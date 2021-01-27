@@ -2911,34 +2911,6 @@
     :cond_1
     const/16 v0, 0x48
 
-    if-ne p1, v0, :cond_2
-
-    .line 736
-    new-instance v0, Ljava/lang/StringBuilder;
-
-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v1, "setProvisionedStringValue WIFI_MDN set db value="
-
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v0
-
-    invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
-
-    .line 737
-    iget v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mSubId:I
-
-    const-string v1, "wfc_ims_mdn"
-
-    invoke-static {v0, v1, p2}, Landroid/telephony/SubscriptionManager;->setSubscriptionProperty(ILjava/lang/String;Ljava/lang/String;)V
-
-    .line 742
-    :cond_2
     const/16 v3, 0x2c
 
     const/4 v5, 0x1
