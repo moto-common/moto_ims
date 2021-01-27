@@ -628,8 +628,6 @@
     .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
 
     .line 52
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->syncWfcMDN()V
-
     return-void
 .end method
 
