@@ -8339,11 +8339,6 @@
 
     iget v3, p0, Lorg/codeaurora/ims/ImsServiceSub;->mPhoneId:I
 
-    .line 504
-    invoke-static {v2, v3}, Lorg/codeaurora/ims/utils/QtiImsExtUtils;->getAutoRejectMode(Landroid/content/ContentResolver;I)I
-
-    move-result v3
-
     move v6, v3
 
     goto :goto_1
