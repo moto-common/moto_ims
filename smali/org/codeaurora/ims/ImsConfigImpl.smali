@@ -736,11 +736,7 @@
     .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
 
     .line 53
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->getPhoneId()I
-
-    move-result v0
-
-    return v0
+    return-void
 .end method
 
 .method static synthetic access$800(Lorg/codeaurora/ims/ImsConfigImpl;)Z
