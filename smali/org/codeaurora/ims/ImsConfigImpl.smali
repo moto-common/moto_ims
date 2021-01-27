@@ -400,8 +400,6 @@
 .method static bridge synthetic -$$Nest$msyncWfcMDN(Lorg/codeaurora/ims/ImsConfigImpl;)V
     .locals 0
 
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->syncWfcMDN()V
-
     return-void
 .end method
 
@@ -1809,8 +1807,6 @@
     if-ne v4, v5, :cond_4
 
     .line 488
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->syncWfcMDN()V
-
     goto :goto_2
 
     .line 492
