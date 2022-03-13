@@ -1,0 +1,19 @@
+!!brut.androlib.meta.MetaInfo
+apkFileName: ims.apk
+compressionType: false
+doNotCompress:
+- classes.dex
+- resources.arsc
+- png
+- res/drawable-hdpi-v4/volte_icon
+- res/drawable-mdpi-v4/volte_icon
+- res/drawable-xhdpi-v4/volte_icon
+isFrameworkApk: false
+packageInfo: null
+sdkInfo: null
+sharedLibrary: false
+sparseResources: false
+unknownFiles: {}
+usesFramework: null
+version: 2.5.0-dirty
+versionInfo: null
