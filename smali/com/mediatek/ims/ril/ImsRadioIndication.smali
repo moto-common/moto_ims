@@ -2827,7 +2827,7 @@
 
     .line 893
     .local v0, "ret":[Ljava/lang/String;
-    invoke-static {p2}, Lcom/android/internal/telephony/RIL;->arrayListToPrimitiveArray(Ljava/util/ArrayList;)[B
+    invoke-static {p2}, Lcom/android/internal/telephony/RILUtils;->arrayListToPrimitiveArray(Ljava/util/ArrayList;)[B
 
     move-result-object v1
 
@@ -2899,7 +2899,7 @@
 
     .line 877
     .local v0, "ret":[Ljava/lang/String;
-    invoke-static {p2}, Lcom/android/internal/telephony/RIL;->arrayListToPrimitiveArray(Ljava/util/ArrayList;)[B
+    invoke-static {p2}, Lcom/android/internal/telephony/RILUtils;->arrayListToPrimitiveArray(Ljava/util/ArrayList;)[B
 
     move-result-object v1
 
