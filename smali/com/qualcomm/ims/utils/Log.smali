@@ -17,7 +17,7 @@
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 4
+    .locals 5
 
     .line 30
     nop
@@ -50,32 +50,30 @@
 
     if-nez v0, :cond_2
 
-    const/4 v0, 0x3
+    const/4 v4, 0x3
 
     .line 33
-    invoke-static {v3, v0}, Landroid/util/Log;->isLoggable(Ljava/lang/String;I)Z
+    invoke-static {v3, v4}, Landroid/util/Log;->isLoggable(Ljava/lang/String;I)Z
 
-    move-result v0
+    move-result v4
 
-    if-eqz v0, :cond_1
+    if-eqz v4, :cond_1
 
     goto :goto_1
 
     :cond_1
-    move v0, v1
+    move v4, v1
 
     goto :goto_2
 
     :cond_2
     :goto_1
-    move v0, v2
+    move v4, v2
 
     :goto_2
-    sput-boolean v0, Lcom/qualcomm/ims/utils/Log;->DEBUG:Z
+    sput-boolean v4, Lcom/qualcomm/ims/utils/Log;->DEBUG:Z
 
     .line 34
-    sget-boolean v0, Lcom/qualcomm/ims/utils/Log;->FORCE_DEBUG:Z
-
     if-nez v0, :cond_3
 
     const/4 v0, 0x2

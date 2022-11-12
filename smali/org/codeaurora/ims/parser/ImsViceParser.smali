@@ -846,7 +846,7 @@
 .end method
 
 .method private static isCallHeld(Ljava/lang/String;)Z
-    .locals 5
+    .locals 4
     .param p0, "callType"    # Ljava/lang/String;
 
     .line 318
@@ -872,20 +872,14 @@
 
     move-result v2
 
-    const v3, -0x3010b10d
+    const/4 v3, 0x1
 
-    const/4 v4, 0x1
-
-    if-eq v2, v3, :cond_3
-
-    const v3, 0x7f00dbb9
-
-    if-eq v2, v3, :cond_2
+    sparse-switch v2, :sswitch_data_0
 
     :cond_1
     goto :goto_0
 
-    :cond_2
+    :sswitch_0
     const-string v2, "volteheld"
 
     invoke-virtual {p0, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
@@ -898,7 +892,7 @@
 
     goto :goto_0
 
-    :cond_3
+    :sswitch_1
     const-string v2, "vtheld"
 
     invoke-virtual {p0, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
@@ -907,19 +901,31 @@
 
     if-eqz v2, :cond_1
 
-    move v1, v4
+    move v1, v3
 
     :goto_0
-    if-eqz v1, :cond_4
-
-    if-eq v1, v4, :cond_4
+    packed-switch v1, :pswitch_data_0
 
     .line 329
     return v0
 
     .line 326
-    :cond_4
-    return v4
+    :pswitch_0
+    return v3
+
+    nop
+
+    :sswitch_data_0
+    .sparse-switch
+        -0x3010b10d -> :sswitch_1
+        0x7f00dbb9 -> :sswitch_0
+    .end sparse-switch
+
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_0
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method private static isCallPullable(Lorg/codeaurora/ims/parser/ImsViceParser$DialogInfo;ZZ)Z
@@ -1208,7 +1214,7 @@
 .end method
 
 .method private static mapViceCallTypeToImsCallProfileCallType(Ljava/lang/String;)I
-    .locals 7
+    .locals 5
     .param p0, "callType"    # Ljava/lang/String;
 
     .line 291
@@ -1234,13 +1240,9 @@
 
     move-result v2
 
-    const/4 v3, 0x3
+    const/4 v3, 0x5
 
-    const/4 v4, 0x1
-
-    const/4 v5, 0x5
-
-    const/4 v6, 0x4
+    const/4 v4, 0x4
 
     sparse-switch v2, :sswitch_data_0
 
@@ -1256,7 +1258,7 @@
 
     if-eqz v2, :cond_1
 
-    move v1, v4
+    const/4 v1, 0x1
 
     goto :goto_0
 
@@ -1269,7 +1271,7 @@
 
     if-eqz v2, :cond_1
 
-    move v1, v6
+    move v1, v4
 
     goto :goto_0
 
@@ -1282,7 +1284,7 @@
 
     if-eqz v2, :cond_1
 
-    move v1, v5
+    move v1, v3
 
     goto :goto_0
 
@@ -1308,7 +1310,7 @@
 
     if-eqz v2, :cond_1
 
-    move v1, v3
+    const/4 v1, 0x3
 
     goto :goto_0
 
@@ -1324,17 +1326,7 @@
     const/4 v1, 0x0
 
     :goto_0
-    if-eqz v1, :cond_5
-
-    if-eq v1, v4, :cond_5
-
-    if-eq v1, v0, :cond_4
-
-    if-eq v1, v3, :cond_4
-
-    if-eq v1, v6, :cond_3
-
-    if-eq v1, v5, :cond_2
+    packed-switch v1, :pswitch_data_0
 
     .line 312
     sget-object v1, Lorg/codeaurora/ims/parser/ImsViceParser;->LOGTAG:Ljava/lang/String;
@@ -1359,24 +1351,22 @@
     return v0
 
     .line 309
-    :cond_2
+    :pswitch_0
     const/4 v0, 0x6
 
     return v0
 
     .line 306
-    :cond_3
-    return v5
+    :pswitch_1
+    return v3
 
     .line 303
-    :cond_4
-    return v6
+    :pswitch_2
+    return v4
 
     .line 299
-    :cond_5
+    :pswitch_3
     return v0
-
-    nop
 
     :sswitch_data_0
     .sparse-switch
@@ -1387,6 +1377,16 @@
         0x3765c2 -> :sswitch_1
         0x7f00dbb9 -> :sswitch_0
     .end sparse-switch
+
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_3
+        :pswitch_3
+        :pswitch_2
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method private preparePartialList()V

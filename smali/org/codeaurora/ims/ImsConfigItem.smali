@@ -154,7 +154,9 @@
 
 .field public static final VOICE_OVER_WIFI_ENABLED:I = 0x1b
 
-.field public static final VOICE_OVER_WIFI_MDN:I = 0x4c
+.field public static final VOICE_OVER_WIFI_ENTITLEMENT_ID:I = 0x4c
+
+.field public static final VOICE_OVER_WIFI_MDN:I = 0x4d
 
 .field public static final VOICE_OVER_WIFI_MODE:I = 0x1d
 
@@ -193,29 +195,29 @@
 .method public constructor <init>()V
     .locals 2
 
-    .line 658
+    .line 663
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 659
+    .line 664
     const/4 v0, 0x0
 
     iput v0, p0, Lorg/codeaurora/ims/ImsConfigItem;->mItem:I
 
-    .line 660
+    .line 665
     iput-boolean v0, p0, Lorg/codeaurora/ims/ImsConfigItem;->mBoolValue:Z
 
-    .line 661
+    .line 666
     iput v0, p0, Lorg/codeaurora/ims/ImsConfigItem;->mIntValue:I
 
-    .line 662
+    .line 667
     const-string v1, ""
 
     iput-object v1, p0, Lorg/codeaurora/ims/ImsConfigItem;->mStringValue:Ljava/lang/String;
 
-    .line 663
+    .line 668
     iput v0, p0, Lorg/codeaurora/ims/ImsConfigItem;->mErrorCause:I
 
-    .line 664
+    .line 669
     return-void
 .end method
 
@@ -224,7 +226,7 @@
 .method public getBoolValue()Z
     .locals 1
 
-    .line 679
+    .line 684
     iget-boolean v0, p0, Lorg/codeaurora/ims/ImsConfigItem;->mBoolValue:Z
 
     return v0
@@ -233,7 +235,7 @@
 .method public getErrorCause()I
     .locals 1
 
-    .line 703
+    .line 708
     iget v0, p0, Lorg/codeaurora/ims/ImsConfigItem;->mErrorCause:I
 
     return v0
@@ -242,7 +244,7 @@
 .method public getIntValue()I
     .locals 1
 
-    .line 687
+    .line 692
     iget v0, p0, Lorg/codeaurora/ims/ImsConfigItem;->mIntValue:I
 
     return v0
@@ -251,7 +253,7 @@
 .method public getItem()I
     .locals 1
 
-    .line 671
+    .line 676
     iget v0, p0, Lorg/codeaurora/ims/ImsConfigItem;->mItem:I
 
     return v0
@@ -260,7 +262,7 @@
 .method public getStringValue()Ljava/lang/String;
     .locals 1
 
-    .line 695
+    .line 700
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigItem;->mStringValue:Ljava/lang/String;
 
     return-object v0
@@ -270,10 +272,10 @@
     .locals 0
     .param p1, "value"    # Z
 
-    .line 675
+    .line 680
     iput-boolean p1, p0, Lorg/codeaurora/ims/ImsConfigItem;->mBoolValue:Z
 
-    .line 676
+    .line 681
     return-void
 .end method
 
@@ -281,10 +283,10 @@
     .locals 0
     .param p1, "value"    # I
 
-    .line 699
+    .line 704
     iput p1, p0, Lorg/codeaurora/ims/ImsConfigItem;->mErrorCause:I
 
-    .line 700
+    .line 705
     return-void
 .end method
 
@@ -292,10 +294,10 @@
     .locals 0
     .param p1, "value"    # I
 
-    .line 683
+    .line 688
     iput p1, p0, Lorg/codeaurora/ims/ImsConfigItem;->mIntValue:I
 
-    .line 684
+    .line 689
     return-void
 .end method
 
@@ -303,10 +305,10 @@
     .locals 0
     .param p1, "value"    # I
 
-    .line 667
+    .line 672
     iput p1, p0, Lorg/codeaurora/ims/ImsConfigItem;->mItem:I
 
-    .line 668
+    .line 673
     return-void
 .end method
 
@@ -314,17 +316,17 @@
     .locals 0
     .param p1, "value"    # Ljava/lang/String;
 
-    .line 691
+    .line 696
     iput-object p1, p0, Lorg/codeaurora/ims/ImsConfigItem;->mStringValue:Ljava/lang/String;
 
-    .line 692
+    .line 697
     return-void
 .end method
 
 .method public toString()Ljava/lang/String;
     .locals 2
 
-    .line 707
+    .line 712
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V

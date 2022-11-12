@@ -20,6 +20,10 @@
 
 .field public status:I
 
+.field public timeSeconds:I
+
+.field public toa:I
+
 
 # direct methods
 .method public constructor <init>()V
@@ -36,7 +40,7 @@
 .method public toString()Ljava/lang/String;
     .locals 2
 
-    .line 45
+    .line 47
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -77,13 +81,29 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    const-string v1, "number:"
+    const-string v1, " toa: "
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    iget v1, p0, Lorg/codeaurora/ims/ImsCallForwardTimerInfo;->toa:I
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    const-string v1, " number:"
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     iget-object v1, p0, Lorg/codeaurora/ims/ImsCallForwardTimerInfo;->number:Ljava/lang/String;
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string v1, " timeSeconds: "
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    iget v1, p0, Lorg/codeaurora/ims/ImsCallForwardTimerInfo;->timeSeconds:I
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
     const-string v1, " startHour:"
 

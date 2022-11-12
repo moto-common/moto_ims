@@ -787,10 +787,6 @@
     .line 301
     invoke-interface {v4, v2}, Ljava/util/Map;->equals(Ljava/lang/Object;)Z
 
-    move-result v2
-
-    if-eqz v2, :cond_2
-
     .line 302
     return v3
 

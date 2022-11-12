@@ -62,15 +62,7 @@
     .line 72
     iget v0, p1, Landroid/os/Message;->what:I
 
-    if-eqz v0, :cond_2
-
-    const/4 v1, 0x1
-
-    if-eq v0, v1, :cond_1
-
-    const/4 v1, 0x2
-
-    if-eq v0, v1, :cond_0
+    packed-switch v0, :pswitch_data_0
 
     .line 85
     iget-object v0, p0, Lcom/qualcomm/ims/vt/ImsVideoCallProviderImpl$1;->this$0:Lcom/qualcomm/ims/vt/ImsVideoCallProviderImpl;
@@ -96,7 +88,7 @@
     goto :goto_0
 
     .line 81
-    :cond_0
+    :pswitch_0
     iget-object v0, p0, Lcom/qualcomm/ims/vt/ImsVideoCallProviderImpl$1;->this$0:Lcom/qualcomm/ims/vt/ImsVideoCallProviderImpl;
 
     invoke-static {v0, p1}, Lcom/qualcomm/ims/vt/ImsVideoCallProviderImpl;->access$300(Lcom/qualcomm/ims/vt/ImsVideoCallProviderImpl;Landroid/os/Message;)V
@@ -105,7 +97,7 @@
     goto :goto_0
 
     .line 77
-    :cond_1
+    :pswitch_1
     iget-object v0, p0, Lcom/qualcomm/ims/vt/ImsVideoCallProviderImpl$1;->this$0:Lcom/qualcomm/ims/vt/ImsVideoCallProviderImpl;
 
     invoke-static {v0, p1}, Lcom/qualcomm/ims/vt/ImsVideoCallProviderImpl;->access$200(Lcom/qualcomm/ims/vt/ImsVideoCallProviderImpl;Landroid/os/Message;)V
@@ -114,7 +106,7 @@
     goto :goto_0
 
     .line 74
-    :cond_2
+    :pswitch_2
     iget-object v0, p0, Lcom/qualcomm/ims/vt/ImsVideoCallProviderImpl$1;->this$0:Lcom/qualcomm/ims/vt/ImsVideoCallProviderImpl;
 
     invoke-static {v0, p1}, Lcom/qualcomm/ims/vt/ImsVideoCallProviderImpl;->access$100(Lcom/qualcomm/ims/vt/ImsVideoCallProviderImpl;Landroid/os/Message;)V
@@ -125,4 +117,13 @@
     .line 87
     :goto_0
     return-void
+
+    nop
+
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method

@@ -95,9 +95,7 @@
     .param p0, "item"    # I
 
     .line 250
-    const/16 v0, 0x4b
-
-    if-eq p0, v0, :cond_0
+    packed-switch p0, :pswitch_data_0
 
     .line 254
     invoke-static {p0}, Lorg/codeaurora/ims/ImsRadioUtils;->configInfoItemFromHal(I)I
@@ -107,10 +105,17 @@
     return v0
 
     .line 252
-    :cond_0
+    :pswitch_0
     const/16 v0, 0x49
 
     return v0
+
+    nop
+
+    :pswitch_data_0
+    .packed-switch 0x4b
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method public static configInfoItemToHal(I)I
@@ -118,9 +123,7 @@
     .param p0, "item"    # I
 
     .line 241
-    const/16 v0, 0x49
-
-    if-eq p0, v0, :cond_0
+    packed-switch p0, :pswitch_data_0
 
     .line 245
     invoke-static {p0}, Lorg/codeaurora/ims/ImsRadioUtils;->configInfoItemToHal(I)I
@@ -130,10 +133,17 @@
     return v0
 
     .line 243
-    :cond_0
+    :pswitch_0
     const/16 v0, 0x4b
 
     return v0
+
+    nop
+
+    :pswitch_data_0
+    .packed-switch 0x49
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method public static getCallFailCauseForImsReason(I)I
@@ -141,29 +151,7 @@
     .param p0, "imsReason"    # I
 
     .line 42
-    const/16 v0, 0x1ff
-
-    if-eq p0, v0, :cond_4
-
-    const/16 v0, 0x200
-
-    if-eq p0, v0, :cond_3
-
-    const/16 v0, 0x3f9
-
-    if-eq p0, v0, :cond_2
-
-    const/16 v0, 0x5ed
-
-    if-eq p0, v0, :cond_1
-
-    const/16 v0, 0xbb9
-
-    if-eq p0, v0, :cond_0
-
-    packed-switch p0, :pswitch_data_0
-
-    packed-switch p0, :pswitch_data_1
+    sparse-switch p0, :sswitch_data_0
 
     .line 78
     const-class v0, Lorg/codeaurora/ims/ImsRadioUtilsV15;
@@ -177,129 +165,128 @@
 
     return v0
 
-    .line 74
-    :pswitch_0
-    const/16 v0, 0x26a
-
-    return v0
-
-    .line 72
-    :pswitch_1
-    const/16 v0, 0x269
-
-    return v0
-
-    .line 70
-    :pswitch_2
-    const/16 v0, 0x268
-
-    return v0
-
-    .line 68
-    :pswitch_3
-    const/16 v0, 0x267
-
-    return v0
-
-    .line 66
-    :pswitch_4
-    const/16 v0, 0x266
-
-    return v0
-
-    .line 56
-    :pswitch_5
-    const/16 v0, 0x265
-
-    return v0
-
-    .line 54
-    :pswitch_6
-    const/16 v0, 0x264
-
-    return v0
-
-    .line 50
-    :pswitch_7
-    const/16 v0, 0x263
-
-    return v0
-
-    .line 52
-    :pswitch_8
-    const/16 v0, 0x262
-
-    return v0
-
-    .line 48
-    :pswitch_9
-    const/16 v0, 0x261
-
-    return v0
-
-    .line 46
-    :pswitch_a
-    const/16 v0, 0x260
-
-    return v0
-
-    .line 44
-    :pswitch_b
-    const/16 v0, 0x25f
-
-    return v0
-
     .line 76
-    :cond_0
+    :sswitch_0
     const/16 v0, 0x26b
 
     return v0
 
     .line 64
-    :cond_1
+    :sswitch_1
     const/16 v0, 0x25e
 
     return v0
 
     .line 58
-    :cond_2
+    :sswitch_2
     const/16 v0, 0x25b
 
     return v0
 
     .line 62
-    :cond_3
+    :sswitch_3
     const/16 v0, 0x25d
 
     return v0
 
     .line 60
-    :cond_4
+    :sswitch_4
     const/16 v0, 0x25c
 
     return v0
 
-    nop
+    .line 74
+    :sswitch_5
+    const/16 v0, 0x26a
 
-    :pswitch_data_0
-    .packed-switch 0x16e
-        :pswitch_b
-        :pswitch_a
-        :pswitch_9
-        :pswitch_8
-        :pswitch_7
-        :pswitch_6
-        :pswitch_5
-        :pswitch_4
-        :pswitch_3
-    .end packed-switch
+    return v0
 
-    :pswitch_data_1
-    .packed-switch 0x178
-        :pswitch_2
-        :pswitch_1
-        :pswitch_0
-    .end packed-switch
+    .line 72
+    :sswitch_6
+    const/16 v0, 0x269
+
+    return v0
+
+    .line 70
+    :sswitch_7
+    const/16 v0, 0x268
+
+    return v0
+
+    .line 68
+    :sswitch_8
+    const/16 v0, 0x267
+
+    return v0
+
+    .line 66
+    :sswitch_9
+    const/16 v0, 0x266
+
+    return v0
+
+    .line 56
+    :sswitch_a
+    const/16 v0, 0x265
+
+    return v0
+
+    .line 54
+    :sswitch_b
+    const/16 v0, 0x264
+
+    return v0
+
+    .line 50
+    :sswitch_c
+    const/16 v0, 0x263
+
+    return v0
+
+    .line 52
+    :sswitch_d
+    const/16 v0, 0x262
+
+    return v0
+
+    .line 48
+    :sswitch_e
+    const/16 v0, 0x261
+
+    return v0
+
+    .line 46
+    :sswitch_f
+    const/16 v0, 0x260
+
+    return v0
+
+    .line 44
+    :sswitch_10
+    const/16 v0, 0x25f
+
+    return v0
+
+    :sswitch_data_0
+    .sparse-switch
+        0x16e -> :sswitch_10
+        0x16f -> :sswitch_f
+        0x170 -> :sswitch_e
+        0x171 -> :sswitch_d
+        0x172 -> :sswitch_c
+        0x173 -> :sswitch_b
+        0x174 -> :sswitch_a
+        0x175 -> :sswitch_9
+        0x176 -> :sswitch_8
+        0x178 -> :sswitch_7
+        0x179 -> :sswitch_6
+        0x17a -> :sswitch_5
+        0x1ff -> :sswitch_4
+        0x200 -> :sswitch_3
+        0x3f9 -> :sswitch_2
+        0x5ed -> :sswitch_1
+        0xbb9 -> :sswitch_0
+    .end sparse-switch
 .end method
 
 .method public static getImsReasonForCallFailCause(I)I
@@ -443,13 +430,7 @@
     .param p0, "status"    # I
 
     .line 437
-    const/4 v0, 0x3
-
-    if-eq p0, v0, :cond_1
-
-    const/4 v1, 0x4
-
-    if-eq p0, v1, :cond_0
+    packed-switch p0, :pswitch_data_0
 
     .line 443
     const-class v0, Lorg/codeaurora/ims/ImsRadioUtilsV15;
@@ -464,14 +445,22 @@
     return v0
 
     .line 441
-    :cond_0
+    :pswitch_0
+    const/4 v0, 0x3
+
     return v0
 
     .line 439
-    :cond_1
+    :pswitch_1
     const/4 v0, 0x2
 
     return v0
+
+    :pswitch_data_0
+    .packed-switch 0x3
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method public static isConfigItemIntroducedInV15(I)Ljava/lang/Boolean;
@@ -479,9 +468,7 @@
     .param p0, "item"    # I
 
     .line 276
-    const/16 v0, 0x4b
-
-    if-eq p0, v0, :cond_0
+    packed-switch p0, :pswitch_data_0
 
     .line 280
     const/4 v0, 0x0
@@ -493,7 +480,7 @@
     return-object v0
 
     .line 278
-    :cond_0
+    :pswitch_0
     const/4 v0, 0x1
 
     invoke-static {v0}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
@@ -501,6 +488,13 @@
     move-result-object v0
 
     return-object v0
+
+    nop
+
+    :pswitch_data_0
+    .packed-switch 0x4b
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method public static mapEmergencyCallRoutingToHal(I)I
@@ -508,13 +502,7 @@
     .param p0, "routing"    # I
 
     .line 344
-    const/4 v0, 0x1
-
-    if-eq p0, v0, :cond_1
-
-    const/4 v0, 0x2
-
-    if-eq p0, v0, :cond_0
+    packed-switch p0, :pswitch_data_0
 
     .line 350
     const/4 v0, 0x0
@@ -522,12 +510,24 @@
     return v0
 
     .line 346
-    :cond_0
+    :pswitch_0
+    const/4 v0, 0x2
+
     return v0
 
     .line 348
-    :cond_1
+    :pswitch_1
+    const/4 v0, 0x1
+
     return v0
+
+    nop
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method public static mapEmergencyServiceCategoryToHal(I)I
@@ -767,11 +767,7 @@
     .param p0, "presentation"    # I
 
     .line 360
-    if-eqz p0, :cond_1
-
-    const/4 v0, 0x1
-
-    if-eq p0, v0, :cond_0
+    packed-switch p0, :pswitch_data_0
 
     .line 366
     const/4 v0, 0x2
@@ -779,14 +775,24 @@
     return v0
 
     .line 364
-    :cond_0
+    :pswitch_0
+    const/4 v0, 0x1
+
     return v0
 
     .line 362
-    :cond_1
+    :pswitch_1
     const/4 v0, 0x0
 
     return v0
+
+    nop
+
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method private static migarateVerstatInfo(Lvendor/qti/hardware/radio/ims/V1_3/VerstatInfo;Lvendor/qti/hardware/radio/ims/V1_3/VerstatInfo;)V

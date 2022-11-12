@@ -23,7 +23,7 @@
     .locals 0
     .param p1, "this$0"    # Lcom/qualcomm/ims/vt/Camera2;
 
-    .line 626
+    .line 627
     iput-object p1, p0, Lcom/qualcomm/ims/vt/Camera2$1;->this$0:Lcom/qualcomm/ims/vt/Camera2;
 
     invoke-direct {p0}, Landroid/hardware/camera2/CameraDevice$StateCallback;-><init>()V
@@ -37,7 +37,7 @@
     .locals 2
     .param p1, "cameraDevice"    # Landroid/hardware/camera2/CameraDevice;
 
-    .line 643
+    .line 644
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -62,12 +62,12 @@
 
     invoke-static {v1, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 644
+    .line 645
     iget-object v0, p0, Lcom/qualcomm/ims/vt/Camera2$1;->this$0:Lcom/qualcomm/ims/vt/Camera2;
 
     invoke-virtual {v0}, Lcom/qualcomm/ims/vt/Camera2;->close()V
 
-    .line 645
+    .line 646
     return-void
 .end method
 
@@ -76,7 +76,7 @@
     .param p1, "cameraDevice"    # Landroid/hardware/camera2/CameraDevice;
     .param p2, "error"    # I
 
-    .line 649
+    .line 650
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -107,12 +107,12 @@
 
     invoke-static {v1, v0}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 650
+    .line 651
     iget-object v0, p0, Lcom/qualcomm/ims/vt/Camera2$1;->this$0:Lcom/qualcomm/ims/vt/Camera2;
 
     invoke-virtual {v0}, Lcom/qualcomm/ims/vt/Camera2;->close()V
 
-    .line 651
+    .line 652
     return-void
 .end method
 
@@ -120,7 +120,7 @@
     .locals 2
     .param p1, "cameraDevice"    # Landroid/hardware/camera2/CameraDevice;
 
-    .line 630
+    .line 631
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -145,12 +145,12 @@
 
     invoke-static {v1, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 631
+    .line 632
     iget-object v0, p0, Lcom/qualcomm/ims/vt/Camera2$1;->this$0:Lcom/qualcomm/ims/vt/Camera2;
 
     invoke-static {v0, p1}, Lcom/qualcomm/ims/vt/Camera2;->access$002(Lcom/qualcomm/ims/vt/Camera2;Landroid/hardware/camera2/CameraDevice;)Landroid/hardware/camera2/CameraDevice;
 
-    .line 632
+    .line 633
     iget-object v0, p0, Lcom/qualcomm/ims/vt/Camera2$1;->this$0:Lcom/qualcomm/ims/vt/Camera2;
 
     invoke-static {v0}, Lcom/qualcomm/ims/vt/Camera2;->access$100(Lcom/qualcomm/ims/vt/Camera2;)Z
@@ -159,19 +159,19 @@
 
     if-eqz v0, :cond_0
 
-    .line 633
+    .line 634
     const-string v0, "onOpened: Camera open completed after close requested."
 
     invoke-static {v1, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 634
+    .line 635
     iget-object v0, p0, Lcom/qualcomm/ims/vt/Camera2$1;->this$0:Lcom/qualcomm/ims/vt/Camera2;
 
     invoke-virtual {v0}, Lcom/qualcomm/ims/vt/Camera2;->close()V
 
     goto :goto_0
 
-    .line 636
+    .line 637
     :cond_0
     iget-object v0, p0, Lcom/qualcomm/ims/vt/Camera2$1;->this$0:Lcom/qualcomm/ims/vt/Camera2;
 
@@ -179,12 +179,12 @@
 
     invoke-static {v0, v1}, Lcom/qualcomm/ims/vt/Camera2;->access$202(Lcom/qualcomm/ims/vt/Camera2;I)I
 
-    .line 637
+    .line 638
     iget-object v0, p0, Lcom/qualcomm/ims/vt/Camera2$1;->this$0:Lcom/qualcomm/ims/vt/Camera2;
 
     invoke-static {v0}, Lcom/qualcomm/ims/vt/Camera2;->access$300(Lcom/qualcomm/ims/vt/Camera2;)V
 
-    .line 639
+    .line 640
     :goto_0
     return-void
 .end method

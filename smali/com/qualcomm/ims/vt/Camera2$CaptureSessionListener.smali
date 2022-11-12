@@ -25,15 +25,15 @@
     .locals 0
     .param p2, "v"    # I
 
-    .line 898
+    .line 902
     iput-object p1, p0, Lcom/qualcomm/ims/vt/Camera2$CaptureSessionListener;->this$0:Lcom/qualcomm/ims/vt/Camera2;
 
     invoke-direct {p0}, Landroid/hardware/camera2/CameraCaptureSession$StateCallback;-><init>()V
 
-    .line 899
+    .line 903
     iput p2, p0, Lcom/qualcomm/ims/vt/Camera2$CaptureSessionListener;->id:I
 
-    .line 900
+    .line 904
     return-void
 .end method
 
@@ -43,7 +43,7 @@
     .locals 2
     .param p1, "session"    # Landroid/hardware/camera2/CameraCaptureSession;
 
-    .line 915
+    .line 919
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -74,14 +74,14 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 916
+    .line 920
     iget-object v0, p0, Lcom/qualcomm/ims/vt/Camera2$CaptureSessionListener;->this$0:Lcom/qualcomm/ims/vt/Camera2;
 
     const/4 v1, 0x0
 
     invoke-static {v0, v1}, Lcom/qualcomm/ims/vt/Camera2;->access$502(Lcom/qualcomm/ims/vt/Camera2;Z)Z
 
-    .line 917
+    .line 921
     iget-object v0, p0, Lcom/qualcomm/ims/vt/Camera2$CaptureSessionListener;->this$0:Lcom/qualcomm/ims/vt/Camera2;
 
     invoke-static {v0}, Lcom/qualcomm/ims/vt/Camera2;->access$600(Lcom/qualcomm/ims/vt/Camera2;)Z
@@ -90,7 +90,7 @@
 
     if-nez v0, :cond_0
 
-    .line 918
+    .line 922
     iget v0, p0, Lcom/qualcomm/ims/vt/Camera2$CaptureSessionListener;->id:I
 
     iget-object v1, p0, Lcom/qualcomm/ims/vt/Camera2$CaptureSessionListener;->this$0:Lcom/qualcomm/ims/vt/Camera2;
@@ -107,13 +107,13 @@
 
     goto :goto_0
 
-    .line 920
+    .line 924
     :cond_0
     iget-object v0, p0, Lcom/qualcomm/ims/vt/Camera2$CaptureSessionListener;->this$0:Lcom/qualcomm/ims/vt/Camera2;
 
     invoke-static {v0}, Lcom/qualcomm/ims/vt/Camera2;->access$300(Lcom/qualcomm/ims/vt/Camera2;)V
 
-    .line 922
+    .line 926
     :cond_1
     :goto_0
     return-void
@@ -123,7 +123,7 @@
     .locals 2
     .param p1, "session"    # Landroid/hardware/camera2/CameraCaptureSession;
 
-    .line 904
+    .line 908
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -154,14 +154,14 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 905
+    .line 909
     iget-object v0, p0, Lcom/qualcomm/ims/vt/Camera2$CaptureSessionListener;->this$0:Lcom/qualcomm/ims/vt/Camera2;
 
     const/4 v1, 0x0
 
     invoke-static {v0, v1}, Lcom/qualcomm/ims/vt/Camera2;->access$502(Lcom/qualcomm/ims/vt/Camera2;Z)Z
 
-    .line 906
+    .line 910
     iget-object v0, p0, Lcom/qualcomm/ims/vt/Camera2$CaptureSessionListener;->this$0:Lcom/qualcomm/ims/vt/Camera2;
 
     invoke-static {v0}, Lcom/qualcomm/ims/vt/Camera2;->access$600(Lcom/qualcomm/ims/vt/Camera2;)Z
@@ -170,7 +170,7 @@
 
     if-nez v0, :cond_0
 
-    .line 907
+    .line 911
     iget v0, p0, Lcom/qualcomm/ims/vt/Camera2$CaptureSessionListener;->id:I
 
     iget-object v1, p0, Lcom/qualcomm/ims/vt/Camera2$CaptureSessionListener;->this$0:Lcom/qualcomm/ims/vt/Camera2;
@@ -187,13 +187,13 @@
 
     goto :goto_0
 
-    .line 909
+    .line 913
     :cond_0
     iget-object v0, p0, Lcom/qualcomm/ims/vt/Camera2$CaptureSessionListener;->this$0:Lcom/qualcomm/ims/vt/Camera2;
 
     invoke-static {v0}, Lcom/qualcomm/ims/vt/Camera2;->access$300(Lcom/qualcomm/ims/vt/Camera2;)V
 
-    .line 911
+    .line 915
     :cond_1
     :goto_0
     return-void

@@ -151,7 +151,10 @@
         }
     .end annotation
 
-    .line 77
+    .annotation runtime Ljava/lang/Deprecated;
+    .end annotation
+
+    .line 84
     const-string v0, "default"
 
     invoke-static {v0}, Lvendor/qti/hardware/radio/ims/V1_5/IImsRadioIndication;->getService(Ljava/lang/String;)Lvendor/qti/hardware/radio/ims/V1_5/IImsRadioIndication;
@@ -170,7 +173,10 @@
         }
     .end annotation
 
-    .line 70
+    .annotation runtime Ljava/lang/Deprecated;
+    .end annotation
+
+    .line 74
     const-string v0, "vendor.qti.hardware.radio.ims@1.5::IImsRadioIndication"
 
     invoke-static {v0, p0}, Landroid/os/HwBinder;->getService(Ljava/lang/String;Ljava/lang/String;)Landroid/os/IHwBinder;
@@ -194,7 +200,7 @@
         }
     .end annotation
 
-    .line 55
+    .line 57
     const-string v0, "vendor.qti.hardware.radio.ims@1.5::IImsRadioIndication"
 
     invoke-static {v0, p0, p1}, Landroid/os/HwBinder;->getService(Ljava/lang/String;Ljava/lang/String;Z)Landroid/os/IHwBinder;
@@ -217,7 +223,7 @@
         }
     .end annotation
 
-    .line 62
+    .line 64
     const-string v0, "default"
 
     invoke-static {v0, p0}, Lvendor/qti/hardware/radio/ims/V1_5/IImsRadioIndication;->getService(Ljava/lang/String;Z)Lvendor/qti/hardware/radio/ims/V1_5/IImsRadioIndication;

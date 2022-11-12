@@ -11,7 +11,7 @@
 .method public constructor <init>()V
     .locals 0
 
-    .line 17
+    .line 19
     invoke-direct {p0}, Landroid/app/Service;-><init>()V
 
     return-void
@@ -20,31 +20,31 @@
 .method private createQtiImsExt()V
     .locals 2
 
-    .line 29
-    invoke-static {}, Lorg/codeaurora/ims/ImsService;->getServiceSubs()[Lorg/codeaurora/ims/ImsServiceSub;
+    .line 31
+    invoke-static {}, Lorg/codeaurora/ims/ImsService;->getServiceSubs()Ljava/util/List;
 
     move-result-object v0
 
-    .line 30
-    .local v0, "imsServiceSubs":[Lorg/codeaurora/ims/ImsServiceSub;
+    .line 32
+    .local v0, "imsServiceSubs":Ljava/util/List;, "Ljava/util/List<Lorg/codeaurora/ims/ImsServiceSub;>;"
     if-eqz v0, :cond_0
 
-    .line 31
+    .line 33
     new-instance v1, Lorg/codeaurora/ims/QtiImsExt;
 
-    invoke-direct {v1, p0, v0}, Lorg/codeaurora/ims/QtiImsExt;-><init>(Landroid/content/Context;[Lorg/codeaurora/ims/ImsServiceSub;)V
+    invoke-direct {v1, p0, v0}, Lorg/codeaurora/ims/QtiImsExt;-><init>(Landroid/content/Context;Ljava/util/List;)V
 
     iput-object v1, p0, Lorg/codeaurora/ims/QtiImsExtService;->mQtiImsExt:Lorg/codeaurora/ims/QtiImsExt;
 
     goto :goto_0
 
-    .line 33
+    .line 35
     :cond_0
     const-string v1, "QtiImsExtService, ImsService is not yet started retry."
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 35
+    .line 37
     :goto_0
     return-void
 .end method
@@ -55,7 +55,7 @@
     .locals 2
     .param p1, "intent"    # Landroid/content/Intent;
 
-    .line 39
+    .line 41
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -74,31 +74,31 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->d(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 40
+    .line 42
     iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExtService;->mQtiImsExt:Lorg/codeaurora/ims/QtiImsExt;
 
     if-nez v0, :cond_0
 
-    .line 41
+    .line 43
     invoke-direct {p0}, Lorg/codeaurora/ims/QtiImsExtService;->createQtiImsExt()V
 
-    .line 43
+    .line 45
     :cond_0
     iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExtService;->mQtiImsExt:Lorg/codeaurora/ims/QtiImsExt;
 
     if-nez v0, :cond_1
 
-    .line 44
+    .line 46
     const-string v0, "onBind returned null"
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->w(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 45
+    .line 47
     const/4 v0, 0x0
 
     return-object v0
 
-    .line 47
+    .line 49
     :cond_1
     invoke-virtual {v0}, Lorg/codeaurora/ims/QtiImsExt;->getBinder()Lorg/codeaurora/ims/QtiImsExtBase$QtiImsExtBinder;
 
@@ -110,17 +110,17 @@
 .method public onCreate()V
     .locals 1
 
-    .line 22
+    .line 24
     invoke-super {p0}, Landroid/app/Service;->onCreate()V
 
-    .line 23
+    .line 25
     const-string v0, "QtiImsExtService created!"
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 25
+    .line 27
     invoke-direct {p0}, Lorg/codeaurora/ims/QtiImsExtService;->createQtiImsExt()V
 
-    .line 26
+    .line 28
     return-void
 .end method

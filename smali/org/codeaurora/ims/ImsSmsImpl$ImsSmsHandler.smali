@@ -79,17 +79,7 @@
     :cond_0
     iget v1, p1, Landroid/os/Message;->what:I
 
-    const/4 v2, 0x1
-
-    if-eq v1, v2, :cond_3
-
-    const/4 v2, 0x2
-
-    if-eq v1, v2, :cond_2
-
-    const/4 v2, 0x3
-
-    if-eq v1, v2, :cond_1
+    packed-switch v1, :pswitch_data_0
 
     .line 254
     const-string v1, "ImsSmsImpl"
@@ -101,7 +91,7 @@
     goto :goto_0
 
     .line 251
-    :cond_1
+    :pswitch_0
     iget-object v1, p0, Lorg/codeaurora/ims/ImsSmsImpl$ImsSmsHandler;->this$0:Lorg/codeaurora/ims/ImsSmsImpl;
 
     invoke-static {v1, v0}, Lorg/codeaurora/ims/ImsSmsImpl;->access$200(Lorg/codeaurora/ims/ImsSmsImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
@@ -110,7 +100,7 @@
     goto :goto_0
 
     .line 248
-    :cond_2
+    :pswitch_1
     iget-object v1, p0, Lorg/codeaurora/ims/ImsSmsImpl$ImsSmsHandler;->this$0:Lorg/codeaurora/ims/ImsSmsImpl;
 
     invoke-static {v1, v0}, Lorg/codeaurora/ims/ImsSmsImpl;->access$100(Lorg/codeaurora/ims/ImsSmsImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
@@ -119,7 +109,7 @@
     goto :goto_0
 
     .line 245
-    :cond_3
+    :pswitch_2
     iget-object v1, p0, Lorg/codeaurora/ims/ImsSmsImpl$ImsSmsHandler;->this$0:Lorg/codeaurora/ims/ImsSmsImpl;
 
     invoke-static {v1, v0}, Lorg/codeaurora/ims/ImsSmsImpl;->access$000(Lorg/codeaurora/ims/ImsSmsImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
@@ -130,4 +120,11 @@
     .line 256
     :goto_0
     return-void
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method

@@ -75,13 +75,7 @@
     .line 77
     iget v0, p1, Landroid/os/Message;->what:I
 
-    const/4 v1, 0x1
-
-    if-eq v0, v1, :cond_1
-
-    const/4 v1, 0x2
-
-    if-eq v0, v1, :cond_0
+    packed-switch v0, :pswitch_data_0
 
     .line 87
     new-instance v0, Ljava/lang/StringBuilder;
@@ -105,7 +99,7 @@
     goto :goto_0
 
     .line 83
-    :cond_0
+    :pswitch_0
     const-string v0, "EVENT_EXIT_EMERGENCY_CALLBACK_MODE"
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
@@ -121,13 +115,15 @@
     goto :goto_0
 
     .line 79
-    :cond_1
+    :pswitch_1
     const-string v0, "EVENT_ENTER_EMERGENCY_CALLBACK_MODE"
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
     .line 80
     iget-object v0, p0, Lorg/codeaurora/ims/ImsEcbmImpl$ImsEcbmImplHandler;->this$0:Lorg/codeaurora/ims/ImsEcbmImpl;
+
+    const/4 v1, 0x1
 
     invoke-static {v0, v1}, Lorg/codeaurora/ims/ImsEcbmImpl;->access$000(Lorg/codeaurora/ims/ImsEcbmImpl;Z)V
 
@@ -137,4 +133,12 @@
     .line 90
     :goto_0
     return-void
+
+    nop
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method

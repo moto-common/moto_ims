@@ -84,7 +84,7 @@
 
     .line 36
     .local p1, "uri":Ljava/util/ArrayList;, "Ljava/util/ArrayList<Ljava/lang/Byte;>;"
-    invoke-static {p1}, Lorg/codeaurora/ims/ImsRadioUtils;->getByteArray(Ljava/util/ArrayList;)[B
+    invoke-static {p1}, Lorg/codeaurora/ims/ImsUtils;->toByteArray(Ljava/util/ArrayList;)[B
 
     move-result-object v0
 

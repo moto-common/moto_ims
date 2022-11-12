@@ -21,6 +21,10 @@
 
 .field public static final DIAG:Ljava/lang/String; = "com.qti.permission.DIAG"
 
+.field public static final RECEIVE_MSIM_VOICE_CAPABILITY:Ljava/lang/String; = "com.qti.permission.RECEIVE_MSIM_VOICE_CAPABILITY"
+
+.field public static final RECEIVE_SMS_CALLBACK_MODE:Ljava/lang/String; = "com.qti.permission.RECEIVE_SMS_CALLBACK_MODE"
+
 
 # direct methods
 .method public constructor <init>()V

@@ -83,13 +83,7 @@
     .local v0, "ar":Lorg/codeaurora/telephony/utils/AsyncResult;
     iget v2, p1, Landroid/os/Message;->what:I
 
-    const/4 v3, 0x1
-
-    if-eq v2, v3, :cond_1
-
-    const/4 v3, 0x2
-
-    if-eq v2, v3, :cond_0
+    packed-switch v2, :pswitch_data_0
 
     .line 76
     new-instance v2, Ljava/lang/StringBuilder;
@@ -113,7 +107,7 @@
     goto :goto_0
 
     .line 72
-    :cond_0
+    :pswitch_0
     const-string v2, "EVENT_CAPABILITIES_CHANGED"
 
     invoke-static {v1, v2}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
@@ -127,7 +121,7 @@
     goto :goto_0
 
     .line 68
-    :cond_1
+    :pswitch_1
     const-string v2, "EVENT_REFRESH_VICE_INFO"
 
     invoke-static {v1, v2}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
@@ -143,4 +137,12 @@
     .line 79
     :goto_0
     return-void
+
+    nop
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method

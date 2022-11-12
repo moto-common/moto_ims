@@ -12,40 +12,57 @@
 
 .field private mContext:Landroid/content/Context;
 
-.field private mServiceSub:[Lorg/codeaurora/ims/ImsServiceSub;
+.field private mServiceSub:Ljava/util/List;
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "Ljava/util/List<",
+            "Lorg/codeaurora/ims/ImsServiceSub;",
+            ">;"
+        }
+    .end annotation
+.end field
 
 
 # direct methods
-.method public constructor <init>(Landroid/content/Context;[Lorg/codeaurora/ims/ImsServiceSub;)V
+.method public constructor <init>(Landroid/content/Context;Ljava/util/List;)V
     .locals 1
     .param p1, "context"    # Landroid/content/Context;
-    .param p2, "serviceSub"    # [Lorg/codeaurora/ims/ImsServiceSub;
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Landroid/content/Context;",
+            "Ljava/util/List<",
+            "Lorg/codeaurora/ims/ImsServiceSub;",
+            ">;)V"
+        }
+    .end annotation
 
-    .line 30
+    .line 33
+    .local p2, "serviceSub":Ljava/util/List;, "Ljava/util/List<Lorg/codeaurora/ims/ImsServiceSub;>;"
     invoke-direct {p0}, Lorg/codeaurora/ims/QtiImsExtBase;-><init>()V
 
-    .line 23
+    .line 26
     const-string v0, "android.permission.MODIFY_PHONE_STATE"
 
     iput-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->MODIFY_PHONE_STATE:Ljava/lang/String;
 
-    .line 24
+    .line 27
     const-string v0, "android.permission.READ_PHONE_STATE"
 
     iput-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->READ_PHONE_STATE:Ljava/lang/String;
 
-    .line 25
+    .line 28
     const-string v0, "android.permission.READ_PRIVILEGED_PHONE_STATE"
 
     iput-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->READ_PRIVILEGED_PHONE_STATE:Ljava/lang/String;
 
-    .line 31
+    .line 34
     iput-object p1, p0, Lorg/codeaurora/ims/QtiImsExt;->mContext:Landroid/content/Context;
 
-    .line 32
-    iput-object p2, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:[Lorg/codeaurora/ims/ImsServiceSub;
+    .line 35
+    iput-object p2, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:Ljava/util/List;
 
-    .line 33
+    .line 36
     return-void
 .end method
 
@@ -58,7 +75,7 @@
     .param p3, "serviceClass"    # I
     .param p4, "listener"    # Lorg/codeaurora/ims/internal/IQtiImsExtListener;
 
-    .line 47
+    .line 50
     iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.READ_PHONE_STATE"
@@ -67,15 +84,62 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 48
-    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:[Lorg/codeaurora/ims/ImsServiceSub;
+    .line 51
+    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:Ljava/util/List;
 
-    aget-object v0, v0, p1
+    invoke-interface {v0, p1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lorg/codeaurora/ims/ImsServiceSub;
 
     invoke-virtual {v0, p2, p3, p4}, Lorg/codeaurora/ims/ImsServiceSub;->getCallForwardUncondTimer(IILorg/codeaurora/ims/internal/IQtiImsExtListener;)V
 
-    .line 50
+    .line 53
     return-void
+.end method
+
+.method protected onGetCrsCrbtController(I)Lorg/codeaurora/ims/internal/ICrsCrbtController;
+    .locals 3
+    .param p1, "phoneId"    # I
+
+    .line 221
+    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mContext:Landroid/content/Context;
+
+    const-string v1, "android.permission.READ_PHONE_STATE"
+
+    const-string v2, "onGetCrsCrbtController"
+
+    invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 222
+    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:Ljava/util/List;
+
+    invoke-interface {v0, p1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lorg/codeaurora/ims/ImsServiceSub;
+
+    invoke-virtual {v0}, Lorg/codeaurora/ims/ImsServiceSub;->getCrsCrbtController()Lorg/codeaurora/ims/CrsCrbtControllerImpl;
+
+    move-result-object v0
+
+    .line 223
+    .local v0, "v":Lorg/codeaurora/ims/CrsCrbtControllerBase;
+    if-eqz v0, :cond_0
+
+    invoke-virtual {v0}, Lorg/codeaurora/ims/CrsCrbtControllerBase;->getBinder()Lorg/codeaurora/ims/internal/ICrsCrbtController;
+
+    move-result-object v1
+
+    goto :goto_0
+
+    :cond_0
+    const/4 v1, 0x0
+
+    :goto_0
+    return-object v1
 .end method
 
 .method protected onGetHandoverConfig(ILorg/codeaurora/ims/internal/IQtiImsExtListener;)V
@@ -83,7 +147,7 @@
     .param p1, "phoneId"    # I
     .param p2, "listener"    # Lorg/codeaurora/ims/internal/IQtiImsExtListener;
 
-    .line 108
+    .line 111
     iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.READ_PHONE_STATE"
@@ -92,14 +156,18 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 109
-    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:[Lorg/codeaurora/ims/ImsServiceSub;
+    .line 112
+    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:Ljava/util/List;
 
-    aget-object v0, v0, p1
+    invoke-interface {v0, p1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lorg/codeaurora/ims/ImsServiceSub;
 
     invoke-virtual {v0, p2}, Lorg/codeaurora/ims/ImsServiceSub;->getHandoverConfig(Lorg/codeaurora/ims/internal/IQtiImsExtListener;)V
 
-    .line 110
+    .line 113
     return-void
 .end method
 
@@ -107,7 +175,7 @@
     .locals 4
     .param p1, "phoneId"    # I
 
-    .line 193
+    .line 196
     const-string v0, "getImsFeatureState"
 
     :try_start_0
@@ -119,32 +187,36 @@
     :try_end_0
     .catch Ljava/lang/SecurityException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 199
+    .line 202
     goto :goto_0
 
-    .line 195
+    .line 198
     :catch_0
     move-exception v1
 
-    .line 196
+    .line 199
     .local v1, "e":Ljava/lang/SecurityException;
     const-string v2, "no READ_PHONE_STATE permission, check READ_PRIVILEGED_PHONE_STATE"
 
     invoke-static {p0, v2}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 197
+    .line 200
     iget-object v2, p0, Lorg/codeaurora/ims/QtiImsExt;->mContext:Landroid/content/Context;
 
     const-string v3, "android.permission.READ_PRIVILEGED_PHONE_STATE"
 
     invoke-virtual {v2, v3, v0}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 201
+    .line 204
     .end local v1    # "e":Ljava/lang/SecurityException;
     :goto_0
-    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:[Lorg/codeaurora/ims/ImsServiceSub;
+    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:Ljava/util/List;
 
-    aget-object v0, v0, p1
+    invoke-interface {v0, p1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lorg/codeaurora/ims/ImsServiceSub;
 
     invoke-virtual {v0}, Lorg/codeaurora/ims/ImsServiceSub;->getImsFeatureState()I
 
@@ -157,7 +229,7 @@
     .locals 3
     .param p1, "phoneId"    # I
 
-    .line 178
+    .line 181
     iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.MODIFY_PHONE_STATE"
@@ -166,16 +238,20 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 179
-    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:[Lorg/codeaurora/ims/ImsServiceSub;
+    .line 182
+    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:Ljava/util/List;
 
-    aget-object v0, v0, p1
+    invoke-interface {v0, p1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lorg/codeaurora/ims/ImsServiceSub;
 
     invoke-virtual {v0}, Lorg/codeaurora/ims/ImsServiceSub;->getMultiIdentityImpl()Lorg/codeaurora/ims/ImsMultiIdentityImpl;
 
     move-result-object v0
 
-    .line 180
+    .line 183
     .local v0, "v":Lorg/codeaurora/ims/ImsMultiIdentityControllerBase;
     if-eqz v0, :cond_0
 
@@ -196,7 +272,7 @@
     .locals 4
     .param p1, "phoneId"    # I
 
-    .line 147
+    .line 150
     const-string v0, "getRcsAppConfig"
 
     :try_start_0
@@ -208,33 +284,37 @@
     :try_end_0
     .catch Ljava/lang/SecurityException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 152
+    .line 155
     goto :goto_0
 
-    .line 148
+    .line 151
     :catch_0
     move-exception v1
 
-    .line 149
+    .line 152
     .local v1, "e":Ljava/lang/SecurityException;
     const-string v2, "no READ_PHONE_STATE permission, check READ_PRIVILEGED_PHONE_STATE"
 
     invoke-static {p0, v2}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 151
+    .line 154
     iget-object v2, p0, Lorg/codeaurora/ims/QtiImsExt;->mContext:Landroid/content/Context;
 
     const-string v3, "android.permission.READ_PRIVILEGED_PHONE_STATE"
 
     invoke-virtual {v2, v3, v0}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 154
+    .line 157
     .end local v1    # "e":Ljava/lang/SecurityException;
     :goto_0
     :try_start_1
-    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:[Lorg/codeaurora/ims/ImsServiceSub;
+    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:Ljava/util/List;
 
-    aget-object v0, v0, p1
+    invoke-interface {v0, p1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lorg/codeaurora/ims/ImsServiceSub;
 
     invoke-virtual {v0}, Lorg/codeaurora/ims/ImsServiceSub;->getConfigInterface()Lorg/codeaurora/ims/ImsConfigImpl;
 
@@ -242,21 +322,21 @@
 
     const/16 v1, 0x3e9
 
-    .line 155
+    .line 158
     invoke-virtual {v0, v1}, Lorg/codeaurora/ims/ImsConfigImpl;->getConfigInt(I)I
 
     move-result v0
     :try_end_1
     .catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_1
 
-    .line 154
+    .line 157
     return v0
 
-    .line 156
+    .line 159
     :catch_1
     move-exception v0
 
-    .line 157
+    .line 160
     .local v0, "re":Ljava/lang/Exception;
     new-instance v1, Ljava/lang/StringBuilder;
 
@@ -278,7 +358,7 @@
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 160
+    .line 163
     .end local v0    # "re":Ljava/lang/Exception;
     const/4 v0, -0x1
 
@@ -289,7 +369,7 @@
     .locals 3
     .param p1, "phoneId"    # I
 
-    .line 185
+    .line 188
     iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.MODIFY_PHONE_STATE"
@@ -298,16 +378,20 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 186
-    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:[Lorg/codeaurora/ims/ImsServiceSub;
+    .line 189
+    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:Ljava/util/List;
 
-    aget-object v0, v0, p1
+    invoke-interface {v0, p1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lorg/codeaurora/ims/ImsServiceSub;
 
     invoke-virtual {v0}, Lorg/codeaurora/ims/ImsServiceSub;->getScreenShareController()Lorg/codeaurora/ims/ImsScreenShareControllerImpl;
 
     move-result-object v0
 
-    .line 187
+    .line 190
     .local v0, "v":Lorg/codeaurora/ims/ImsScreenShareControllerBase;
     if-eqz v0, :cond_0
 
@@ -328,7 +412,7 @@
     .locals 3
     .param p1, "phoneId"    # I
 
-    .line 120
+    .line 123
     iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.READ_PHONE_STATE"
@@ -337,11 +421,15 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 122
+    .line 125
     :try_start_0
-    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:[Lorg/codeaurora/ims/ImsServiceSub;
+    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:Ljava/util/List;
 
-    aget-object v0, v0, p1
+    invoke-interface {v0, p1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lorg/codeaurora/ims/ImsServiceSub;
 
     invoke-virtual {v0}, Lorg/codeaurora/ims/ImsServiceSub;->getConfigInterface()Lorg/codeaurora/ims/ImsConfigImpl;
 
@@ -349,21 +437,21 @@
 
     const/16 v1, 0x3ea
 
-    .line 123
+    .line 126
     invoke-virtual {v0, v1}, Lorg/codeaurora/ims/ImsConfigImpl;->getConfigInt(I)I
 
     move-result v0
     :try_end_0
     .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 122
+    .line 125
     return v0
 
-    .line 124
+    .line 127
     :catch_0
     move-exception v0
 
-    .line 125
+    .line 128
     .local v0, "re":Ljava/lang/Exception;
     new-instance v1, Ljava/lang/StringBuilder;
 
@@ -385,7 +473,7 @@
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 128
+    .line 131
     .end local v0    # "re":Ljava/lang/Exception;
     const/4 v0, -0x1
 
@@ -396,7 +484,7 @@
     .locals 3
     .param p1, "phoneId"    # I
 
-    .line 212
+    .line 215
     iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.READ_PHONE_STATE"
@@ -405,10 +493,14 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 213
-    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:[Lorg/codeaurora/ims/ImsServiceSub;
+    .line 216
+    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:Ljava/util/List;
 
-    aget-object v0, v0, p1
+    invoke-interface {v0, p1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lorg/codeaurora/ims/ImsServiceSub;
 
     invoke-virtual {v0}, Lorg/codeaurora/ims/ImsServiceSub;->isCallComposerSupported()Z
 
@@ -417,12 +509,89 @@
     return v0
 .end method
 
+.method protected onQueryCallBarringStatus(IILjava/lang/String;IZLorg/codeaurora/ims/internal/IQtiImsExtListener;)V
+    .locals 7
+    .param p1, "phoneId"    # I
+    .param p2, "cbType"    # I
+    .param p3, "password"    # Ljava/lang/String;
+    .param p4, "serviceClass"    # I
+    .param p5, "expectMore"    # Z
+    .param p6, "listener"    # Lorg/codeaurora/ims/internal/IQtiImsExtListener;
+
+    .line 237
+    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mContext:Landroid/content/Context;
+
+    const-string v1, "android.permission.READ_PHONE_STATE"
+
+    const-string v2, "onQueryCallBarringStatus"
+
+    invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 238
+    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:Ljava/util/List;
+
+    invoke-interface {v0, p1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    move-object v1, v0
+
+    check-cast v1, Lorg/codeaurora/ims/ImsServiceSub;
+
+    move v2, p2
+
+    move-object v3, p3
+
+    move v4, p4
+
+    move v5, p5
+
+    move-object v6, p6
+
+    invoke-virtual/range {v1 .. v6}, Lorg/codeaurora/ims/ImsServiceSub;->queryCallBarringStatus(ILjava/lang/String;IZLorg/codeaurora/ims/internal/IQtiImsExtListener;)V
+
+    .line 240
+    return-void
+.end method
+
+.method protected onQueryCallForwardStatus(IIIZLorg/codeaurora/ims/internal/IQtiImsExtListener;)V
+    .locals 3
+    .param p1, "phoneId"    # I
+    .param p2, "reason"    # I
+    .param p3, "serviceClass"    # I
+    .param p4, "expectMore"    # Z
+    .param p5, "listener"    # Lorg/codeaurora/ims/internal/IQtiImsExtListener;
+
+    .line 229
+    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mContext:Landroid/content/Context;
+
+    const-string v1, "android.permission.READ_PHONE_STATE"
+
+    const-string v2, "onQueryCallForwardStatus"
+
+    invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 230
+    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:Ljava/util/List;
+
+    invoke-interface {v0, p1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lorg/codeaurora/ims/ImsServiceSub;
+
+    invoke-virtual {v0, p2, p3, p4, p5}, Lorg/codeaurora/ims/ImsServiceSub;->queryCallForwardStatus(IIZLorg/codeaurora/ims/internal/IQtiImsExtListener;)V
+
+    .line 232
+    return-void
+.end method
+
 .method protected onQuerySsacStatus(ILorg/codeaurora/ims/internal/IQtiImsExtListener;)V
     .locals 3
     .param p1, "phoneId"    # I
     .param p2, "listener"    # Lorg/codeaurora/ims/internal/IQtiImsExtListener;
 
-    .line 82
+    .line 85
     iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.READ_PHONE_STATE"
@@ -431,14 +600,18 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 83
-    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:[Lorg/codeaurora/ims/ImsServiceSub;
+    .line 86
+    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:Ljava/util/List;
 
-    aget-object v0, v0, p1
+    invoke-interface {v0, p1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lorg/codeaurora/ims/ImsServiceSub;
 
     invoke-virtual {v0, p2}, Lorg/codeaurora/ims/ImsServiceSub;->querySsacStatus(Lorg/codeaurora/ims/internal/IQtiImsExtListener;)V
 
-    .line 84
+    .line 87
     return-void
 .end method
 
@@ -447,7 +620,7 @@
     .param p1, "phoneId"    # I
     .param p2, "listener"    # Lorg/codeaurora/ims/internal/IQtiImsExtListener;
 
-    .line 102
+    .line 105
     iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.READ_PHONE_STATE"
@@ -456,14 +629,18 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 103
-    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:[Lorg/codeaurora/ims/ImsServiceSub;
+    .line 106
+    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:Ljava/util/List;
 
-    aget-object v0, v0, p1
+    invoke-interface {v0, p1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lorg/codeaurora/ims/ImsServiceSub;
 
     invoke-virtual {v0, p2}, Lorg/codeaurora/ims/ImsServiceSub;->queryVoltePreference(Lorg/codeaurora/ims/internal/IQtiImsExtListener;)V
 
-    .line 104
+    .line 107
     return-void
 .end method
 
@@ -472,7 +649,7 @@
     .param p1, "phoneId"    # I
     .param p2, "listener"    # Lorg/codeaurora/ims/internal/IQtiImsExtListener;
 
-    .line 73
+    .line 76
     const-string v0, "queryVopsStatus"
 
     :try_start_0
@@ -484,14 +661,14 @@
     :try_end_0
     .catch Ljava/lang/SecurityException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 76
+    .line 79
     goto :goto_0
 
-    .line 74
+    .line 77
     :catch_0
     move-exception v1
 
-    .line 75
+    .line 78
     .local v1, "e":Ljava/lang/SecurityException;
     iget-object v2, p0, Lorg/codeaurora/ims/QtiImsExt;->mContext:Landroid/content/Context;
 
@@ -499,16 +676,20 @@
 
     invoke-virtual {v2, v3, v0}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 77
+    .line 80
     .end local v1    # "e":Ljava/lang/SecurityException;
     :goto_0
-    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:[Lorg/codeaurora/ims/ImsServiceSub;
+    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:Ljava/util/List;
 
-    aget-object v0, v0, p1
+    invoke-interface {v0, p1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lorg/codeaurora/ims/ImsServiceSub;
 
     invoke-virtual {v0, p2}, Lorg/codeaurora/ims/ImsServiceSub;->queryVopsStatus(Lorg/codeaurora/ims/internal/IQtiImsExtListener;)V
 
-    .line 78
+    .line 81
     return-void
 .end method
 
@@ -517,7 +698,7 @@
     .param p1, "phoneId"    # I
     .param p2, "listener"    # Lorg/codeaurora/ims/internal/IQtiImsExtListener;
 
-    .line 88
+    .line 91
     iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.MODIFY_PHONE_STATE"
@@ -526,14 +707,18 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 90
-    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:[Lorg/codeaurora/ims/ImsServiceSub;
+    .line 93
+    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:Ljava/util/List;
 
-    aget-object v0, v0, p1
+    invoke-interface {v0, p1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lorg/codeaurora/ims/ImsServiceSub;
 
     invoke-virtual {v0, p2}, Lorg/codeaurora/ims/ImsServiceSub;->registerForParticipantStatusInfo(Lorg/codeaurora/ims/internal/IQtiImsExtListener;)V
 
-    .line 91
+    .line 94
     return-void
 .end method
 
@@ -542,7 +727,7 @@
     .param p1, "phoneId"    # I
     .param p2, "videoState"    # I
 
-    .line 54
+    .line 57
     iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.MODIFY_PHONE_STATE"
@@ -551,14 +736,18 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 55
-    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:[Lorg/codeaurora/ims/ImsServiceSub;
+    .line 58
+    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:Ljava/util/List;
 
-    aget-object v0, v0, p1
+    invoke-interface {v0, p1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lorg/codeaurora/ims/ImsServiceSub;
 
     invoke-virtual {v0, p2}, Lorg/codeaurora/ims/ImsServiceSub;->resumePendingCall(I)V
 
-    .line 56
+    .line 59
     return-void
 .end method
 
@@ -567,7 +756,7 @@
     .param p1, "phoneId"    # I
     .param p2, "listener"    # Lorg/codeaurora/ims/internal/IQtiImsExtListener;
 
-    .line 60
+    .line 63
     iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.MODIFY_PHONE_STATE"
@@ -576,14 +765,18 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 61
-    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:[Lorg/codeaurora/ims/ImsServiceSub;
+    .line 64
+    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:Ljava/util/List;
 
-    aget-object v0, v0, p1
+    invoke-interface {v0, p1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lorg/codeaurora/ims/ImsServiceSub;
 
     invoke-virtual {v0, p2}, Lorg/codeaurora/ims/ImsServiceSub;->sendCancelModifyCall(Lorg/codeaurora/ims/internal/IQtiImsExtListener;)V
 
-    .line 62
+    .line 65
     return-void
 .end method
 
@@ -592,7 +785,7 @@
     .param p1, "phoneId"    # I
     .param p2, "extras"    # Landroid/os/Bundle;
 
-    .line 206
+    .line 209
     iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.READ_PHONE_STATE"
@@ -601,19 +794,23 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 207
-    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:[Lorg/codeaurora/ims/ImsServiceSub;
+    .line 210
+    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:Ljava/util/List;
 
-    aget-object v0, v0, p1
+    invoke-interface {v0, p1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lorg/codeaurora/ims/ImsServiceSub;
 
     invoke-virtual {v0, p2}, Lorg/codeaurora/ims/ImsServiceSub;->setAnswerExtras(Landroid/os/Bundle;)V
 
-    .line 208
+    .line 211
     return-void
 .end method
 
 .method protected onSetCallForwardUncondTimer(IIIIIIIILjava/lang/String;Lorg/codeaurora/ims/internal/IQtiImsExtListener;)V
-    .locals 12
+    .locals 13
     .param p1, "phoneId"    # I
     .param p2, "startHour"    # I
     .param p3, "startMinute"    # I
@@ -625,7 +822,7 @@
     .param p9, "number"    # Ljava/lang/String;
     .param p10, "listener"    # Lorg/codeaurora/ims/internal/IQtiImsExtListener;
 
-    .line 39
+    .line 42
     move-object v0, p0
 
     iget-object v1, v0, Lorg/codeaurora/ims/QtiImsExt;->mContext:Landroid/content/Context;
@@ -636,32 +833,40 @@
 
     invoke-virtual {v1, v2, v3}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 40
-    iget-object v1, v0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:[Lorg/codeaurora/ims/ImsServiceSub;
+    .line 43
+    iget-object v1, v0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:Ljava/util/List;
 
-    aget-object v2, v1, p1
+    move v2, p1
 
-    move v3, p2
+    invoke-interface {v1, p1}, Ljava/util/List;->get(I)Ljava/lang/Object;
 
-    move v4, p3
+    move-result-object v1
 
-    move/from16 v5, p4
+    move-object v3, v1
 
-    move/from16 v6, p5
+    check-cast v3, Lorg/codeaurora/ims/ImsServiceSub;
 
-    move/from16 v7, p6
+    move v4, p2
 
-    move/from16 v8, p7
+    move/from16 v5, p3
 
-    move/from16 v9, p8
+    move/from16 v6, p4
 
-    move-object/from16 v10, p9
+    move/from16 v7, p5
 
-    move-object/from16 v11, p10
+    move/from16 v8, p6
 
-    invoke-virtual/range {v2 .. v11}, Lorg/codeaurora/ims/ImsServiceSub;->setCallForwardUncondTimer(IIIIIIILjava/lang/String;Lorg/codeaurora/ims/internal/IQtiImsExtListener;)V
+    move/from16 v9, p7
 
-    .line 42
+    move/from16 v10, p8
+
+    move-object/from16 v11, p9
+
+    move-object/from16 v12, p10
+
+    invoke-virtual/range {v3 .. v12}, Lorg/codeaurora/ims/ImsServiceSub;->setCallForwardUncondTimer(IIIIIIILjava/lang/String;Lorg/codeaurora/ims/internal/IQtiImsExtListener;)V
+
+    .line 45
     return-void
 .end method
 
@@ -671,7 +876,7 @@
     .param p2, "hoConfig"    # I
     .param p3, "listener"    # Lorg/codeaurora/ims/internal/IQtiImsExtListener;
 
-    .line 114
+    .line 117
     iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.MODIFY_PHONE_STATE"
@@ -680,14 +885,18 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 115
-    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:[Lorg/codeaurora/ims/ImsServiceSub;
+    .line 118
+    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:Ljava/util/List;
 
-    aget-object v0, v0, p1
+    invoke-interface {v0, p1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lorg/codeaurora/ims/ImsServiceSub;
 
     invoke-virtual {v0, p2, p3}, Lorg/codeaurora/ims/ImsServiceSub;->setHandoverConfig(ILorg/codeaurora/ims/internal/IQtiImsExtListener;)V
 
-    .line 116
+    .line 119
     return-void
 .end method
 
@@ -696,7 +905,7 @@
     .param p1, "phoneId"    # I
     .param p2, "defaultSmsApp"    # I
 
-    .line 165
+    .line 168
     iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.MODIFY_PHONE_STATE"
@@ -705,11 +914,15 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 167
+    .line 170
     :try_start_0
-    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:[Lorg/codeaurora/ims/ImsServiceSub;
+    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:Ljava/util/List;
 
-    aget-object v0, v0, p1
+    invoke-interface {v0, p1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lorg/codeaurora/ims/ImsServiceSub;
 
     invoke-virtual {v0}, Lorg/codeaurora/ims/ImsServiceSub;->getConfigInterface()Lorg/codeaurora/ims/ImsConfigImpl;
 
@@ -725,11 +938,11 @@
 
     return v0
 
-    .line 169
+    .line 172
     :catch_0
     move-exception v0
 
-    .line 170
+    .line 173
     .local v0, "re":Ljava/lang/Exception;
     new-instance v1, Ljava/lang/StringBuilder;
 
@@ -751,7 +964,7 @@
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 173
+    .line 176
     .end local v0    # "re":Ljava/lang/Exception;
     const/4 v0, -0x1
 
@@ -763,7 +976,7 @@
     .param p1, "phoneId"    # I
     .param p2, "listener"    # Lorg/codeaurora/ims/internal/IQtiImsExtListener;
 
-    .line 66
+    .line 69
     iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.MODIFY_PHONE_STATE"
@@ -772,14 +985,18 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 67
-    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:[Lorg/codeaurora/ims/ImsServiceSub;
+    .line 70
+    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:Ljava/util/List;
 
-    aget-object v0, v0, p1
+    invoke-interface {v0, p1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lorg/codeaurora/ims/ImsServiceSub;
 
     invoke-virtual {v0, p2}, Lorg/codeaurora/ims/ImsServiceSub;->setUssdInfoListener(Lorg/codeaurora/ims/internal/IQtiImsExtListener;)V
 
-    .line 68
+    .line 71
     return-void
 .end method
 
@@ -788,7 +1005,7 @@
     .param p1, "phoneId"    # I
     .param p2, "defaultVvmApp"    # I
 
-    .line 133
+    .line 136
     iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.MODIFY_PHONE_STATE"
@@ -797,11 +1014,15 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 135
+    .line 138
     :try_start_0
-    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:[Lorg/codeaurora/ims/ImsServiceSub;
+    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:Ljava/util/List;
 
-    aget-object v0, v0, p1
+    invoke-interface {v0, p1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lorg/codeaurora/ims/ImsServiceSub;
 
     invoke-virtual {v0}, Lorg/codeaurora/ims/ImsServiceSub;->getConfigInterface()Lorg/codeaurora/ims/ImsConfigImpl;
 
@@ -817,11 +1038,11 @@
 
     return v0
 
-    .line 137
+    .line 140
     :catch_0
     move-exception v0
 
-    .line 138
+    .line 141
     .local v0, "re":Ljava/lang/Exception;
     new-instance v1, Ljava/lang/StringBuilder;
 
@@ -843,7 +1064,7 @@
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 141
+    .line 144
     .end local v0    # "re":Ljava/lang/Exception;
     const/4 v0, -0x1
 
@@ -856,7 +1077,7 @@
     .param p2, "preference"    # I
     .param p3, "listener"    # Lorg/codeaurora/ims/internal/IQtiImsExtListener;
 
-    .line 96
+    .line 99
     iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.MODIFY_PHONE_STATE"
@@ -865,13 +1086,17 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 97
-    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:[Lorg/codeaurora/ims/ImsServiceSub;
+    .line 100
+    iget-object v0, p0, Lorg/codeaurora/ims/QtiImsExt;->mServiceSub:Ljava/util/List;
 
-    aget-object v0, v0, p1
+    invoke-interface {v0, p1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lorg/codeaurora/ims/ImsServiceSub;
 
     invoke-virtual {v0, p2, p3}, Lorg/codeaurora/ims/ImsServiceSub;->updateVoltePreference(ILorg/codeaurora/ims/internal/IQtiImsExtListener;)V
 
-    .line 98
+    .line 101
     return-void
 .end method

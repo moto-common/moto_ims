@@ -67,25 +67,7 @@
     .local v0, "ar":Lorg/codeaurora/telephony/utils/AsyncResult;
     iget v1, p1, Landroid/os/Message;->what:I
 
-    const/4 v2, 0x1
-
-    if-eq v1, v2, :cond_4
-
-    const/4 v2, 0x2
-
-    if-eq v1, v2, :cond_3
-
-    const/4 v2, 0x3
-
-    if-eq v1, v2, :cond_2
-
-    const/4 v2, 0x4
-
-    if-eq v1, v2, :cond_1
-
-    const/4 v2, 0x5
-
-    if-eq v1, v2, :cond_0
+    packed-switch v1, :pswitch_data_0
 
     .line 100
     new-instance v1, Ljava/lang/StringBuilder;
@@ -109,7 +91,7 @@
     goto :goto_0
 
     .line 97
-    :cond_0
+    :pswitch_0
     iget-object v1, p0, Lorg/codeaurora/ims/ImsMultiIdentityImpl$ImsMultiIdentityHandler;->this$0:Lorg/codeaurora/ims/ImsMultiIdentityImpl;
 
     invoke-static {v1, v0}, Lorg/codeaurora/ims/ImsMultiIdentityImpl;->access$500(Lorg/codeaurora/ims/ImsMultiIdentityImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
@@ -118,7 +100,7 @@
     goto :goto_0
 
     .line 94
-    :cond_1
+    :pswitch_1
     iget-object v1, p0, Lorg/codeaurora/ims/ImsMultiIdentityImpl$ImsMultiIdentityHandler;->this$0:Lorg/codeaurora/ims/ImsMultiIdentityImpl;
 
     invoke-static {v1, v0}, Lorg/codeaurora/ims/ImsMultiIdentityImpl;->access$400(Lorg/codeaurora/ims/ImsMultiIdentityImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
@@ -127,7 +109,7 @@
     goto :goto_0
 
     .line 91
-    :cond_2
+    :pswitch_2
     iget-object v1, p0, Lorg/codeaurora/ims/ImsMultiIdentityImpl$ImsMultiIdentityHandler;->this$0:Lorg/codeaurora/ims/ImsMultiIdentityImpl;
 
     invoke-static {v1}, Lorg/codeaurora/ims/ImsMultiIdentityImpl;->access$300(Lorg/codeaurora/ims/ImsMultiIdentityImpl;)V
@@ -136,7 +118,7 @@
     goto :goto_0
 
     .line 88
-    :cond_3
+    :pswitch_3
     iget-object v1, p0, Lorg/codeaurora/ims/ImsMultiIdentityImpl$ImsMultiIdentityHandler;->this$0:Lorg/codeaurora/ims/ImsMultiIdentityImpl;
 
     invoke-static {v1, v0}, Lorg/codeaurora/ims/ImsMultiIdentityImpl;->access$200(Lorg/codeaurora/ims/ImsMultiIdentityImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
@@ -145,7 +127,7 @@
     goto :goto_0
 
     .line 85
-    :cond_4
+    :pswitch_4
     iget-object v1, p0, Lorg/codeaurora/ims/ImsMultiIdentityImpl$ImsMultiIdentityHandler;->this$0:Lorg/codeaurora/ims/ImsMultiIdentityImpl;
 
     invoke-static {v1, v0}, Lorg/codeaurora/ims/ImsMultiIdentityImpl;->access$100(Lorg/codeaurora/ims/ImsMultiIdentityImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
@@ -156,4 +138,15 @@
     .line 102
     :goto_0
     return-void
+
+    nop
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_4
+        :pswitch_3
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method

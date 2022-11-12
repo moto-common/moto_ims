@@ -296,10 +296,8 @@
     :try_start_0
     iget-object v0, p0, Lorg/codeaurora/ims/ImsServiceStateReceiver;->mContext:Landroid/content/Context;
 
-    iget-object v3, p0, Lorg/codeaurora/ims/ImsServiceStateReceiver;->mContext:Landroid/content/Context;
-
     .line 94
-    invoke-virtual {v3}, Landroid/content/Context;->getPackageName()Ljava/lang/String;
+    invoke-virtual {v0}, Landroid/content/Context;->getPackageName()Ljava/lang/String;
 
     move-result-object v3
 
@@ -778,6 +776,11 @@
 
     invoke-virtual {p0, v2, v5}, Lorg/codeaurora/ims/ImsServiceStateReceiver;->updateHDIcon(ZZ)V
 
+    .line 208
+    iget-object v2, p0, Lorg/codeaurora/ims/ImsServiceStateReceiver;->mServiceSub:Lorg/codeaurora/ims/ImsServiceSub;
+
+    invoke-virtual {v2}, Lorg/codeaurora/ims/ImsServiceSub;->onCarrierConfigChanged()V
+
     goto :goto_1
 
     .line 201
@@ -786,7 +789,7 @@
     :goto_0
     nop
 
-    .line 210
+    .line 211
     :cond_3
     :goto_1
     return-void

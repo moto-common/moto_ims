@@ -15,14 +15,14 @@
 
 
 # virtual methods
-.method public abstract onCameraConfigChanged(IIILandroid/view/Surface;I)V
+.method public abstract onCameraConfigChanged(IIIILandroid/view/Surface;I)V
 .end method
 
-.method public abstract onRecordingDisabled()V
+.method public abstract onRecordingDisabled(I)V
 .end method
 
-.method public abstract onRecordingEnabled()V
+.method public abstract onRecordingEnabled(I)V
 .end method
 
-.method public abstract onUpdateRecorderFrameRate(I)V
+.method public abstract onUpdateRecorderFrameRate(II)V
 .end method

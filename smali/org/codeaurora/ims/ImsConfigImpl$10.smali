@@ -1,5 +1,5 @@
-.class synthetic Lorg/codeaurora/ims/ImsConfigImpl$10;
-.super Ljava/lang/Object;
+.class Lorg/codeaurora/ims/ImsConfigImpl$10;
+.super Landroid/telephony/PhoneStateListener;
 .source "ImsConfigImpl.java"
 
 
@@ -9,69 +9,65 @@
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
-    accessFlags = 0x1008
+    accessFlags = 0x0
     name = null
 .end annotation
 
 
-# static fields
-.field static final synthetic $SwitchMap$org$codeaurora$ims$ImsConfigImpl$SetCapabilityFailCause:[I
+# instance fields
+.field final synthetic this$0:Lorg/codeaurora/ims/ImsConfigImpl;
 
 
 # direct methods
-.method static constructor <clinit>()V
+.method constructor <init>(Lorg/codeaurora/ims/ImsConfigImpl;Landroid/os/Looper;)V
+    .locals 0
+    .param p1, "this$0"    # Lorg/codeaurora/ims/ImsConfigImpl;
+    .param p2, "arg0"    # Landroid/os/Looper;
+
+    .line 1033
+    iput-object p1, p0, Lorg/codeaurora/ims/ImsConfigImpl$10;->this$0:Lorg/codeaurora/ims/ImsConfigImpl;
+
+    invoke-direct {p0, p2}, Landroid/telephony/PhoneStateListener;-><init>(Landroid/os/Looper;)V
+
+    return-void
+.end method
+
+
+# virtual methods
+.method public onServiceStateChanged(Landroid/telephony/ServiceState;)V
     .locals 3
+    .param p1, "serviceState"    # Landroid/telephony/ServiceState;
 
-    .line 320
-    invoke-static {}, Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;->values()[Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;
+    .line 1036
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl$10;->this$0:Lorg/codeaurora/ims/ImsConfigImpl;
 
-    move-result-object v0
+    new-instance v1, Ljava/lang/StringBuilder;
 
-    array-length v0, v0
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    new-array v0, v0, [I
+    const-string v2, "SubID "
 
-    sput-object v0, Lorg/codeaurora/ims/ImsConfigImpl$10;->$SwitchMap$org$codeaurora$ims$ImsConfigImpl$SetCapabilityFailCause:[I
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    :try_start_0
-    sget-object v1, Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;->ERROR_GENERIC:Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;
+    iget-object v2, p0, Lorg/codeaurora/ims/ImsConfigImpl$10;->mSubId:Ljava/lang/Integer;
 
-    invoke-virtual {v1}, Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;->ordinal()I
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
 
-    move-result v1
+    const-string v2, ": onServiceStateChanged"
 
-    const/4 v2, 0x1
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    aput v2, v0, v1
-    :try_end_0
-    .catch Ljava/lang/NoSuchFieldError; {:try_start_0 .. :try_end_0} :catch_0
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    goto :goto_0
+    move-result-object v1
 
-    :catch_0
-    move-exception v0
+    invoke-static {v0, v1}, Lcom/qualcomm/ims/utils/Log;->v(Ljava/lang/Object;Ljava/lang/String;)V
 
-    :goto_0
-    :try_start_1
-    sget-object v0, Lorg/codeaurora/ims/ImsConfigImpl$10;->$SwitchMap$org$codeaurora$ims$ImsConfigImpl$SetCapabilityFailCause:[I
+    .line 1037
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl$10;->this$0:Lorg/codeaurora/ims/ImsConfigImpl;
 
-    sget-object v1, Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;->ERROR_SUCCESS:Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;
+    invoke-static {v0, p1}, Lorg/codeaurora/ims/ImsConfigImpl;->access$100(Lorg/codeaurora/ims/ImsConfigImpl;Landroid/telephony/ServiceState;)V
 
-    invoke-virtual {v1}, Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;->ordinal()I
-
-    move-result v1
-
-    const/4 v2, 0x2
-
-    aput v2, v0, v1
-    :try_end_1
-    .catch Ljava/lang/NoSuchFieldError; {:try_start_1 .. :try_end_1} :catch_1
-
-    goto :goto_1
-
-    :catch_1
-    move-exception v0
-
-    :goto_1
+    .line 1038
     return-void
 .end method

@@ -1,74 +1,77 @@
-.class Lorg/codeaurora/ims/ImsServiceSub$1;
+.class synthetic Lorg/codeaurora/ims/ImsServiceSub$1;
 .super Ljava/lang/Object;
 .source "ImsServiceSub.java"
 
-# interfaces
-.implements Ljava/lang/Runnable;
-
 
 # annotations
-.annotation system Ldalvik/annotation/EnclosingMethod;
-    value = Lorg/codeaurora/ims/ImsServiceSub;->handleRegistrationBlockStatus(Lorg/codeaurora/telephony/utils/AsyncResult;)V
+.annotation system Ldalvik/annotation/EnclosingClass;
+    value = Lorg/codeaurora/ims/ImsServiceSub;
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
-    accessFlags = 0x0
+    accessFlags = 0x1008
     name = null
 .end annotation
 
 
-# instance fields
-.field final synthetic this$0:Lorg/codeaurora/ims/ImsServiceSub;
+# static fields
+.field static final synthetic $SwitchMap$org$codeaurora$ims$ImsConfigImpl$SetCapabilityFailCause:[I
 
 
 # direct methods
-.method constructor <init>(Lorg/codeaurora/ims/ImsServiceSub;)V
-    .locals 0
-    .param p1, "this$0"    # Lorg/codeaurora/ims/ImsServiceSub;
+.method static constructor <clinit>()V
+    .locals 3
 
-    .line 2111
-    iput-object p1, p0, Lorg/codeaurora/ims/ImsServiceSub$1;->this$0:Lorg/codeaurora/ims/ImsServiceSub;
+    .line 861
+    invoke-static {}, Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;->values()[Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;
 
-    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+    move-result-object v0
 
-    return-void
-.end method
+    array-length v0, v0
 
+    new-array v0, v0, [I
 
-# virtual methods
-.method public run()V
-    .locals 4
+    sput-object v0, Lorg/codeaurora/ims/ImsServiceSub$1;->$SwitchMap$org$codeaurora$ims$ImsConfigImpl$SetCapabilityFailCause:[I
 
-    .line 2114
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsServiceSub$1;->this$0:Lorg/codeaurora/ims/ImsServiceSub;
+    :try_start_0
+    sget-object v1, Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;->ERROR_GENERIC:Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;
 
-    const-string v1, "Permanent IWLAN reg failure (IKEv2 auth failure)."
+    invoke-virtual {v1}, Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;->ordinal()I
 
-    invoke-static {v0, v1}, Lorg/codeaurora/ims/ImsServiceSub;->access$700(Lorg/codeaurora/ims/ImsServiceSub;Ljava/lang/String;)V
+    move-result v1
 
-    .line 2115
-    new-instance v0, Landroid/telephony/ims/ImsReasonInfo;
+    const/4 v2, 0x1
 
-    const/16 v1, 0x578
+    aput v2, v0, v1
+    :try_end_0
+    .catch Ljava/lang/NoSuchFieldError; {:try_start_0 .. :try_end_0} :catch_0
 
-    const/16 v2, 0x580
+    goto :goto_0
 
-    const/4 v3, 0x0
+    :catch_0
+    move-exception v0
 
-    invoke-direct {v0, v1, v2, v3}, Landroid/telephony/ims/ImsReasonInfo;-><init>(IILjava/lang/String;)V
+    :goto_0
+    :try_start_1
+    sget-object v0, Lorg/codeaurora/ims/ImsServiceSub$1;->$SwitchMap$org$codeaurora$ims$ImsConfigImpl$SetCapabilityFailCause:[I
 
-    .line 2119
-    .local v0, "imsReasonInfo":Landroid/telephony/ims/ImsReasonInfo;
-    iget-object v1, p0, Lorg/codeaurora/ims/ImsServiceSub$1;->this$0:Lorg/codeaurora/ims/ImsServiceSub;
+    sget-object v1, Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;->ERROR_SUCCESS:Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;
 
-    invoke-static {v1}, Lorg/codeaurora/ims/ImsServiceSub;->access$500(Lorg/codeaurora/ims/ImsServiceSub;)Lorg/codeaurora/ims/ImsRegistrationImpl;
+    invoke-virtual {v1}, Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;->ordinal()I
 
-    move-result-object v1
+    move-result v1
 
-    const/16 v2, 0x12
+    const/4 v2, 0x2
 
-    invoke-virtual {v1, v2, v0}, Lorg/codeaurora/ims/ImsRegistrationImpl;->registrationChangeFailed(ILandroid/telephony/ims/ImsReasonInfo;)V
+    aput v2, v0, v1
+    :try_end_1
+    .catch Ljava/lang/NoSuchFieldError; {:try_start_1 .. :try_end_1} :catch_1
 
-    .line 2121
+    goto :goto_1
+
+    :catch_1
+    move-exception v0
+
+    :goto_1
     return-void
 .end method

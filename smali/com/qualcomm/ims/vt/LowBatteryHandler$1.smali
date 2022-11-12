@@ -23,7 +23,7 @@
     .locals 0
     .param p1, "this$0"    # Lcom/qualcomm/ims/vt/LowBatteryHandler;
 
-    .line 111
+    .line 92
     iput-object p1, p0, Lcom/qualcomm/ims/vt/LowBatteryHandler$1;->this$0:Lcom/qualcomm/ims/vt/LowBatteryHandler;
 
     invoke-direct {p0}, Landroid/content/BroadcastReceiver;-><init>()V
@@ -34,16 +34,16 @@
 
 # virtual methods
 .method public onReceive(Landroid/content/Context;Landroid/content/Intent;)V
-    .locals 5
+    .locals 6
     .param p1, "context"    # Landroid/content/Context;
     .param p2, "intent"    # Landroid/content/Intent;
 
-    .line 114
+    .line 95
     invoke-virtual {p2}, Landroid/content/Intent;->getAction()Ljava/lang/String;
 
     move-result-object v0
 
-    .line 115
+    .line 96
     .local v0, "action":Ljava/lang/String;
     const-string v1, "android.intent.action.BATTERY_CHANGED"
 
@@ -51,85 +51,113 @@
 
     move-result v1
 
-    if-eqz v1, :cond_2
+    if-eqz v1, :cond_3
 
-    .line 116
+    .line 97
     iget-object v1, p0, Lcom/qualcomm/ims/vt/LowBatteryHandler$1;->this$0:Lcom/qualcomm/ims/vt/LowBatteryHandler;
 
-    .line 117
-    invoke-static {v1}, Lcom/qualcomm/ims/vt/LowBatteryHandler;->access$000(Lcom/qualcomm/ims/vt/LowBatteryHandler;)I
+    const/4 v2, 0x0
 
-    move-result v1
+    const-string v3, "battery_low"
 
-    iget-object v2, p0, Lcom/qualcomm/ims/vt/LowBatteryHandler$1;->this$0:Lcom/qualcomm/ims/vt/LowBatteryHandler;
+    invoke-virtual {p2, v3, v2}, Landroid/content/Intent;->getBooleanExtra(Ljava/lang/String;Z)Z
 
-    invoke-static {v2}, Lcom/qualcomm/ims/vt/LowBatteryHandler;->access$100(Lcom/qualcomm/ims/vt/LowBatteryHandler;)Landroid/content/Context;
+    move-result v2
+
+    invoke-static {v1, v2}, Lcom/qualcomm/ims/vt/LowBatteryHandler;->access$002(Lcom/qualcomm/ims/vt/LowBatteryHandler;Z)Z
+
+    .line 98
+    iget-object v1, p0, Lcom/qualcomm/ims/vt/LowBatteryHandler$1;->this$0:Lcom/qualcomm/ims/vt/LowBatteryHandler;
+
+    invoke-static {v1}, Lcom/qualcomm/ims/vt/LowBatteryHandler;->access$100(Lcom/qualcomm/ims/vt/LowBatteryHandler;)Ljava/util/List;
+
+    move-result-object v1
+
+    invoke-interface {v1}, Ljava/util/List;->iterator()Ljava/util/Iterator;
+
+    move-result-object v1
+
+    :goto_0
+    invoke-interface {v1}, Ljava/util/Iterator;->hasNext()Z
+
+    move-result v2
+
+    if-eqz v2, :cond_3
+
+    invoke-interface {v1}, Ljava/util/Iterator;->next()Ljava/lang/Object;
 
     move-result-object v2
 
-    invoke-static {v1, v2}, Lorg/codeaurora/ims/utils/QtiImsExtUtils;->allowVideoCallsInLowBattery(ILandroid/content/Context;)Z
+    check-cast v2, Lorg/codeaurora/ims/ImsServiceSub;
 
-    move-result v1
+    .line 99
+    .local v2, "serviceSub":Lorg/codeaurora/ims/ImsServiceSub;
+    nop
 
-    .line 118
-    .local v1, "allowVideoCallsInLowBattery":Z
-    iget-object v2, p0, Lcom/qualcomm/ims/vt/LowBatteryHandler$1;->this$0:Lcom/qualcomm/ims/vt/LowBatteryHandler;
-
-    const/4 v3, 0x0
-
-    const-string v4, "battery_low"
-
-    invoke-virtual {p2, v4, v3}, Landroid/content/Intent;->getBooleanExtra(Ljava/lang/String;Z)Z
+    .line 100
+    invoke-virtual {v2}, Lorg/codeaurora/ims/ImsServiceSub;->getPhoneId()I
 
     move-result v3
 
-    invoke-static {v2, v3}, Lcom/qualcomm/ims/vt/LowBatteryHandler;->access$202(Lcom/qualcomm/ims/vt/LowBatteryHandler;Z)Z
+    iget-object v4, p0, Lcom/qualcomm/ims/vt/LowBatteryHandler$1;->this$0:Lcom/qualcomm/ims/vt/LowBatteryHandler;
 
-    .line 119
-    iget-object v2, p0, Lcom/qualcomm/ims/vt/LowBatteryHandler$1;->this$0:Lcom/qualcomm/ims/vt/LowBatteryHandler;
+    invoke-static {v4}, Lcom/qualcomm/ims/vt/LowBatteryHandler;->access$200(Lcom/qualcomm/ims/vt/LowBatteryHandler;)Landroid/content/Context;
 
-    invoke-static {v2}, Lcom/qualcomm/ims/vt/LowBatteryHandler;->access$200(Lcom/qualcomm/ims/vt/LowBatteryHandler;)Z
+    move-result-object v4
 
-    move-result v2
+    invoke-static {v3, v4}, Lorg/codeaurora/ims/utils/QtiImsExtUtils;->allowVideoCallsInLowBattery(ILandroid/content/Context;)Z
 
-    if-eqz v2, :cond_0
+    move-result v3
 
-    if-nez v1, :cond_0
+    .line 101
+    .local v3, "allowVideoCallsInLowBattery":Z
+    iget-object v4, p0, Lcom/qualcomm/ims/vt/LowBatteryHandler$1;->this$0:Lcom/qualcomm/ims/vt/LowBatteryHandler;
 
-    .line 121
+    invoke-static {v4}, Lcom/qualcomm/ims/vt/LowBatteryHandler;->access$000(Lcom/qualcomm/ims/vt/LowBatteryHandler;)Z
+
+    move-result v4
+
+    if-eqz v4, :cond_0
+
+    if-nez v3, :cond_0
+
+    .line 103
     invoke-static {}, Lcom/qualcomm/ims/vt/LowBatteryHandler;->access$300()Ljava/lang/String;
 
-    move-result-object v2
+    move-result-object v4
 
-    const-string v3, "disconnectVideoCalls on low battery"
+    const-string v5, "disconnectVideoCalls on low battery"
 
-    invoke-static {v2, v3}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-static {v4, v5}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 122
-    iget-object v2, p0, Lcom/qualcomm/ims/vt/LowBatteryHandler$1;->this$0:Lcom/qualcomm/ims/vt/LowBatteryHandler;
+    .line 104
+    iget-object v4, p0, Lcom/qualcomm/ims/vt/LowBatteryHandler$1;->this$0:Lcom/qualcomm/ims/vt/LowBatteryHandler;
 
-    invoke-static {v2}, Lcom/qualcomm/ims/vt/LowBatteryHandler;->access$400(Lcom/qualcomm/ims/vt/LowBatteryHandler;)V
+    invoke-static {v4, v2}, Lcom/qualcomm/ims/vt/LowBatteryHandler;->access$400(Lcom/qualcomm/ims/vt/LowBatteryHandler;Lorg/codeaurora/ims/ImsServiceSub;)V
 
-    .line 125
+    .line 106
     :cond_0
-    if-eqz v1, :cond_1
+    if-eqz v3, :cond_1
 
-    iget-object v2, p0, Lcom/qualcomm/ims/vt/LowBatteryHandler$1;->this$0:Lcom/qualcomm/ims/vt/LowBatteryHandler;
+    iget-object v4, p0, Lcom/qualcomm/ims/vt/LowBatteryHandler$1;->this$0:Lcom/qualcomm/ims/vt/LowBatteryHandler;
 
-    invoke-static {v2}, Lcom/qualcomm/ims/vt/LowBatteryHandler;->access$500(Lcom/qualcomm/ims/vt/LowBatteryHandler;)Z
+    invoke-static {v4}, Lcom/qualcomm/ims/vt/LowBatteryHandler;->access$500(Lcom/qualcomm/ims/vt/LowBatteryHandler;)Z
 
-    move-result v2
+    move-result v4
 
-    if-eqz v2, :cond_2
+    if-eqz v4, :cond_2
 
-    .line 127
+    .line 108
     :cond_1
-    iget-object v2, p0, Lcom/qualcomm/ims/vt/LowBatteryHandler$1;->this$0:Lcom/qualcomm/ims/vt/LowBatteryHandler;
+    invoke-virtual {v2}, Lorg/codeaurora/ims/ImsServiceSub;->updateLowBatteryStatus()V
 
-    invoke-static {v2}, Lcom/qualcomm/ims/vt/LowBatteryHandler;->access$600(Lcom/qualcomm/ims/vt/LowBatteryHandler;)V
-
-    .line 130
-    .end local v1    # "allowVideoCallsInLowBattery":Z
+    .line 110
+    .end local v2    # "serviceSub":Lorg/codeaurora/ims/ImsServiceSub;
+    .end local v3    # "allowVideoCallsInLowBattery":Z
     :cond_2
+    goto :goto_0
+
+    .line 112
+    :cond_3
     return-void
 .end method

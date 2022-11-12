@@ -109,28 +109,28 @@
 .method private cleanup()V
     .locals 1
 
-    .line 525
+    .line 572
     const-string v0, "cleanup"
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 526
+    .line 573
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mHandlerThread:Landroid/os/HandlerThread;
 
     if-eqz v0, :cond_0
 
-    .line 527
+    .line 574
     invoke-virtual {v0}, Landroid/os/HandlerThread;->quitSafely()Z
 
-    .line 528
+    .line 575
     const/4 v0, 0x0
 
     iput-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mHandlerThread:Landroid/os/HandlerThread;
 
-    .line 529
+    .line 576
     iput-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mCallbackHandler:Landroid/os/Handler;
 
-    .line 531
+    .line 578
     :cond_0
     return-void
 .end method
@@ -140,7 +140,7 @@
     .param p1, "r"    # Ljava/lang/Runnable;
     .param p2, "delayMillis"    # J
 
-    .line 544
+    .line 591
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -157,23 +157,23 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 545
+    .line 592
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mCallbackHandler:Landroid/os/Handler;
 
     if-eqz v0, :cond_0
 
-    .line 546
+    .line 593
     invoke-virtual {v0, p1, p2, p3}, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable;J)Z
 
     goto :goto_0
 
-    .line 548
+    .line 595
     :cond_0
     const-string v0, "Handler is null. Can\'t post delayed runnable!"
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 550
+    .line 597
     :goto_0
     return-void
 .end method
@@ -182,28 +182,28 @@
     .locals 1
     .param p1, "r"    # Ljava/lang/Runnable;
 
-    .line 534
+    .line 581
     const-string v0, "posting to handler"
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 535
+    .line 582
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mCallbackHandler:Landroid/os/Handler;
 
     if-eqz v0, :cond_0
 
-    .line 536
+    .line 583
     invoke-virtual {v0, p1}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
 
     goto :goto_0
 
-    .line 538
+    .line 585
     :cond_0
     const-string v0, "Handler is null. Can\'t post runnable!"
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 540
+    .line 587
     :goto_0
     return-void
 .end method
@@ -214,14 +214,14 @@
     .locals 1
     .param p1, "state"    # Landroid/telephony/ims/ImsConferenceState;
 
-    .line 415
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$BcMP3esi5AAhVnEZJ3lgIePzxBs;
+    .line 428
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda18;
 
-    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$BcMP3esi5AAhVnEZJ3lgIePzxBs;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsConferenceState;)V
+    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda18;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsConferenceState;)V
 
     invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
 
-    .line 425
+    .line 438
     return-void
 .end method
 
@@ -231,14 +231,14 @@
     .param p2, "targetAccessTech"    # I
     .param p3, "reasonInfo"    # Landroid/telephony/ims/ImsReasonInfo;
 
-    .line 145
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$C9MTcYNkkIl55y9Q7jWCCvFCUbo;
+    .line 158
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda6;
 
-    invoke-direct {v0, p0, p1, p2, p3}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$C9MTcYNkkIl55y9Q7jWCCvFCUbo;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;IILandroid/telephony/ims/ImsReasonInfo;)V
+    invoke-direct {v0, p0, p1, p2, p3}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda6;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;IILandroid/telephony/ims/ImsReasonInfo;)V
 
     invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
 
-    .line 157
+    .line 170
     return-void
 .end method
 
@@ -248,14 +248,14 @@
     .param p2, "targetAccessTech"    # I
     .param p3, "reasonInfo"    # Landroid/telephony/ims/ImsReasonInfo;
 
-    .line 161
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$y6XnVBM3_o4exd8JjCkEvalTqH4;
+    .line 174
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda7;
 
-    invoke-direct {v0, p0, p1, p2, p3}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$y6XnVBM3_o4exd8JjCkEvalTqH4;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;IILandroid/telephony/ims/ImsReasonInfo;)V
+    invoke-direct {v0, p0, p1, p2, p3}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda7;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;IILandroid/telephony/ims/ImsReasonInfo;)V
 
     invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
 
-    .line 174
+    .line 187
     return-void
 .end method
 
@@ -265,14 +265,14 @@
     .param p2, "targetAccessTech"    # I
     .param p3, "reasonInfo"    # Landroid/telephony/ims/ImsReasonInfo;
 
-    .line 127
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$HZ25FmIdtJxtAX9S-T3fkpTmY44;
+    .line 140
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda8;
 
-    invoke-direct {v0, p0, p1, p2, p3}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$HZ25FmIdtJxtAX9S-T3fkpTmY44;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;IILandroid/telephony/ims/ImsReasonInfo;)V
+    invoke-direct {v0, p0, p1, p2, p3}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda8;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;IILandroid/telephony/ims/ImsReasonInfo;)V
 
     invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
 
-    .line 140
+    .line 153
     return-void
 .end method
 
@@ -280,25 +280,10 @@
     .locals 1
     .param p1, "profile"    # Landroid/telephony/ims/ImsCallProfile;
 
-    .line 207
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$IW8zC68K_FFeZoqT3eCrFOmLypw;
-
-    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$IW8zC68K_FFeZoqT3eCrFOmLypw;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsCallProfile;)V
-
-    invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
-
-    .line 217
-    return-void
-.end method
-
-.method public callSessionHoldFailed(Landroid/telephony/ims/ImsReasonInfo;)V
-    .locals 1
-    .param p1, "reasonInfo"    # Landroid/telephony/ims/ImsReasonInfo;
-
     .line 220
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$4992efbOdKYZaAiINvvqnb4h2hM;
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda10;
 
-    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$4992efbOdKYZaAiINvvqnb4h2hM;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsReasonInfo;)V
+    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda10;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsCallProfile;)V
 
     invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
 
@@ -306,14 +291,14 @@
     return-void
 .end method
 
-.method public callSessionHoldReceived(Landroid/telephony/ims/ImsCallProfile;)V
+.method public callSessionHoldFailed(Landroid/telephony/ims/ImsReasonInfo;)V
     .locals 1
-    .param p1, "profile"    # Landroid/telephony/ims/ImsCallProfile;
+    .param p1, "reasonInfo"    # Landroid/telephony/ims/ImsReasonInfo;
 
     .line 233
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$_bZZKdobFcipERYxWUXGj470FzM;
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda19;
 
-    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$_bZZKdobFcipERYxWUXGj470FzM;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsCallProfile;)V
+    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda19;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsReasonInfo;)V
 
     invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
 
@@ -321,29 +306,29 @@
     return-void
 .end method
 
+.method public callSessionHoldReceived(Landroid/telephony/ims/ImsCallProfile;)V
+    .locals 1
+    .param p1, "profile"    # Landroid/telephony/ims/ImsCallProfile;
+
+    .line 246
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda11;
+
+    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda11;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsCallProfile;)V
+
+    invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
+
+    .line 256
+    return-void
+.end method
+
 .method public callSessionInitiated(Landroid/telephony/ims/ImsCallProfile;)V
     .locals 1
     .param p1, "profile"    # Landroid/telephony/ims/ImsCallProfile;
 
-    .line 64
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$IWCrUbm0dnA0EtxuZC_pPucWcXg;
-
-    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$IWCrUbm0dnA0EtxuZC_pPucWcXg;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsCallProfile;)V
-
-    invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
-
-    .line 74
-    return-void
-.end method
-
-.method public callSessionInitiatedFailed(Landroid/telephony/ims/ImsReasonInfo;)V
-    .locals 1
-    .param p1, "reason"    # Landroid/telephony/ims/ImsReasonInfo;
-
     .line 77
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$0VTgnLKgp0IKpqolVc06e4qRjDA;
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda12;
 
-    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$0VTgnLKgp0IKpqolVc06e4qRjDA;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsReasonInfo;)V
+    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda12;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsCallProfile;)V
 
     invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
 
@@ -351,17 +336,47 @@
     return-void
 .end method
 
-.method public callSessionInviteParticipantsRequestDelivered()V
+.method public callSessionInitiating(Landroid/telephony/ims/ImsCallProfile;)V
     .locals 1
+    .param p1, "profile"    # Landroid/telephony/ims/ImsCallProfile;
 
-    .line 382
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$wMiO8TYWtWMKVhilAGJ2B72WKAQ;
+    .line 64
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda13;
 
-    invoke-direct {v0, p0}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$wMiO8TYWtWMKVhilAGJ2B72WKAQ;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;)V
+    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda13;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsCallProfile;)V
 
     invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
 
-    .line 394
+    .line 74
+    return-void
+.end method
+
+.method public callSessionInitiatingFailed(Landroid/telephony/ims/ImsReasonInfo;)V
+    .locals 1
+    .param p1, "reason"    # Landroid/telephony/ims/ImsReasonInfo;
+
+    .line 90
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda20;
+
+    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda20;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsReasonInfo;)V
+
+    invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
+
+    .line 100
+    return-void
+.end method
+
+.method public callSessionInviteParticipantsRequestDelivered()V
+    .locals 1
+
+    .line 395
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda0;
+
+    invoke-direct {v0, p0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda0;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;)V
+
+    invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
+
+    .line 407
     return-void
 .end method
 
@@ -369,14 +384,14 @@
     .locals 1
     .param p1, "reasonInfo"    # Landroid/telephony/ims/ImsReasonInfo;
 
-    .line 397
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$vS8MvKuTFLZM4boa3Y-HnKe1ls4;
+    .line 410
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda21;
 
-    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$vS8MvKuTFLZM4boa3Y-HnKe1ls4;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsReasonInfo;)V
+    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda21;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsReasonInfo;)V
 
     invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
 
-    .line 409
+    .line 422
     return-void
 .end method
 
@@ -385,14 +400,14 @@
     .param p1, "srcAccessTech"    # I
     .param p2, "targetAccessTech"    # I
 
-    .line 177
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$sB1JJtIKcCmIJSWLtqsS7A1N1Oc;
+    .line 190
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda5;
 
-    invoke-direct {v0, p0, p1, p2}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$sB1JJtIKcCmIJSWLtqsS7A1N1Oc;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;II)V
+    invoke-direct {v0, p0, p1, p2}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda5;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;II)V
 
     invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
 
-    .line 188
+    .line 201
     return-void
 .end method
 
@@ -400,14 +415,14 @@
     .locals 1
     .param p1, "activeCallSession"    # Lorg/codeaurora/ims/ImsCallSessionImpl;
 
-    .line 313
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$y3OON8K3TpaDS9JdlADae3P5m9I;
+    .line 326
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda29;
 
-    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$y3OON8K3TpaDS9JdlADae3P5m9I;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Lorg/codeaurora/ims/ImsCallSessionImpl;)V
+    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda29;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Lorg/codeaurora/ims/ImsCallSessionImpl;)V
 
     invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
 
-    .line 323
+    .line 336
     return-void
 .end method
 
@@ -415,14 +430,14 @@
     .locals 1
     .param p1, "reasonInfo"    # Landroid/telephony/ims/ImsReasonInfo;
 
-    .line 332
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$Iiy2nlTGtOOIRDQZaqgLo1_W3fY;
+    .line 345
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda22;
 
-    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$Iiy2nlTGtOOIRDQZaqgLo1_W3fY;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsReasonInfo;)V
+    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda22;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsReasonInfo;)V
 
     invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
 
-    .line 342
+    .line 355
     return-void
 .end method
 
@@ -431,14 +446,14 @@
     .param p1, "newSession"    # Lorg/codeaurora/ims/ImsCallSessionImpl;
     .param p2, "profile"    # Landroid/telephony/ims/ImsCallProfile;
 
-    .line 293
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$eV1DIwoJO7vzBkpDyutHYP6WG4U;
+    .line 306
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda30;
 
-    invoke-direct {v0, p0, p1, p2}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$eV1DIwoJO7vzBkpDyutHYP6WG4U;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Lorg/codeaurora/ims/ImsCallSessionImpl;Landroid/telephony/ims/ImsCallProfile;)V
+    invoke-direct {v0, p0, p1, p2}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda30;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Lorg/codeaurora/ims/ImsCallSessionImpl;Landroid/telephony/ims/ImsCallProfile;)V
 
     invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
 
-    .line 305
+    .line 318
     return-void
 .end method
 
@@ -446,130 +461,10 @@
     .locals 1
     .param p1, "isMultiParty"    # Z
 
-    .line 433
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$qYCZqQ7BhTOA_JdJFcGAB4o9KfY;
+    .line 446
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda31;
 
-    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$qYCZqQ7BhTOA_JdJFcGAB4o9KfY;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Z)V
-
-    invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
-
-    .line 444
-    return-void
-.end method
-
-.method public callSessionProgressing(Landroid/telephony/ims/ImsStreamMediaProfile;)V
-    .locals 1
-    .param p1, "profile"    # Landroid/telephony/ims/ImsStreamMediaProfile;
-
-    .line 90
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$442J7df5JdJYYEsUp1tl5YTyMBI;
-
-    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$442J7df5JdJYYEsUp1tl5YTyMBI;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsStreamMediaProfile;)V
-
-    invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
-
-    .line 100
-    return-void
-.end method
-
-.method public callSessionResumeFailed(Landroid/telephony/ims/ImsReasonInfo;)V
-    .locals 1
-    .param p1, "reasonInfo"    # Landroid/telephony/ims/ImsReasonInfo;
-
-    .line 259
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$kt9GXMCD2UIkz1c-D6KNAYzDCQ0;
-
-    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$kt9GXMCD2UIkz1c-D6KNAYzDCQ0;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsReasonInfo;)V
-
-    invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
-
-    .line 269
-    return-void
-.end method
-
-.method public callSessionResumeReceived(Landroid/telephony/ims/ImsCallProfile;)V
-    .locals 1
-    .param p1, "profile"    # Landroid/telephony/ims/ImsCallProfile;
-
-    .line 272
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$NgTmPyvS2DCyvFG0fHOBT5Fxa0c;
-
-    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$NgTmPyvS2DCyvFG0fHOBT5Fxa0c;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsCallProfile;)V
-
-    invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
-
-    .line 282
-    return-void
-.end method
-
-.method public callSessionResumed(Landroid/telephony/ims/ImsCallProfile;)V
-    .locals 1
-    .param p1, "profile"    # Landroid/telephony/ims/ImsCallProfile;
-
-    .line 246
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$nriNCdCPWutE_AgiZMLXo3ver2w;
-
-    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$nriNCdCPWutE_AgiZMLXo3ver2w;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsCallProfile;)V
-
-    invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
-
-    .line 256
-    return-void
-.end method
-
-.method public callSessionRttAudioIndicatorChanged(Landroid/telephony/ims/ImsStreamMediaProfile;)V
-    .locals 1
-    .param p1, "profile"    # Landroid/telephony/ims/ImsStreamMediaProfile;
-
-    .line 486
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$W3UZXKEI6Spz7y-CsRkNHu9hhmI;
-
-    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$W3UZXKEI6Spz7y-CsRkNHu9hhmI;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsStreamMediaProfile;)V
-
-    invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
-
-    .line 496
-    return-void
-.end method
-
-.method public callSessionRttMessageReceived(Ljava/lang/String;)V
-    .locals 1
-    .param p1, "rttMessage"    # Ljava/lang/String;
-
-    .line 460
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$MN4geWypzRV1lOtQSKbta99phqk;
-
-    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$MN4geWypzRV1lOtQSKbta99phqk;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Ljava/lang/String;)V
-
-    invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
-
-    .line 470
-    return-void
-.end method
-
-.method public callSessionRttModifyRequestReceived(Landroid/telephony/ims/ImsCallProfile;)V
-    .locals 1
-    .param p1, "profile"    # Landroid/telephony/ims/ImsCallProfile;
-
-    .line 473
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$29avhs9k60UA_0CabugO0GaSkZs;
-
-    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$29avhs9k60UA_0CabugO0GaSkZs;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsCallProfile;)V
-
-    invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
-
-    .line 483
-    return-void
-.end method
-
-.method public callSessionRttModifyResponseReceived(I)V
-    .locals 1
-    .param p1, "status"    # I
-
-    .line 447
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$uuTRjUI_3SGOLcZozf3L62yMNJM;
-
-    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$uuTRjUI_3SGOLcZozf3L62yMNJM;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;I)V
+    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda31;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Z)V
 
     invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
 
@@ -577,18 +472,138 @@
     return-void
 .end method
 
+.method public callSessionProgressing(Landroid/telephony/ims/ImsStreamMediaProfile;)V
+    .locals 1
+    .param p1, "profile"    # Landroid/telephony/ims/ImsStreamMediaProfile;
+
+    .line 103
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda25;
+
+    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda25;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsStreamMediaProfile;)V
+
+    invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
+
+    .line 113
+    return-void
+.end method
+
+.method public callSessionResumeFailed(Landroid/telephony/ims/ImsReasonInfo;)V
+    .locals 1
+    .param p1, "reasonInfo"    # Landroid/telephony/ims/ImsReasonInfo;
+
+    .line 272
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda23;
+
+    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda23;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsReasonInfo;)V
+
+    invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
+
+    .line 282
+    return-void
+.end method
+
+.method public callSessionResumeReceived(Landroid/telephony/ims/ImsCallProfile;)V
+    .locals 1
+    .param p1, "profile"    # Landroid/telephony/ims/ImsCallProfile;
+
+    .line 285
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda14;
+
+    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda14;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsCallProfile;)V
+
+    invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
+
+    .line 295
+    return-void
+.end method
+
+.method public callSessionResumed(Landroid/telephony/ims/ImsCallProfile;)V
+    .locals 1
+    .param p1, "profile"    # Landroid/telephony/ims/ImsCallProfile;
+
+    .line 259
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda15;
+
+    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda15;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsCallProfile;)V
+
+    invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
+
+    .line 269
+    return-void
+.end method
+
+.method public callSessionRttAudioIndicatorChanged(Landroid/telephony/ims/ImsStreamMediaProfile;)V
+    .locals 1
+    .param p1, "profile"    # Landroid/telephony/ims/ImsStreamMediaProfile;
+
+    .line 499
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda26;
+
+    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda26;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsStreamMediaProfile;)V
+
+    invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
+
+    .line 509
+    return-void
+.end method
+
+.method public callSessionRttMessageReceived(Ljava/lang/String;)V
+    .locals 1
+    .param p1, "rttMessage"    # Ljava/lang/String;
+
+    .line 473
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda28;
+
+    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda28;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Ljava/lang/String;)V
+
+    invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
+
+    .line 483
+    return-void
+.end method
+
+.method public callSessionRttModifyRequestReceived(Landroid/telephony/ims/ImsCallProfile;)V
+    .locals 1
+    .param p1, "profile"    # Landroid/telephony/ims/ImsCallProfile;
+
+    .line 486
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda16;
+
+    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda16;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsCallProfile;)V
+
+    invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
+
+    .line 496
+    return-void
+.end method
+
+.method public callSessionRttModifyResponseReceived(I)V
+    .locals 1
+    .param p1, "status"    # I
+
+    .line 460
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda3;
+
+    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda3;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;I)V
+
+    invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
+
+    .line 470
+    return-void
+.end method
+
 .method public callSessionSuppServiceReceived(Landroid/telephony/ims/ImsSuppServiceNotification;)V
     .locals 1
     .param p1, "suppServiceInfo"    # Landroid/telephony/ims/ImsSuppServiceNotification;
 
-    .line 365
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$-_QVNdYWPTw24WAKBXREWURgHz8;
+    .line 378
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda27;
 
-    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$-_QVNdYWPTw24WAKBXREWURgHz8;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsSuppServiceNotification;)V
+    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda27;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsSuppServiceNotification;)V
 
     invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
 
-    .line 376
+    .line 389
     return-void
 .end method
 
@@ -596,28 +611,28 @@
     .locals 3
     .param p1, "reason"    # Landroid/telephony/ims/ImsReasonInfo;
 
-    .line 104
+    .line 117
     new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$1;
 
     invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$1;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsReasonInfo;)V
 
-    .line 114
+    .line 127
     .local v0, "r":Ljava/lang/Runnable;
     iget-object v1, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mCallbackHandler:Landroid/os/Handler;
 
     invoke-virtual {v1, v0}, Landroid/os/Handler;->removeCallbacks(Ljava/lang/Runnable;)V
 
-    .line 115
+    .line 128
     iget-object v1, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
     if-eqz v1, :cond_0
 
-    .line 116
+    .line 129
     invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
 
     goto :goto_0
 
-    .line 118
+    .line 131
     :cond_0
     new-instance v1, Ljava/lang/StringBuilder;
 
@@ -635,13 +650,42 @@
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 119
+    .line 132
     const-wide/16 v1, 0x12c
 
     invoke-direct {p0, v0, v1, v2}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postDelayedRunnable(Ljava/lang/Runnable;J)V
 
-    .line 122
+    .line 135
     :goto_0
+    return-void
+.end method
+
+.method public callSessionTransferFailed(Landroid/telephony/ims/ImsReasonInfo;)V
+    .locals 1
+    .param p1, "reasonInfo"    # Landroid/telephony/ims/ImsReasonInfo;
+
+    .line 536
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda24;
+
+    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda24;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsReasonInfo;)V
+
+    invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
+
+    .line 546
+    return-void
+.end method
+
+.method public callSessionTransferred()V
+    .locals 1
+
+    .line 552
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda1;
+
+    invoke-direct {v0, p0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda1;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;)V
+
+    invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
+
+    .line 562
     return-void
 .end method
 
@@ -649,14 +693,14 @@
     .locals 1
     .param p1, "ttyMode"    # I
 
-    .line 191
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$d9hzXKuf9LG-EotfdtxvPRVpFpg;
+    .line 204
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda4;
 
-    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$d9hzXKuf9LG-EotfdtxvPRVpFpg;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;I)V
+    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda4;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;I)V
 
     invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
 
-    .line 201
+    .line 214
     return-void
 .end method
 
@@ -664,14 +708,14 @@
     .locals 1
     .param p1, "profile"    # Landroid/telephony/ims/ImsCallProfile;
 
-    .line 348
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$kxQGCDYr0DA04VIY5ZRLwwdgyQw;
+    .line 361
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda17;
 
-    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$kxQGCDYr0DA04VIY5ZRLwwdgyQw;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsCallProfile;)V
+    invoke-direct {v0, p0, p1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda17;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;Landroid/telephony/ims/ImsCallProfile;)V
 
     invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
 
-    .line 358
+    .line 371
     return-void
 .end method
 
@@ -680,41 +724,41 @@
     .param p1, "mode"    # I
     .param p2, "ussdMessage"    # Ljava/lang/String;
 
-    .line 505
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$sh6hjKR5dv89Z18W6USFTazlh0Y;
+    .line 518
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda9;
 
-    invoke-direct {v0, p0, p1, p2}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$sh6hjKR5dv89Z18W6USFTazlh0Y;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;ILjava/lang/String;)V
+    invoke-direct {v0, p0, p1, p2}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda9;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;ILjava/lang/String;)V
 
     invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
 
-    .line 515
+    .line 528
     return-void
 .end method
 
 .method public dispose()V
     .locals 1
 
-    .line 518
-    new-instance v0, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$RwJ4k4uPSzwLx3ZRZCcW46yKv0U;
+    .line 565
+    new-instance v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda2;
 
-    invoke-direct {v0, p0}, Lorg/codeaurora/ims/-$$Lambda$ImsCallSessionCallbackHandler$RwJ4k4uPSzwLx3ZRZCcW46yKv0U;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;)V
+    invoke-direct {v0, p0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler$$ExternalSyntheticLambda2;-><init>(Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;)V
 
     invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->postRunnable(Ljava/lang/Runnable;)V
 
-    .line 522
+    .line 569
     return-void
 .end method
 
-.method public synthetic lambda$callSessionConferenceStateUpdated$21$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsConferenceState;)V
+.method public synthetic lambda$callSessionConferenceStateUpdated$22$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsConferenceState;)V
     .locals 3
     .param p1, "state"    # Landroid/telephony/ims/ImsConferenceState;
 
-    .line 416
+    .line 429
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
     if-eqz v0, :cond_0
 
-    .line 417
+    .line 430
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -731,7 +775,7 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 419
+    .line 432
     :try_start_0
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
@@ -739,14 +783,14 @@
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 422
+    .line 435
     goto :goto_0
 
-    .line 420
+    .line 433
     :catch_0
     move-exception v0
 
-    .line 421
+    .line 434
     .local v0, "r":Ljava/lang/RuntimeException;
     new-instance v1, Ljava/lang/StringBuilder;
 
@@ -764,25 +808,25 @@
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 424
+    .line 437
     .end local v0    # "r":Ljava/lang/RuntimeException;
     :cond_0
     :goto_0
     return-void
 .end method
 
-.method public synthetic lambda$callSessionHandover$4$ImsCallSessionCallbackHandler(IILandroid/telephony/ims/ImsReasonInfo;)V
+.method public synthetic lambda$callSessionHandover$5$ImsCallSessionCallbackHandler(IILandroid/telephony/ims/ImsReasonInfo;)V
     .locals 3
     .param p1, "srcAccessTech"    # I
     .param p2, "targetAccessTech"    # I
     .param p3, "reasonInfo"    # Landroid/telephony/ims/ImsReasonInfo;
 
-    .line 146
+    .line 159
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
     if-eqz v0, :cond_0
 
-    .line 147
+    .line 160
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -811,7 +855,7 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 151
+    .line 164
     :try_start_0
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
@@ -819,14 +863,14 @@
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 154
+    .line 167
     goto :goto_0
 
-    .line 152
+    .line 165
     :catch_0
     move-exception v0
 
-    .line 153
+    .line 166
     .local v0, "r":Ljava/lang/RuntimeException;
     new-instance v1, Ljava/lang/StringBuilder;
 
@@ -844,25 +888,25 @@
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 156
+    .line 169
     .end local v0    # "r":Ljava/lang/RuntimeException;
     :cond_0
     :goto_0
     return-void
 .end method
 
-.method public synthetic lambda$callSessionHandoverFailed$5$ImsCallSessionCallbackHandler(IILandroid/telephony/ims/ImsReasonInfo;)V
+.method public synthetic lambda$callSessionHandoverFailed$6$ImsCallSessionCallbackHandler(IILandroid/telephony/ims/ImsReasonInfo;)V
     .locals 3
     .param p1, "srcAccessTech"    # I
     .param p2, "targetAccessTech"    # I
     .param p3, "reasonInfo"    # Landroid/telephony/ims/ImsReasonInfo;
 
-    .line 162
+    .line 175
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
     if-eqz v0, :cond_0
 
-    .line 163
+    .line 176
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -891,7 +935,7 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 167
+    .line 180
     :try_start_0
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
@@ -899,14 +943,14 @@
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 171
+    .line 184
     goto :goto_0
 
-    .line 169
+    .line 182
     :catch_0
     move-exception v0
 
-    .line 170
+    .line 183
     .local v0, "r":Ljava/lang/RuntimeException;
     new-instance v1, Ljava/lang/StringBuilder;
 
@@ -924,25 +968,25 @@
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 173
+    .line 186
     .end local v0    # "r":Ljava/lang/RuntimeException;
     :cond_0
     :goto_0
     return-void
 .end method
 
-.method public synthetic lambda$callSessionHandoverStarted$3$ImsCallSessionCallbackHandler(IILandroid/telephony/ims/ImsReasonInfo;)V
+.method public synthetic lambda$callSessionHandoverStarted$4$ImsCallSessionCallbackHandler(IILandroid/telephony/ims/ImsReasonInfo;)V
     .locals 3
     .param p1, "srcAccessTech"    # I
     .param p2, "targetAccessTech"    # I
     .param p3, "reasonInfo"    # Landroid/telephony/ims/ImsReasonInfo;
 
-    .line 128
+    .line 141
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
     if-eqz v0, :cond_0
 
-    .line 129
+    .line 142
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -971,7 +1015,7 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 133
+    .line 146
     :try_start_0
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
@@ -979,14 +1023,14 @@
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 137
+    .line 150
     goto :goto_0
 
-    .line 135
+    .line 148
     :catch_0
     move-exception v0
 
-    .line 136
+    .line 149
     .local v0, "r":Ljava/lang/RuntimeException;
     new-instance v1, Ljava/lang/StringBuilder;
 
@@ -1004,23 +1048,23 @@
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 139
+    .line 152
     .end local v0    # "r":Ljava/lang/RuntimeException;
     :cond_0
     :goto_0
     return-void
 .end method
 
-.method public synthetic lambda$callSessionHeld$8$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsCallProfile;)V
+.method public synthetic lambda$callSessionHeld$9$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsCallProfile;)V
     .locals 3
     .param p1, "profile"    # Landroid/telephony/ims/ImsCallProfile;
 
-    .line 208
+    .line 221
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
     if-eqz v0, :cond_0
 
-    .line 209
+    .line 222
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1037,77 +1081,11 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 211
-    :try_start_0
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
-
-    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionHeld(Landroid/telephony/ims/ImsCallProfile;)V
-    :try_end_0
-    .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
-
-    .line 214
-    goto :goto_0
-
-    .line 212
-    :catch_0
-    move-exception v0
-
-    .line 213
-    .local v0, "r":Ljava/lang/RuntimeException;
-    new-instance v1, Ljava/lang/StringBuilder;
-
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v2, "callSessionHeld :: RuntimeException "
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v1
-
-    invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
-
-    .line 216
-    .end local v0    # "r":Ljava/lang/RuntimeException;
-    :cond_0
-    :goto_0
-    return-void
-.end method
-
-.method public synthetic lambda$callSessionHoldFailed$9$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsReasonInfo;)V
-    .locals 3
-    .param p1, "reasonInfo"    # Landroid/telephony/ims/ImsReasonInfo;
-
-    .line 221
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
-
-    if-eqz v0, :cond_0
-
-    .line 222
-    new-instance v0, Ljava/lang/StringBuilder;
-
-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v1, "callSessionHoldFailed :: reasonInfo="
-
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v0
-
-    invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
-
     .line 224
     :try_start_0
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
-    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionHoldFailed(Landroid/telephony/ims/ImsReasonInfo;)V
+    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionHeld(Landroid/telephony/ims/ImsCallProfile;)V
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
@@ -1124,7 +1102,7 @@
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v2, "callSessionHoldFailed :: RuntimeException "
+    const-string v2, "callSessionHeld :: RuntimeException "
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
@@ -1143,9 +1121,9 @@
     return-void
 .end method
 
-.method public synthetic lambda$callSessionHoldReceived$10$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsCallProfile;)V
+.method public synthetic lambda$callSessionHoldFailed$10$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsReasonInfo;)V
     .locals 3
-    .param p1, "profile"    # Landroid/telephony/ims/ImsCallProfile;
+    .param p1, "reasonInfo"    # Landroid/telephony/ims/ImsReasonInfo;
 
     .line 234
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
@@ -1157,7 +1135,7 @@
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v1, "callSessionHoldReceived :: profile="
+    const-string v1, "callSessionHoldFailed :: reasonInfo="
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
@@ -1173,7 +1151,7 @@
     :try_start_0
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
-    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionHoldReceived(Landroid/telephony/ims/ImsCallProfile;)V
+    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionHoldFailed(Landroid/telephony/ims/ImsReasonInfo;)V
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
@@ -1190,7 +1168,7 @@
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v2, "callSessionHoldReceived :: RuntimeException "
+    const-string v2, "callSessionHoldFailed :: RuntimeException "
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
@@ -1209,16 +1187,82 @@
     return-void
 .end method
 
-.method public synthetic lambda$callSessionInitiated$0$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsCallProfile;)V
+.method public synthetic lambda$callSessionHoldReceived$11$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsCallProfile;)V
     .locals 3
     .param p1, "profile"    # Landroid/telephony/ims/ImsCallProfile;
 
-    .line 65
+    .line 247
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
     if-eqz v0, :cond_0
 
-    .line 66
+    .line 248
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v1, "callSessionHoldReceived :: profile="
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 250
+    :try_start_0
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
+
+    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionHoldReceived(Landroid/telephony/ims/ImsCallProfile;)V
+    :try_end_0
+    .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
+
+    .line 253
+    goto :goto_0
+
+    .line 251
+    :catch_0
+    move-exception v0
+
+    .line 252
+    .local v0, "r":Ljava/lang/RuntimeException;
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "callSessionHoldReceived :: RuntimeException "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 255
+    .end local v0    # "r":Ljava/lang/RuntimeException;
+    :cond_0
+    :goto_0
+    return-void
+.end method
+
+.method public synthetic lambda$callSessionInitiated$1$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsCallProfile;)V
+    .locals 3
+    .param p1, "profile"    # Landroid/telephony/ims/ImsCallProfile;
+
+    .line 78
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
+
+    if-eqz v0, :cond_0
+
+    .line 79
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1235,77 +1279,11 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 68
-    :try_start_0
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
-
-    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionInitiated(Landroid/telephony/ims/ImsCallProfile;)V
-    :try_end_0
-    .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
-
-    .line 71
-    goto :goto_0
-
-    .line 69
-    :catch_0
-    move-exception v0
-
-    .line 70
-    .local v0, "r":Ljava/lang/RuntimeException;
-    new-instance v1, Ljava/lang/StringBuilder;
-
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v2, "callSessionInitiated :: RuntimeException "
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v1
-
-    invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
-
-    .line 73
-    .end local v0    # "r":Ljava/lang/RuntimeException;
-    :cond_0
-    :goto_0
-    return-void
-.end method
-
-.method public synthetic lambda$callSessionInitiatedFailed$1$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsReasonInfo;)V
-    .locals 3
-    .param p1, "reason"    # Landroid/telephony/ims/ImsReasonInfo;
-
-    .line 78
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
-
-    if-eqz v0, :cond_0
-
-    .line 79
-    new-instance v0, Ljava/lang/StringBuilder;
-
-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v1, "callSessionInitiatedFailed :: reason="
-
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v0
-
-    invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
-
     .line 81
     :try_start_0
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
-    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionInitiatedFailed(Landroid/telephony/ims/ImsReasonInfo;)V
+    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionInitiated(Landroid/telephony/ims/ImsCallProfile;)V
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
@@ -1322,7 +1300,7 @@
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v2, "callSessionInitiatedFailed :: RuntimeException "
+    const-string v2, "callSessionInitiated :: RuntimeException "
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
@@ -1341,20 +1319,152 @@
     return-void
 .end method
 
-.method public synthetic lambda$callSessionInviteParticipantsRequestDelivered$19$ImsCallSessionCallbackHandler()V
+.method public synthetic lambda$callSessionInitiating$0$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsCallProfile;)V
     .locals 3
+    .param p1, "profile"    # Landroid/telephony/ims/ImsCallProfile;
 
-    .line 383
+    .line 65
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
     if-eqz v0, :cond_0
 
-    .line 384
+    .line 66
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v1, "callSessionInitiating :: profile="
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 68
+    :try_start_0
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
+
+    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionInitiating(Landroid/telephony/ims/ImsCallProfile;)V
+    :try_end_0
+    .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
+
+    .line 71
+    goto :goto_0
+
+    .line 69
+    :catch_0
+    move-exception v0
+
+    .line 70
+    .local v0, "r":Ljava/lang/RuntimeException;
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "callSessionInitiating :: RuntimeException "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 73
+    .end local v0    # "r":Ljava/lang/RuntimeException;
+    :cond_0
+    :goto_0
+    return-void
+.end method
+
+.method public synthetic lambda$callSessionInitiatingFailed$2$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsReasonInfo;)V
+    .locals 3
+    .param p1, "reason"    # Landroid/telephony/ims/ImsReasonInfo;
+
+    .line 91
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
+
+    if-eqz v0, :cond_0
+
+    .line 92
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v1, "callSessionInitiatingFailed :: reason="
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 94
+    :try_start_0
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
+
+    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionInitiatingFailed(Landroid/telephony/ims/ImsReasonInfo;)V
+    :try_end_0
+    .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
+
+    .line 97
+    goto :goto_0
+
+    .line 95
+    :catch_0
+    move-exception v0
+
+    .line 96
+    .local v0, "r":Ljava/lang/RuntimeException;
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "callSessionInitiatingFailed :: RuntimeException "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 99
+    .end local v0    # "r":Ljava/lang/RuntimeException;
+    :cond_0
+    :goto_0
+    return-void
+.end method
+
+.method public synthetic lambda$callSessionInviteParticipantsRequestDelivered$20$ImsCallSessionCallbackHandler()V
+    .locals 3
+
+    .line 396
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
+
+    if-eqz v0, :cond_0
+
+    .line 397
     const-string v0, "callSessionInviteParticipantsRequestDelivered"
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 386
+    .line 399
     :try_start_0
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
@@ -1362,14 +1472,14 @@
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 391
+    .line 404
     goto :goto_0
 
-    .line 387
+    .line 400
     :catch_0
     move-exception v0
 
-    .line 388
+    .line 401
     .local v0, "r":Ljava/lang/RuntimeException;
     new-instance v1, Ljava/lang/StringBuilder;
 
@@ -1387,23 +1497,23 @@
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 393
+    .line 406
     .end local v0    # "r":Ljava/lang/RuntimeException;
     :cond_0
     :goto_0
     return-void
 .end method
 
-.method public synthetic lambda$callSessionInviteParticipantsRequestFailed$20$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsReasonInfo;)V
+.method public synthetic lambda$callSessionInviteParticipantsRequestFailed$21$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsReasonInfo;)V
     .locals 3
     .param p1, "reasonInfo"    # Landroid/telephony/ims/ImsReasonInfo;
 
-    .line 398
+    .line 411
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
     if-eqz v0, :cond_0
 
-    .line 399
+    .line 412
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1420,7 +1530,7 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 402
+    .line 415
     :try_start_0
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
@@ -1428,14 +1538,14 @@
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 406
+    .line 419
     goto :goto_0
 
-    .line 403
+    .line 416
     :catch_0
     move-exception v0
 
-    .line 404
+    .line 417
     .local v0, "r":Ljava/lang/RuntimeException;
     new-instance v1, Ljava/lang/StringBuilder;
 
@@ -1453,24 +1563,24 @@
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 408
+    .line 421
     .end local v0    # "r":Ljava/lang/RuntimeException;
     :cond_0
     :goto_0
     return-void
 .end method
 
-.method public synthetic lambda$callSessionMayHandover$6$ImsCallSessionCallbackHandler(II)V
+.method public synthetic lambda$callSessionMayHandover$7$ImsCallSessionCallbackHandler(II)V
     .locals 3
     .param p1, "srcAccessTech"    # I
     .param p2, "targetAccessTech"    # I
 
-    .line 178
+    .line 191
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
     if-eqz v0, :cond_0
 
-    .line 179
+    .line 192
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1493,7 +1603,7 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 182
+    .line 195
     :try_start_0
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
@@ -1501,14 +1611,14 @@
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 185
+    .line 198
     goto :goto_0
 
-    .line 183
+    .line 196
     :catch_0
     move-exception v0
 
-    .line 184
+    .line 197
     .local v0, "r":Ljava/lang/RuntimeException;
     new-instance v1, Ljava/lang/StringBuilder;
 
@@ -1526,23 +1636,23 @@
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 187
+    .line 200
     .end local v0    # "r":Ljava/lang/RuntimeException;
     :cond_0
     :goto_0
     return-void
 .end method
 
-.method public synthetic lambda$callSessionMergeComplete$15$ImsCallSessionCallbackHandler(Lorg/codeaurora/ims/ImsCallSessionImpl;)V
+.method public synthetic lambda$callSessionMergeComplete$16$ImsCallSessionCallbackHandler(Lorg/codeaurora/ims/ImsCallSessionImpl;)V
     .locals 3
     .param p1, "activeCallSession"    # Lorg/codeaurora/ims/ImsCallSessionImpl;
 
-    .line 314
+    .line 327
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
     if-eqz v0, :cond_0
 
-    .line 315
+    .line 328
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1559,7 +1669,7 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 317
+    .line 330
     :try_start_0
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
@@ -1567,14 +1677,14 @@
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 320
+    .line 333
     goto :goto_0
 
-    .line 318
+    .line 331
     :catch_0
     move-exception v0
 
-    .line 319
+    .line 332
     .local v0, "r":Ljava/lang/RuntimeException;
     new-instance v1, Ljava/lang/StringBuilder;
 
@@ -1592,23 +1702,23 @@
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 322
+    .line 335
     .end local v0    # "r":Ljava/lang/RuntimeException;
     :cond_0
     :goto_0
     return-void
 .end method
 
-.method public synthetic lambda$callSessionMergeFailed$16$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsReasonInfo;)V
+.method public synthetic lambda$callSessionMergeFailed$17$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsReasonInfo;)V
     .locals 3
     .param p1, "reasonInfo"    # Landroid/telephony/ims/ImsReasonInfo;
 
-    .line 333
+    .line 346
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
     if-eqz v0, :cond_0
 
-    .line 334
+    .line 347
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1625,7 +1735,7 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 336
+    .line 349
     :try_start_0
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
@@ -1633,14 +1743,14 @@
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 339
+    .line 352
     goto :goto_0
 
-    .line 337
+    .line 350
     :catch_0
     move-exception v0
 
-    .line 338
+    .line 351
     .local v0, "r":Ljava/lang/RuntimeException;
     new-instance v1, Ljava/lang/StringBuilder;
 
@@ -1658,24 +1768,24 @@
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 341
+    .line 354
     .end local v0    # "r":Ljava/lang/RuntimeException;
     :cond_0
     :goto_0
     return-void
 .end method
 
-.method public synthetic lambda$callSessionMergeStarted$14$ImsCallSessionCallbackHandler(Lorg/codeaurora/ims/ImsCallSessionImpl;Landroid/telephony/ims/ImsCallProfile;)V
+.method public synthetic lambda$callSessionMergeStarted$15$ImsCallSessionCallbackHandler(Lorg/codeaurora/ims/ImsCallSessionImpl;Landroid/telephony/ims/ImsCallProfile;)V
     .locals 3
     .param p1, "newSession"    # Lorg/codeaurora/ims/ImsCallSessionImpl;
     .param p2, "profile"    # Landroid/telephony/ims/ImsCallProfile;
 
-    .line 294
+    .line 307
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
     if-eqz v0, :cond_0
 
-    .line 295
+    .line 308
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1698,7 +1808,7 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 298
+    .line 311
     :try_start_0
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
@@ -1706,14 +1816,14 @@
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 302
+    .line 315
     goto :goto_0
 
-    .line 300
+    .line 313
     :catch_0
     move-exception v0
 
-    .line 301
+    .line 314
     .local v0, "r":Ljava/lang/RuntimeException;
     new-instance v1, Ljava/lang/StringBuilder;
 
@@ -1731,23 +1841,23 @@
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 304
+    .line 317
     .end local v0    # "r":Ljava/lang/RuntimeException;
     :cond_0
     :goto_0
     return-void
 .end method
 
-.method public synthetic lambda$callSessionMultipartyStateChanged$22$ImsCallSessionCallbackHandler(Z)V
+.method public synthetic lambda$callSessionMultipartyStateChanged$23$ImsCallSessionCallbackHandler(Z)V
     .locals 3
     .param p1, "isMultiParty"    # Z
 
-    .line 434
+    .line 447
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
     if-eqz v0, :cond_0
 
-    .line 435
+    .line 448
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1764,539 +1874,11 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 438
-    :try_start_0
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
-
-    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionMultipartyStateChanged(Z)V
-    :try_end_0
-    .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
-
-    .line 441
-    goto :goto_0
-
-    .line 439
-    :catch_0
-    move-exception v0
-
-    .line 440
-    .local v0, "r":Ljava/lang/RuntimeException;
-    new-instance v1, Ljava/lang/StringBuilder;
-
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v2, "callSessionMultipartyStateChanged :: RuntimeException "
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v1
-
-    invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
-
-    .line 443
-    .end local v0    # "r":Ljava/lang/RuntimeException;
-    :cond_0
-    :goto_0
-    return-void
-.end method
-
-.method public synthetic lambda$callSessionProgressing$2$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsStreamMediaProfile;)V
-    .locals 3
-    .param p1, "profile"    # Landroid/telephony/ims/ImsStreamMediaProfile;
-
-    .line 91
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
-
-    if-eqz v0, :cond_0
-
-    .line 92
-    new-instance v0, Ljava/lang/StringBuilder;
-
-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v1, "callSessionProgressing :: profile="
-
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v0
-
-    invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
-
-    .line 94
-    :try_start_0
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
-
-    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionProgressing(Landroid/telephony/ims/ImsStreamMediaProfile;)V
-    :try_end_0
-    .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
-
-    .line 97
-    goto :goto_0
-
-    .line 95
-    :catch_0
-    move-exception v0
-
-    .line 96
-    .local v0, "r":Ljava/lang/RuntimeException;
-    new-instance v1, Ljava/lang/StringBuilder;
-
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v2, "callSessionProgressing :: RuntimeException "
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v1
-
-    invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
-
-    .line 99
-    .end local v0    # "r":Ljava/lang/RuntimeException;
-    :cond_0
-    :goto_0
-    return-void
-.end method
-
-.method public synthetic lambda$callSessionResumeFailed$12$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsReasonInfo;)V
-    .locals 3
-    .param p1, "reasonInfo"    # Landroid/telephony/ims/ImsReasonInfo;
-
-    .line 260
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
-
-    if-eqz v0, :cond_0
-
-    .line 261
-    new-instance v0, Ljava/lang/StringBuilder;
-
-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v1, "callSessionResumeFailed :: reasonInfo="
-
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v0
-
-    invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
-
-    .line 263
-    :try_start_0
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
-
-    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionResumeFailed(Landroid/telephony/ims/ImsReasonInfo;)V
-    :try_end_0
-    .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
-
-    .line 266
-    goto :goto_0
-
-    .line 264
-    :catch_0
-    move-exception v0
-
-    .line 265
-    .local v0, "r":Ljava/lang/RuntimeException;
-    new-instance v1, Ljava/lang/StringBuilder;
-
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v2, "callSessionResumeFailed :: RuntimeException "
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v1
-
-    invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
-
-    .line 268
-    .end local v0    # "r":Ljava/lang/RuntimeException;
-    :cond_0
-    :goto_0
-    return-void
-.end method
-
-.method public synthetic lambda$callSessionResumeReceived$13$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsCallProfile;)V
-    .locals 3
-    .param p1, "profile"    # Landroid/telephony/ims/ImsCallProfile;
-
-    .line 273
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
-
-    if-eqz v0, :cond_0
-
-    .line 274
-    new-instance v0, Ljava/lang/StringBuilder;
-
-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v1, "callSessionResumeReceived :: profile="
-
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v0
-
-    invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
-
-    .line 276
-    :try_start_0
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
-
-    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionResumeReceived(Landroid/telephony/ims/ImsCallProfile;)V
-    :try_end_0
-    .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
-
-    .line 279
-    goto :goto_0
-
-    .line 277
-    :catch_0
-    move-exception v0
-
-    .line 278
-    .local v0, "r":Ljava/lang/RuntimeException;
-    new-instance v1, Ljava/lang/StringBuilder;
-
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v2, "callSessionResumeReceived :: RuntimeException "
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v1
-
-    invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
-
-    .line 281
-    .end local v0    # "r":Ljava/lang/RuntimeException;
-    :cond_0
-    :goto_0
-    return-void
-.end method
-
-.method public synthetic lambda$callSessionResumed$11$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsCallProfile;)V
-    .locals 3
-    .param p1, "profile"    # Landroid/telephony/ims/ImsCallProfile;
-
-    .line 247
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
-
-    if-eqz v0, :cond_0
-
-    .line 248
-    new-instance v0, Ljava/lang/StringBuilder;
-
-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v1, "callSessionResumed :: profile="
-
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v0
-
-    invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
-
-    .line 250
-    :try_start_0
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
-
-    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionResumed(Landroid/telephony/ims/ImsCallProfile;)V
-    :try_end_0
-    .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
-
-    .line 253
-    goto :goto_0
-
-    .line 251
-    :catch_0
-    move-exception v0
-
-    .line 252
-    .local v0, "r":Ljava/lang/RuntimeException;
-    new-instance v1, Ljava/lang/StringBuilder;
-
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v2, "callSessionResumed :: RuntimeException "
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v1
-
-    invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
-
-    .line 255
-    .end local v0    # "r":Ljava/lang/RuntimeException;
-    :cond_0
-    :goto_0
-    return-void
-.end method
-
-.method public synthetic lambda$callSessionRttAudioIndicatorChanged$26$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsStreamMediaProfile;)V
-    .locals 3
-    .param p1, "profile"    # Landroid/telephony/ims/ImsStreamMediaProfile;
-
-    .line 487
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
-
-    if-eqz v0, :cond_0
-
-    .line 488
-    new-instance v0, Ljava/lang/StringBuilder;
-
-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v1, "callSessionRttAudioIndicatorChanged :: profile="
-
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v0
-
-    invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
-
-    .line 490
-    :try_start_0
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
-
-    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionRttAudioIndicatorChanged(Landroid/telephony/ims/ImsStreamMediaProfile;)V
-    :try_end_0
-    .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
-
-    .line 493
-    goto :goto_0
-
-    .line 491
-    :catch_0
-    move-exception v0
-
-    .line 492
-    .local v0, "r":Ljava/lang/RuntimeException;
-    new-instance v1, Ljava/lang/StringBuilder;
-
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v2, "callSessionRttAudioIndicatorChanged :: RuntimeException "
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v1
-
-    invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
-
-    .line 495
-    .end local v0    # "r":Ljava/lang/RuntimeException;
-    :cond_0
-    :goto_0
-    return-void
-.end method
-
-.method public synthetic lambda$callSessionRttMessageReceived$24$ImsCallSessionCallbackHandler(Ljava/lang/String;)V
-    .locals 3
-    .param p1, "rttMessage"    # Ljava/lang/String;
-
-    .line 461
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
-
-    if-eqz v0, :cond_0
-
-    .line 462
-    new-instance v0, Ljava/lang/StringBuilder;
-
-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v1, "callSessionRttMessageReceived :: rttMessage="
-
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v0
-
-    invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
-
-    .line 464
-    :try_start_0
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
-
-    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionRttMessageReceived(Ljava/lang/String;)V
-    :try_end_0
-    .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
-
-    .line 467
-    goto :goto_0
-
-    .line 465
-    :catch_0
-    move-exception v0
-
-    .line 466
-    .local v0, "r":Ljava/lang/RuntimeException;
-    new-instance v1, Ljava/lang/StringBuilder;
-
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v2, "callSessionRttMessageReceived :: RuntimeException "
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v1
-
-    invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
-
-    .line 469
-    .end local v0    # "r":Ljava/lang/RuntimeException;
-    :cond_0
-    :goto_0
-    return-void
-.end method
-
-.method public synthetic lambda$callSessionRttModifyRequestReceived$25$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsCallProfile;)V
-    .locals 3
-    .param p1, "profile"    # Landroid/telephony/ims/ImsCallProfile;
-
-    .line 474
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
-
-    if-eqz v0, :cond_0
-
-    .line 475
-    new-instance v0, Ljava/lang/StringBuilder;
-
-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v1, "callSessionRttModifyRequestReceived :: profile="
-
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v0
-
-    invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
-
-    .line 477
-    :try_start_0
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
-
-    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionRttModifyRequestReceived(Landroid/telephony/ims/ImsCallProfile;)V
-    :try_end_0
-    .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
-
-    .line 480
-    goto :goto_0
-
-    .line 478
-    :catch_0
-    move-exception v0
-
-    .line 479
-    .local v0, "r":Ljava/lang/RuntimeException;
-    new-instance v1, Ljava/lang/StringBuilder;
-
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v2, "callSessionRttModifyRequestReceived :: RuntimeException "
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v1
-
-    invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
-
-    .line 482
-    .end local v0    # "r":Ljava/lang/RuntimeException;
-    :cond_0
-    :goto_0
-    return-void
-.end method
-
-.method public synthetic lambda$callSessionRttModifyResponseReceived$23$ImsCallSessionCallbackHandler(I)V
-    .locals 3
-    .param p1, "status"    # I
-
-    .line 448
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
-
-    if-eqz v0, :cond_0
-
-    .line 449
-    new-instance v0, Ljava/lang/StringBuilder;
-
-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v1, "callSessionRttModifyResponseReceived :: status="
-
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v0
-
-    invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
-
     .line 451
     :try_start_0
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
-    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionRttModifyResponseReceived(I)V
+    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionMultipartyStateChanged(Z)V
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
@@ -2313,7 +1895,7 @@
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v2, "callSessionRttModifyResponseReceived :: RuntimeException "
+    const-string v2, "callSessionMultipartyStateChanged :: RuntimeException "
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
@@ -2332,16 +1914,548 @@
     return-void
 .end method
 
-.method public synthetic lambda$callSessionSuppServiceReceived$18$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsSuppServiceNotification;)V
+.method public synthetic lambda$callSessionProgressing$3$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsStreamMediaProfile;)V
     .locals 3
-    .param p1, "suppServiceInfo"    # Landroid/telephony/ims/ImsSuppServiceNotification;
+    .param p1, "profile"    # Landroid/telephony/ims/ImsStreamMediaProfile;
 
-    .line 366
+    .line 104
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
     if-eqz v0, :cond_0
 
-    .line 367
+    .line 105
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v1, "callSessionProgressing :: profile="
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 107
+    :try_start_0
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
+
+    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionProgressing(Landroid/telephony/ims/ImsStreamMediaProfile;)V
+    :try_end_0
+    .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
+
+    .line 110
+    goto :goto_0
+
+    .line 108
+    :catch_0
+    move-exception v0
+
+    .line 109
+    .local v0, "r":Ljava/lang/RuntimeException;
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "callSessionProgressing :: RuntimeException "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 112
+    .end local v0    # "r":Ljava/lang/RuntimeException;
+    :cond_0
+    :goto_0
+    return-void
+.end method
+
+.method public synthetic lambda$callSessionResumeFailed$13$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsReasonInfo;)V
+    .locals 3
+    .param p1, "reasonInfo"    # Landroid/telephony/ims/ImsReasonInfo;
+
+    .line 273
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
+
+    if-eqz v0, :cond_0
+
+    .line 274
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v1, "callSessionResumeFailed :: reasonInfo="
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 276
+    :try_start_0
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
+
+    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionResumeFailed(Landroid/telephony/ims/ImsReasonInfo;)V
+    :try_end_0
+    .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
+
+    .line 279
+    goto :goto_0
+
+    .line 277
+    :catch_0
+    move-exception v0
+
+    .line 278
+    .local v0, "r":Ljava/lang/RuntimeException;
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "callSessionResumeFailed :: RuntimeException "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 281
+    .end local v0    # "r":Ljava/lang/RuntimeException;
+    :cond_0
+    :goto_0
+    return-void
+.end method
+
+.method public synthetic lambda$callSessionResumeReceived$14$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsCallProfile;)V
+    .locals 3
+    .param p1, "profile"    # Landroid/telephony/ims/ImsCallProfile;
+
+    .line 286
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
+
+    if-eqz v0, :cond_0
+
+    .line 287
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v1, "callSessionResumeReceived :: profile="
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 289
+    :try_start_0
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
+
+    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionResumeReceived(Landroid/telephony/ims/ImsCallProfile;)V
+    :try_end_0
+    .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
+
+    .line 292
+    goto :goto_0
+
+    .line 290
+    :catch_0
+    move-exception v0
+
+    .line 291
+    .local v0, "r":Ljava/lang/RuntimeException;
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "callSessionResumeReceived :: RuntimeException "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 294
+    .end local v0    # "r":Ljava/lang/RuntimeException;
+    :cond_0
+    :goto_0
+    return-void
+.end method
+
+.method public synthetic lambda$callSessionResumed$12$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsCallProfile;)V
+    .locals 3
+    .param p1, "profile"    # Landroid/telephony/ims/ImsCallProfile;
+
+    .line 260
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
+
+    if-eqz v0, :cond_0
+
+    .line 261
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v1, "callSessionResumed :: profile="
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 263
+    :try_start_0
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
+
+    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionResumed(Landroid/telephony/ims/ImsCallProfile;)V
+    :try_end_0
+    .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
+
+    .line 266
+    goto :goto_0
+
+    .line 264
+    :catch_0
+    move-exception v0
+
+    .line 265
+    .local v0, "r":Ljava/lang/RuntimeException;
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "callSessionResumed :: RuntimeException "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 268
+    .end local v0    # "r":Ljava/lang/RuntimeException;
+    :cond_0
+    :goto_0
+    return-void
+.end method
+
+.method public synthetic lambda$callSessionRttAudioIndicatorChanged$27$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsStreamMediaProfile;)V
+    .locals 3
+    .param p1, "profile"    # Landroid/telephony/ims/ImsStreamMediaProfile;
+
+    .line 500
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
+
+    if-eqz v0, :cond_0
+
+    .line 501
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v1, "callSessionRttAudioIndicatorChanged :: profile="
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 503
+    :try_start_0
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
+
+    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionRttAudioIndicatorChanged(Landroid/telephony/ims/ImsStreamMediaProfile;)V
+    :try_end_0
+    .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
+
+    .line 506
+    goto :goto_0
+
+    .line 504
+    :catch_0
+    move-exception v0
+
+    .line 505
+    .local v0, "r":Ljava/lang/RuntimeException;
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "callSessionRttAudioIndicatorChanged :: RuntimeException "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 508
+    .end local v0    # "r":Ljava/lang/RuntimeException;
+    :cond_0
+    :goto_0
+    return-void
+.end method
+
+.method public synthetic lambda$callSessionRttMessageReceived$25$ImsCallSessionCallbackHandler(Ljava/lang/String;)V
+    .locals 3
+    .param p1, "rttMessage"    # Ljava/lang/String;
+
+    .line 474
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
+
+    if-eqz v0, :cond_0
+
+    .line 475
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v1, "callSessionRttMessageReceived :: rttMessage="
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-static {p1}, Lcom/qualcomm/ims/utils/Log;->pii(Ljava/lang/Object;)Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 477
+    :try_start_0
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
+
+    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionRttMessageReceived(Ljava/lang/String;)V
+    :try_end_0
+    .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
+
+    .line 480
+    goto :goto_0
+
+    .line 478
+    :catch_0
+    move-exception v0
+
+    .line 479
+    .local v0, "r":Ljava/lang/RuntimeException;
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "callSessionRttMessageReceived :: RuntimeException "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 482
+    .end local v0    # "r":Ljava/lang/RuntimeException;
+    :cond_0
+    :goto_0
+    return-void
+.end method
+
+.method public synthetic lambda$callSessionRttModifyRequestReceived$26$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsCallProfile;)V
+    .locals 3
+    .param p1, "profile"    # Landroid/telephony/ims/ImsCallProfile;
+
+    .line 487
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
+
+    if-eqz v0, :cond_0
+
+    .line 488
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v1, "callSessionRttModifyRequestReceived :: profile="
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 490
+    :try_start_0
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
+
+    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionRttModifyRequestReceived(Landroid/telephony/ims/ImsCallProfile;)V
+    :try_end_0
+    .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
+
+    .line 493
+    goto :goto_0
+
+    .line 491
+    :catch_0
+    move-exception v0
+
+    .line 492
+    .local v0, "r":Ljava/lang/RuntimeException;
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "callSessionRttModifyRequestReceived :: RuntimeException "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 495
+    .end local v0    # "r":Ljava/lang/RuntimeException;
+    :cond_0
+    :goto_0
+    return-void
+.end method
+
+.method public synthetic lambda$callSessionRttModifyResponseReceived$24$ImsCallSessionCallbackHandler(I)V
+    .locals 3
+    .param p1, "status"    # I
+
+    .line 461
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
+
+    if-eqz v0, :cond_0
+
+    .line 462
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v1, "callSessionRttModifyResponseReceived :: status="
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 464
+    :try_start_0
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
+
+    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionRttModifyResponseReceived(I)V
+    :try_end_0
+    .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
+
+    .line 467
+    goto :goto_0
+
+    .line 465
+    :catch_0
+    move-exception v0
+
+    .line 466
+    .local v0, "r":Ljava/lang/RuntimeException;
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "callSessionRttModifyResponseReceived :: RuntimeException "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 469
+    .end local v0    # "r":Ljava/lang/RuntimeException;
+    :cond_0
+    :goto_0
+    return-void
+.end method
+
+.method public synthetic lambda$callSessionSuppServiceReceived$19$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsSuppServiceNotification;)V
+    .locals 3
+    .param p1, "suppServiceInfo"    # Landroid/telephony/ims/ImsSuppServiceNotification;
+
+    .line 379
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
+
+    if-eqz v0, :cond_0
+
+    .line 380
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -2358,7 +2472,7 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 370
+    .line 383
     :try_start_0
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
@@ -2366,14 +2480,14 @@
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 373
+    .line 386
     goto :goto_0
 
-    .line 371
+    .line 384
     :catch_0
     move-exception v0
 
-    .line 372
+    .line 385
     .local v0, "r":Ljava/lang/RuntimeException;
     new-instance v1, Ljava/lang/StringBuilder;
 
@@ -2391,23 +2505,142 @@
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 375
+    .line 388
     .end local v0    # "r":Ljava/lang/RuntimeException;
     :cond_0
     :goto_0
     return-void
 .end method
 
-.method public synthetic lambda$callSessionTtyModeReceived$7$ImsCallSessionCallbackHandler(I)V
+.method public synthetic lambda$callSessionTransferFailed$29$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsReasonInfo;)V
     .locals 3
-    .param p1, "ttyMode"    # I
+    .param p1, "reasonInfo"    # Landroid/telephony/ims/ImsReasonInfo;
 
-    .line 192
+    .line 537
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
     if-eqz v0, :cond_0
 
-    .line 193
+    .line 538
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v1, "callSessionTransferFailed :: reasonInfo = "
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 540
+    :try_start_0
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
+
+    invoke-virtual {v0, p1}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionTransferFailed(Landroid/telephony/ims/ImsReasonInfo;)V
+    :try_end_0
+    .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
+
+    .line 543
+    goto :goto_0
+
+    .line 541
+    :catch_0
+    move-exception v0
+
+    .line 542
+    .local v0, "r":Ljava/lang/RuntimeException;
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "callSessionTransferFailed :: RuntimeException "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 545
+    .end local v0    # "r":Ljava/lang/RuntimeException;
+    :cond_0
+    :goto_0
+    return-void
+.end method
+
+.method public synthetic lambda$callSessionTransferred$30$ImsCallSessionCallbackHandler()V
+    .locals 3
+
+    .line 553
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
+
+    if-eqz v0, :cond_0
+
+    .line 554
+    const-string v0, "callSessionTransferred. "
+
+    invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 556
+    :try_start_0
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
+
+    invoke-virtual {v0}, Landroid/telephony/ims/ImsCallSessionListener;->callSessionTransferred()V
+    :try_end_0
+    .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
+
+    .line 559
+    goto :goto_0
+
+    .line 557
+    :catch_0
+    move-exception v0
+
+    .line 558
+    .local v0, "r":Ljava/lang/RuntimeException;
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "callSessionTransferred :: RuntimeException "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 561
+    .end local v0    # "r":Ljava/lang/RuntimeException;
+    :cond_0
+    :goto_0
+    return-void
+.end method
+
+.method public synthetic lambda$callSessionTtyModeReceived$8$ImsCallSessionCallbackHandler(I)V
+    .locals 3
+    .param p1, "ttyMode"    # I
+
+    .line 205
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
+
+    if-eqz v0, :cond_0
+
+    .line 206
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -2424,7 +2657,7 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 195
+    .line 208
     :try_start_0
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
@@ -2432,14 +2665,14 @@
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 198
+    .line 211
     goto :goto_0
 
-    .line 196
+    .line 209
     :catch_0
     move-exception v0
 
-    .line 197
+    .line 210
     .local v0, "r":Ljava/lang/RuntimeException;
     new-instance v1, Ljava/lang/StringBuilder;
 
@@ -2457,23 +2690,23 @@
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 200
+    .line 213
     .end local v0    # "r":Ljava/lang/RuntimeException;
     :cond_0
     :goto_0
     return-void
 .end method
 
-.method public synthetic lambda$callSessionUpdated$17$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsCallProfile;)V
+.method public synthetic lambda$callSessionUpdated$18$ImsCallSessionCallbackHandler(Landroid/telephony/ims/ImsCallProfile;)V
     .locals 3
     .param p1, "profile"    # Landroid/telephony/ims/ImsCallProfile;
 
-    .line 349
+    .line 362
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
     if-eqz v0, :cond_0
 
-    .line 350
+    .line 363
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -2490,7 +2723,7 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 352
+    .line 365
     :try_start_0
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
@@ -2498,14 +2731,14 @@
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 355
+    .line 368
     goto :goto_0
 
-    .line 353
+    .line 366
     :catch_0
     move-exception v0
 
-    .line 354
+    .line 367
     .local v0, "r":Ljava/lang/RuntimeException;
     new-instance v1, Ljava/lang/StringBuilder;
 
@@ -2523,24 +2756,24 @@
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 357
+    .line 370
     .end local v0    # "r":Ljava/lang/RuntimeException;
     :cond_0
     :goto_0
     return-void
 .end method
 
-.method public synthetic lambda$callSessionUssdMessageReceived$27$ImsCallSessionCallbackHandler(ILjava/lang/String;)V
+.method public synthetic lambda$callSessionUssdMessageReceived$28$ImsCallSessionCallbackHandler(ILjava/lang/String;)V
     .locals 3
     .param p1, "mode"    # I
     .param p2, "ussdMessage"    # Ljava/lang/String;
 
-    .line 506
+    .line 519
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
     if-eqz v0, :cond_0
 
-    .line 507
+    .line 520
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -2557,7 +2790,7 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 509
+    .line 522
     :try_start_0
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
@@ -2565,14 +2798,14 @@
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 512
+    .line 525
     goto :goto_0
 
-    .line 510
+    .line 523
     :catch_0
     move-exception v0
 
-    .line 511
+    .line 524
     .local v0, "r":Ljava/lang/RuntimeException;
     new-instance v1, Ljava/lang/StringBuilder;
 
@@ -2590,24 +2823,24 @@
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 514
+    .line 527
     .end local v0    # "r":Ljava/lang/RuntimeException;
     :cond_0
     :goto_0
     return-void
 .end method
 
-.method public synthetic lambda$dispose$28$ImsCallSessionCallbackHandler()V
+.method public synthetic lambda$dispose$31$ImsCallSessionCallbackHandler()V
     .locals 1
 
-    .line 519
+    .line 566
     const-string v0, "dispose"
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 520
+    .line 567
     invoke-direct {p0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->cleanup()V
 
-    .line 521
+    .line 568
     return-void
 .end method

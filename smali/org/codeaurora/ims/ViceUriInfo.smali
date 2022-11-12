@@ -39,7 +39,7 @@
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     .line 20
-    invoke-static {p1}, Lorg/codeaurora/ims/ImsRadioUtils;->getByteArray(Ljava/util/ArrayList;)[B
+    invoke-static {p1}, Lorg/codeaurora/ims/ImsUtils;->toByteArray(Ljava/util/ArrayList;)[B
 
     move-result-object v0
 

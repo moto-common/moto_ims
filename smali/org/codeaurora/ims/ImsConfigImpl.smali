@@ -17,8 +17,6 @@
 # static fields
 .field private static final ACTION_TRY_WFC_CONNECTION:Ljava/lang/String; = "com.google.android.wfcactivation.TRY_WFC_CONNECTION"
 
-.field private static final BROADCAST_PERMISSION:Ljava/lang/String; = "android.permission.READ_PRIVILEGED_PHONE_STATE"
-
 .field static final CARRIER_ID_USC:I = 0x7a0
 
 .field private static final DEFAULT_WFC_MDN:Ljava/lang/String; = "0"
@@ -41,6 +39,8 @@
 
 .field private mCi:Lorg/codeaurora/ims/ImsSenderRxr;
 
+.field private mConfigOem:Lorg/codeaurora/ims/ImsConfigImplOem;
+
 .field private mContext:Landroid/content/Context;
 
 .field private mHandler:Landroid/os/Handler;
@@ -50,6 +50,10 @@
 .field private mIsCarrierConfigLoaded:Z
 
 .field private mIsContentObserversRegistered:Z
+
+.field private mIsSsacVoiceBarred:Z
+
+.field private mIsVopsEnabled:Z
 
 .field private final mOnSubscriptionsChangeListener:Landroid/telephony/SubscriptionManager$OnSubscriptionsChangedListener;
 
@@ -66,6 +70,8 @@
 .field private mTelephonyManager:Landroid/telephony/TelephonyManager;
 
 .field private mUserSetting:Ljava/lang/Integer;
+
+.field private mVoLTEEnabledObserver:Landroid/database/ContentObserver;
 
 .field private mVoWiFiModeObserver:Landroid/database/ContentObserver;
 
@@ -85,51 +91,59 @@
     .param p2, "senderRxr"    # Lorg/codeaurora/ims/ImsSenderRxr;
     .param p3, "context"    # Landroid/content/Context;
 
-    .line 157
+    .line 207
     invoke-direct {p0}, Landroid/telephony/ims/stub/ImsConfigImplBase;-><init>()V
 
-    .line 61
+    .line 62
     const/4 v0, -0x1
 
     iput v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mSubId:I
 
-    .line 65
+    .line 66
     const/4 v0, 0x0
 
     iput-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mImsMmTelManager:Landroid/telephony/ims/ImsMmTelManager;
 
-    .line 66
+    .line 67
     iput-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mTelephonyManager:Landroid/telephony/TelephonyManager;
 
-    .line 67
+    .line 68
     const/4 v0, 0x0
 
     iput-boolean v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mIsContentObserversRegistered:Z
 
-    .line 68
+    .line 69
     iput-boolean v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mIsCarrierConfigLoaded:Z
 
-    .line 74
+    .line 76
     const-string v1, "android.permission.MODIFY_PHONE_STATE"
 
     iput-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->MODIFY_PHONE_STATE:Ljava/lang/String;
 
-    .line 75
+    .line 77
     const-string v1, "android.permission.READ_PRIVILEGED_PHONE_STATE"
 
     iput-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->READ_PRIVILEGED_PHONE_STATE:Ljava/lang/String;
 
-    .line 77
+    .line 79
     const-string v1, "android.permission.READ_PHONE_STATE"
 
     iput-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->READ_PHONE_STATE:Ljava/lang/String;
 
-    .line 84
+    .line 85
+    const/4 v1, 0x1
+
+    iput-boolean v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mIsVopsEnabled:Z
+
+    .line 86
+    iput-boolean v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mIsSsacVoiceBarred:Z
+
+    .line 89
     new-instance v1, Lorg/codeaurora/ims/ImsConfigImpl$1;
 
     new-instance v2, Landroid/os/Handler;
 
-    .line 85
+    .line 90
     invoke-static {}, Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;
 
     move-result-object v3
@@ -140,12 +154,12 @@
 
     iput-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mVoWiFiModeObserver:Landroid/database/ContentObserver;
 
-    .line 91
+    .line 96
     new-instance v1, Lorg/codeaurora/ims/ImsConfigImpl$2;
 
     new-instance v2, Landroid/os/Handler;
 
-    .line 92
+    .line 97
     invoke-static {}, Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;
 
     move-result-object v3
@@ -156,141 +170,180 @@
 
     iput-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mVoWiFiRoamingModeObserver:Landroid/database/ContentObserver;
 
-    .line 99
+    .line 105
     new-instance v1, Lorg/codeaurora/ims/ImsConfigImpl$3;
 
-    invoke-direct {v1, p0}, Lorg/codeaurora/ims/ImsConfigImpl$3;-><init>(Lorg/codeaurora/ims/ImsConfigImpl;)V
+    new-instance v2, Landroid/os/Handler;
 
-    iput-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mBroadcastReceiver:Landroid/content/BroadcastReceiver;
+    .line 106
+    invoke-static {}, Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;
 
-    .line 194
+    move-result-object v3
+
+    invoke-direct {v2, v3}, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V
+
+    invoke-direct {v1, p0, v2}, Lorg/codeaurora/ims/ImsConfigImpl$3;-><init>(Lorg/codeaurora/ims/ImsConfigImpl;Landroid/os/Handler;)V
+
+    iput-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mVoLTEEnabledObserver:Landroid/database/ContentObserver;
+
+    .line 116
     new-instance v1, Lorg/codeaurora/ims/ImsConfigImpl$4;
 
     invoke-direct {v1, p0}, Lorg/codeaurora/ims/ImsConfigImpl$4;-><init>(Lorg/codeaurora/ims/ImsConfigImpl;)V
 
+    iput-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mBroadcastReceiver:Landroid/content/BroadcastReceiver;
+
+    .line 256
+    new-instance v1, Lorg/codeaurora/ims/ImsConfigImpl$5;
+
+    invoke-direct {v1, p0}, Lorg/codeaurora/ims/ImsConfigImpl$5;-><init>(Lorg/codeaurora/ims/ImsConfigImpl;)V
+
     iput-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mOnSubscriptionsChangeListener:Landroid/telephony/SubscriptionManager$OnSubscriptionsChangedListener;
 
-    .line 884
+    .line 904
     iput v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mVolteProvisionFlag:I
 
-    .line 885
+    .line 905
     invoke-static {v0}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
     move-result-object v0
 
     iput-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mUserSetting:Ljava/lang/Integer;
 
-    .line 1012
-    new-instance v0, Lorg/codeaurora/ims/ImsConfigImpl$9;
+    .line 1032
+    new-instance v0, Lorg/codeaurora/ims/ImsConfigImpl$10;
 
-    .line 1013
+    .line 1033
     invoke-static {}, Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;
-
-    move-result-object v1
-
-    invoke-direct {v0, p0, v1}, Lorg/codeaurora/ims/ImsConfigImpl$9;-><init>(Lorg/codeaurora/ims/ImsConfigImpl;Landroid/os/Looper;)V
-
-    iput-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mPhoneStateListener:Landroid/telephony/PhoneStateListener;
-
-    .line 158
-    iput-object p1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mServiceSub:Lorg/codeaurora/ims/ImsServiceSub;
-
-    .line 159
-    iput-object p2, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mCi:Lorg/codeaurora/ims/ImsSenderRxr;
-
-    .line 160
-    iput-object p3, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
-
-    .line 161
-    new-instance v0, Landroid/os/HandlerThread;
-
-    const-string v1, "ImsConfigImplHandler"
-
-    invoke-direct {v0, v1}, Landroid/os/HandlerThread;-><init>(Ljava/lang/String;)V
-
-    .line 162
-    .local v0, "handlerThread":Landroid/os/HandlerThread;
-    invoke-virtual {v0}, Landroid/os/HandlerThread;->start()V
-
-    .line 163
-    new-instance v1, Lorg/codeaurora/ims/ImsConfigImpl$ImsConfigImplHandler;
-
-    invoke-virtual {v0}, Landroid/os/HandlerThread;->getLooper()Landroid/os/Looper;
 
     move-result-object v2
 
-    invoke-direct {v1, p0, v2}, Lorg/codeaurora/ims/ImsConfigImpl$ImsConfigImplHandler;-><init>(Lorg/codeaurora/ims/ImsConfigImpl;Landroid/os/Looper;)V
+    invoke-direct {v0, p0, v2}, Lorg/codeaurora/ims/ImsConfigImpl$10;-><init>(Lorg/codeaurora/ims/ImsConfigImpl;Landroid/os/Looper;)V
 
-    iput-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mHandler:Landroid/os/Handler;
+    iput-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mPhoneStateListener:Landroid/telephony/PhoneStateListener;
 
-    .line 165
-    iget-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
+    .line 208
+    iput-object p1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mServiceSub:Lorg/codeaurora/ims/ImsServiceSub;
 
-    const-string v2, "telephony_subscription_service"
+    .line 209
+    iput-object p2, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mCi:Lorg/codeaurora/ims/ImsSenderRxr;
 
-    invoke-virtual {v1, v2}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+    .line 210
+    iput-object p3, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
 
-    move-result-object v1
+    .line 211
+    new-instance v0, Landroid/os/HandlerThread;
 
-    check-cast v1, Landroid/telephony/SubscriptionManager;
+    const-string v2, "ImsConfigImplHandler"
 
-    iput-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mSubscriptionManager:Landroid/telephony/SubscriptionManager;
+    invoke-direct {v0, v2}, Landroid/os/HandlerThread;-><init>(Ljava/lang/String;)V
 
-    .line 167
-    if-eqz v1, :cond_0
+    .line 212
+    .local v0, "handlerThread":Landroid/os/HandlerThread;
+    invoke-virtual {v0}, Landroid/os/HandlerThread;->start()V
 
-    .line 168
-    iget-object v2, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mOnSubscriptionsChangeListener:Landroid/telephony/SubscriptionManager$OnSubscriptionsChangedListener;
+    .line 213
+    new-instance v2, Lorg/codeaurora/ims/ImsConfigImpl$ImsConfigImplHandler;
 
-    invoke-virtual {v1, v2}, Landroid/telephony/SubscriptionManager;->addOnSubscriptionsChangedListener(Landroid/telephony/SubscriptionManager$OnSubscriptionsChangedListener;)V
+    invoke-virtual {v0}, Landroid/os/HandlerThread;->getLooper()Landroid/os/Looper;
+
+    move-result-object v3
+
+    invoke-direct {v2, p0, v3}, Lorg/codeaurora/ims/ImsConfigImpl$ImsConfigImplHandler;-><init>(Lorg/codeaurora/ims/ImsConfigImpl;Landroid/os/Looper;)V
+
+    iput-object v2, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mHandler:Landroid/os/Handler;
+
+    .line 214
+    iget-object v2, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mServiceSub:Lorg/codeaurora/ims/ImsServiceSub;
+
+    iget-object v3, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
+
+    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->getPhoneId()I
+
+    move-result v4
+
+    invoke-static {v2, v3, v4}, Lorg/codeaurora/ims/ImsConfigImplOem;->getInstance(Lorg/codeaurora/ims/ImsServiceSub;Landroid/content/Context;I)Lorg/codeaurora/ims/ImsConfigImplOem;
+
+    move-result-object v2
+
+    iput-object v2, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mConfigOem:Lorg/codeaurora/ims/ImsConfigImplOem;
+
+    .line 216
+    iget-object v2, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
+
+    const-string v3, "telephony_subscription_service"
+
+    invoke-virtual {v2, v3}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+
+    move-result-object v2
+
+    check-cast v2, Landroid/telephony/SubscriptionManager;
+
+    iput-object v2, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mSubscriptionManager:Landroid/telephony/SubscriptionManager;
+
+    .line 218
+    if-eqz v2, :cond_0
+
+    .line 219
+    invoke-virtual {v2, v1}, Landroid/telephony/SubscriptionManager;->addOnSubscriptionsChangedListener(Landroid/telephony/SubscriptionManager$OnSubscriptionsChangedListener;)V
 
     goto :goto_0
 
-    .line 170
+    .line 221
     :cond_0
     const-string v1, "unable to listen for subscription changed due to subscriptionManager is null"
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 173
+    .line 224
     :goto_0
     new-instance v1, Landroid/content/IntentFilter;
 
     invoke-direct {v1}, Landroid/content/IntentFilter;-><init>()V
 
-    .line 174
+    .line 225
     .local v1, "filter":Landroid/content/IntentFilter;
     const-string v2, "android.telephony.action.CARRIER_CONFIG_CHANGED"
 
     invoke-virtual {v1, v2}, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
 
-    .line 175
+    .line 226
     const-string v2, "com.google.android.wfcactivation.TRY_WFC_CONNECTION"
 
     invoke-virtual {v1, v2}, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
 
-    .line 176
+    .line 227
+    const-string v2, "com.motorola.android.ims.ACTION_UPDATE_IMS_SERVICE_CONFIG"
+
+    invoke-virtual {v1, v2}, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
+
+    .line 228
+    const-string v2, "org.codeaurora.VOIP_VOPS_SSAC_STATUS"
+
+    invoke-virtual {v1, v2}, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
+
+    .line 229
     iget-object v2, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
 
     iget-object v3, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mBroadcastReceiver:Landroid/content/BroadcastReceiver;
 
     invoke-virtual {v2, v3, v1}, Landroid/content/Context;->registerReceiver(Landroid/content/BroadcastReceiver;Landroid/content/IntentFilter;)Landroid/content/Intent;
 
-    .line 178
+    .line 231
     new-instance v2, Landroid/os/HandlerThread;
 
     const-string v3, "ImsConfigImplRequestHandler"
 
     invoke-direct {v2, v3}, Landroid/os/HandlerThread;-><init>(Ljava/lang/String;)V
 
-    .line 179
+    .line 232
     .local v2, "requestHandlerThread":Landroid/os/HandlerThread;
     invoke-virtual {v2}, Landroid/os/HandlerThread;->start()V
 
-    .line 180
+    .line 233
     new-instance v3, Lorg/codeaurora/ims/ImsConfigImpl$ImsConfigImplRequestHandler;
 
-    .line 181
+    .line 234
     invoke-virtual {v2}, Landroid/os/HandlerThread;->getLooper()Landroid/os/Looper;
 
     move-result-object v4
@@ -299,194 +352,234 @@
 
     iput-object v3, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mRequestHandler:Landroid/os/Handler;
 
-    .line 183
+    .line 236
     return-void
 .end method
 
-.method static synthetic access$000(Lorg/codeaurora/ims/ImsConfigImpl;)Lorg/codeaurora/ims/ImsSenderRxr;
+.method static synthetic access$000(Lorg/codeaurora/ims/ImsConfigImpl;)Landroid/telephony/TelephonyManager;
     .locals 1
     .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
 
-    .line 52
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mCi:Lorg/codeaurora/ims/ImsSenderRxr;
-
-    return-object v0
-.end method
-
-.method static synthetic access$100(Lorg/codeaurora/ims/ImsConfigImpl;)Landroid/telephony/ims/ImsMmTelManager;
-    .locals 1
-    .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
-
-    .line 52
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mImsMmTelManager:Landroid/telephony/ims/ImsMmTelManager;
-
-    return-object v0
-.end method
-
-.method static synthetic access$1000(Lorg/codeaurora/ims/ImsConfigImpl;)Landroid/telephony/TelephonyManager;
-    .locals 1
-    .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
-
-    .line 52
+    .line 53
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mTelephonyManager:Landroid/telephony/TelephonyManager;
 
     return-object v0
 .end method
 
-.method static synthetic access$1002(Lorg/codeaurora/ims/ImsConfigImpl;Landroid/telephony/TelephonyManager;)Landroid/telephony/TelephonyManager;
+.method static synthetic access$002(Lorg/codeaurora/ims/ImsConfigImpl;Landroid/telephony/TelephonyManager;)Landroid/telephony/TelephonyManager;
     .locals 0
     .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
     .param p1, "x1"    # Landroid/telephony/TelephonyManager;
 
-    .line 52
+    .line 53
     iput-object p1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mTelephonyManager:Landroid/telephony/TelephonyManager;
 
     return-object p1
 .end method
 
-.method static synthetic access$102(Lorg/codeaurora/ims/ImsConfigImpl;Landroid/telephony/ims/ImsMmTelManager;)Landroid/telephony/ims/ImsMmTelManager;
+.method static synthetic access$100(Lorg/codeaurora/ims/ImsConfigImpl;Landroid/telephony/ServiceState;)V
     .locals 0
     .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
-    .param p1, "x1"    # Landroid/telephony/ims/ImsMmTelManager;
+    .param p1, "x1"    # Landroid/telephony/ServiceState;
 
-    .line 52
-    iput-object p1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mImsMmTelManager:Landroid/telephony/ims/ImsMmTelManager;
+    .line 53
+    invoke-direct {p0, p1}, Lorg/codeaurora/ims/ImsConfigImpl;->adjustAndSyncVoWiFiMode(Landroid/telephony/ServiceState;)V
 
-    return-object p1
+    return-void
 .end method
 
-.method static synthetic access$1100(Lorg/codeaurora/ims/ImsConfigImpl;)Landroid/content/Context;
+.method static synthetic access$1000(Lorg/codeaurora/ims/ImsConfigImpl;)V
+    .locals 0
+    .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
+
+    .line 53
+    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->syncWfcMDN()V
+
+    return-void
+.end method
+
+.method static synthetic access$1100(Lorg/codeaurora/ims/ImsConfigImpl;)V
+    .locals 0
+    .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
+
+    .line 53
+    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->setVolteWfcProvisioningEnabled()V
+
+    return-void
+.end method
+
+.method static synthetic access$1200(Lorg/codeaurora/ims/ImsConfigImpl;)V
+    .locals 0
+    .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
+
+    .line 53
+    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->setVoiceDomainSetting()V
+
+    return-void
+.end method
+
+.method static synthetic access$1300(Lorg/codeaurora/ims/ImsConfigImpl;)Lorg/codeaurora/ims/ImsServiceSub;
     .locals 1
     .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
 
-    .line 52
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
+    .line 53
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mServiceSub:Lorg/codeaurora/ims/ImsServiceSub;
 
     return-object v0
 .end method
 
-.method static synthetic access$1200(Lorg/codeaurora/ims/ImsConfigImpl;)Landroid/telephony/PhoneStateListener;
+.method static synthetic access$1400(Lorg/codeaurora/ims/ImsConfigImpl;)Landroid/telephony/SubscriptionManager;
     .locals 1
     .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
 
-    .line 52
+    .line 53
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mSubscriptionManager:Landroid/telephony/SubscriptionManager;
+
+    return-object v0
+.end method
+
+.method static synthetic access$1500(Lorg/codeaurora/ims/ImsConfigImpl;)V
+    .locals 0
+    .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
+
+    .line 53
+    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->clearSubscriptionCache()V
+
+    return-void
+.end method
+
+.method static synthetic access$1600(Lorg/codeaurora/ims/ImsConfigImpl;)Landroid/telephony/PhoneStateListener;
+    .locals 1
+    .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
+
+    .line 53
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mPhoneStateListener:Landroid/telephony/PhoneStateListener;
 
     return-object v0
 .end method
 
-.method static synthetic access$1300(Lorg/codeaurora/ims/ImsConfigImpl;)Landroid/net/Uri;
+.method static synthetic access$1700(Lorg/codeaurora/ims/ImsConfigImpl;)Landroid/database/ContentObserver;
     .locals 1
     .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
 
-    .line 52
+    .line 53
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mVoLTEEnabledObserver:Landroid/database/ContentObserver;
+
+    return-object v0
+.end method
+
+.method static synthetic access$1800(Lorg/codeaurora/ims/ImsConfigImpl;)Landroid/net/Uri;
+    .locals 1
+    .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
+
+    .line 53
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mWfcModeUri:Landroid/net/Uri;
 
     return-object v0
 .end method
 
-.method static synthetic access$1302(Lorg/codeaurora/ims/ImsConfigImpl;Landroid/net/Uri;)Landroid/net/Uri;
+.method static synthetic access$1802(Lorg/codeaurora/ims/ImsConfigImpl;Landroid/net/Uri;)Landroid/net/Uri;
     .locals 0
     .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
     .param p1, "x1"    # Landroid/net/Uri;
 
-    .line 52
+    .line 53
     iput-object p1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mWfcModeUri:Landroid/net/Uri;
 
     return-object p1
 .end method
 
-.method static synthetic access$1400(Lorg/codeaurora/ims/ImsConfigImpl;)Landroid/net/Uri;
+.method static synthetic access$1900(Lorg/codeaurora/ims/ImsConfigImpl;)Landroid/net/Uri;
     .locals 1
     .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
 
-    .line 52
+    .line 53
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mWfcRoamingModeUri:Landroid/net/Uri;
 
     return-object v0
 .end method
 
-.method static synthetic access$1402(Lorg/codeaurora/ims/ImsConfigImpl;Landroid/net/Uri;)Landroid/net/Uri;
+.method static synthetic access$1902(Lorg/codeaurora/ims/ImsConfigImpl;Landroid/net/Uri;)Landroid/net/Uri;
     .locals 0
     .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
     .param p1, "x1"    # Landroid/net/Uri;
 
-    .line 52
+    .line 53
     iput-object p1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mWfcRoamingModeUri:Landroid/net/Uri;
 
     return-object p1
 .end method
 
-.method static synthetic access$1500(Lorg/codeaurora/ims/ImsConfigImpl;)Landroid/database/ContentObserver;
+.method static synthetic access$200(Lorg/codeaurora/ims/ImsConfigImpl;)Lorg/codeaurora/ims/ImsSenderRxr;
     .locals 1
     .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
 
-    .line 52
+    .line 53
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mCi:Lorg/codeaurora/ims/ImsSenderRxr;
+
+    return-object v0
+.end method
+
+.method static synthetic access$2000(Lorg/codeaurora/ims/ImsConfigImpl;)Landroid/database/ContentObserver;
+    .locals 1
+    .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
+
+    .line 53
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mVoWiFiModeObserver:Landroid/database/ContentObserver;
 
     return-object v0
 .end method
 
-.method static synthetic access$1600(Lorg/codeaurora/ims/ImsConfigImpl;)Landroid/database/ContentObserver;
+.method static synthetic access$2100(Lorg/codeaurora/ims/ImsConfigImpl;)Landroid/database/ContentObserver;
     .locals 1
     .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
 
-    .line 52
+    .line 53
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mVoWiFiRoamingModeObserver:Landroid/database/ContentObserver;
 
     return-object v0
 .end method
 
-.method static synthetic access$1702(Lorg/codeaurora/ims/ImsConfigImpl;Z)Z
+.method static synthetic access$2202(Lorg/codeaurora/ims/ImsConfigImpl;Z)Z
     .locals 0
     .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
     .param p1, "x1"    # Z
 
-    .line 52
+    .line 53
     iput-boolean p1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mIsContentObserversRegistered:Z
 
     return p1
 .end method
 
-.method static synthetic access$1800(Lorg/codeaurora/ims/ImsConfigImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
+.method static synthetic access$2300(Lorg/codeaurora/ims/ImsConfigImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
     .locals 0
     .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
     .param p1, "x1"    # Lorg/codeaurora/telephony/utils/AsyncResult;
 
-    .line 52
+    .line 53
     invoke-direct {p0, p1}, Lorg/codeaurora/ims/ImsConfigImpl;->onSetFeatureResponseDone(Lorg/codeaurora/telephony/utils/AsyncResult;)V
 
     return-void
 .end method
 
-.method static synthetic access$1900(Lorg/codeaurora/ims/ImsConfigImpl;Lorg/codeaurora/telephony/utils/AsyncResult;I)V
+.method static synthetic access$2400(Lorg/codeaurora/ims/ImsConfigImpl;Lorg/codeaurora/telephony/utils/AsyncResult;I)V
     .locals 0
     .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
     .param p1, "x1"    # Lorg/codeaurora/telephony/utils/AsyncResult;
     .param p2, "x2"    # I
 
-    .line 52
+    .line 53
     invoke-direct {p0, p1, p2}, Lorg/codeaurora/ims/ImsConfigImpl;->onAccessProvisionedValDone(Lorg/codeaurora/telephony/utils/AsyncResult;I)V
 
     return-void
 .end method
 
-.method static synthetic access$200(Lorg/codeaurora/ims/ImsConfigImpl;)I
-    .locals 1
-    .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
-
-    .line 52
-    iget v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mSubId:I
-
-    return v0
-.end method
-
-.method static synthetic access$2000(Lorg/codeaurora/ims/ImsConfigImpl;I)Ljava/lang/String;
+.method static synthetic access$2500(Lorg/codeaurora/ims/ImsConfigImpl;I)Ljava/lang/String;
     .locals 1
     .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
     .param p1, "x1"    # I
 
-    .line 52
+    .line 53
     invoke-direct {p0, p1}, Lorg/codeaurora/ims/ImsConfigImpl;->getWfcMDN(I)Ljava/lang/String;
 
     move-result-object v0
@@ -494,78 +587,43 @@
     return-object v0
 .end method
 
-.method static synthetic access$202(Lorg/codeaurora/ims/ImsConfigImpl;I)I
-    .locals 0
-    .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
-    .param p1, "x1"    # I
-
-    .line 52
-    iput p1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mSubId:I
-
-    return p1
-.end method
-
-.method static synthetic access$2100(Lorg/codeaurora/ims/ImsConfigImpl;)I
+.method static synthetic access$2600(Lorg/codeaurora/ims/ImsConfigImpl;)Ljava/lang/Integer;
     .locals 1
     .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
 
-    .line 52
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->getPhoneId()I
-
-    move-result v0
-
-    return v0
-.end method
-
-.method static synthetic access$2200(Lorg/codeaurora/ims/ImsConfigImpl;)Ljava/lang/Integer;
-    .locals 1
-    .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
-
-    .line 52
+    .line 53
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mUserSetting:Ljava/lang/Integer;
 
     return-object v0
 .end method
 
-.method static synthetic access$2300(Lorg/codeaurora/ims/ImsConfigImpl;)I
+.method static synthetic access$2700(Lorg/codeaurora/ims/ImsConfigImpl;)I
     .locals 1
     .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
 
-    .line 52
+    .line 53
     iget v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mVolteProvisionFlag:I
 
     return v0
 .end method
 
-.method static synthetic access$2302(Lorg/codeaurora/ims/ImsConfigImpl;I)I
+.method static synthetic access$2702(Lorg/codeaurora/ims/ImsConfigImpl;I)I
     .locals 0
     .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
     .param p1, "x1"    # I
 
-    .line 52
+    .line 53
     iput p1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mVolteProvisionFlag:I
 
     return p1
 .end method
 
-.method static synthetic access$2400(Lorg/codeaurora/ims/ImsConfigImpl;)Z
-    .locals 1
-    .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
-
-    .line 52
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->shouldAdjustVoWiFiMode()Z
-
-    move-result v0
-
-    return v0
-.end method
-
-.method static synthetic access$2500(Lorg/codeaurora/ims/ImsConfigImpl;I)I
+.method static synthetic access$2800(Lorg/codeaurora/ims/ImsConfigImpl;I)I
     .locals 1
     .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
     .param p1, "x1"    # I
 
-    .line 52
+    .line 53
     invoke-direct {p0, p1}, Lorg/codeaurora/ims/ImsConfigImpl;->adjustVoWiFiMode(I)I
 
     move-result v0
@@ -573,13 +631,13 @@
     return v0
 .end method
 
-.method static synthetic access$2600(Lorg/codeaurora/ims/ImsConfigImpl;Ljava/lang/Object;Ljava/lang/Throwable;)I
+.method static synthetic access$2900(Lorg/codeaurora/ims/ImsConfigImpl;Ljava/lang/Object;Ljava/lang/Throwable;)I
     .locals 1
     .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
     .param p1, "x1"    # Ljava/lang/Object;
     .param p2, "x2"    # Ljava/lang/Throwable;
 
-    .line 52
+    .line 53
     invoke-direct {p0, p1, p2}, Lorg/codeaurora/ims/ImsConfigImpl;->getOperationStatus(Ljava/lang/Object;Ljava/lang/Throwable;)I
 
     move-result v0
@@ -587,97 +645,256 @@
     return v0
 .end method
 
-.method static synthetic access$2700(Lorg/codeaurora/ims/ImsConfigImpl;II)V
-    .locals 0
+.method static synthetic access$300(Lorg/codeaurora/ims/ImsConfigImpl;)Landroid/telephony/ims/ImsMmTelManager;
+    .locals 1
     .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
-    .param p1, "x1"    # I
-    .param p2, "x2"    # I
 
-    .line 52
-    invoke-direct {p0, p1, p2}, Lorg/codeaurora/ims/ImsConfigImpl;->broadcastConfigChange(II)V
+    .line 53
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mImsMmTelManager:Landroid/telephony/ims/ImsMmTelManager;
 
-    return-void
+    return-object v0
 .end method
 
-.method static synthetic access$2800(Lorg/codeaurora/ims/ImsConfigImpl;ILjava/lang/String;I)V
+.method static synthetic access$3000(Lorg/codeaurora/ims/ImsConfigImpl;ILjava/lang/String;I)V
     .locals 0
     .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
     .param p1, "x1"    # I
     .param p2, "x2"    # Ljava/lang/String;
     .param p3, "x3"    # I
 
-    .line 52
+    .line 53
     invoke-direct {p0, p1, p2, p3}, Lorg/codeaurora/ims/ImsConfigImpl;->logImsConfigChangedCheckin(ILjava/lang/String;I)V
 
     return-void
 .end method
 
-.method static synthetic access$302(Lorg/codeaurora/ims/ImsConfigImpl;Z)Z
+.method static synthetic access$302(Lorg/codeaurora/ims/ImsConfigImpl;Landroid/telephony/ims/ImsMmTelManager;)Landroid/telephony/ims/ImsMmTelManager;
+    .locals 0
+    .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
+    .param p1, "x1"    # Landroid/telephony/ims/ImsMmTelManager;
+
+    .line 53
+    iput-object p1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mImsMmTelManager:Landroid/telephony/ims/ImsMmTelManager;
+
+    return-object p1
+.end method
+
+.method static synthetic access$400(Lorg/codeaurora/ims/ImsConfigImpl;)Z
+    .locals 1
+    .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
+
+    .line 53
+    iget-boolean v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mIsCarrierConfigLoaded:Z
+
+    return v0
+.end method
+
+.method static synthetic access$402(Lorg/codeaurora/ims/ImsConfigImpl;Z)Z
     .locals 0
     .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
     .param p1, "x1"    # Z
 
-    .line 52
+    .line 53
     iput-boolean p1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mIsCarrierConfigLoaded:Z
 
     return p1
 .end method
 
-.method static synthetic access$400(Lorg/codeaurora/ims/ImsConfigImpl;)V
-    .locals 0
-    .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
-
-    .line 52
-    return-void
-.end method
-
-.method static synthetic access$500(Lorg/codeaurora/ims/ImsConfigImpl;)V
-    .locals 0
-    .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
-
-    .line 52
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->setVolteWfcProvisioningEnabled()V
-
-    return-void
-.end method
-
-.method static synthetic access$600(Lorg/codeaurora/ims/ImsConfigImpl;)V
-    .locals 0
-    .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
-
-    .line 52
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->setVoiceDomainSetting()V
-
-    return-void
-.end method
-
-.method static synthetic access$700(Lorg/codeaurora/ims/ImsConfigImpl;)Lorg/codeaurora/ims/ImsServiceSub;
+.method static synthetic access$500(Lorg/codeaurora/ims/ImsConfigImpl;)Landroid/content/Context;
     .locals 1
     .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
 
-    .line 52
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mServiceSub:Lorg/codeaurora/ims/ImsServiceSub;
+    .line 53
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
 
     return-object v0
 .end method
 
-.method static synthetic access$800(Lorg/codeaurora/ims/ImsConfigImpl;)Landroid/telephony/SubscriptionManager;
+.method static synthetic access$600(Lorg/codeaurora/ims/ImsConfigImpl;)I
     .locals 1
     .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
 
-    .line 52
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mSubscriptionManager:Landroid/telephony/SubscriptionManager;
+    .line 53
+    iget v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mSubId:I
 
-    return-object v0
+    return v0
 .end method
 
-.method static synthetic access$900(Lorg/codeaurora/ims/ImsConfigImpl;)V
+.method static synthetic access$602(Lorg/codeaurora/ims/ImsConfigImpl;I)I
     .locals 0
     .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
+    .param p1, "x1"    # I
 
-    .line 52
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->clearSubscriptionCache()V
+    .line 53
+    iput p1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mSubId:I
 
+    return p1
+.end method
+
+.method static synthetic access$700(Lorg/codeaurora/ims/ImsConfigImpl;)I
+    .locals 1
+    .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
+
+    .line 53
+    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->getPhoneId()I
+
+    move-result v0
+
+    return v0
+.end method
+
+.method static synthetic access$800(Lorg/codeaurora/ims/ImsConfigImpl;)Z
+    .locals 1
+    .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
+
+    .line 53
+    iget-boolean v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mIsVopsEnabled:Z
+
+    return v0
+.end method
+
+.method static synthetic access$802(Lorg/codeaurora/ims/ImsConfigImpl;Z)Z
+    .locals 0
+    .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
+    .param p1, "x1"    # Z
+
+    .line 53
+    iput-boolean p1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mIsVopsEnabled:Z
+
+    return p1
+.end method
+
+.method static synthetic access$900(Lorg/codeaurora/ims/ImsConfigImpl;)Z
+    .locals 1
+    .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
+
+    .line 53
+    iget-boolean v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mIsSsacVoiceBarred:Z
+
+    return v0
+.end method
+
+.method static synthetic access$902(Lorg/codeaurora/ims/ImsConfigImpl;Z)Z
+    .locals 0
+    .param p0, "x0"    # Lorg/codeaurora/ims/ImsConfigImpl;
+    .param p1, "x1"    # Z
+
+    .line 53
+    iput-boolean p1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mIsSsacVoiceBarred:Z
+
+    return p1
+.end method
+
+.method private adjustAndSyncVoWiFiMode(Landroid/telephony/ServiceState;)V
+    .locals 5
+    .param p1, "serviceState"    # Landroid/telephony/ServiceState;
+
+    .line 1043
+    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->shouldAdjustVoWiFiMode()Z
+
+    move-result v0
+
+    if-nez v0, :cond_0
+
+    .line 1044
+    return-void
+
+    .line 1047
+    :cond_0
+    invoke-virtual {p1}, Landroid/telephony/ServiceState;->getState()I
+
+    move-result v0
+
+    const/4 v1, 0x0
+
+    const/4 v2, 0x1
+
+    if-eqz v0, :cond_2
+
+    .line 1048
+    invoke-virtual {p1}, Landroid/telephony/ServiceState;->getDataRegistrationState()I
+
+    move-result v0
+
+    if-nez v0, :cond_1
+
+    goto :goto_0
+
+    :cond_1
+    move v0, v1
+
+    goto :goto_1
+
+    :cond_2
+    :goto_0
+    move v0, v2
+
+    .line 1050
+    .local v0, "isInService":Z
+    :goto_1
+    if-nez v0, :cond_3
+
+    .line 1051
+    const-string v1, "OUT_OF_SERVICE, ignore WFC mode change"
+
+    invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->d(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 1052
+    return-void
+
+    .line 1055
+    :cond_3
+    nop
+
+    .line 1056
+    invoke-virtual {p1}, Landroid/telephony/ServiceState;->getRilVoiceRadioTechnology()I
+
+    move-result v3
+
+    if-nez v3, :cond_4
+
+    .line 1057
+    invoke-virtual {p1}, Landroid/telephony/ServiceState;->getRilDataRadioTechnology()I
+
+    move-result v3
+
+    const/16 v4, 0x12
+
+    if-ne v3, v4, :cond_4
+
+    move v1, v2
+
+    goto :goto_2
+
+    :cond_4
+    nop
+
+    .line 1058
+    .local v1, "isWlanOnly":Z
+    :goto_2
+    if-eqz v1, :cond_5
+
+    .line 1059
+    const-string v2, "IWLAN only, ignore WFC mode change"
+
+    invoke-static {p0, v2}, Lcom/qualcomm/ims/utils/Log;->d(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 1060
+    return-void
+
+    .line 1063
+    :cond_5
+    new-instance v2, Lorg/codeaurora/ims/ImsConfigImpl$11;
+
+    invoke-direct {v2, p0, p1}, Lorg/codeaurora/ims/ImsConfigImpl$11;-><init>(Lorg/codeaurora/ims/ImsConfigImpl;Landroid/telephony/ServiceState;)V
+
+    .line 1092
+    .local v2, "r":Ljava/lang/Runnable;
+    iget-object v3, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mRequestHandler:Landroid/os/Handler;
+
+    invoke-virtual {v3, v2}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
+
+    .line 1093
     return-void
 .end method
 
@@ -685,7 +902,7 @@
     .locals 7
     .param p1, "mode"    # I
 
-    .line 1072
+    .line 1103
     const/16 v0, 0xa
 
     if-ne p1, v0, :cond_0
@@ -697,14 +914,14 @@
     :cond_0
     const/4 v0, 0x0
 
-    .line 1073
+    .line 1104
     .local v0, "isCurrentImsPreferred":Z
     :goto_0
     const-string v1, "SubID "
 
     if-nez v0, :cond_1
 
-    .line 1074
+    .line 1105
     new-instance v2, Ljava/lang/StringBuilder;
 
     invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
@@ -725,10 +942,10 @@
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 1075
+    .line 1106
     return p1
 
-    .line 1079
+    .line 1110
     :cond_1
     iget-object v2, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mTelephonyManager:Landroid/telephony/TelephonyManager;
 
@@ -736,7 +953,7 @@
 
     move-result v2
 
-    .line 1080
+    .line 1111
     .local v2, "voiceNetworkType":I
     iget-object v3, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mTelephonyManager:Landroid/telephony/TelephonyManager;
 
@@ -744,50 +961,81 @@
 
     move-result v3
 
-    .line 1081
+    .line 1112
     .local v3, "dataNetworkType":I
     const/4 v4, -0x1
 
-    .line 1082
+    .line 1114
     .local v4, "adjMode":I
     const/16 v5, 0xd
 
-    if-eq v2, v5, :cond_3
+    if-eq v2, v5, :cond_2
 
     const/16 v6, 0x13
 
-    if-eq v2, v6, :cond_3
+    if-eq v2, v6, :cond_2
 
-    if-eq v3, v5, :cond_3
+    if-eq v3, v5, :cond_2
 
-    if-ne v3, v6, :cond_2
+    if-ne v3, v6, :cond_3
+
+    :cond_2
+    iget-boolean v5, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mIsVopsEnabled:Z
+
+    if-eqz v5, :cond_3
+
+    iget-boolean v5, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mIsSsacVoiceBarred:Z
+
+    if-nez v5, :cond_3
+
+    iget-object v5, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
+
+    .line 1121
+    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->getPhoneId()I
+
+    move-result v6
+
+    invoke-static {v5, v6}, Lorg/codeaurora/ims/ImsUtils;->isVolteEnabledByPlatform(Landroid/content/Context;I)Z
+
+    move-result v5
+
+    if-eqz v5, :cond_3
+
+    iget-object v5, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
+
+    .line 1123
+    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->getPhoneId()I
+
+    move-result v6
+
+    invoke-static {v5, v6}, Lorg/codeaurora/ims/ImsUtils;->isEnhanced4gLteModeSettingEnabledByUser(Landroid/content/Context;I)Z
+
+    move-result v5
+
+    if-eqz v5, :cond_3
+
+    .line 1125
+    const/4 v4, 0x1
 
     goto :goto_1
 
-    .line 1087
-    :cond_2
+    .line 1126
+    :cond_3
     if-eqz v2, :cond_4
 
-    .line 1088
+    .line 1127
     invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->isWifiConnected()Z
 
     move-result v5
 
     if-eqz v5, :cond_4
 
-    .line 1089
+    .line 1128
     const/4 v4, 0x2
 
-    goto :goto_2
-
-    .line 1086
-    :cond_3
-    :goto_1
-    const/4 v4, 0x1
-
-    .line 1091
+    .line 1130
     :cond_4
-    :goto_2
+    :goto_1
     new-instance v5, Ljava/lang/StringBuilder;
 
     invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
@@ -816,250 +1064,29 @@
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->v(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 1092
-    return v4
-.end method
-
-.method private broadcastConfigChange(II)V
-    .locals 7
-    .param p1, "item"    # I
-    .param p2, "value"    # I
-
-    .line 1114
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
-
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->getPhoneId()I
-
-    move-result v1
-
-    invoke-static {p0, v0, v1}, Lorg/codeaurora/ims/ImsConfigImplCache;->getInstance(Lorg/codeaurora/ims/ImsConfigImpl;Landroid/content/Context;I)Lorg/codeaurora/ims/ImsConfigImplCache;
-
-    move-result-object v0
-
-    .line 1115
-    invoke-virtual {v0, p1}, Lorg/codeaurora/ims/ImsConfigImplCache;->isImsConfigExist(I)Z
-
-    move-result v0
-
-    if-nez v0, :cond_0
-
-    .line 1116
-    invoke-static {p1}, Lorg/codeaurora/ims/ImsRadioUtils;->configInfoItemToHal(I)I
-
-    move-result v0
-
-    const/16 v1, 0x4a
-
-    if-ne v0, v1, :cond_0
-
-    .line 1117
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
-
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->getPhoneId()I
-
-    move-result v1
-
-    invoke-static {p0, v0, v1}, Lorg/codeaurora/ims/ImsConfigImplCache;->getInstance(Lorg/codeaurora/ims/ImsConfigImpl;Landroid/content/Context;I)Lorg/codeaurora/ims/ImsConfigImplCache;
-
-    move-result-object v0
-
-    .line 1118
-    invoke-virtual {v0, p1, p2}, Lorg/codeaurora/ims/ImsConfigImplCache;->setImsConfig(II)V
-
-    .line 1123
-    :cond_0
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
-
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->getPhoneId()I
-
-    move-result v1
-
-    invoke-static {p0, v0, v1}, Lorg/codeaurora/ims/ImsConfigImplCache;->getInstance(Lorg/codeaurora/ims/ImsConfigImpl;Landroid/content/Context;I)Lorg/codeaurora/ims/ImsConfigImplCache;
-
-    move-result-object v0
-
-    .line 1124
-    invoke-virtual {v0, p1}, Lorg/codeaurora/ims/ImsConfigImplCache;->getImsConfigInt(I)I
-
-    move-result v0
-
-    .line 1125
-    .local v0, "prev_value":I
-    new-instance v1, Ljava/lang/StringBuilder;
-
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v2, "broadcastConfigChange item="
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    const-string v2, ", prev_value="
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    const-string v2, ", current_value="
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1, p2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v1
-
-    invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->d(Ljava/lang/Object;Ljava/lang/String;)V
-
-    .line 1130
-    const/4 v1, 0x0
-
     .line 1131
-    .local v1, "bProvisioning":Z
-    const/16 v2, 0xa
-
-    if-eq p1, v2, :cond_1
-
-    const/16 v2, 0xb
-
-    if-eq p1, v2, :cond_1
-
-    const/16 v2, 0x19
-
-    if-eq p1, v2, :cond_1
-
-    const/16 v2, 0x1c
-
-    if-eq p1, v2, :cond_1
-
-    goto :goto_0
-
-    .line 1136
-    :cond_1
-    const/4 v1, 0x1
-
-    .line 1139
-    :goto_0
-    if-eqz v1, :cond_4
-
-    .line 1140
-    const/4 v2, 0x0
-
-    const/4 v3, 0x1
-
-    if-ne v0, v3, :cond_2
-
-    move v4, v3
-
-    goto :goto_1
-
-    :cond_2
-    move v4, v2
-
-    .line 1141
-    .local v4, "bPrev":Z
-    :goto_1
-    if-ne p2, v3, :cond_3
-
-    move v2, v3
-
-    .line 1142
-    .local v2, "bNew":Z
-    :cond_3
-    if-eq v4, v2, :cond_4
-
-    .line 1143
-    new-instance v3, Landroid/content/Intent;
-
-    const-string v5, "com.motorola.intent.action.PROVISION_STATE_CHANGED"
-
-    invoke-direct {v3, v5}, Landroid/content/Intent;-><init>(Ljava/lang/String;)V
-
-    .line 1144
-    .local v3, "provisionIntent":Landroid/content/Intent;
-    const/high16 v5, 0x1000000
-
-    invoke-virtual {v3, v5}, Landroid/content/Intent;->addFlags(I)Landroid/content/Intent;
-
-    .line 1145
-    const-string v5, "item"
-
-    invoke-virtual {v3, v5, p1}, Landroid/content/Intent;->putExtra(Ljava/lang/String;I)Landroid/content/Intent;
-
-    .line 1146
-    invoke-static {p2}, Ljava/lang/Integer;->toString(I)Ljava/lang/String;
-
-    move-result-object v5
-
-    const-string v6, "value"
-
-    invoke-virtual {v3, v6, v5}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;
-
-    .line 1147
-    invoke-static {v0}, Ljava/lang/Integer;->toString(I)Ljava/lang/String;
-
-    move-result-object v5
-
-    const-string v6, "prev_value"
-
-    invoke-virtual {v3, v6, v5}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;
-
-    .line 1148
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->getPhoneId()I
-
-    move-result v5
-
-    invoke-static {v3, v5}, Landroid/telephony/SubscriptionManager;->putPhoneIdAndSubIdExtra(Landroid/content/Intent;I)V
-
-    .line 1149
-    iget-object v5, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
-
-    const-string v6, "android.permission.READ_PRIVILEGED_PHONE_STATE"
-
-    invoke-virtual {v5, v3, v6}, Landroid/content/Context;->sendBroadcast(Landroid/content/Intent;Ljava/lang/String;)V
-
-    .line 1153
-    .end local v2    # "bNew":Z
-    .end local v3    # "provisionIntent":Landroid/content/Intent;
-    .end local v4    # "bPrev":Z
-    :cond_4
-    iget-object v2, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
-
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->getPhoneId()I
-
-    move-result v3
-
-    invoke-static {p0, v2, v3}, Lorg/codeaurora/ims/ImsConfigImplCache;->getInstance(Lorg/codeaurora/ims/ImsConfigImpl;Landroid/content/Context;I)Lorg/codeaurora/ims/ImsConfigImplCache;
-
-    move-result-object v2
-
-    invoke-virtual {v2, p1, p2}, Lorg/codeaurora/ims/ImsConfigImplCache;->setImsConfig(II)V
-
-    .line 1155
-    return-void
+    return v4
 .end method
 
 .method private clearSubscriptionCache()V
     .locals 3
 
-    .line 238
+    .line 309
     const/4 v0, 0x0
 
     iput-boolean v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mIsCarrierConfigLoaded:Z
 
-    .line 239
+    .line 310
     const/4 v1, -0x1
 
     iput v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mSubId:I
 
-    .line 240
+    .line 311
     iget-boolean v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mIsContentObserversRegistered:Z
 
     if-eqz v1, :cond_0
 
-    .line 241
+    .line 312
     iget-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
 
     invoke-virtual {v1}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
@@ -1070,7 +1097,7 @@
 
     invoke-virtual {v1, v2}, Landroid/content/ContentResolver;->unregisterContentObserver(Landroid/database/ContentObserver;)V
 
-    .line 243
+    .line 314
     iget-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
 
     invoke-virtual {v1}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
@@ -1081,22 +1108,44 @@
 
     invoke-virtual {v1, v2}, Landroid/content/ContentResolver;->unregisterContentObserver(Landroid/database/ContentObserver;)V
 
-    .line 245
+    .line 318
+    iget-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
+
+    invoke-virtual {v1}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+
+    move-result-object v1
+
+    iget-object v2, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mVoLTEEnabledObserver:Landroid/database/ContentObserver;
+
+    invoke-virtual {v1, v2}, Landroid/content/ContentResolver;->unregisterContentObserver(Landroid/database/ContentObserver;)V
+
+    .line 322
     iput-boolean v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mIsContentObserversRegistered:Z
 
-    .line 247
+    .line 324
     :cond_0
-    const/4 v0, 0x0
+    const/4 v1, 0x0
 
-    iput-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mImsMmTelManager:Landroid/telephony/ims/ImsMmTelManager;
+    iput-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mImsMmTelManager:Landroid/telephony/ims/ImsMmTelManager;
 
-    .line 248
-    iput-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mWfcModeUri:Landroid/net/Uri;
+    .line 325
+    iput-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mWfcModeUri:Landroid/net/Uri;
 
-    .line 249
-    iput-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mWfcRoamingModeUri:Landroid/net/Uri;
+    .line 326
+    iput-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mWfcRoamingModeUri:Landroid/net/Uri;
 
-    .line 250
+    .line 329
+    iget-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mTelephonyManager:Landroid/telephony/TelephonyManager;
+
+    if-eqz v1, :cond_1
+
+    .line 330
+    iget-object v2, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mPhoneStateListener:Landroid/telephony/PhoneStateListener;
+
+    invoke-virtual {v1, v2, v0}, Landroid/telephony/TelephonyManager;->listen(Landroid/telephony/PhoneStateListener;I)V
+
+    .line 333
+    :cond_1
     return-void
 .end method
 
@@ -1104,7 +1153,7 @@
     .locals 2
     .param p1, "fn"    # Ljava/lang/String;
 
-    .line 441
+    .line 521
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.READ_PRIVILEGED_PHONE_STATE"
@@ -1117,7 +1166,7 @@
 
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
 
-    .line 443
+    .line 523
     const-string v1, "android.permission.READ_PHONE_STATE"
 
     invoke-virtual {v0, v1}, Landroid/content/Context;->checkCallingOrSelfPermission(Ljava/lang/String;)I
@@ -1126,12 +1175,12 @@
 
     if-eqz v0, :cond_0
 
-    .line 445
+    .line 525
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
 
     invoke-virtual {v0, v1, p1}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 447
+    .line 527
     :cond_0
     return-void
 .end method
@@ -1139,10 +1188,10 @@
 .method private getDomainName()Ljava/lang/String;
     .locals 3
 
-    .line 578
+    .line 621
     const-string v0, ""
 
-    .line 579
+    .line 622
     .local v0, "domain":Ljava/lang/String;
     iget-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
 
@@ -1156,16 +1205,16 @@
 
     move-result-object v1
 
-    .line 580
+    .line 623
     .local v1, "telephonyMgr":Landroid/telephony/TelephonyManager;
     if-eqz v1, :cond_0
 
-    .line 581
+    .line 624
     invoke-virtual {v1}, Landroid/telephony/TelephonyManager;->getIsimDomain()Ljava/lang/String;
 
     move-result-object v0
 
-    .line 583
+    .line 626
     :cond_0
     return-object v0
 .end method
@@ -1175,7 +1224,7 @@
     .param p1, "item"    # Ljava/lang/Object;
     .param p2, "ex"    # Ljava/lang/Throwable;
 
-    .line 421
+    .line 501
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1192,15 +1241,15 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->d(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 422
+    .line 502
     if-nez p2, :cond_0
 
-    .line 423
+    .line 503
     const/4 v0, 0x0
 
     return v0
 
-    .line 425
+    .line 505
     :cond_0
     const/4 v0, 0x1
 
@@ -1216,7 +1265,7 @@
 
     goto :goto_0
 
-    .line 429
+    .line 509
     :cond_1
     move-object v1, p1
 
@@ -1226,22 +1275,22 @@
 
     move-result v1
 
-    .line 430
+    .line 510
     .local v1, "config":I
     const/16 v2, 0x3e8
 
     if-eq v1, v2, :cond_2
 
-    .line 431
+    .line 511
     return v0
 
-    .line 433
+    .line 513
     :cond_2
     move-object v2, p2
 
     check-cast v2, Lorg/codeaurora/ims/ImsRilException;
 
-    .line 434
+    .line 514
     .local v2, "imsRilException":Lorg/codeaurora/ims/ImsRilException;
     invoke-virtual {v2}, Lorg/codeaurora/ims/ImsRilException;->getErrorCode()I
 
@@ -1251,16 +1300,16 @@
 
     if-ne v3, v4, :cond_3
 
-    .line 435
+    .line 515
     const/4 v0, 0x2
 
     return v0
 
-    .line 437
+    .line 517
     :cond_3
     return v0
 
-    .line 427
+    .line 507
     .end local v1    # "config":I
     .end local v2    # "imsRilException":Lorg/codeaurora/ims/ImsRilException;
     :cond_4
@@ -1271,7 +1320,7 @@
 .method private getPhoneId()I
     .locals 1
 
-    .line 835
+    .line 855
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mServiceSub:Lorg/codeaurora/ims/ImsServiceSub;
 
     invoke-virtual {v0}, Lorg/codeaurora/ims/ImsServiceSub;->getPhoneId()I
@@ -1286,7 +1335,7 @@
 
     monitor-enter p0
 
-    .line 983
+    .line 1003
     :try_start_0
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mImsMmTelManager:Landroid/telephony/ims/ImsMmTelManager;
 
@@ -1294,19 +1343,19 @@
 
     if-nez v0, :cond_0
 
-    .line 984
+    .line 1004
     const-string v0, "checkinVolteProvision: mImsMmTelManager null"
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->w(Ljava/lang/Object;Ljava/lang/String;)V
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    .line 985
+    .line 1005
     monitor-exit p0
 
     return v1
 
-    .line 994
+    .line 1014
     .end local p0    # "this":Lorg/codeaurora/ims/ImsConfigImpl;
     :cond_0
     :try_start_1
@@ -1316,7 +1365,7 @@
 
     iput-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mUserSetting:Ljava/lang/Integer;
 
-    .line 995
+    .line 1015
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mImsMmTelManager:Landroid/telephony/ims/ImsMmTelManager;
 
     invoke-virtual {v0}, Landroid/telephony/ims/ImsMmTelManager;->isAdvancedCallingSettingEnabled()Z
@@ -1327,7 +1376,7 @@
 
     if-eqz v0, :cond_1
 
-    .line 996
+    .line 1016
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mUserSetting:Ljava/lang/Integer;
 
     invoke-virtual {v0}, Ljava/lang/Integer;->intValue()I
@@ -1342,7 +1391,7 @@
 
     iput-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mUserSetting:Ljava/lang/Integer;
 
-    .line 998
+    .line 1018
     :cond_1
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mImsMmTelManager:Landroid/telephony/ims/ImsMmTelManager;
 
@@ -1352,7 +1401,7 @@
 
     if-eqz v0, :cond_2
 
-    .line 999
+    .line 1019
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mUserSetting:Ljava/lang/Integer;
 
     invoke-virtual {v0}, Ljava/lang/Integer;->intValue()I
@@ -1367,7 +1416,7 @@
 
     iput-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mUserSetting:Ljava/lang/Integer;
 
-    .line 1001
+    .line 1021
     :cond_2
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mUserSetting:Ljava/lang/Integer;
 
@@ -1377,7 +1426,7 @@
 
     if-eqz v0, :cond_3
 
-    .line 1002
+    .line 1022
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mImsMmTelManager:Landroid/telephony/ims/ImsMmTelManager;
 
     invoke-virtual {v0}, Landroid/telephony/ims/ImsMmTelManager;->isVtSettingEnabled()Z
@@ -1386,7 +1435,7 @@
 
     if-eqz v0, :cond_3
 
-    .line 1003
+    .line 1023
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mUserSetting:Ljava/lang/Integer;
 
     invoke-virtual {v0}, Ljava/lang/Integer;->intValue()I
@@ -1403,13 +1452,13 @@
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    .line 1007
+    .line 1027
     :cond_3
     monitor-exit p0
 
     return v1
 
-    .line 982
+    .line 1002
     :catchall_0
     move-exception v0
 
@@ -1422,16 +1471,30 @@
     .locals 2
     .param p1, "subid"    # I
 
-    .line 772
+    .line 794
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
+
+    const-string v1, "wfc_ims_mdn"
+
+    invoke-static {p1, v1, v0}, Landroid/telephony/SubscriptionManager;->getSubscriptionProperty(ILjava/lang/String;Landroid/content/Context;)Ljava/lang/String;
+
+    move-result-object v0
+
+    .line 796
+    .local v0, "mdn":Ljava/lang/String;
+    if-nez v0, :cond_0
+
     const-string v0, "0"
 
+    .line 797
+    :cond_0
     return-object v0
 .end method
 
 .method private isWifiConnected()Z
     .locals 5
 
-    .line 1096
+    .line 1135
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
 
     const-string v1, "connectivity"
@@ -1442,19 +1505,19 @@
 
     check-cast v0, Landroid/net/ConnectivityManager;
 
-    .line 1098
+    .line 1137
     .local v0, "connMgr":Landroid/net/ConnectivityManager;
     invoke-virtual {v0}, Landroid/net/ConnectivityManager;->getActiveNetwork()Landroid/net/Network;
 
     move-result-object v1
 
-    .line 1099
+    .line 1138
     .local v1, "network":Landroid/net/Network;
     invoke-virtual {v0, v1}, Landroid/net/ConnectivityManager;->getNetworkCapabilities(Landroid/net/Network;)Landroid/net/NetworkCapabilities;
 
     move-result-object v2
 
-    .line 1100
+    .line 1139
     .local v2, "capabilities":Landroid/net/NetworkCapabilities;
     if-eqz v2, :cond_0
 
@@ -1466,7 +1529,7 @@
 
     if-eqz v3, :cond_0
 
-    .line 1102
+    .line 1141
     const/4 v3, 0x1
 
     invoke-virtual {v2, v3}, Landroid/net/NetworkCapabilities;->hasTransport(I)Z
@@ -1475,10 +1538,10 @@
 
     if-eqz v4, :cond_0
 
-    .line 1103
+    .line 1142
     return v3
 
-    .line 1105
+    .line 1144
     :cond_0
     const/4 v3, 0x0
 
@@ -1491,129 +1554,122 @@
     .param p2, "value"    # Ljava/lang/String;
     .param p3, "retVal"    # I
 
-    .line 841
+    .line 861
     const/4 v0, 0x0
 
-    .line 842
+    .line 862
     .local v0, "info":Ljava/lang/String;
-    const/16 v1, 0xa
-
-    if-eq p1, v1, :cond_4
-
-    const/16 v1, 0xb
-
-    if-eq p1, v1, :cond_3
-
-    const/16 v1, 0x19
-
-    if-eq p1, v1, :cond_2
-
-    const/16 v1, 0x1c
-
-    if-eq p1, v1, :cond_1
-
-    const/16 v1, 0x44
-
-    if-eq p1, v1, :cond_0
+    sparse-switch p1, :sswitch_data_0
 
     goto :goto_0
 
-    .line 856
-    :cond_0
+    .line 876
+    :sswitch_0
     const-string v0, "vice_dm"
 
-    .line 857
+    .line 877
     goto :goto_0
 
-    .line 853
-    :cond_1
+    .line 873
+    :sswitch_1
     const-string v0, "wfc_dm"
 
-    .line 854
+    .line 874
     goto :goto_0
 
-    .line 850
-    :cond_2
+    .line 870
+    :sswitch_2
     const-string v0, "eab_dm"
 
-    .line 851
+    .line 871
     goto :goto_0
 
-    .line 847
-    :cond_3
+    .line 867
+    :sswitch_3
     const-string v0, "vt_dm"
 
-    .line 848
+    .line 868
     goto :goto_0
 
-    .line 844
-    :cond_4
+    .line 864
+    :sswitch_4
     const-string v0, "vlt_dm"
 
-    .line 845
+    .line 865
     nop
 
-    .line 861
+    .line 881
     :goto_0
-    if-eqz v0, :cond_7
+    if-eqz v0, :cond_2
 
     invoke-virtual {v0}, Ljava/lang/String;->isEmpty()Z
 
     move-result v1
 
-    if-eqz v1, :cond_5
+    if-eqz v1, :cond_0
 
     goto :goto_1
 
-    .line 865
-    :cond_5
+    .line 885
+    :cond_0
     new-instance v1, Ljava/lang/StringBuilder;
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    .line 866
+    .line 886
     .local v1, "sb":Ljava/lang/StringBuilder;
     invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    .line 867
+    .line 887
     const-string v2, ": "
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    .line 868
+    .line 888
     invoke-virtual {v1, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    .line 869
-    if-eqz p3, :cond_6
+    .line 889
+    if-eqz p3, :cond_1
 
-    .line 870
+    .line 890
     const-string v2, ", ret: "
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    .line 871
+    .line 891
     invoke-virtual {v1, p3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    .line 873
-    :cond_6
+    .line 893
+    :cond_1
     const/4 v2, 0x1
 
-    .line 874
+    .line 894
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
     move-result-object v3
 
-    .line 873
+    .line 893
     invoke-virtual {p0, v2, v3}, Lorg/codeaurora/ims/ImsConfigImpl;->checkinVolteProvision(ILjava/lang/String;)V
 
-    .line 875
+    .line 895
     return-void
 
-    .line 862
+    .line 882
     .end local v1    # "sb":Ljava/lang/StringBuilder;
-    :cond_7
+    :cond_2
     :goto_1
     return-void
+
+    nop
+
+    :sswitch_data_0
+    .sparse-switch
+        0xa -> :sswitch_4
+        0xb -> :sswitch_3
+        0x19 -> :sswitch_2
+        0x1c -> :sswitch_1
+        0x41 -> :sswitch_0
+    .end sparse-switch
 .end method
 
 .method private onAccessProvisionedValDone(Lorg/codeaurora/telephony/utils/AsyncResult;I)V
@@ -1621,12 +1677,12 @@
     .param p1, "ar"    # Lorg/codeaurora/telephony/utils/AsyncResult;
     .param p2, "accessType"    # I
 
-    .line 361
+    .line 444
     iget-object v0, p1, Lorg/codeaurora/telephony/utils/AsyncResult;->userObj:Ljava/lang/Object;
 
     check-cast v0, Lorg/codeaurora/telephony/utils/SomeArgs;
 
-    .line 362
+    .line 445
     .local v0, "response":Lorg/codeaurora/telephony/utils/SomeArgs;
     iget-object v1, v0, Lorg/codeaurora/telephony/utils/SomeArgs;->arg1:Ljava/lang/Object;
 
@@ -1642,30 +1698,30 @@
 
     iput-object v1, v0, Lorg/codeaurora/telephony/utils/SomeArgs;->arg2:Ljava/lang/Object;
 
-    .line 363
+    .line 446
     iget-object v1, p1, Lorg/codeaurora/telephony/utils/AsyncResult;->result:Ljava/lang/Object;
 
     iput-object v1, v0, Lorg/codeaurora/telephony/utils/SomeArgs;->arg3:Ljava/lang/Object;
 
-    .line 364
+    .line 447
     monitor-enter v0
 
-    .line 365
+    .line 448
     :try_start_0
     const-string v1, "Notifyall"
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 366
+    .line 449
     invoke-virtual {v0}, Ljava/lang/Object;->notifyAll()V
 
-    .line 367
+    .line 450
     monitor-exit v0
 
-    .line 368
+    .line 451
     return-void
 
-    .line 367
+    .line 450
     :catchall_0
     move-exception v1
 
@@ -1680,26 +1736,26 @@
     .locals 7
     .param p1, "ar"    # Lorg/codeaurora/telephony/utils/AsyncResult;
 
-    .line 371
+    .line 454
     if-nez p1, :cond_0
 
-    .line 372
+    .line 455
     const-string v0, "onSetFeatureResponseDone :: AsyncResult is null."
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 373
+    .line 456
     return-void
 
-    .line 376
+    .line 459
     :cond_0
     const/4 v0, 0x0
 
-    .line 377
+    .line 460
     .local v0, "listener":Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityValueListener;
     const/4 v1, 0x0
 
-    .line 380
+    .line 463
     .local v1, "capabilityStatusList":Ljava/util/ArrayList;, "Ljava/util/ArrayList<Lorg/codeaurora/ims/CapabilityStatus;>;"
     :try_start_0
     iget-object v2, p1, Lorg/codeaurora/telephony/utils/AsyncResult;->result:Ljava/lang/Object;
@@ -1708,7 +1764,7 @@
 
     move-object v1, v2
 
-    .line 381
+    .line 464
     iget-object v2, p1, Lorg/codeaurora/telephony/utils/AsyncResult;->userObj:Ljava/lang/Object;
 
     check-cast v2, Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityValueListener;
@@ -1717,14 +1773,14 @@
 
     move-object v0, v2
 
-    .line 384
+    .line 467
     goto :goto_0
 
-    .line 382
+    .line 465
     :catch_0
     move-exception v2
 
-    .line 383
+    .line 466
     .local v2, "ex":Ljava/lang/ClassCastException;
     new-instance v3, Ljava/lang/StringBuilder;
 
@@ -1742,32 +1798,32 @@
 
     invoke-static {p0, v3}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 386
+    .line 469
     .end local v2    # "ex":Ljava/lang/ClassCastException;
     :goto_0
     if-nez v0, :cond_1
 
-    .line 387
+    .line 470
     const-string v2, "onSetFeatureResponseDone :: listener is null"
 
     invoke-static {p0, v2}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 388
+    .line 471
     return-void
 
-    .line 391
+    .line 474
     :cond_1
     if-nez v1, :cond_2
 
-    .line 392
+    .line 475
     const-string v2, "onSetFeatureResponseDone :: capabilityStatusList is null"
 
     invoke-static {p0, v2}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 393
+    .line 476
     return-void
 
-    .line 396
+    .line 479
     :cond_2
     invoke-virtual {v1}, Ljava/util/ArrayList;->iterator()Ljava/util/Iterator;
 
@@ -1786,60 +1842,48 @@
 
     check-cast v3, Lorg/codeaurora/ims/CapabilityStatus;
 
-    .line 397
+    .line 480
     .local v3, "capabilityStatus":Lorg/codeaurora/ims/CapabilityStatus;
     iget-object v4, p1, Lorg/codeaurora/telephony/utils/AsyncResult;->exception:Ljava/lang/Throwable;
 
     if-nez v4, :cond_3
 
-    .line 398
+    .line 481
     invoke-virtual {v3}, Lorg/codeaurora/ims/CapabilityStatus;->getCapability()I
 
     move-result v4
 
-    .line 399
+    .line 482
     invoke-virtual {v3}, Lorg/codeaurora/ims/CapabilityStatus;->getRadioTech()I
 
     move-result v5
 
-    .line 400
+    .line 483
     invoke-virtual {v3}, Lorg/codeaurora/ims/CapabilityStatus;->getStatus()I
 
     move-result v6
 
-    .line 398
+    .line 481
     invoke-interface {v0, v4, v5, v6}, Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityValueListener;->onSetCapabilityValueSuccess(III)V
 
-    .line 402
+    .line 485
     invoke-virtual {v3}, Lorg/codeaurora/ims/CapabilityStatus;->getCapability()I
 
     move-result v4
 
-    invoke-static {v4}, Lorg/codeaurora/ims/ImsRadioUtils;->mapCapabilityToSrvType(I)I
+    if-nez v4, :cond_4
 
-    move-result v4
-
-    const/4 v5, 0x1
-
-    if-ne v4, v5, :cond_4
-
-    .line 404
+    .line 486
     invoke-virtual {v3}, Lorg/codeaurora/ims/CapabilityStatus;->getRadioTech()I
 
     move-result v4
 
-    invoke-static {v4}, Lorg/codeaurora/ims/ImsRadioUtils;->mapRadioTechToHidlRadioTech(I)I
-
-    move-result v4
+    const/16 v5, 0x13
 
     if-ne v4, v5, :cond_4
 
-    .line 406
+    .line 487
     invoke-virtual {v3}, Lorg/codeaurora/ims/CapabilityStatus;->getStatus()I
-
-    move-result v4
-
-    invoke-static {v4}, Lorg/codeaurora/ims/ImsRadioUtils;->mapValueToServiceStatus(I)I
 
     move-result v4
 
@@ -1847,34 +1891,34 @@
 
     if-ne v4, v5, :cond_4
 
-    .line 408
+    .line 488
     invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->syncWfcMDN()V
 
     goto :goto_2
 
-    .line 412
+    .line 492
     :cond_3
     invoke-virtual {v3}, Lorg/codeaurora/ims/CapabilityStatus;->getCapability()I
 
     move-result v4
 
-    .line 413
+    .line 493
     invoke-virtual {v3}, Lorg/codeaurora/ims/CapabilityStatus;->getRadioTech()I
 
     move-result v5
 
     sget-object v6, Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;->ERROR_GENERIC:Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;
 
-    .line 412
+    .line 492
     invoke-interface {v0, v4, v5, v6}, Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityValueListener;->onSetCapabilityValueFailure(IILorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;)V
 
-    .line 416
+    .line 496
     .end local v3    # "capabilityStatus":Lorg/codeaurora/ims/CapabilityStatus;
     :cond_4
     :goto_2
     goto :goto_1
 
-    .line 417
+    .line 497
     :cond_5
     return-void
 .end method
@@ -1884,7 +1928,7 @@
     .param p1, "item"    # I
     .param p2, "value"    # I
 
-    .line 588
+    .line 631
     const/16 v1, 0x2c
 
     const/4 v3, 0x1
@@ -1905,7 +1949,7 @@
 
     check-cast v0, Lorg/codeaurora/telephony/utils/SomeArgs;
 
-    .line 590
+    .line 633
     .local v0, "result":Lorg/codeaurora/telephony/utils/SomeArgs;
     iget-object v1, v0, Lorg/codeaurora/telephony/utils/SomeArgs;->arg2:Ljava/lang/Object;
 
@@ -1915,68 +1959,61 @@
 
     move-result v1
 
-    .line 591
+    .line 634
     .local v1, "retVal":I
     invoke-virtual {v0}, Lorg/codeaurora/telephony/utils/SomeArgs;->recycle()V
 
-    .line 594
-    if-nez v1, :cond_0
-
-    .line 595
-    invoke-direct {p0, p1, p2}, Lorg/codeaurora/ims/ImsConfigImpl;->broadcastConfigChange(II)V
-
-    .line 598
-    :cond_0
+    .line 635
     invoke-static {p2}, Ljava/lang/Integer;->toString(I)Ljava/lang/String;
 
     move-result-object v2
 
     invoke-direct {p0, p1, v2, v1}, Lorg/codeaurora/ims/ImsConfigImpl;->logImsConfigChangedCheckin(ILjava/lang/String;I)V
 
-    .line 599
+    .line 636
     return v1
 .end method
 
 .method private setVoiceDomainSetting()V
     .locals 2
 
-    .line 810
-    new-instance v0, Lorg/codeaurora/ims/ImsConfigImpl$7;
-
-    invoke-direct {v0, p0}, Lorg/codeaurora/ims/ImsConfigImpl$7;-><init>(Lorg/codeaurora/ims/ImsConfigImpl;)V
-
     .line 830
+    new-instance v0, Lorg/codeaurora/ims/ImsConfigImpl$8;
+
+    invoke-direct {v0, p0}, Lorg/codeaurora/ims/ImsConfigImpl$8;-><init>(Lorg/codeaurora/ims/ImsConfigImpl;)V
+
+    .line 850
     .local v0, "r":Ljava/lang/Runnable;
     iget-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mRequestHandler:Landroid/os/Handler;
 
     invoke-virtual {v1, v0}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
 
-    .line 831
+    .line 851
     return-void
 .end method
 
 .method private setVolteWfcProvisioningEnabled()V
     .locals 2
 
-    .line 783
-    new-instance v0, Lorg/codeaurora/ims/ImsConfigImpl$6;
-
-    invoke-direct {v0, p0}, Lorg/codeaurora/ims/ImsConfigImpl$6;-><init>(Lorg/codeaurora/ims/ImsConfigImpl;)V
-
     .line 803
+    new-instance v0, Lorg/codeaurora/ims/ImsConfigImpl$7;
+
+    invoke-direct {v0, p0}, Lorg/codeaurora/ims/ImsConfigImpl$7;-><init>(Lorg/codeaurora/ims/ImsConfigImpl;)V
+
+    .line 823
     .local v0, "r":Ljava/lang/Runnable;
     iget-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mRequestHandler:Landroid/os/Handler;
 
     invoke-virtual {v1, v0}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
 
-    .line 804
+    .line 824
     return-void
 .end method
 
 .method private shouldAdjustVoWiFiMode()Z
     .locals 3
 
-    .line 1066
+    .line 1097
     invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->getPhoneId()I
 
     move-result v0
@@ -1995,18 +2032,18 @@
 .method private syncWfcMDN()V
     .locals 2
 
-    .line 744
-    new-instance v0, Lorg/codeaurora/ims/ImsConfigImpl$5;
+    .line 770
+    new-instance v0, Lorg/codeaurora/ims/ImsConfigImpl$6;
 
-    invoke-direct {v0, p0}, Lorg/codeaurora/ims/ImsConfigImpl$5;-><init>(Lorg/codeaurora/ims/ImsConfigImpl;)V
+    invoke-direct {v0, p0}, Lorg/codeaurora/ims/ImsConfigImpl$6;-><init>(Lorg/codeaurora/ims/ImsConfigImpl;)V
 
-    .line 767
+    .line 789
     .local v0, "r":Ljava/lang/Runnable;
     iget-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mRequestHandler:Landroid/os/Handler;
 
     invoke-virtual {v1, v0}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
 
-    .line 768
+    .line 790
     return-void
 .end method
 
@@ -2017,17 +2054,17 @@
     .param p1, "event"    # I
     .param p2, "info"    # Ljava/lang/String;
 
-    .line 887
+    .line 907
     invoke-static {}, Lorg/codeaurora/ims/CheckinEvent;->isInitialized()Z
 
     move-result v0
 
     if-nez v0, :cond_0
 
-    .line 888
+    .line 908
     return-void
 
-    .line 892
+    .line 912
     :cond_0
     invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->getUserSetting()Z
 
@@ -2035,52 +2072,76 @@
 
     if-nez v0, :cond_1
 
-    .line 893
+    .line 913
     return-void
 
-    .line 897
+    .line 917
     :cond_1
     move v0, p1
 
-    .line 898
+    .line 918
     .local v0, "event_code":I
     move-object v1, p2
 
-    .line 900
+    .line 920
     .local v1, "event_info":Ljava/lang/String;
-    new-instance v2, Lorg/codeaurora/ims/ImsConfigImpl$8;
+    new-instance v2, Lorg/codeaurora/ims/ImsConfigImpl$9;
 
-    invoke-direct {v2, p0, v0, v1}, Lorg/codeaurora/ims/ImsConfigImpl$8;-><init>(Lorg/codeaurora/ims/ImsConfigImpl;ILjava/lang/String;)V
+    invoke-direct {v2, p0, v0, v1}, Lorg/codeaurora/ims/ImsConfigImpl$9;-><init>(Lorg/codeaurora/ims/ImsConfigImpl;ILjava/lang/String;)V
 
-    .line 977
+    .line 997
     .local v2, "r":Ljava/lang/Runnable;
     iget-object v3, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mRequestHandler:Landroid/os/Handler;
 
     invoke-virtual {v3, v2}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
 
-    .line 978
+    .line 998
     return-void
 .end method
 
 .method public dispose()V
-    .locals 2
+    .locals 3
 
-    .line 191
+    .line 244
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
 
     iget-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mBroadcastReceiver:Landroid/content/BroadcastReceiver;
 
     invoke-virtual {v0, v1}, Landroid/content/Context;->unregisterReceiver(Landroid/content/BroadcastReceiver;)V
 
-    .line 192
+    .line 247
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mSubscriptionManager:Landroid/telephony/SubscriptionManager;
+
+    if-eqz v0, :cond_0
+
+    .line 248
+    iget-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mOnSubscriptionsChangeListener:Landroid/telephony/SubscriptionManager$OnSubscriptionsChangedListener;
+
+    invoke-virtual {v0, v1}, Landroid/telephony/SubscriptionManager;->removeOnSubscriptionsChangedListener(Landroid/telephony/SubscriptionManager$OnSubscriptionsChangedListener;)V
+
+    .line 250
+    :cond_0
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mTelephonyManager:Landroid/telephony/TelephonyManager;
+
+    if-eqz v0, :cond_1
+
+    .line 251
+    iget-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mPhoneStateListener:Landroid/telephony/PhoneStateListener;
+
+    const/4 v2, 0x0
+
+    invoke-virtual {v0, v1, v2}, Landroid/telephony/TelephonyManager;->listen(Landroid/telephony/PhoneStateListener;I)V
+
+    .line 254
+    :cond_1
     return-void
 .end method
 
 .method public getConfigInt(I)I
-    .locals 10
+    .locals 9
     .param p1, "item"    # I
 
-    .line 487
+    .line 567
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -2097,123 +2158,85 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->d(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 488
+    .line 568
     const-string v0, "getConfigInt"
 
     invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsConfigImpl;->enforceReadPhoneState(Ljava/lang/String;)V
 
-    .line 491
-    const/16 v0, 0x47
+    .line 571
+    const/16 v0, 0x46
 
     if-ne p1, v0, :cond_0
 
-    .line 492
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mServiceSub:Lorg/codeaurora/ims/ImsServiceSub;
+    .line 572
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mConfigOem:Lorg/codeaurora/ims/ImsConfigImplOem;
 
-    iget-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
-
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->getPhoneId()I
-
-    move-result v2
-
-    invoke-static {v0, v1, v2}, Lorg/codeaurora/ims/ImsConfigImplOem;->getInstance(Lorg/codeaurora/ims/ImsServiceSub;Landroid/content/Context;I)Lorg/codeaurora/ims/ImsConfigImplOem;
-
-    move-result-object v0
-
-    .line 493
     invoke-virtual {v0}, Lorg/codeaurora/ims/ImsConfigImplOem;->getTVolteHysTimer()I
 
     move-result v0
 
-    .line 492
     return v0
 
-    .line 494
+    .line 573
     :cond_0
-    const/16 v0, 0x4a
+    const/16 v0, 0x49
 
     if-ne p1, v0, :cond_1
 
-    .line 495
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mServiceSub:Lorg/codeaurora/ims/ImsServiceSub;
+    .line 574
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mConfigOem:Lorg/codeaurora/ims/ImsConfigImplOem;
 
-    iget-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
-
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->getPhoneId()I
-
-    move-result v2
-
-    invoke-static {v0, v1, v2}, Lorg/codeaurora/ims/ImsConfigImplOem;->getInstance(Lorg/codeaurora/ims/ImsServiceSub;Landroid/content/Context;I)Lorg/codeaurora/ims/ImsConfigImplOem;
-
-    move-result-object v0
-
-    .line 496
     invoke-virtual {v0}, Lorg/codeaurora/ims/ImsConfigImplOem;->getImsSupportedServices()I
 
     move-result v0
 
-    .line 495
     return v0
 
-    .line 500
+    .line 578
     :cond_1
     const/4 v0, 0x1
 
     invoke-static {p1, v0}, Lorg/codeaurora/ims/ImsCallUtils;->isConfigRequestValid(II)Z
 
-    move-result v1
+    move-result v0
 
-    const/4 v2, -0x1
+    const/4 v1, -0x1
 
-    if-nez v1, :cond_2
+    if-nez v0, :cond_2
 
-    .line 501
+    .line 579
     const-string v0, "Invalid API request for item"
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 502
-    return v2
+    .line 580
+    return v1
 
-    .line 505
+    .line 583
     :cond_2
-    const/16 v4, 0x2d
+    const/16 v3, 0x2d
 
-    const/4 v6, 0x1
+    const/4 v5, 0x1
+
+    const/4 v6, 0x0
 
     const/4 v7, 0x0
 
     const/4 v8, 0x0
 
-    const/4 v9, 0x0
+    move-object v2, p0
 
-    move-object v3, p0
+    move v4, p1
 
-    move v5, p1
+    invoke-virtual/range {v2 .. v8}, Lorg/codeaurora/ims/ImsConfigImpl;->sendRequest(IIIZILjava/lang/String;)Ljava/lang/Object;
 
-    invoke-virtual/range {v3 .. v9}, Lorg/codeaurora/ims/ImsConfigImpl;->sendRequest(IIIZILjava/lang/String;)Ljava/lang/Object;
+    move-result-object v0
 
-    move-result-object v1
+    check-cast v0, Lorg/codeaurora/telephony/utils/SomeArgs;
 
-    check-cast v1, Lorg/codeaurora/telephony/utils/SomeArgs;
-
-    .line 507
-    .local v1, "result":Lorg/codeaurora/telephony/utils/SomeArgs;
-    iget-object v3, v1, Lorg/codeaurora/telephony/utils/SomeArgs;->arg2:Ljava/lang/Object;
-
-    check-cast v3, Ljava/lang/Integer;
-
-    invoke-virtual {v3}, Ljava/lang/Integer;->intValue()I
-
-    move-result v3
-
-    if-eqz v3, :cond_3
-
-    .line 508
-    goto :goto_0
-
-    :cond_3
-    iget-object v2, v1, Lorg/codeaurora/telephony/utils/SomeArgs;->arg3:Ljava/lang/Object;
+    .line 585
+    .local v0, "result":Lorg/codeaurora/telephony/utils/SomeArgs;
+    iget-object v2, v0, Lorg/codeaurora/telephony/utils/SomeArgs;->arg2:Ljava/lang/Object;
 
     check-cast v2, Ljava/lang/Integer;
 
@@ -2221,218 +2244,34 @@
 
     move-result v2
 
-    .line 509
-    .local v2, "retVal":I
+    if-eqz v2, :cond_3
+
+    .line 586
+    goto :goto_0
+
+    :cond_3
+    iget-object v1, v0, Lorg/codeaurora/telephony/utils/SomeArgs;->arg3:Ljava/lang/Object;
+
+    check-cast v1, Ljava/lang/Integer;
+
+    invoke-virtual {v1}, Ljava/lang/Integer;->intValue()I
+
+    move-result v1
+
+    .line 587
+    .local v1, "retVal":I
     :goto_0
-    iget-object v3, v1, Lorg/codeaurora/telephony/utils/SomeArgs;->arg2:Ljava/lang/Object;
+    invoke-virtual {v0}, Lorg/codeaurora/telephony/utils/SomeArgs;->recycle()V
 
-    check-cast v3, Ljava/lang/Integer;
-
-    invoke-virtual {v3}, Ljava/lang/Integer;->intValue()I
-
-    move-result v3
-
-    .line 510
-    .local v3, "result_arg2":I
-    invoke-virtual {v1}, Lorg/codeaurora/telephony/utils/SomeArgs;->recycle()V
-
-    .line 512
-    if-nez v3, :cond_7
-
-    .line 513
-    const/4 v4, 0x0
-
-    .line 514
-    .local v4, "bProvisioning":Z
-    const/16 v5, 0xa
-
-    if-eq p1, v5, :cond_4
-
-    const/16 v5, 0xb
-
-    if-eq p1, v5, :cond_4
-
-    const/16 v5, 0x19
-
-    if-eq p1, v5, :cond_4
-
-    const/16 v5, 0x1c
-
-    if-eq p1, v5, :cond_4
-
-    goto :goto_1
-
-    .line 519
-    :cond_4
-    const/4 v4, 0x1
-
-    .line 522
-    :goto_1
-    if-eqz v4, :cond_7
-
-    .line 523
-    iget-object v5, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
-
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->getPhoneId()I
-
-    move-result v6
-
-    invoke-static {p0, v5, v6}, Lorg/codeaurora/ims/ImsConfigImplCache;->getInstance(Lorg/codeaurora/ims/ImsConfigImpl;Landroid/content/Context;I)Lorg/codeaurora/ims/ImsConfigImplCache;
-
-    move-result-object v5
-
-    .line 524
-    invoke-virtual {v5, p1}, Lorg/codeaurora/ims/ImsConfigImplCache;->isImsConfigExist(I)Z
-
-    move-result v5
-
-    if-eqz v5, :cond_7
-
-    .line 525
-    iget-object v5, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
-
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->getPhoneId()I
-
-    move-result v6
-
-    invoke-static {p0, v5, v6}, Lorg/codeaurora/ims/ImsConfigImplCache;->getInstance(Lorg/codeaurora/ims/ImsConfigImpl;Landroid/content/Context;I)Lorg/codeaurora/ims/ImsConfigImplCache;
-
-    move-result-object v5
-
-    .line 526
-    invoke-virtual {v5, p1}, Lorg/codeaurora/ims/ImsConfigImplCache;->getImsConfigInt(I)I
-
-    move-result v5
-
-    .line 527
-    .local v5, "prev":I
-    const/4 v6, 0x0
-
-    if-ne v5, v0, :cond_5
-
-    move v7, v0
-
-    goto :goto_2
-
-    :cond_5
-    move v7, v6
-
-    .line 528
-    .local v7, "bPrev":Z
-    :goto_2
-    if-ne v2, v0, :cond_6
-
-    goto :goto_3
-
-    :cond_6
-    move v0, v6
-
-    .line 529
-    .local v0, "bNew":Z
-    :goto_3
-    if-eq v7, v0, :cond_7
-
-    .line 530
-    new-instance v6, Ljava/lang/StringBuilder;
-
-    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v8, "getProvisionedValue Provision item="
-
-    invoke-virtual {v6, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v6, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    const-string v8, ", changed to value="
-
-    invoke-virtual {v6, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v6, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    const-string v8, ", prev="
-
-    invoke-virtual {v6, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v6, v5}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v6
-
-    invoke-static {p0, v6}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
-
-    .line 532
-    new-instance v6, Landroid/content/Intent;
-
-    const-string v8, "com.motorola.intent.action.PROVISION_STATE_CHANGED"
-
-    invoke-direct {v6, v8}, Landroid/content/Intent;-><init>(Ljava/lang/String;)V
-
-    .line 533
-    .local v6, "provisionIntent":Landroid/content/Intent;
-    const/high16 v8, 0x1000000
-
-    invoke-virtual {v6, v8}, Landroid/content/Intent;->addFlags(I)Landroid/content/Intent;
-
-    .line 534
-    const-string v8, "item"
-
-    invoke-virtual {v6, v8, p1}, Landroid/content/Intent;->putExtra(Ljava/lang/String;I)Landroid/content/Intent;
-
-    .line 535
-    invoke-static {v2}, Ljava/lang/Integer;->toString(I)Ljava/lang/String;
-
-    move-result-object v8
-
-    const-string v9, "value"
-
-    invoke-virtual {v6, v9, v8}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;
-
-    .line 536
-    invoke-static {v5}, Ljava/lang/Integer;->toString(I)Ljava/lang/String;
-
-    move-result-object v8
-
-    const-string v9, "prev_value"
-
-    invoke-virtual {v6, v9, v8}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;
-
-    .line 537
-    iget-object v8, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
-
-    const-string v9, "android.permission.READ_PRIVILEGED_PHONE_STATE"
-
-    invoke-virtual {v8, v6, v9}, Landroid/content/Context;->sendBroadcast(Landroid/content/Intent;Ljava/lang/String;)V
-
-    .line 542
-    .end local v0    # "bNew":Z
-    .end local v4    # "bProvisioning":Z
-    .end local v5    # "prev":I
-    .end local v6    # "provisionIntent":Landroid/content/Intent;
-    .end local v7    # "bPrev":Z
-    :cond_7
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
-
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->getPhoneId()I
-
-    move-result v4
-
-    invoke-static {p0, v0, v4}, Lorg/codeaurora/ims/ImsConfigImplCache;->getInstance(Lorg/codeaurora/ims/ImsConfigImpl;Landroid/content/Context;I)Lorg/codeaurora/ims/ImsConfigImplCache;
-
-    move-result-object v0
-
-    .line 543
-    invoke-virtual {v0, p1, v2}, Lorg/codeaurora/ims/ImsConfigImplCache;->setImsConfig(II)V
-
-    .line 545
-    return v2
+    .line 588
+    return v1
 .end method
 
 .method public getConfigString(I)Ljava/lang/String;
     .locals 9
     .param p1, "item"    # I
 
-    .line 556
+    .line 599
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -2449,12 +2288,12 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->d(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 557
+    .line 600
     const-string v0, "getConfigString"
 
     invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsConfigImpl;->enforceReadPhoneState(Ljava/lang/String;)V
 
-    .line 558
+    .line 601
     const/4 v0, 0x2
 
     invoke-static {p1, v0}, Lorg/codeaurora/ims/ImsCallUtils;->isConfigRequestValid(II)Z
@@ -2465,28 +2304,28 @@
 
     if-nez v0, :cond_0
 
-    .line 559
+    .line 602
     const-string v0, "Invalid API request for item"
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 560
+    .line 603
     return-object v1
 
-    .line 564
+    .line 607
     :cond_0
     const/16 v0, 0xc
 
     if-ne p1, v0, :cond_1
 
-    .line 565
+    .line 608
     invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->getDomainName()Ljava/lang/String;
 
     move-result-object v0
 
     return-object v0
 
-    .line 569
+    .line 612
     :cond_1
     const/16 v3, 0x2d
 
@@ -2508,7 +2347,7 @@
 
     check-cast v0, Lorg/codeaurora/telephony/utils/SomeArgs;
 
-    .line 571
+    .line 614
     .local v0, "result":Lorg/codeaurora/telephony/utils/SomeArgs;
     iget-object v2, v0, Lorg/codeaurora/telephony/utils/SomeArgs;->arg2:Ljava/lang/Object;
 
@@ -2520,7 +2359,7 @@
 
     if-eqz v2, :cond_2
 
-    .line 572
+    .line 615
     goto :goto_0
 
     :cond_2
@@ -2528,19 +2367,19 @@
 
     check-cast v1, Ljava/lang/String;
 
-    .line 573
+    .line 616
     .local v1, "retVal":Ljava/lang/String;
     :goto_0
     invoke-virtual {v0}, Lorg/codeaurora/telephony/utils/SomeArgs;->recycle()V
 
-    .line 574
+    .line 617
     return-object v1
 .end method
 
 .method public getHandler()Landroid/os/Handler;
     .locals 1
 
-    .line 187
+    .line 240
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mHandler:Landroid/os/Handler;
 
     return-object v0
@@ -2549,7 +2388,7 @@
 .method public getSubscriptionsChangeListener()Landroid/telephony/SubscriptionManager$OnSubscriptionsChangedListener;
     .locals 1
 
-    .line 739
+    .line 765
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mOnSubscriptionsChangeListener:Landroid/telephony/SubscriptionManager$OnSubscriptionsChangedListener;
 
     return-object v0
@@ -2564,14 +2403,14 @@
     .param p5, "intVal"    # I
     .param p6, "strVal"    # Ljava/lang/String;
 
-    .line 455
+    .line 535
     move-object v1, p0
 
     invoke-static {}, Lorg/codeaurora/telephony/utils/SomeArgs;->obtain()Lorg/codeaurora/telephony/utils/SomeArgs;
 
     move-result-object v2
 
-    .line 457
+    .line 537
     .local v2, "request":Lorg/codeaurora/telephony/utils/SomeArgs;
     :try_start_0
     invoke-static {p2}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -2580,7 +2419,7 @@
 
     iput-object v0, v2, Lorg/codeaurora/telephony/utils/SomeArgs;->arg1:Ljava/lang/Object;
 
-    .line 458
+    .line 538
     iget-object v3, v1, Lorg/codeaurora/ims/ImsConfigImpl;->mCi:Lorg/codeaurora/ims/ImsSenderRxr;
 
     invoke-static {p2}, Lorg/codeaurora/ims/ImsCallUtils;->convertImsConfigToImsConfigItem(I)I
@@ -2594,7 +2433,7 @@
     .catch Ljava/lang/IllegalArgumentException; {:try_start_0 .. :try_end_0} :catch_2
     .catchall {:try_start_0 .. :try_end_0} :catchall_1
 
-    .line 460
+    .line 540
     move v11, p3
 
     :try_start_1
@@ -2602,7 +2441,7 @@
 
     move-result-object v10
 
-    .line 458
+    .line 538
     move v4, p1
 
     move/from16 v6, p4
@@ -2613,13 +2452,13 @@
 
     invoke-virtual/range {v3 .. v10}, Lorg/codeaurora/ims/ImsSenderRxr;->sendConfigRequest(IIZILjava/lang/String;ILandroid/os/Message;)V
 
-    .line 462
+    .line 542
     monitor-enter v2
     :try_end_1
     .catch Ljava/lang/IllegalArgumentException; {:try_start_1 .. :try_end_1} :catch_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_2
 
-    .line 463
+    .line 543
     :goto_0
     :try_start_2
     iget-object v0, v2, Lorg/codeaurora/telephony/utils/SomeArgs;->arg2:Ljava/lang/Object;
@@ -2628,32 +2467,32 @@
 
     if-nez v0, :cond_0
 
-    .line 465
+    .line 545
     :try_start_3
     invoke-virtual {v2}, Ljava/lang/Object;->wait()V
     :try_end_3
     .catch Ljava/lang/InterruptedException; {:try_start_3 .. :try_end_3} :catch_0
     .catchall {:try_start_3 .. :try_end_3} :catchall_0
 
-    .line 468
+    .line 548
     :goto_1
     goto :goto_0
 
-    .line 466
+    .line 546
     :catch_0
     move-exception v0
 
     goto :goto_1
 
-    .line 470
+    .line 550
     :cond_0
     :try_start_4
     monitor-exit v2
 
-    .line 474
+    .line 554
     return-object v2
 
-    .line 470
+    .line 550
     :catchall_0
     move-exception v0
 
@@ -2675,7 +2514,7 @@
     .catch Ljava/lang/IllegalArgumentException; {:try_start_5 .. :try_end_5} :catch_1
     .catchall {:try_start_5 .. :try_end_5} :catchall_2
 
-    .line 471
+    .line 551
     .restart local v2    # "request":Lorg/codeaurora/telephony/utils/SomeArgs;
     .restart local p0    # "this":Lorg/codeaurora/ims/ImsConfigImpl;
     .restart local p1    # "requestType":I
@@ -2689,7 +2528,7 @@
 
     goto :goto_2
 
-    .line 474
+    .line 554
     :catchall_1
     move-exception v0
 
@@ -2697,13 +2536,13 @@
 
     goto :goto_3
 
-    .line 471
+    .line 551
     :catch_2
     move-exception v0
 
     move v11, p3
 
-    .line 472
+    .line 552
     .local v0, "e":Ljava/lang/IllegalArgumentException;
     :goto_2
     const/4 v3, -0x1
@@ -2717,7 +2556,7 @@
     :try_end_6
     .catchall {:try_start_6 .. :try_end_6} :catchall_2
 
-    .line 474
+    .line 554
     .end local v0    # "e":Ljava/lang/IllegalArgumentException;
     return-object v2
 
@@ -2733,7 +2572,7 @@
     .param p1, "item"    # I
     .param p2, "value"    # I
 
-    .line 603
+    .line 640
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -2756,24 +2595,24 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->d(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 604
+    .line 641
     iget-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mCi:Lorg/codeaurora/ims/ImsSenderRxr;
 
-    .line 605
+    .line 642
     invoke-static {p1}, Lorg/codeaurora/ims/ImsCallUtils;->convertImsConfigToImsConfigItem(I)I
 
     move-result v3
 
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mRequestHandler:Landroid/os/Handler;
 
-    .line 607
+    .line 644
     const/16 v2, 0x64
 
     invoke-virtual {v0, v2, p1, p2}, Landroid/os/Handler;->obtainMessage(III)Landroid/os/Message;
 
     move-result-object v8
 
-    .line 604
+    .line 641
     const/16 v2, 0x2c
 
     const/4 v4, 0x0
@@ -2786,7 +2625,7 @@
 
     invoke-virtual/range {v1 .. v8}, Lorg/codeaurora/ims/ImsSenderRxr;->sendConfigRequest(IIZILjava/lang/String;ILandroid/os/Message;)V
 
-    .line 608
+    .line 645
     return-void
 .end method
 
@@ -2804,7 +2643,7 @@
         }
     .end annotation
 
-    .line 732
+    .line 758
     .local p1, "capabilityStatusList":Ljava/util/ArrayList;, "Ljava/util/ArrayList<Lorg/codeaurora/ims/CapabilityStatus;>;"
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
 
@@ -2814,7 +2653,7 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 733
+    .line 759
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mCi:Lorg/codeaurora/ims/ImsSenderRxr;
 
     iget-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mHandler:Landroid/os/Handler;
@@ -2829,16 +2668,16 @@
 
     invoke-virtual {v0, v1, p1, v2}, Lorg/codeaurora/ims/ImsSenderRxr;->setServiceStatus(Landroid/os/Message;Ljava/util/ArrayList;I)V
 
-    .line 735
+    .line 761
     return-void
 .end method
 
 .method public setConfig(II)I
-    .locals 4
+    .locals 3
     .param p1, "item"    # I
     .param p2, "value"    # I
 
-    .line 619
+    .line 656
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -2861,7 +2700,7 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->d(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 620
+    .line 657
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.MODIFY_PHONE_STATE"
@@ -2870,74 +2709,51 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 625
+    .line 662
     const/4 v0, 0x1
 
     const/16 v1, 0x1a
 
     if-ne p1, v1, :cond_0
 
-    .line 626
+    .line 663
     const-string v1, "Ignore VoWiFi Roaming enable/disable"
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->w(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 627
+    .line 664
     return v0
 
-    .line 631
+    .line 668
     :cond_0
-    const/16 v1, 0x47
+    const/16 v1, 0x46
 
     if-ne p1, v1, :cond_1
 
-    .line 632
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mServiceSub:Lorg/codeaurora/ims/ImsServiceSub;
+    .line 669
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mConfigOem:Lorg/codeaurora/ims/ImsConfigImplOem;
 
-    iget-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
-
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->getPhoneId()I
-
-    move-result v2
-
-    invoke-static {v0, v1, v2}, Lorg/codeaurora/ims/ImsConfigImplOem;->getInstance(Lorg/codeaurora/ims/ImsServiceSub;Landroid/content/Context;I)Lorg/codeaurora/ims/ImsConfigImplOem;
-
-    move-result-object v0
-
-    .line 633
     invoke-virtual {v0, p2}, Lorg/codeaurora/ims/ImsConfigImplOem;->setTVolteHysTimer(I)I
 
     move-result v0
 
-    .line 632
     return v0
 
-    .line 634
+    .line 670
     :cond_1
-    const/16 v1, 0x4a
+    const/16 v1, 0x49
 
     if-ne p1, v1, :cond_2
 
-    .line 635
-    iget-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mServiceSub:Lorg/codeaurora/ims/ImsServiceSub;
+    .line 671
+    iget-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mConfigOem:Lorg/codeaurora/ims/ImsConfigImplOem;
 
-    iget-object v2, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
-
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->getPhoneId()I
-
-    move-result v3
-
-    invoke-static {v1, v2, v3}, Lorg/codeaurora/ims/ImsConfigImplOem;->getInstance(Lorg/codeaurora/ims/ImsServiceSub;Landroid/content/Context;I)Lorg/codeaurora/ims/ImsConfigImplOem;
-
-    move-result-object v1
-
-    .line 636
     invoke-virtual {v1}, Lorg/codeaurora/ims/ImsConfigImplOem;->updateImsSupportedServicesAndNotify()V
 
-    .line 637
+    .line 672
     return v0
 
-    .line 641
+    .line 676
     :cond_2
     invoke-static {p1, v0}, Lorg/codeaurora/ims/ImsCallUtils;->isConfigRequestValid(II)Z
 
@@ -2945,15 +2761,15 @@
 
     if-nez v1, :cond_3
 
-    .line 642
+    .line 677
     const-string v1, "Invalid API request for item"
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 643
+    .line 678
     return v0
 
-    .line 653
+    .line 688
     :cond_3
     const/16 v1, 0x1b
 
@@ -2961,33 +2777,33 @@
 
     iget-object v2, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mServiceSub:Lorg/codeaurora/ims/ImsServiceSub;
 
-    .line 654
+    .line 689
     invoke-virtual {v2}, Lorg/codeaurora/ims/ImsServiceSub;->IsWfcRoamingConfigurationSupportedByModem()Z
 
     move-result v2
 
     if-eqz v2, :cond_4
 
-    .line 655
+    .line 690
     const-string v1, "VoWiFi mode: config update is done only when mode preference is changed or when sim is loaded"
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->w(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 657
+    .line 692
     return v0
 
-    .line 661
+    .line 696
     :cond_4
     if-ne p1, v1, :cond_5
 
-    .line 662
+    .line 697
     invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->shouldAdjustVoWiFiMode()Z
 
     move-result v1
 
     if-eqz v1, :cond_5
 
-    .line 663
+    .line 698
     new-instance v1, Ljava/lang/StringBuilder;
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
@@ -3010,25 +2826,25 @@
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->v(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 664
+    .line 699
     invoke-direct {p0, p2}, Lorg/codeaurora/ims/ImsConfigImpl;->adjustVoWiFiMode(I)I
 
     move-result p2
 
-    .line 665
+    .line 700
     const/4 v1, -0x1
 
     if-ne p2, v1, :cond_5
 
-    .line 666
+    .line 701
     const-string v1, "Inappropriate network, no need to set WFC mode!"
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 667
+    .line 702
     return v0
 
-    .line 672
+    .line 707
     :cond_5
     invoke-direct {p0, p1, p2}, Lorg/codeaurora/ims/ImsConfigImpl;->sendSetConfigRequest(II)I
 
@@ -3042,39 +2858,71 @@
     .param p1, "item"    # I
     .param p2, "value"    # Ljava/lang/String;
 
-    .line 685
-    new-instance v0, Ljava/lang/StringBuilder;
-
-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+    .line 721
+    const-string v0, " value="
 
     const-string v1, "setConfig :: item="
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    const/16 v2, 0x48
 
-    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    if-ne p1, v2, :cond_0
 
-    const-string v1, " value="
+    .line 722
+    new-instance v3, Ljava/lang/StringBuilder;
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
 
-    invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {v3, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v3, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-static {p2}, Lcom/qualcomm/ims/utils/Log;->pii(Ljava/lang/Object;)Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-virtual {v3, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
     move-result-object v0
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->d(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 686
+    goto :goto_0
+
+    .line 724
+    :cond_0
+    new-instance v3, Ljava/lang/StringBuilder;
+
+    invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
+
+    invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v3, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v3, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v3, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->d(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 727
+    :goto_0
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.MODIFY_PHONE_STATE"
 
-    const-string v2, "setConfig"
+    const-string v3, "setConfig"
 
-    invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
+    invoke-virtual {v0, v1, v3}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 687
+    .line 728
     const/4 v0, 0x2
 
     invoke-static {p1, v0}, Lorg/codeaurora/ims/ImsCallUtils;->isConfigRequestValid(II)Z
@@ -3083,74 +2931,64 @@
 
     const/4 v1, 0x1
 
-    if-nez v0, :cond_0
+    if-nez v0, :cond_1
 
-    .line 688
+    .line 729
     const-string v0, "Invalid API request for item"
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 689
+    .line 730
     return v1
 
-    .line 693
-    :cond_0
+    .line 734
+    :cond_1
     const/16 v0, 0xc
 
-    if-ne p1, v0, :cond_1
+    if-ne p1, v0, :cond_2
 
-    .line 694
+    .line 735
     const-string v0, "ProvisioningManager.KEY_REGISTRATION_DOMAIN_NAME: value can\'t be changed"
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->w(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 695
+    .line 736
     return v1
 
-    .line 700
-    :cond_1
-    const/16 v0, 0x49
+    .line 741
+    :cond_2
+    if-ne p1, v2, :cond_3
 
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
+    .line 742
+    new-instance v0, Ljava/lang/StringBuilder;
 
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->getPhoneId()I
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
 
-    move-result v1
+    const-string v1, "setProvisionedStringValue WIFI_MDN set db value="
 
-    invoke-static {p0, v0, v1}, Lorg/codeaurora/ims/ImsConfigImplCache;->getInstance(Lorg/codeaurora/ims/ImsConfigImpl;Landroid/content/Context;I)Lorg/codeaurora/ims/ImsConfigImplCache;
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
-    .line 709
-    invoke-virtual {v0, p1}, Lorg/codeaurora/ims/ImsConfigImplCache;->getImsConfig(I)Ljava/lang/String;
-
-    move-result-object v0
-
-    .line 710
-    .local v0, "prev_value":Ljava/lang/String;
-    new-instance v1, Ljava/lang/StringBuilder;
-
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v2, "setProvisionedStringValue item="
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    const-string v2, ", prev_value="
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-static {p2}, Lcom/qualcomm/ims/utils/Log;->pii(Ljava/lang/Object;)Ljava/lang/String;
 
     move-result-object v1
 
-    invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->d(Ljava/lang/Object;Ljava/lang/String;)V
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    .line 713
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 743
+    iget v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mSubId:I
+
+    const-string v1, "wfc_ims_mdn"
+
+    invoke-static {v0, v1, p2}, Landroid/telephony/SubscriptionManager;->setSubscriptionProperty(ILjava/lang/String;Ljava/lang/String;)V
+
+    .line 748
+    :cond_3
     const/16 v3, 0x2c
 
     const/4 v5, 0x1
@@ -3167,59 +3005,36 @@
 
     invoke-virtual/range {v2 .. v8}, Lorg/codeaurora/ims/ImsConfigImpl;->sendRequest(IIIZILjava/lang/String;)Ljava/lang/Object;
 
-    move-result-object v1
+    move-result-object v0
 
-    check-cast v1, Lorg/codeaurora/telephony/utils/SomeArgs;
+    check-cast v0, Lorg/codeaurora/telephony/utils/SomeArgs;
 
-    .line 715
-    .local v1, "result":Lorg/codeaurora/telephony/utils/SomeArgs;
-    iget-object v2, v1, Lorg/codeaurora/telephony/utils/SomeArgs;->arg2:Ljava/lang/Object;
+    .line 750
+    .local v0, "result":Lorg/codeaurora/telephony/utils/SomeArgs;
+    iget-object v1, v0, Lorg/codeaurora/telephony/utils/SomeArgs;->arg2:Ljava/lang/Object;
 
-    check-cast v2, Ljava/lang/Integer;
+    check-cast v1, Ljava/lang/Integer;
 
-    invoke-virtual {v2}, Ljava/lang/Integer;->intValue()I
+    invoke-virtual {v1}, Ljava/lang/Integer;->intValue()I
 
-    move-result v2
+    move-result v1
 
-    .line 716
-    .local v2, "retVal":I
-    invoke-virtual {v1}, Lorg/codeaurora/telephony/utils/SomeArgs;->recycle()V
+    .line 751
+    .local v1, "retVal":I
+    invoke-virtual {v0}, Lorg/codeaurora/telephony/utils/SomeArgs;->recycle()V
 
-    .line 719
-    if-nez v2, :cond_3
+    .line 752
+    invoke-direct {p0, p1, p2, v1}, Lorg/codeaurora/ims/ImsConfigImpl;->logImsConfigChangedCheckin(ILjava/lang/String;I)V
 
-    .line 720
-    const-string v3, "setConfig broadcasting"
-
-    invoke-static {p0, v3}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
-
-    .line 722
-    iget-object v3, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
-
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->getPhoneId()I
-
-    move-result v4
-
-    invoke-static {p0, v3, v4}, Lorg/codeaurora/ims/ImsConfigImplCache;->getInstance(Lorg/codeaurora/ims/ImsConfigImpl;Landroid/content/Context;I)Lorg/codeaurora/ims/ImsConfigImplCache;
-
-    move-result-object v3
-
-    .line 723
-    invoke-virtual {v3, p1, p2}, Lorg/codeaurora/ims/ImsConfigImplCache;->setImsConfig(ILjava/lang/String;)V
-
-    .line 726
-    :cond_3
-    invoke-direct {p0, p1, p2, v2}, Lorg/codeaurora/ims/ImsConfigImpl;->logImsConfigChangedCheckin(ILjava/lang/String;I)V
-
-    .line 727
-    return v2
+    .line 753
+    return v1
 .end method
 
 .method public updateWFCMode(Z)I
     .locals 6
     .param p1, "isRoamingMode"    # Z
 
-    .line 265
+    .line 348
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -3244,7 +3059,7 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->d(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 266
+    .line 349
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mContext:Landroid/content/Context;
 
     const-string v1, "android.permission.MODIFY_PHONE_STATE"
@@ -3253,10 +3068,10 @@
 
     invoke-virtual {v0, v1, v2}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 267
+    .line 350
     invoke-direct {p0, v2}, Lorg/codeaurora/ims/ImsConfigImpl;->enforceReadPhoneState(Ljava/lang/String;)V
 
-    .line 270
+    .line 353
     const/4 v0, 0x1
 
     :try_start_0
@@ -3264,11 +3079,9 @@
 
     if-eqz v1, :cond_5
 
-    iget-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mSubscriptionManager:Landroid/telephony/SubscriptionManager;
-
     iget v2, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mSubId:I
 
-    .line 271
+    .line 354
     invoke-virtual {v1, v2}, Landroid/telephony/SubscriptionManager;->isActiveSubscriptionId(I)Z
 
     move-result v1
@@ -3277,21 +3090,21 @@
 
     goto :goto_1
 
-    .line 276
+    .line 359
     :cond_0
     iget-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mImsMmTelManager:Landroid/telephony/ims/ImsMmTelManager;
 
     if-nez v1, :cond_1
 
-    .line 277
+    .line 360
     const-string v1, "updateWFCMode: mImsMmTelManager null"
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->w(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 278
+    .line 361
     return v0
 
-    .line 281
+    .line 364
     :cond_1
     iget-object v1, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mServiceSub:Lorg/codeaurora/ims/ImsServiceSub;
 
@@ -3301,22 +3114,22 @@
 
     if-nez v1, :cond_2
 
-    .line 282
+    .line 365
     const-string v1, "Modem do not support WFC roaming config"
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 283
+    .line 366
     return v0
 
-    .line 287
+    .line 370
     :cond_2
     if-eqz p1, :cond_3
 
-    .line 288
+    .line 371
     const/16 v1, 0x3eb
 
-    .line 289
+    .line 372
     .local v1, "item":I
     iget-object v2, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mImsMmTelManager:Landroid/telephony/ims/ImsMmTelManager;
 
@@ -3327,13 +3140,13 @@
     .local v2, "value":I
     goto :goto_0
 
-    .line 291
+    .line 374
     .end local v1    # "item":I
     .end local v2    # "value":I
     :cond_3
     const/16 v1, 0x1b
 
-    .line 292
+    .line 375
     .restart local v1    # "item":I
     iget-object v2, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mImsMmTelManager:Landroid/telephony/ims/ImsMmTelManager;
 
@@ -3341,7 +3154,7 @@
 
     move-result v2
 
-    .line 296
+    .line 379
     .restart local v2    # "value":I
     :goto_0
     invoke-direct {p0}, Lorg/codeaurora/ims/ImsConfigImpl;->shouldAdjustVoWiFiMode()Z
@@ -3352,7 +3165,7 @@
 
     if-eqz v3, :cond_4
 
-    .line 297
+    .line 380
     new-instance v3, Ljava/lang/StringBuilder;
 
     invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
@@ -3375,37 +3188,37 @@
 
     invoke-static {p0, v3}, Lcom/qualcomm/ims/utils/Log;->v(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 298
+    .line 381
     invoke-direct {p0, v2}, Lorg/codeaurora/ims/ImsConfigImpl;->adjustVoWiFiMode(I)I
 
     move-result v3
 
     move v2, v3
 
-    .line 299
+    .line 382
     if-ne v2, v4, :cond_4
 
-    .line 300
+    .line 383
     const-string v3, "Inappropriate network, no need to set WFC mode!"
 
     invoke-static {p0, v3}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 301
+    .line 384
     return v0
 
-    .line 306
+    .line 389
     :cond_4
     invoke-virtual {p0, v1, v2}, Lorg/codeaurora/ims/ImsConfigImpl;->sendSetConfigRequestAsync(II)V
 
-    .line 310
+    .line 393
     .end local v1    # "item":I
     .end local v2    # "value":I
     nop
 
-    .line 311
+    .line 394
     return v4
 
-    .line 272
+    .line 355
     :cond_5
     :goto_1
     new-instance v1, Ljava/lang/StringBuilder;
@@ -3428,14 +3241,14 @@
     :try_end_0
     .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 273
+    .line 356
     return v0
 
-    .line 307
+    .line 390
     :catch_0
     move-exception v1
 
-    .line 308
+    .line 391
     .local v1, "e":Ljava/lang/Exception;
     new-instance v2, Ljava/lang/StringBuilder;
 
@@ -3455,14 +3268,14 @@
 
     invoke-static {p0, v2}, Lcom/qualcomm/ims/utils/Log;->w(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 309
+    .line 392
     return v0
 .end method
 
 .method public updateWfcModeConfigurationsToModem()V
     .locals 2
 
-    .line 254
+    .line 337
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -3481,7 +3294,7 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->d(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 256
+    .line 339
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigImpl;->mServiceSub:Lorg/codeaurora/ims/ImsServiceSub;
 
     invoke-virtual {v0}, Lorg/codeaurora/ims/ImsServiceSub;->IsWfcRoamingConfigurationSupportedByModem()Z
@@ -3498,17 +3311,17 @@
 
     if-eqz v0, :cond_0
 
-    .line 258
+    .line 341
     const/4 v0, 0x0
 
     invoke-virtual {p0, v0}, Lorg/codeaurora/ims/ImsConfigImpl;->updateWFCMode(Z)I
 
-    .line 259
+    .line 342
     const/4 v0, 0x1
 
     invoke-virtual {p0, v0}, Lorg/codeaurora/ims/ImsConfigImpl;->updateWFCMode(Z)I
 
-    .line 261
+    .line 344
     :cond_0
     return-void
 .end method

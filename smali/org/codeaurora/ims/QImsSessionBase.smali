@@ -37,14 +37,14 @@
 
 
 # direct methods
-.method public constructor <init>(Landroid/content/Context;Lorg/codeaurora/ims/ImsSenderRxr;ILorg/codeaurora/ims/ImsServiceClassTracker;)V
+.method protected constructor <init>(Landroid/content/Context;Lorg/codeaurora/ims/ImsSenderRxr;ILorg/codeaurora/ims/ImsServiceClassTracker;)V
     .locals 6
     .param p1, "context"    # Landroid/content/Context;
     .param p2, "senderRxr"    # Lorg/codeaurora/ims/ImsSenderRxr;
     .param p3, "phoneId"    # I
     .param p4, "tracker"    # Lorg/codeaurora/ims/ImsServiceClassTracker;
 
-    .line 88
+    .line 87
     new-instance v5, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;
 
     invoke-direct {v5}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;-><init>()V
@@ -61,11 +61,11 @@
 
     invoke-direct/range {v0 .. v5}, Lorg/codeaurora/ims/QImsSessionBase;-><init>(Landroid/content/Context;Lorg/codeaurora/ims/ImsSenderRxr;ILorg/codeaurora/ims/ImsServiceClassTracker;Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;)V
 
-    .line 89
+    .line 88
     return-void
 .end method
 
-.method private constructor <init>(Landroid/content/Context;Lorg/codeaurora/ims/ImsSenderRxr;ILorg/codeaurora/ims/ImsServiceClassTracker;Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;)V
+.method protected constructor <init>(Landroid/content/Context;Lorg/codeaurora/ims/ImsSenderRxr;ILorg/codeaurora/ims/ImsServiceClassTracker;Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;)V
     .locals 1
     .param p1, "context"    # Landroid/content/Context;
     .param p2, "senderRxr"    # Lorg/codeaurora/ims/ImsSenderRxr;
@@ -73,7 +73,7 @@
     .param p4, "tracker"    # Lorg/codeaurora/ims/ImsServiceClassTracker;
     .param p5, "handler"    # Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;
 
-    .line 93
+    .line 92
     invoke-direct {p0}, Landroid/telephony/ims/stub/ImsCallSessionImplBase;-><init>()V
 
     .line 41
@@ -98,22 +98,22 @@
 
     iput-object v0, p0, Lorg/codeaurora/ims/QImsSessionBase;->mListeners:Ljava/util/List;
 
-    .line 94
+    .line 93
     iput-object p2, p0, Lorg/codeaurora/ims/QImsSessionBase;->mCi:Lorg/codeaurora/ims/ImsSenderRxr;
 
-    .line 95
+    .line 94
     iput-object p1, p0, Lorg/codeaurora/ims/QImsSessionBase;->mContext:Landroid/content/Context;
 
-    .line 96
+    .line 95
     iput-object p4, p0, Lorg/codeaurora/ims/QImsSessionBase;->mTracker:Lorg/codeaurora/ims/ImsServiceClassTracker;
 
-    .line 97
+    .line 96
     iput p3, p0, Lorg/codeaurora/ims/QImsSessionBase;->mPhoneId:I
 
-    .line 98
+    .line 97
     iput-object p5, p0, Lorg/codeaurora/ims/QImsSessionBase;->mCallbackHandler:Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;
 
-    .line 99
+    .line 98
     return-void
 .end method
 
@@ -123,7 +123,7 @@
     .locals 3
     .param p1, "listener"    # Lorg/codeaurora/ims/QImsSessionBase$Listener;
 
-    .line 128
+    .line 127
     invoke-virtual {p0}, Lorg/codeaurora/ims/QImsSessionBase;->isSessionValid()Z
 
     move-result v0
@@ -132,16 +132,16 @@
 
     return-void
 
-    .line 130
+    .line 129
     :cond_0
     if-eqz p1, :cond_2
 
-    .line 136
+    .line 135
     iget-object v0, p0, Lorg/codeaurora/ims/QImsSessionBase;->mListeners:Ljava/util/List;
 
     monitor-enter v0
 
-    .line 137
+    .line 136
     :try_start_0
     iget-object v1, p0, Lorg/codeaurora/ims/QImsSessionBase;->mListeners:Ljava/util/List;
 
@@ -151,14 +151,14 @@
 
     if-nez v1, :cond_1
 
-    .line 138
+    .line 137
     iget-object v1, p0, Lorg/codeaurora/ims/QImsSessionBase;->mListeners:Ljava/util/List;
 
     invoke-interface {v1, p1}, Ljava/util/List;->add(Ljava/lang/Object;)Z
 
     goto :goto_0
 
-    .line 140
+    .line 139
     :cond_1
     new-instance v1, Ljava/lang/StringBuilder;
 
@@ -176,14 +176,14 @@
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 142
+    .line 141
     :goto_0
     monitor-exit v0
 
-    .line 143
+    .line 142
     return-void
 
-    .line 142
+    .line 141
     :catchall_0
     move-exception v1
 
@@ -193,7 +193,7 @@
 
     throw v1
 
-    .line 131
+    .line 130
     :cond_2
     new-instance v0, Ljava/lang/IllegalArgumentException;
 
@@ -204,10 +204,31 @@
     throw v0
 .end method
 
+.method public getState()I
+    .locals 1
+
+    .line 243
+    invoke-virtual {p0}, Lorg/codeaurora/ims/QImsSessionBase;->isSessionValid()Z
+
+    move-result v0
+
+    if-nez v0, :cond_0
+
+    const/4 v0, -0x1
+
+    return v0
+
+    .line 244
+    :cond_0
+    iget v0, p0, Lorg/codeaurora/ims/QImsSessionBase;->mState:I
+
+    return v0
+.end method
+
 .method public isSessionValid()Z
     .locals 2
 
-    .line 231
+    .line 229
     iget v0, p0, Lorg/codeaurora/ims/QImsSessionBase;->mState:I
 
     const/4 v1, -0x1
@@ -221,17 +242,17 @@
     :cond_0
     const/4 v0, 0x0
 
-    .line 232
+    .line 230
     .local v0, "isValid":Z
     :goto_0
     if-nez v0, :cond_1
 
-    .line 233
+    .line 231
     const-string v1, "Session is closed"
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 235
+    .line 233
     :cond_1
     return v0
 .end method
@@ -240,7 +261,7 @@
     .locals 3
     .param p1, "callModify"    # Lorg/codeaurora/ims/CallModify;
 
-    .line 195
+    .line 194
     invoke-virtual {p0}, Lorg/codeaurora/ims/QImsSessionBase;->isSessionValid()Z
 
     move-result v0
@@ -249,13 +270,13 @@
 
     return-void
 
-    .line 196
+    .line 195
     :cond_0
     iget-object v0, p0, Lorg/codeaurora/ims/QImsSessionBase;->mListeners:Ljava/util/List;
 
     monitor-enter v0
 
-    .line 197
+    .line 196
     :try_start_0
     iget-object v1, p0, Lorg/codeaurora/ims/QImsSessionBase;->mListeners:Ljava/util/List;
 
@@ -276,22 +297,22 @@
 
     check-cast v2, Lorg/codeaurora/ims/QImsSessionBase$Listener;
 
-    .line 198
+    .line 197
     .local v2, "l":Lorg/codeaurora/ims/QImsSessionBase$Listener;
     invoke-interface {v2, p0, p1}, Lorg/codeaurora/ims/QImsSessionBase$Listener;->onCallModifyInitiated(Lorg/codeaurora/ims/QImsSessionBase;Lorg/codeaurora/ims/CallModify;)V
 
-    .line 199
+    .line 198
     .end local v2    # "l":Lorg/codeaurora/ims/QImsSessionBase$Listener;
     goto :goto_0
 
-    .line 200
+    .line 199
     :cond_1
     monitor-exit v0
 
-    .line 201
+    .line 200
     return-void
 
-    .line 200
+    .line 199
     :catchall_0
     move-exception v1
 
@@ -306,7 +327,7 @@
     .locals 3
     .param p1, "callType"    # I
 
-    .line 204
+    .line 203
     invoke-virtual {p0}, Lorg/codeaurora/ims/QImsSessionBase;->isSessionValid()Z
 
     move-result v0
@@ -315,13 +336,13 @@
 
     return-void
 
-    .line 205
+    .line 204
     :cond_0
     iget-object v0, p0, Lorg/codeaurora/ims/QImsSessionBase;->mListeners:Ljava/util/List;
 
     monitor-enter v0
 
-    .line 206
+    .line 205
     :try_start_0
     iget-object v1, p0, Lorg/codeaurora/ims/QImsSessionBase;->mListeners:Ljava/util/List;
 
@@ -342,22 +363,22 @@
 
     check-cast v2, Lorg/codeaurora/ims/QImsSessionBase$Listener;
 
-    .line 207
+    .line 206
     .local v2, "l":Lorg/codeaurora/ims/QImsSessionBase$Listener;
     invoke-interface {v2, p0, p1}, Lorg/codeaurora/ims/QImsSessionBase$Listener;->onCallTypeChanging(Lorg/codeaurora/ims/QImsSessionBase;I)V
 
-    .line 208
+    .line 207
     .end local v2    # "l":Lorg/codeaurora/ims/QImsSessionBase$Listener;
     goto :goto_0
 
-    .line 209
+    .line 208
     :cond_1
     monitor-exit v0
 
-    .line 210
+    .line 209
     return-void
 
-    .line 209
+    .line 208
     :catchall_0
     move-exception v1
 
@@ -368,15 +389,15 @@
     throw v1
 .end method
 
-.method protected notifySessionActive()V
+.method public notifySessionActive()V
     .locals 3
 
-    .line 214
+    .line 212
     iget-object v0, p0, Lorg/codeaurora/ims/QImsSessionBase;->mListeners:Ljava/util/List;
 
     monitor-enter v0
 
-    .line 215
+    .line 213
     :try_start_0
     iget-object v1, p0, Lorg/codeaurora/ims/QImsSessionBase;->mListeners:Ljava/util/List;
 
@@ -397,22 +418,22 @@
 
     check-cast v2, Lorg/codeaurora/ims/QImsSessionBase$Listener;
 
-    .line 216
+    .line 214
     .local v2, "l":Lorg/codeaurora/ims/QImsSessionBase$Listener;
     invoke-interface {v2, p0}, Lorg/codeaurora/ims/QImsSessionBase$Listener;->onActive(Lorg/codeaurora/ims/QImsSessionBase;)V
 
-    .line 217
+    .line 215
     .end local v2    # "l":Lorg/codeaurora/ims/QImsSessionBase$Listener;
     goto :goto_0
 
-    .line 218
+    .line 216
     :cond_0
     monitor-exit v0
 
-    .line 219
+    .line 217
     return-void
 
-    .line 218
+    .line 216
     :catchall_0
     move-exception v1
 
@@ -426,12 +447,12 @@
 .method protected notifySessionClosed()V
     .locals 3
 
-    .line 177
+    .line 176
     iget-object v0, p0, Lorg/codeaurora/ims/QImsSessionBase;->mListeners:Ljava/util/List;
 
     monitor-enter v0
 
-    .line 178
+    .line 177
     :try_start_0
     iget-object v1, p0, Lorg/codeaurora/ims/QImsSessionBase;->mListeners:Ljava/util/List;
 
@@ -452,22 +473,22 @@
 
     check-cast v2, Lorg/codeaurora/ims/QImsSessionBase$Listener;
 
-    .line 179
+    .line 178
     .local v2, "l":Lorg/codeaurora/ims/QImsSessionBase$Listener;
     invoke-interface {v2, p0}, Lorg/codeaurora/ims/QImsSessionBase$Listener;->onClosed(Lorg/codeaurora/ims/QImsSessionBase;)V
 
-    .line 180
+    .line 179
     .end local v2    # "l":Lorg/codeaurora/ims/QImsSessionBase$Listener;
     goto :goto_0
 
-    .line 181
+    .line 180
     :cond_0
     monitor-exit v0
 
-    .line 182
+    .line 181
     return-void
 
-    .line 181
+    .line 180
     :catchall_0
     move-exception v1
 
@@ -481,12 +502,12 @@
 .method protected notifySessionDisconnected()V
     .locals 3
 
-    .line 169
+    .line 168
     iget-object v0, p0, Lorg/codeaurora/ims/QImsSessionBase;->mListeners:Ljava/util/List;
 
     monitor-enter v0
 
-    .line 170
+    .line 169
     :try_start_0
     iget-object v1, p0, Lorg/codeaurora/ims/QImsSessionBase;->mListeners:Ljava/util/List;
 
@@ -507,22 +528,22 @@
 
     check-cast v2, Lorg/codeaurora/ims/QImsSessionBase$Listener;
 
-    .line 171
+    .line 170
     .local v2, "l":Lorg/codeaurora/ims/QImsSessionBase$Listener;
     invoke-interface {v2, p0}, Lorg/codeaurora/ims/QImsSessionBase$Listener;->onDisconnected(Lorg/codeaurora/ims/QImsSessionBase;)V
 
-    .line 172
+    .line 171
     .end local v2    # "l":Lorg/codeaurora/ims/QImsSessionBase$Listener;
     goto :goto_0
 
-    .line 173
+    .line 172
     :cond_0
     monitor-exit v0
 
-    .line 174
+    .line 173
     return-void
 
-    .line 173
+    .line 172
     :catchall_0
     move-exception v1
 
@@ -533,15 +554,15 @@
     throw v1
 .end method
 
-.method protected notifySessionHold()V
+.method public notifySessionHold()V
     .locals 3
 
-    .line 222
+    .line 220
     iget-object v0, p0, Lorg/codeaurora/ims/QImsSessionBase;->mListeners:Ljava/util/List;
 
     monitor-enter v0
 
-    .line 223
+    .line 221
     :try_start_0
     iget-object v1, p0, Lorg/codeaurora/ims/QImsSessionBase;->mListeners:Ljava/util/List;
 
@@ -562,22 +583,22 @@
 
     check-cast v2, Lorg/codeaurora/ims/QImsSessionBase$Listener;
 
-    .line 224
+    .line 222
     .local v2, "l":Lorg/codeaurora/ims/QImsSessionBase$Listener;
     invoke-interface {v2, p0}, Lorg/codeaurora/ims/QImsSessionBase$Listener;->onHold(Lorg/codeaurora/ims/QImsSessionBase;)V
 
-    .line 225
+    .line 223
     .end local v2    # "l":Lorg/codeaurora/ims/QImsSessionBase$Listener;
     goto :goto_0
 
-    .line 226
+    .line 224
     :cond_0
     monitor-exit v0
 
-    .line 227
+    .line 225
     return-void
 
-    .line 226
+    .line 224
     :catchall_0
     move-exception v1
 
@@ -592,7 +613,7 @@
     .locals 3
     .param p1, "callModify"    # Lorg/codeaurora/ims/CallModify;
 
-    .line 185
+    .line 184
     invoke-virtual {p0}, Lorg/codeaurora/ims/QImsSessionBase;->isSessionValid()Z
 
     move-result v0
@@ -601,13 +622,13 @@
 
     return-void
 
-    .line 187
+    .line 186
     :cond_0
     iget-object v0, p0, Lorg/codeaurora/ims/QImsSessionBase;->mListeners:Ljava/util/List;
 
     monitor-enter v0
 
-    .line 188
+    .line 187
     :try_start_0
     iget-object v1, p0, Lorg/codeaurora/ims/QImsSessionBase;->mListeners:Ljava/util/List;
 
@@ -628,22 +649,22 @@
 
     check-cast v2, Lorg/codeaurora/ims/QImsSessionBase$Listener;
 
-    .line 189
+    .line 188
     .local v2, "l":Lorg/codeaurora/ims/QImsSessionBase$Listener;
     invoke-interface {v2, p0, p1}, Lorg/codeaurora/ims/QImsSessionBase$Listener;->onUnsolCallModify(Lorg/codeaurora/ims/QImsSessionBase;Lorg/codeaurora/ims/CallModify;)V
 
-    .line 190
+    .line 189
     .end local v2    # "l":Lorg/codeaurora/ims/QImsSessionBase$Listener;
     goto :goto_0
 
-    .line 191
+    .line 190
     :cond_1
     monitor-exit v0
 
-    .line 192
+    .line 191
     return-void
 
-    .line 191
+    .line 190
     :catchall_0
     move-exception v1
 
@@ -658,7 +679,7 @@
     .locals 3
     .param p1, "listener"    # Lorg/codeaurora/ims/QImsSessionBase$Listener;
 
-    .line 151
+    .line 150
     invoke-virtual {p0}, Lorg/codeaurora/ims/QImsSessionBase;->isSessionValid()Z
 
     move-result v0
@@ -667,16 +688,16 @@
 
     return-void
 
-    .line 153
+    .line 152
     :cond_0
     if-eqz p1, :cond_2
 
-    .line 159
+    .line 158
     iget-object v0, p0, Lorg/codeaurora/ims/QImsSessionBase;->mListeners:Ljava/util/List;
 
     monitor-enter v0
 
-    .line 160
+    .line 159
     :try_start_0
     iget-object v1, p0, Lorg/codeaurora/ims/QImsSessionBase;->mListeners:Ljava/util/List;
 
@@ -686,14 +707,14 @@
 
     if-eqz v1, :cond_1
 
-    .line 161
+    .line 160
     iget-object v1, p0, Lorg/codeaurora/ims/QImsSessionBase;->mListeners:Ljava/util/List;
 
     invoke-interface {v1, p1}, Ljava/util/List;->remove(Ljava/lang/Object;)Z
 
     goto :goto_0
 
-    .line 163
+    .line 162
     :cond_1
     new-instance v1, Ljava/lang/StringBuilder;
 
@@ -711,14 +732,14 @@
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 165
+    .line 164
     :goto_0
     monitor-exit v0
 
-    .line 166
+    .line 165
     return-void
 
-    .line 165
+    .line 164
     :catchall_0
     move-exception v1
 
@@ -728,7 +749,7 @@
 
     throw v1
 
-    .line 154
+    .line 153
     :cond_2
     new-instance v0, Ljava/lang/IllegalArgumentException;
 
@@ -743,7 +764,7 @@
     .locals 1
     .param p1, "listener"    # Landroid/telephony/ims/ImsCallSessionListener;
 
-    .line 114
+    .line 113
     invoke-virtual {p0}, Lorg/codeaurora/ims/QImsSessionBase;->isSessionValid()Z
 
     move-result v0
@@ -752,13 +773,13 @@
 
     return-void
 
-    .line 115
+    .line 114
     :cond_0
     iget-object v0, p0, Lorg/codeaurora/ims/QImsSessionBase;->mCallbackHandler:Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;
 
     iput-object p1, v0, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->mListener:Landroid/telephony/ims/ImsCallSessionListener;
 
-    .line 116
+    .line 115
     return-void
 .end method
 
@@ -767,6 +788,6 @@
     .param p1, "isVideo"    # Z
     .param p2, "isVoice"    # Z
 
-    .line 103
+    .line 102
     return-void
 .end method

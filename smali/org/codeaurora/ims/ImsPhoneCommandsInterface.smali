@@ -12,26 +12,6 @@
 
 
 # static fields
-.field public static final CB_FACILITY_BAIC:Ljava/lang/String; = "AI"
-
-.field public static final CB_FACILITY_BAICr:Ljava/lang/String; = "IR"
-
-.field public static final CB_FACILITY_BAOC:Ljava/lang/String; = "AO"
-
-.field public static final CB_FACILITY_BAOIC:Ljava/lang/String; = "OI"
-
-.field public static final CB_FACILITY_BAOICxH:Ljava/lang/String; = "OX"
-
-.field public static final CB_FACILITY_BA_ALL:Ljava/lang/String; = "AB"
-
-.field public static final CB_FACILITY_BA_FD:Ljava/lang/String; = "FD"
-
-.field public static final CB_FACILITY_BA_MO:Ljava/lang/String; = "AG"
-
-.field public static final CB_FACILITY_BA_MT:Ljava/lang/String; = "AC"
-
-.field public static final CB_FACILITY_BA_SIM:Ljava/lang/String; = "SC"
-
 .field public static final CF_ACTION_DISABLE:I = 0x0
 
 .field public static final CF_ACTION_ENABLE:I = 0x1
@@ -39,44 +19,6 @@
 .field public static final CF_ACTION_ERASURE:I = 0x4
 
 .field public static final CF_ACTION_REGISTRATION:I = 0x3
-
-.field public static final CF_REASON_ALL:I = 0x4
-
-.field public static final CF_REASON_ALL_CONDITIONAL:I = 0x5
-
-.field public static final CF_REASON_BUSY:I = 0x1
-
-.field public static final CF_REASON_NOT_REACHABLE:I = 0x3
-
-.field public static final CF_REASON_NO_REPLY:I = 0x2
-
-.field public static final CF_REASON_UNCONDITIONAL:I = 0x0
-
-.field public static final CLIR_DEFAULT:I = 0x0
-
-.field public static final CLIR_INVOCATION:I = 0x1
-
-.field public static final CLIR_SUPPRESSION:I = 0x2
-
-.field public static final SERVICE_CLASS_DATA:I = 0x2
-
-.field public static final SERVICE_CLASS_DATA_ASYNC:I = 0x20
-
-.field public static final SERVICE_CLASS_DATA_SYNC:I = 0x10
-
-.field public static final SERVICE_CLASS_FAX:I = 0x4
-
-.field public static final SERVICE_CLASS_MAX:I = 0x80
-
-.field public static final SERVICE_CLASS_NONE:I = 0x0
-
-.field public static final SERVICE_CLASS_PACKET:I = 0x40
-
-.field public static final SERVICE_CLASS_PAD:I = 0x80
-
-.field public static final SERVICE_CLASS_SMS:I = 0x8
-
-.field public static final SERVICE_CLASS_VOICE:I = 0x1
 
 .field public static final USSD_MODE_LOCAL_CLIENT:I = 0x3
 
@@ -149,6 +91,9 @@
 .method public abstract queryCallForwardStatus(IILjava/lang/String;Landroid/os/Message;)V
 .end method
 
+.method public abstract queryCallForwardStatus(IILjava/lang/String;Landroid/os/Message;Z)V
+.end method
+
 .method public abstract queryCallWaiting(ILandroid/os/Message;)V
 .end method
 
@@ -168,6 +113,9 @@
 .end method
 
 .method public abstract registerForCallStateChanged(Landroid/os/Handler;ILjava/lang/Object;)V
+.end method
+
+.method public abstract registerForConferenceCallStateCompleted(Landroid/os/Handler;ILjava/lang/Object;)V
 .end method
 
 .method public abstract registerForExitEmergencyCallbackMode(Landroid/os/Handler;ILjava/lang/Object;)V
@@ -206,6 +154,12 @@
 .method public abstract registerForRttMessage(Landroid/os/Handler;ILjava/lang/Object;)V
 .end method
 
+.method public abstract registerForSipDtmfInfo(Landroid/os/Handler;ILjava/lang/Object;)V
+.end method
+
+.method public abstract registerForSrvDomainChanged(Landroid/os/Handler;ILjava/lang/Object;)V
+.end method
+
 .method public abstract registerForSrvStatusUpdate(Landroid/os/Handler;ILjava/lang/Object;)V
 .end method
 
@@ -221,7 +175,7 @@
 .method public abstract rejectCall(Landroid/os/Message;)V
 .end method
 
-.method public abstract sendDtmf(CLandroid/os/Message;)V
+.method public abstract sendDtmf(ICLandroid/os/Message;)V
 .end method
 
 .method public abstract setCLIR(ILandroid/os/Message;)V
@@ -275,10 +229,13 @@
 .method public abstract setUiTTYMode(ILandroid/os/Message;)V
 .end method
 
-.method public abstract startDtmf(CLandroid/os/Message;)V
+.method public abstract startDtmf(ICLandroid/os/Message;)V
 .end method
 
-.method public abstract stopDtmf(Landroid/os/Message;)V
+.method public abstract stopDtmf(ILandroid/os/Message;)V
+.end method
+
+.method public abstract suppSvcStatus(II[Ljava/lang/String;Ljava/lang/String;ILandroid/os/Message;Z)V
 .end method
 
 .method public abstract switchWaitingOrHoldingAndActive(Landroid/os/Message;)V
@@ -294,6 +251,9 @@
 .end method
 
 .method public abstract unregisterForCallStateChanged(Landroid/os/Handler;)V
+.end method
+
+.method public abstract unregisterForConferenceCallStateCompleted(Landroid/os/Handler;)V
 .end method
 
 .method public abstract unregisterForExitEmergencyCallbackMode(Landroid/os/Handler;)V
@@ -321,6 +281,12 @@
 .end method
 
 .method public abstract unregisterForRingbackTone(Landroid/os/Handler;)V
+.end method
+
+.method public abstract unregisterForSipDtmfInfo(Landroid/os/Handler;)V
+.end method
+
+.method public abstract unregisterForSrvDomainChanged(Landroid/os/Handler;)V
 .end method
 
 .method public abstract unregisterForUssdInfo(Landroid/os/Handler;)V
