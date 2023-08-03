@@ -11520,7 +11520,7 @@
     .local v2, "volteEnabledByUser":Z
     iget v3, p0, Lcom/mediatek/ims/ImsCallSessionProxy;->mPhoneId:I
 
-    invoke-static {v3}, Landroid/telephony/SubscriptionManager;->getSimStateForSlotIndex(I)I
+    invoke-static {v3}, Landroid/telephony/TelephonyManager;->getSimStateForSlotIndex(I)I
 
     move-result v3
 
@@ -11543,7 +11543,7 @@
     iget v6, p0, Lcom/mediatek/ims/ImsCallSessionProxy;->mPhoneId:I
 
     .line 5257
-    invoke-static {v6}, Landroid/telephony/SubscriptionManager;->getSimStateForSlotIndex(I)I
+    invoke-static {v6}, Landroid/telephony/TelephonyManager;->getSimStateForSlotIndex(I)I
 
     move-result v6
 
@@ -11556,7 +11556,7 @@
     iget v6, p0, Lcom/mediatek/ims/ImsCallSessionProxy;->mPhoneId:I
 
     .line 5258
-    invoke-static {v6}, Landroid/telephony/SubscriptionManager;->getSimStateForSlotIndex(I)I
+    invoke-static {v6}, Landroid/telephony/TelephonyManager;->getSimStateForSlotIndex(I)I
 
     move-result v6
 
