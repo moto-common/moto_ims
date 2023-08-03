@@ -119,7 +119,7 @@
 
     move-result v0
 
-    invoke-static {v0}, Landroid/telephony/SubscriptionManager;->getSimStateForSlotIndex(I)I
+    invoke-static {v0}, Landroid/telephony/TelephonyManager;->getSimStateForSlotIndex(I)I
 
     move-result v0
 
