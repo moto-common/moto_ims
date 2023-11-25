@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="conf_digest_id">[]</string>
+    <string name="conf_digest_pwd">[žţé one]</string>
+    <string name="conf_xcap_root">[ĥţţþ://192.168.23.137/ one two three]</string>
+</resources>
