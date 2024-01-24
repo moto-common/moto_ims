@@ -26,7 +26,7 @@
     .locals 0
     .param p1, "this$0"    # Lcom/qualcomm/ims/vt/MediaController;
 
-    .line 427
+    .line 411
     iput-object p1, p0, Lcom/qualcomm/ims/vt/MediaController$4;->this$0:Lcom/qualcomm/ims/vt/MediaController;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -39,15 +39,15 @@
 .method public run()V
     .locals 1
 
-    .line 430
+    .line 414
     iget-object v0, p0, Lcom/qualcomm/ims/vt/MediaController$4;->this$0:Lcom/qualcomm/ims/vt/MediaController;
 
-    invoke-static {v0}, Lcom/qualcomm/ims/vt/MediaController;->access$000(Lcom/qualcomm/ims/vt/MediaController;)Lcom/qualcomm/ims/vt/ImsMedia;
+    invoke-static {v0}, Lcom/qualcomm/ims/vt/MediaController;->-$$Nest$fgetmMedia(Lcom/qualcomm/ims/vt/MediaController;)Lcom/qualcomm/ims/vt/ImsMedia;
 
     move-result-object v0
 
     invoke-virtual {v0}, Lcom/qualcomm/ims/vt/ImsMedia;->init()I
 
-    .line 431
+    .line 415
     return-void
 .end method

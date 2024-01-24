@@ -151,7 +151,10 @@
         }
     .end annotation
 
-    .line 88
+    .annotation runtime Ljava/lang/Deprecated;
+    .end annotation
+
+    .line 95
     const-string v0, "default"
 
     invoke-static {v0}, Landroid/hidl/base/V1_0/IBase;->getService(Ljava/lang/String;)Landroid/hidl/base/V1_0/IBase;
@@ -170,7 +173,10 @@
         }
     .end annotation
 
-    .line 81
+    .annotation runtime Ljava/lang/Deprecated;
+    .end annotation
+
+    .line 85
     const-string v0, "android.hidl.base@1.0::IBase"
 
     invoke-static {v0, p0}, Landroid/os/HwBinder;->getService(Ljava/lang/String;Ljava/lang/String;)Landroid/os/IHwBinder;
@@ -194,7 +200,7 @@
         }
     .end annotation
 
-    .line 66
+    .line 68
     const-string v0, "android.hidl.base@1.0::IBase"
 
     invoke-static {v0, p0, p1}, Landroid/os/HwBinder;->getService(Ljava/lang/String;Ljava/lang/String;Z)Landroid/os/IHwBinder;
@@ -217,7 +223,7 @@
         }
     .end annotation
 
-    .line 73
+    .line 75
     const-string v0, "default"
 
     invoke-static {v0, p0}, Landroid/hidl/base/V1_0/IBase;->getService(Ljava/lang/String;Z)Landroid/hidl/base/V1_0/IBase;

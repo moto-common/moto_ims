@@ -22,13 +22,13 @@
 .method public constructor <init>(Lorg/codeaurora/ims/ImsSubController;)V
     .locals 0
 
-    .line 282
+    .line 403
     iput-object p1, p0, Lorg/codeaurora/ims/ImsSubController$ImsSubControllerHandler;->this$0:Lorg/codeaurora/ims/ImsSubController;
 
-    .line 283
+    .line 404
     invoke-direct {p0}, Landroid/os/Handler;-><init>()V
 
-    .line 284
+    .line 405
     return-void
 .end method
 
@@ -36,23 +36,23 @@
     .locals 0
     .param p2, "looper"    # Landroid/os/Looper;
 
-    .line 286
+    .line 407
     iput-object p1, p0, Lorg/codeaurora/ims/ImsSubController$ImsSubControllerHandler;->this$0:Lorg/codeaurora/ims/ImsSubController;
 
-    .line 287
+    .line 408
     invoke-direct {p0, p2}, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V
 
-    .line 288
+    .line 409
     return-void
 .end method
 
 
 # virtual methods
 .method public handleMessage(Landroid/os/Message;)V
-    .locals 6
+    .locals 5
     .param p1, "msg"    # Landroid/os/Message;
 
-    .line 292
+    .line 413
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -61,9 +61,13 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     iget v1, p1, Landroid/os/Message;->what:I
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -71,28 +75,28 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 293
+    .line 414
     iget-object v0, p0, Lorg/codeaurora/ims/ImsSubController$ImsSubControllerHandler;->this$0:Lorg/codeaurora/ims/ImsSubController;
 
-    invoke-static {v0}, Lorg/codeaurora/ims/ImsSubController;->access$000(Lorg/codeaurora/ims/ImsSubController;)Z
+    invoke-static {v0}, Lorg/codeaurora/ims/ImsSubController;->-$$Nest$misDisposed(Lorg/codeaurora/ims/ImsSubController;)Z
 
     move-result v0
 
     if-eqz v0, :cond_0
 
-    .line 294
+    .line 415
     const-string v0, "handleMessage, returning as isDisposed"
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->d(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 295
+    .line 416
     return-void
 
-    .line 298
+    .line 419
     :cond_0
     const/4 v0, -0x1
 
-    .line 300
+    .line 421
     .local v0, "phoneId":I
     :try_start_0
     iget v1, p1, Landroid/os/Message;->what:I
@@ -101,19 +105,67 @@
 
     packed-switch v1, :pswitch_data_0
 
-    .line 342
+    .line 464
     new-instance v1, Ljava/lang/StringBuilder;
 
     goto/16 :goto_0
 
-    .line 328
+    .line 457
     :pswitch_0
     iget-object v1, p1, Landroid/os/Message;->obj:Ljava/lang/Object;
 
     check-cast v1, Lorg/codeaurora/telephony/utils/AsyncResult;
 
-    .line 329
+    .line 458
     .local v1, "ar":Lorg/codeaurora/telephony/utils/AsyncResult;
+    iget-object v2, v1, Lorg/codeaurora/telephony/utils/AsyncResult;->userObj:Ljava/lang/Object;
+
+    check-cast v2, Ljava/lang/Integer;
+
+    invoke-virtual {v2}, Ljava/lang/Integer;->intValue()I
+
+    move-result v2
+
+    move v0, v2
+
+    .line 459
+    new-instance v2, Ljava/lang/StringBuilder;
+
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v3, "Received multi sim voice capability phoneId = "
+
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v2
+
+    invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v2
+
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-static {p0, v2}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 460
+    iget-object v2, p0, Lorg/codeaurora/ims/ImsSubController$ImsSubControllerHandler;->this$0:Lorg/codeaurora/ims/ImsSubController;
+
+    invoke-static {v2, v1}, Lorg/codeaurora/ims/ImsSubController;->-$$Nest$mhandleMultiSimVoiceCapability(Lorg/codeaurora/ims/ImsSubController;Lorg/codeaurora/telephony/utils/AsyncResult;)V
+
+    .line 461
+    goto/16 :goto_1
+
+    .line 442
+    .end local v1    # "ar":Lorg/codeaurora/telephony/utils/AsyncResult;
+    :pswitch_1
+    iget-object v1, p1, Landroid/os/Message;->obj:Ljava/lang/Object;
+
+    check-cast v1, Lorg/codeaurora/telephony/utils/AsyncResult;
+
+    .line 443
+    .restart local v1    # "ar":Lorg/codeaurora/telephony/utils/AsyncResult;
     iget-object v3, v1, Lorg/codeaurora/telephony/utils/AsyncResult;->userObj:Ljava/lang/Object;
 
     check-cast v3, Ljava/lang/Integer;
@@ -124,7 +176,7 @@
 
     move v0, v3
 
-    .line 330
+    .line 444
     new-instance v3, Ljava/lang/StringBuilder;
 
     invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
@@ -133,7 +185,11 @@
 
     invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v3
+
     invoke-virtual {v3, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v3
 
     invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -141,22 +197,22 @@
 
     invoke-static {p0, v3}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 331
+    .line 445
     iget-object v3, p0, Lorg/codeaurora/ims/ImsSubController$ImsSubControllerHandler;->this$0:Lorg/codeaurora/ims/ImsSubController;
 
-    invoke-static {v3, v0, v2}, Lorg/codeaurora/ims/ImsSubController;->access$700(Lorg/codeaurora/ims/ImsSubController;IZ)V
+    invoke-static {v3, v0, v2}, Lorg/codeaurora/ims/ImsSubController;->-$$Nest$mupdateStackConfig(Lorg/codeaurora/ims/ImsSubController;IZ)V
 
-    .line 332
+    .line 446
     goto/16 :goto_1
 
-    .line 335
+    .line 449
     .end local v1    # "ar":Lorg/codeaurora/telephony/utils/AsyncResult;
-    :pswitch_1
+    :pswitch_2
     iget-object v1, p1, Landroid/os/Message;->obj:Ljava/lang/Object;
 
     check-cast v1, Lorg/codeaurora/telephony/utils/AsyncResult;
 
-    .line 336
+    .line 450
     .restart local v1    # "ar":Lorg/codeaurora/telephony/utils/AsyncResult;
     iget-object v2, v1, Lorg/codeaurora/telephony/utils/AsyncResult;->userObj:Ljava/lang/Object;
 
@@ -168,7 +224,7 @@
 
     move v0, v2
 
-    .line 337
+    .line 451
     new-instance v2, Ljava/lang/StringBuilder;
 
     invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
@@ -177,7 +233,11 @@
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v2
+
     invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v2
 
     invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -185,46 +245,22 @@
 
     invoke-static {p0, v2}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 338
+    .line 452
     iget-object v2, p0, Lorg/codeaurora/ims/ImsSubController$ImsSubControllerHandler;->this$0:Lorg/codeaurora/ims/ImsSubController;
 
-    invoke-static {v2}, Lorg/codeaurora/ims/ImsSubController;->access$500(Lorg/codeaurora/ims/ImsSubController;)[Lorg/codeaurora/ims/ImsSenderRxr;
+    invoke-static {v2, v0}, Lorg/codeaurora/ims/ImsSubController;->-$$Nest$mhandleRadioAvailable(Lorg/codeaurora/ims/ImsSubController;I)V
 
-    move-result-object v2
-
-    aget-object v2, v2, v0
-
-    iget-object v3, p0, Lorg/codeaurora/ims/ImsSubController$ImsSubControllerHandler;->this$0:Lorg/codeaurora/ims/ImsSubController;
-
-    .line 339
-    invoke-static {v3}, Lorg/codeaurora/ims/ImsSubController;->access$600(Lorg/codeaurora/ims/ImsSubController;)Landroid/os/Handler;
-
-    move-result-object v3
-
-    const/4 v4, 0x2
-
-    invoke-static {v0}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
-
-    move-result-object v5
-
-    invoke-virtual {v3, v4, v5}, Landroid/os/Handler;->obtainMessage(ILjava/lang/Object;)Landroid/os/Message;
-
-    move-result-object v3
-
-    .line 338
-    invoke-virtual {v2, v3}, Lorg/codeaurora/ims/ImsSenderRxr;->getImsSubConfig(Landroid/os/Message;)V
-
-    .line 340
+    .line 453
     goto/16 :goto_1
 
-    .line 319
+    .line 435
     .end local v1    # "ar":Lorg/codeaurora/telephony/utils/AsyncResult;
-    :pswitch_2
+    :pswitch_3
     iget v1, p1, Landroid/os/Message;->arg1:I
 
     move v0, v1
 
-    .line 320
+    .line 436
     new-instance v1, Ljava/lang/StringBuilder;
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
@@ -233,7 +269,11 @@
 
     invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -241,50 +281,26 @@
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 321
+    .line 437
     iget-object v1, p0, Lorg/codeaurora/ims/ImsSubController$ImsSubControllerHandler;->this$0:Lorg/codeaurora/ims/ImsSubController;
 
-    invoke-static {v1}, Lorg/codeaurora/ims/ImsSubController;->access$500(Lorg/codeaurora/ims/ImsSubController;)[Lorg/codeaurora/ims/ImsSenderRxr;
+    invoke-static {v1, v0}, Lorg/codeaurora/ims/ImsSubController;->-$$Nest$mdeRegisterFromRadioEvents(Lorg/codeaurora/ims/ImsSubController;I)V
 
-    move-result-object v1
-
-    aget-object v1, v1, v0
-
-    if-eqz v1, :cond_1
-
-    .line 322
+    .line 438
     iget-object v1, p0, Lorg/codeaurora/ims/ImsSubController$ImsSubControllerHandler;->this$0:Lorg/codeaurora/ims/ImsSubController;
 
-    invoke-static {v1}, Lorg/codeaurora/ims/ImsSubController;->access$500(Lorg/codeaurora/ims/ImsSubController;)[Lorg/codeaurora/ims/ImsSenderRxr;
+    invoke-static {v1, v0, v2}, Lorg/codeaurora/ims/ImsSubController;->-$$Nest$mupdateStackConfig(Lorg/codeaurora/ims/ImsSubController;IZ)V
 
-    move-result-object v1
+    .line 439
+    goto :goto_1
 
-    aget-object v1, v1, v0
-
-    iget-object v3, p0, Lorg/codeaurora/ims/ImsSubController$ImsSubControllerHandler;->this$0:Lorg/codeaurora/ims/ImsSubController;
-
-    invoke-static {v3}, Lorg/codeaurora/ims/ImsSubController;->access$600(Lorg/codeaurora/ims/ImsSubController;)Landroid/os/Handler;
-
-    move-result-object v3
-
-    invoke-virtual {v1, v3}, Lorg/codeaurora/ims/ImsSenderRxr;->deregisterForImsSubConfigChanged(Landroid/os/Handler;)V
-
-    .line 324
-    :cond_1
-    iget-object v1, p0, Lorg/codeaurora/ims/ImsSubController$ImsSubControllerHandler;->this$0:Lorg/codeaurora/ims/ImsSubController;
-
-    invoke-static {v1, v0, v2}, Lorg/codeaurora/ims/ImsSubController;->access$700(Lorg/codeaurora/ims/ImsSubController;IZ)V
-
-    .line 325
-    goto/16 :goto_1
-
-    .line 309
-    :pswitch_3
+    .line 430
+    :pswitch_4
     iget v1, p1, Landroid/os/Message;->arg1:I
 
     move v0, v1
 
-    .line 310
+    .line 431
     new-instance v1, Ljava/lang/StringBuilder;
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
@@ -293,7 +309,11 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -301,57 +321,21 @@
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 311
+    .line 432
     iget-object v1, p0, Lorg/codeaurora/ims/ImsSubController$ImsSubControllerHandler;->this$0:Lorg/codeaurora/ims/ImsSubController;
 
-    invoke-static {v1}, Lorg/codeaurora/ims/ImsSubController;->access$200(Lorg/codeaurora/ims/ImsSubController;)Landroid/telephony/TelephonyManager;
+    invoke-static {v1, v0}, Lorg/codeaurora/ims/ImsSubController;->-$$Nest$mregisterForRadioEvents(Lorg/codeaurora/ims/ImsSubController;I)V
 
-    move-result-object v1
-
-    if-eqz v1, :cond_2
-
-    iget-object v1, p0, Lorg/codeaurora/ims/ImsSubController$ImsSubControllerHandler;->this$0:Lorg/codeaurora/ims/ImsSubController;
-
-    invoke-static {v1}, Lorg/codeaurora/ims/ImsSubController;->access$200(Lorg/codeaurora/ims/ImsSubController;)Landroid/telephony/TelephonyManager;
-
-    move-result-object v1
-
-    invoke-virtual {v1}, Landroid/telephony/TelephonyManager;->getActiveModemCount()I
-
-    move-result v1
-
-    const/4 v2, 0x1
-
-    if-le v1, v2, :cond_2
-
-    .line 312
-    iget-object v1, p0, Lorg/codeaurora/ims/ImsSubController$ImsSubControllerHandler;->this$0:Lorg/codeaurora/ims/ImsSubController;
-
-    invoke-static {v1, v0}, Lorg/codeaurora/ims/ImsSubController;->access$300(Lorg/codeaurora/ims/ImsSubController;I)V
-
+    .line 433
     goto :goto_1
 
-    .line 314
-    :cond_2
-    const-string v1, "Single SIM mode"
-
-    invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
-
-    .line 315
-    iget-object v1, p0, Lorg/codeaurora/ims/ImsSubController$ImsSubControllerHandler;->this$0:Lorg/codeaurora/ims/ImsSubController;
-
-    invoke-static {v1}, Lorg/codeaurora/ims/ImsSubController;->access$400(Lorg/codeaurora/ims/ImsSubController;)V
-
-    .line 317
-    goto :goto_1
-
-    .line 303
-    :pswitch_4
+    .line 424
+    :pswitch_5
     iget-object v1, p1, Landroid/os/Message;->obj:Ljava/lang/Object;
 
     check-cast v1, Lorg/codeaurora/telephony/utils/AsyncResult;
 
-    .line 304
+    .line 425
     .restart local v1    # "ar":Lorg/codeaurora/telephony/utils/AsyncResult;
     iget-object v2, v1, Lorg/codeaurora/telephony/utils/AsyncResult;->userObj:Ljava/lang/Object;
 
@@ -363,7 +347,7 @@
 
     move v0, v2
 
-    .line 305
+    .line 426
     new-instance v2, Ljava/lang/StringBuilder;
 
     invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
@@ -372,7 +356,11 @@
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v2
+
     invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v2
 
     invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -380,15 +368,15 @@
 
     invoke-static {p0, v2}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 306
+    .line 427
     iget-object v2, p0, Lorg/codeaurora/ims/ImsSubController$ImsSubControllerHandler;->this$0:Lorg/codeaurora/ims/ImsSubController;
 
-    invoke-static {v2, v1}, Lorg/codeaurora/ims/ImsSubController;->access$100(Lorg/codeaurora/ims/ImsSubController;Lorg/codeaurora/telephony/utils/AsyncResult;)V
+    invoke-static {v2, v1}, Lorg/codeaurora/ims/ImsSubController;->-$$Nest$mhandleSubConfigChanged(Lorg/codeaurora/ims/ImsSubController;Lorg/codeaurora/telephony/utils/AsyncResult;)V
 
-    .line 307
+    .line 428
     goto :goto_1
 
-    .line 342
+    .line 464
     .end local v1    # "ar":Lorg/codeaurora/telephony/utils/AsyncResult;
     :goto_0
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
@@ -397,9 +385,13 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     iget v2, p1, Landroid/os/Message;->what:I
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -407,18 +399,18 @@
 
     invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->w(Ljava/lang/Object;Ljava/lang/String;)V
     :try_end_0
-    .catch Ljava/lang/ArrayIndexOutOfBoundsException; {:try_start_0 .. :try_end_0} :catch_0
+    .catch Ljava/lang/IndexOutOfBoundsException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 347
+    .line 469
     :goto_1
     goto :goto_2
 
-    .line 345
+    .line 467
     :catch_0
     move-exception v1
 
-    .line 346
-    .local v1, "exc":Ljava/lang/ArrayIndexOutOfBoundsException;
+    .line 468
+    .local v1, "exc":Ljava/lang/IndexOutOfBoundsException;
     new-instance v2, Ljava/lang/StringBuilder;
 
     invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
@@ -427,7 +419,11 @@
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v2
+
     invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v2
 
     invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -435,18 +431,20 @@
 
     invoke-static {p0, v2}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 348
-    .end local v1    # "exc":Ljava/lang/ArrayIndexOutOfBoundsException;
+    .line 470
+    .end local v1    # "exc":Ljava/lang/IndexOutOfBoundsException;
     :goto_2
     return-void
 
     :pswitch_data_0
     .packed-switch 0x1
-        :pswitch_4
+        :pswitch_5
+        :pswitch_5
         :pswitch_4
         :pswitch_3
         :pswitch_2
         :pswitch_1
+        :pswitch_0
         :pswitch_0
     .end packed-switch
 .end method

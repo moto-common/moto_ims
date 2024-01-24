@@ -33,12 +33,9 @@
     return-void
 .end method
 
-.method synthetic constructor <init>(Lcom/qualcomm/ims/vt/CameraManager;Lcom/qualcomm/ims/vt/CameraManager$1;)V
+.method synthetic constructor <init>(Lcom/qualcomm/ims/vt/CameraManager;Lcom/qualcomm/ims/vt/CameraManager$Camera2Factory-IA;)V
     .locals 0
-    .param p1, "x0"    # Lcom/qualcomm/ims/vt/CameraManager;
-    .param p2, "x1"    # Lcom/qualcomm/ims/vt/CameraManager$1;
 
-    .line 43
     invoke-direct {p0, p1}, Lcom/qualcomm/ims/vt/CameraManager$Camera2Factory;-><init>(Lcom/qualcomm/ims/vt/CameraManager;)V
 
     return-void
@@ -61,7 +58,7 @@
 
     iget-object v1, p0, Lcom/qualcomm/ims/vt/CameraManager$Camera2Factory;->this$0:Lcom/qualcomm/ims/vt/CameraManager;
 
-    invoke-static {v1}, Lcom/qualcomm/ims/vt/CameraManager;->access$200(Lcom/qualcomm/ims/vt/CameraManager;)Landroid/content/Context;
+    invoke-static {v1}, Lcom/qualcomm/ims/vt/CameraManager;->-$$Nest$fgetmContext(Lcom/qualcomm/ims/vt/CameraManager;)Landroid/content/Context;
 
     move-result-object v1
 

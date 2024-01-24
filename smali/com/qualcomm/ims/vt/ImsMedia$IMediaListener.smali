@@ -18,17 +18,17 @@
 .method public abstract onDataUsageChanged(ILorg/codeaurora/ims/QtiVideoCallDataUsage;)V
 .end method
 
-.method public abstract onOrientationModeChanged(I)V
+.method public abstract onOrientationModeChanged(II)V
 .end method
 
-.method public abstract onPeerResolutionChanged(II)V
+.method public abstract onPeerResolutionChanged(III)V
 .end method
 
-.method public abstract onPlayerStateChanged(I)V
+.method public abstract onPlayerStateChanged(II)V
 .end method
 
-.method public abstract onRecordingSurfaceChanged(Landroid/view/Surface;II)V
+.method public abstract onRecordingSurfaceChanged(ILandroid/view/Surface;II)V
 .end method
 
-.method public abstract onVideoQualityEvent(I)V
+.method public abstract onVideoQualityEvent(II)V
 .end method

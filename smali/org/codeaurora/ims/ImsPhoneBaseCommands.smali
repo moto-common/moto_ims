@@ -9,8 +9,6 @@
 # instance fields
 .field protected mAvailRegistrants:Lorg/codeaurora/telephony/utils/RegistrantList;
 
-.field protected mCallComposerInfoRegistrants:Lorg/codeaurora/telephony/utils/RegistrantList;
-
 .field protected mCallStateRegistrants:Lorg/codeaurora/telephony/utils/RegistrantList;
 
 .field protected mContext:Landroid/content/Context;
@@ -30,6 +28,8 @@
 .field protected mOnRegistrants:Lorg/codeaurora/telephony/utils/RegistrantList;
 
 .field protected mPhoneType:I
+
+.field protected mPreAlertingCallInfoRegistrants:Lorg/codeaurora/telephony/utils/RegistrantList;
 
 .field protected mRadioStateChangedRegistrants:Lorg/codeaurora/telephony/utils/RegistrantList;
 
@@ -242,7 +242,7 @@
 
     invoke-direct {v0, v1}, Lorg/codeaurora/ims/WakeLockRegistrantList;-><init>(Landroid/os/PowerManager$WakeLock;)V
 
-    iput-object v0, p0, Lorg/codeaurora/ims/ImsPhoneBaseCommands;->mCallComposerInfoRegistrants:Lorg/codeaurora/telephony/utils/RegistrantList;
+    iput-object v0, p0, Lorg/codeaurora/ims/ImsPhoneBaseCommands;->mPreAlertingCallInfoRegistrants:Lorg/codeaurora/telephony/utils/RegistrantList;
 
     .line 102
     return-void
@@ -250,12 +250,12 @@
 
 
 # virtual methods
-.method public deregisterForCallComposerInfo(Landroid/os/Handler;)V
+.method public deregisterForPreAlertingCallInfo(Landroid/os/Handler;)V
     .locals 1
     .param p1, "h"    # Landroid/os/Handler;
 
     .line 363
-    iget-object v0, p0, Lorg/codeaurora/ims/ImsPhoneBaseCommands;->mCallComposerInfoRegistrants:Lorg/codeaurora/telephony/utils/RegistrantList;
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsPhoneBaseCommands;->mPreAlertingCallInfoRegistrants:Lorg/codeaurora/telephony/utils/RegistrantList;
 
     invoke-virtual {v0, p1}, Lorg/codeaurora/telephony/utils/RegistrantList;->remove(Landroid/os/Handler;)V
 
@@ -338,29 +338,6 @@
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     throw v2
-.end method
-
-.method public registerForCallComposerInfo(Landroid/os/Handler;ILjava/lang/Object;)V
-    .locals 2
-    .param p1, "h"    # Landroid/os/Handler;
-    .param p2, "what"    # I
-    .param p3, "obj"    # Ljava/lang/Object;
-
-    .line 357
-    new-instance v0, Lorg/codeaurora/ims/WakeLockRegistrant;
-
-    iget-object v1, p0, Lorg/codeaurora/ims/ImsPhoneBaseCommands;->mNotifyWakeLock:Landroid/os/PowerManager$WakeLock;
-
-    invoke-direct {v0, p1, p2, p3, v1}, Lorg/codeaurora/ims/WakeLockRegistrant;-><init>(Landroid/os/Handler;ILjava/lang/Object;Landroid/os/PowerManager$WakeLock;)V
-
-    .line 358
-    .local v0, "r":Lorg/codeaurora/telephony/utils/Registrant;
-    iget-object v1, p0, Lorg/codeaurora/ims/ImsPhoneBaseCommands;->mCallComposerInfoRegistrants:Lorg/codeaurora/telephony/utils/RegistrantList;
-
-    invoke-virtual {v1, v0}, Lorg/codeaurora/telephony/utils/RegistrantList;->add(Lorg/codeaurora/telephony/utils/Registrant;)V
-
-    .line 359
-    return-void
 .end method
 
 .method public registerForCallStateChanged(Landroid/os/Handler;ILjava/lang/Object;)V
@@ -666,6 +643,29 @@
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     throw v2
+.end method
+
+.method public registerForPreAlertingCallInfo(Landroid/os/Handler;ILjava/lang/Object;)V
+    .locals 2
+    .param p1, "h"    # Landroid/os/Handler;
+    .param p2, "what"    # I
+    .param p3, "obj"    # Ljava/lang/Object;
+
+    .line 357
+    new-instance v0, Lorg/codeaurora/ims/WakeLockRegistrant;
+
+    iget-object v1, p0, Lorg/codeaurora/ims/ImsPhoneBaseCommands;->mNotifyWakeLock:Landroid/os/PowerManager$WakeLock;
+
+    invoke-direct {v0, p1, p2, p3, v1}, Lorg/codeaurora/ims/WakeLockRegistrant;-><init>(Landroid/os/Handler;ILjava/lang/Object;Landroid/os/PowerManager$WakeLock;)V
+
+    .line 358
+    .local v0, "r":Lorg/codeaurora/telephony/utils/Registrant;
+    iget-object v1, p0, Lorg/codeaurora/ims/ImsPhoneBaseCommands;->mPreAlertingCallInfoRegistrants:Lorg/codeaurora/telephony/utils/RegistrantList;
+
+    invoke-virtual {v1, v0}, Lorg/codeaurora/telephony/utils/RegistrantList;->add(Lorg/codeaurora/telephony/utils/Registrant;)V
+
+    .line 359
+    return-void
 .end method
 
 .method public registerForRadioStateChanged(Landroid/os/Handler;ILjava/lang/Object;)V

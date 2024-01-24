@@ -34,7 +34,7 @@
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 6
+    .locals 7
 
     .line 37
     new-instance v0, Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;
@@ -48,43 +48,39 @@
     sput-object v0, Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;->RADIO_OFF:Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;
 
     .line 38
-    new-instance v0, Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;
+    new-instance v1, Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;
 
-    const-string v1, "RADIO_UNAVAILABLE"
+    const-string v3, "RADIO_UNAVAILABLE"
 
-    const/4 v3, 0x1
+    const/4 v4, 0x1
 
-    invoke-direct {v0, v1, v3}, Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v1, v3, v4}, Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;->RADIO_UNAVAILABLE:Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;
+    sput-object v1, Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;->RADIO_UNAVAILABLE:Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;
 
     .line 39
-    new-instance v0, Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;
+    new-instance v3, Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;
 
-    const-string v1, "RADIO_ON"
+    const-string v5, "RADIO_ON"
 
-    const/4 v4, 0x2
+    const/4 v6, 0x2
 
-    invoke-direct {v0, v1, v4}, Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v3, v5, v6}, Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;->RADIO_ON:Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;
+    sput-object v3, Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;->RADIO_ON:Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;
 
     .line 36
-    const/4 v1, 0x3
+    const/4 v5, 0x3
 
-    new-array v1, v1, [Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;
+    new-array v5, v5, [Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;
 
-    sget-object v5, Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;->RADIO_OFF:Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;
+    aput-object v0, v5, v2
 
-    aput-object v5, v1, v2
+    aput-object v1, v5, v4
 
-    sget-object v2, Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;->RADIO_UNAVAILABLE:Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;
+    aput-object v3, v5, v6
 
-    aput-object v2, v1, v3
-
-    aput-object v0, v1, v4
-
-    sput-object v1, Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;->$VALUES:[Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;
+    sput-object v5, Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;->$VALUES:[Lorg/codeaurora/ims/ImsPhoneCommandsInterface$RadioState;
 
     return-void
 .end method

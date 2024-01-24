@@ -1118,9 +1118,7 @@
     .line 297
     :cond_0
     :try_start_0
-    sget-object v0, Lorg/codeaurora/ims/CheckinEvent;->sMethodSetNameValueString:Ljava/lang/reflect/Method;
-
-    iget-object v1, p0, Lorg/codeaurora/ims/CheckinEvent;->mReflectedCheckinEvent:Ljava/lang/Object;
+    sget-object v1, Lorg/codeaurora/ims/CheckinEvent;->sMethodSetNameValueString:Ljava/lang/reflect/Method;
 
     const/4 v2, 0x2
 
@@ -1134,7 +1132,7 @@
 
     aput-object p2, v2, v3
 
-    invoke-virtual {v0, v1, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-virtual {v1, v0, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 

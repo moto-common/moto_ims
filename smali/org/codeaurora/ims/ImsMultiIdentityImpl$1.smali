@@ -42,7 +42,7 @@
     .line 42
     iget-object v0, p0, Lorg/codeaurora/ims/ImsMultiIdentityImpl$1;->this$0:Lorg/codeaurora/ims/ImsMultiIdentityImpl;
 
-    invoke-static {v0}, Lorg/codeaurora/ims/ImsMultiIdentityImpl;->access$000(Lorg/codeaurora/ims/ImsMultiIdentityImpl;)V
+    invoke-static {v0}, Lorg/codeaurora/ims/ImsMultiIdentityImpl;->-$$Nest$monClientDeath(Lorg/codeaurora/ims/ImsMultiIdentityImpl;)V
 
     .line 43
     return-void

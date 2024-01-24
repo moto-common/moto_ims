@@ -61,6 +61,54 @@
 
 
 # direct methods
+.method static bridge synthetic -$$Nest$monClientDeath(Lorg/codeaurora/ims/ImsMultiIdentityImpl;)V
+    .locals 0
+
+    invoke-direct {p0}, Lorg/codeaurora/ims/ImsMultiIdentityImpl;->onClientDeath()V
+
+    return-void
+.end method
+
+.method static bridge synthetic -$$Nest$monMultiIdentityInfoPendingIndication(Lorg/codeaurora/ims/ImsMultiIdentityImpl;)V
+    .locals 0
+
+    invoke-direct {p0}, Lorg/codeaurora/ims/ImsMultiIdentityImpl;->onMultiIdentityInfoPendingIndication()V
+
+    return-void
+.end method
+
+.method static bridge synthetic -$$Nest$monMultiIdentityInfoPendingResponse(Lorg/codeaurora/ims/ImsMultiIdentityImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
+    .locals 0
+
+    invoke-direct {p0, p1}, Lorg/codeaurora/ims/ImsMultiIdentityImpl;->onMultiIdentityInfoPendingResponse(Lorg/codeaurora/telephony/utils/AsyncResult;)V
+
+    return-void
+.end method
+
+.method static bridge synthetic -$$Nest$monMultiIdentityRegistrationStatusChange(Lorg/codeaurora/ims/ImsMultiIdentityImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
+    .locals 0
+
+    invoke-direct {p0, p1}, Lorg/codeaurora/ims/ImsMultiIdentityImpl;->onMultiIdentityRegistrationStatusChange(Lorg/codeaurora/telephony/utils/AsyncResult;)V
+
+    return-void
+.end method
+
+.method static bridge synthetic -$$Nest$monMultiIdentityVirtualLineInfoResponse(Lorg/codeaurora/ims/ImsMultiIdentityImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
+    .locals 0
+
+    invoke-direct {p0, p1}, Lorg/codeaurora/ims/ImsMultiIdentityImpl;->onMultiIdentityVirtualLineInfoResponse(Lorg/codeaurora/telephony/utils/AsyncResult;)V
+
+    return-void
+.end method
+
+.method static bridge synthetic -$$Nest$monRegisterMultiIdentityLinesResponse(Lorg/codeaurora/ims/ImsMultiIdentityImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
+    .locals 0
+
+    invoke-direct {p0, p1}, Lorg/codeaurora/ims/ImsMultiIdentityImpl;->onRegisterMultiIdentityLinesResponse(Lorg/codeaurora/telephony/utils/AsyncResult;)V
+
+    return-void
+.end method
+
 .method public constructor <init>(ILorg/codeaurora/ims/ImsSenderRxr;Landroid/content/Context;Landroid/os/Looper;)V
     .locals 5
     .param p1, "phoneId"    # I
@@ -158,70 +206,6 @@
     iput-object v0, p0, Lorg/codeaurora/ims/ImsMultiIdentityImpl;->mRegisteredSet:Ljava/util/HashSet;
 
     .line 70
-    return-void
-.end method
-
-.method static synthetic access$000(Lorg/codeaurora/ims/ImsMultiIdentityImpl;)V
-    .locals 0
-    .param p0, "x0"    # Lorg/codeaurora/ims/ImsMultiIdentityImpl;
-
-    .line 30
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsMultiIdentityImpl;->onClientDeath()V
-
-    return-void
-.end method
-
-.method static synthetic access$100(Lorg/codeaurora/ims/ImsMultiIdentityImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
-    .locals 0
-    .param p0, "x0"    # Lorg/codeaurora/ims/ImsMultiIdentityImpl;
-    .param p1, "x1"    # Lorg/codeaurora/telephony/utils/AsyncResult;
-
-    .line 30
-    invoke-direct {p0, p1}, Lorg/codeaurora/ims/ImsMultiIdentityImpl;->onRegisterMultiIdentityLinesResponse(Lorg/codeaurora/telephony/utils/AsyncResult;)V
-
-    return-void
-.end method
-
-.method static synthetic access$200(Lorg/codeaurora/ims/ImsMultiIdentityImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
-    .locals 0
-    .param p0, "x0"    # Lorg/codeaurora/ims/ImsMultiIdentityImpl;
-    .param p1, "x1"    # Lorg/codeaurora/telephony/utils/AsyncResult;
-
-    .line 30
-    invoke-direct {p0, p1}, Lorg/codeaurora/ims/ImsMultiIdentityImpl;->onMultiIdentityRegistrationStatusChange(Lorg/codeaurora/telephony/utils/AsyncResult;)V
-
-    return-void
-.end method
-
-.method static synthetic access$300(Lorg/codeaurora/ims/ImsMultiIdentityImpl;)V
-    .locals 0
-    .param p0, "x0"    # Lorg/codeaurora/ims/ImsMultiIdentityImpl;
-
-    .line 30
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsMultiIdentityImpl;->onMultiIdentityInfoPendingIndication()V
-
-    return-void
-.end method
-
-.method static synthetic access$400(Lorg/codeaurora/ims/ImsMultiIdentityImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
-    .locals 0
-    .param p0, "x0"    # Lorg/codeaurora/ims/ImsMultiIdentityImpl;
-    .param p1, "x1"    # Lorg/codeaurora/telephony/utils/AsyncResult;
-
-    .line 30
-    invoke-direct {p0, p1}, Lorg/codeaurora/ims/ImsMultiIdentityImpl;->onMultiIdentityInfoPendingResponse(Lorg/codeaurora/telephony/utils/AsyncResult;)V
-
-    return-void
-.end method
-
-.method static synthetic access$500(Lorg/codeaurora/ims/ImsMultiIdentityImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
-    .locals 0
-    .param p0, "x0"    # Lorg/codeaurora/ims/ImsMultiIdentityImpl;
-    .param p1, "x1"    # Lorg/codeaurora/telephony/utils/AsyncResult;
-
-    .line 30
-    invoke-direct {p0, p1}, Lorg/codeaurora/ims/ImsMultiIdentityImpl;->onMultiIdentityVirtualLineInfoResponse(Lorg/codeaurora/telephony/utils/AsyncResult;)V
-
     return-void
 .end method
 
@@ -377,9 +361,13 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     iget-object v1, p1, Lorg/codeaurora/telephony/utils/AsyncResult;->exception:Ljava/lang/Throwable;
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -488,7 +476,11 @@
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v2
+
     invoke-virtual {v2, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v2
 
     invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -583,7 +575,11 @@
 
     invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v4
+
     invoke-virtual {v4, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v4
 
     invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -659,7 +655,11 @@
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v2
+
     invoke-virtual {v2, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v2
 
     invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 

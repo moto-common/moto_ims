@@ -20,6 +20,14 @@
 
 
 # direct methods
+.method static bridge synthetic -$$Nest$mupdatePhoneStateListeners(Lorg/codeaurora/ims/ImsPhoneListenerController;)V
+    .locals 0
+
+    invoke-direct {p0}, Lorg/codeaurora/ims/ImsPhoneListenerController;->updatePhoneStateListeners()V
+
+    return-void
+.end method
+
 .method static constructor <clinit>()V
     .locals 1
 
@@ -35,7 +43,7 @@
     .locals 4
     .param p1, "context"    # Landroid/content/Context;
 
-    .line 41
+    .line 42
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     .line 58
@@ -45,20 +53,20 @@
 
     iput-object v0, p0, Lorg/codeaurora/ims/ImsPhoneListenerController;->mSubChangedListener:Landroid/telephony/SubscriptionManager$OnSubscriptionsChangedListener;
 
-    .line 42
+    .line 43
     iput-object p1, p0, Lorg/codeaurora/ims/ImsPhoneListenerController;->mContext:Landroid/content/Context;
 
-    .line 43
+    .line 44
     invoke-static {p1}, Landroid/telephony/SubscriptionManager;->from(Landroid/content/Context;)Landroid/telephony/SubscriptionManager;
 
     move-result-object v0
 
     iput-object v0, p0, Lorg/codeaurora/ims/ImsPhoneListenerController;->mSubMgr:Landroid/telephony/SubscriptionManager;
 
-    .line 45
+    .line 46
     const/4 v0, 0x1
 
-    .line 46
+    .line 47
     .local v0, "nPhones":I
     invoke-static {}, Landroid/telephony/TelephonyManager;->getDefault()Landroid/telephony/TelephonyManager;
 
@@ -70,7 +78,7 @@
 
     if-eqz v1, :cond_0
 
-    .line 47
+    .line 48
     invoke-static {}, Landroid/telephony/TelephonyManager;->getDefault()Landroid/telephony/TelephonyManager;
 
     move-result-object v1
@@ -79,13 +87,13 @@
 
     move-result v0
 
-    .line 50
+    .line 51
     :cond_0
     new-array v1, v0, [Lorg/codeaurora/ims/ImsPhoneStateListener;
 
     iput-object v1, p0, Lorg/codeaurora/ims/ImsPhoneListenerController;->mListeners:[Lorg/codeaurora/ims/ImsPhoneStateListener;
 
-    .line 51
+    .line 52
     const/4 v1, 0x0
 
     .local v1, "i":I
@@ -96,32 +104,19 @@
 
     if-ge v1, v3, :cond_1
 
-    .line 52
+    .line 53
     const/4 v3, 0x0
 
     aput-object v3, v2, v1
 
-    .line 51
+    .line 52
     add-int/lit8 v1, v1, 0x1
 
     goto :goto_0
 
-    .line 55
+    .line 56
     .end local v1    # "i":I
     :cond_1
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsPhoneListenerController;->registerForNotifications()V
-
-    .line 56
-    return-void
-.end method
-
-.method static synthetic access$000(Lorg/codeaurora/ims/ImsPhoneListenerController;)V
-    .locals 0
-    .param p0, "x0"    # Lorg/codeaurora/ims/ImsPhoneListenerController;
-
-    .line 17
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsPhoneListenerController;->updatePhoneStateListeners()V
-
     return-void
 .end method
 
@@ -232,13 +227,11 @@
     if-ge v0, v2, :cond_1
 
     .line 115
-    aget-object v2, v1, v0
-
-    if-eqz v2, :cond_0
-
-    .line 116
     aget-object v1, v1, v0
 
+    if-eqz v1, :cond_0
+
+    .line 116
     invoke-virtual {v1}, Lorg/codeaurora/ims/ImsPhoneStateListener;->unregister()V
 
     .line 117
@@ -333,7 +326,11 @@
 
     invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v3
+
     invoke-virtual {v3, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v3
 
     invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -376,13 +373,11 @@
     if-ge v5, v7, :cond_6
 
     .line 88
-    aget-object v7, v6, v5
-
-    if-eqz v7, :cond_5
-
-    .line 89
     aget-object v6, v6, v5
 
+    if-eqz v6, :cond_5
+
+    .line 89
     invoke-virtual {v6}, Lorg/codeaurora/ims/ImsPhoneStateListener;->getSubscriptionId()I
 
     move-result v6
@@ -490,20 +485,23 @@
     invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsPhoneListenerController;->logd(Ljava/lang/String;)V
 
     .line 34
+    invoke-direct {p0}, Lorg/codeaurora/ims/ImsPhoneListenerController;->registerForNotifications()V
+
+    .line 35
     return-void
 .end method
 
 .method public stop()V
     .locals 1
 
-    .line 37
+    .line 38
     invoke-direct {p0}, Lorg/codeaurora/ims/ImsPhoneListenerController;->unregisterForNotifications()V
 
-    .line 38
+    .line 39
     const-string v0, "stop"
 
     invoke-direct {p0, v0}, Lorg/codeaurora/ims/ImsPhoneListenerController;->logd(Ljava/lang/String;)V
 
-    .line 39
+    .line 40
     return-void
 .end method

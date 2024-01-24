@@ -34,7 +34,7 @@
 .method static constructor <clinit>()V
     .locals 5
 
-    .line 315
+    .line 398
     new-instance v0, Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;
 
     const-string v1, "ERROR_GENERIC"
@@ -45,29 +45,27 @@
 
     sput-object v0, Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;->ERROR_GENERIC:Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;
 
-    .line 316
-    new-instance v0, Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;
+    .line 399
+    new-instance v1, Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;
 
-    const-string v1, "ERROR_SUCCESS"
+    const-string v3, "ERROR_SUCCESS"
 
-    const/4 v3, 0x1
+    const/4 v4, 0x1
 
-    invoke-direct {v0, v1, v3}, Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v1, v3, v4}, Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;->ERROR_SUCCESS:Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;
+    sput-object v1, Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;->ERROR_SUCCESS:Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;
 
-    .line 314
-    const/4 v1, 0x2
+    .line 397
+    const/4 v3, 0x2
 
-    new-array v1, v1, [Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;
+    new-array v3, v3, [Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;
 
-    sget-object v4, Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;->ERROR_GENERIC:Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;
+    aput-object v0, v3, v2
 
-    aput-object v4, v1, v2
+    aput-object v1, v3, v4
 
-    aput-object v0, v1, v3
-
-    sput-object v1, Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;->$VALUES:[Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;
+    sput-object v3, Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;->$VALUES:[Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;
 
     return-void
 .end method
@@ -80,7 +78,7 @@
         }
     .end annotation
 
-    .line 314
+    .line 397
     invoke-direct {p0, p1, p2}, Ljava/lang/Enum;-><init>(Ljava/lang/String;I)V
 
     return-void
@@ -90,7 +88,7 @@
     .locals 1
     .param p0, "name"    # Ljava/lang/String;
 
-    .line 314
+    .line 397
     const-class v0, Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;
 
     invoke-static {v0, p0}, Ljava/lang/Enum;->valueOf(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
@@ -105,7 +103,7 @@
 .method public static values()[Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;
     .locals 1
 
-    .line 314
+    .line 397
     sget-object v0, Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;->$VALUES:[Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;
 
     invoke-virtual {v0}, [Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;->clone()Ljava/lang/Object;
@@ -122,8 +120,8 @@
 .method public toString()Ljava/lang/String;
     .locals 2
 
-    .line 320
-    sget-object v0, Lorg/codeaurora/ims/ImsConfigImpl$10;->$SwitchMap$org$codeaurora$ims$ImsConfigImpl$SetCapabilityFailCause:[I
+    .line 403
+    sget-object v0, Lorg/codeaurora/ims/ImsConfigImpl$11;->$SwitchMap$org$codeaurora$ims$ImsConfigImpl$SetCapabilityFailCause:[I
 
     invoke-virtual {p0}, Lorg/codeaurora/ims/ImsConfigImpl$SetCapabilityFailCause;->ordinal()I
 
@@ -131,28 +129,28 @@
 
     aget v0, v0, v1
 
-    const/4 v1, 0x1
+    packed-switch v0, :pswitch_data_0
 
-    if-eq v0, v1, :cond_1
-
-    const/4 v1, 0x2
-
-    if-eq v0, v1, :cond_0
-
-    .line 326
+    .line 409
     const-string v0, ""
 
     return-object v0
 
-    .line 324
-    :cond_0
+    .line 407
+    :pswitch_0
     const-string v0, "ERROR_SUCCESS"
 
     return-object v0
 
-    .line 322
-    :cond_1
+    .line 405
+    :pswitch_1
     const-string v0, "ERROR_GENERIC"
 
     return-object v0
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method

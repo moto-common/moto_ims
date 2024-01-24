@@ -34,6 +34,8 @@
 
 .field public static final REQUEST_EXIT_EMERGENCY_CALLBACK_MODE:I = 0xb
 
+.field public static final REQUEST_EXIT_SCBM:I = 0x45
+
 .field public static final REQUEST_EXPLICIT_CALL_TRANSFER:I = 0xc
 
 .field public static final REQUEST_GET_CLIR:I = 0x14
@@ -86,6 +88,8 @@
 
 .field public static final REQUEST_QUERY_CLIP:I = 0x13
 
+.field public static final REQUEST_QUERY_MULTI_SIM_VOICE_CAPABILITY:I = 0x44
+
 .field public static final REQUEST_QUERY_SERVICE_STATUS:I = 0x1d
 
 .field public static final REQUEST_QUERY_VIRTUAL_LINE_INFO:I = 0x3d
@@ -116,6 +120,8 @@
 
 .field public static final REQUEST_SET_IMS_CONFIG:I = 0x2c
 
+.field public static final REQUEST_SET_MEDIA_CONFIG:I = 0x43
+
 .field public static final REQUEST_SET_SERVICE_STATUS:I = 0x1e
 
 .field public static final REQUEST_SET_SUPP_SVC_NOTIFICATION:I = 0x1b
@@ -125,6 +131,8 @@
 .field public static final REQUEST_SET_VT_CALL_QUALITY:I = 0x24
 
 .field public static final REQUEST_SET_WIFI_CALLING_STATUS:I = 0x2b
+
+.field public static final REQUEST_SIP_DTMF:I = 0x42
 
 .field public static final REQUEST_SUPP_SVC_STATUS:I = 0x1f
 
@@ -144,6 +152,10 @@
 
 .field public static final UNSOL_CALL_RING:I = 0xca
 
+.field public static final UNSOL_CONFERENCE_CALL_STATE_COMPLETED:I = 0xef
+
+.field public static final UNSOL_C_IWLAN_NOTIFICATION:I = 0xf6
+
 .field public static final UNSOL_ENTER_EMERGENCY_CALLBACK_MODE:I = 0xcd
 
 .field public static final UNSOL_EXIT_EMERGENCY_CALLBACK_MODE:I = 0xce
@@ -151,6 +163,12 @@
 .field public static final UNSOL_IMS_SMS_STATUS_REPORT:I = 0xe1
 
 .field public static final UNSOL_IMS_SUB_CONFIG_CHANGED:I = 0xdd
+
+.field public static final UNSOL_INCOMING_CALL_AUTO_REJECTED:I = 0xf5
+
+.field public static final UNSOL_INCOMING_DTMF_START:I = 0xf1
+
+.field public static final UNSOL_INCOMING_DTMF_STOP:I = 0xf2
 
 .field public static final UNSOL_INCOMING_IMS_SMS:I = 0xe2
 
@@ -162,11 +180,15 @@
 
 .field public static final UNSOL_MULTI_IDENTITY_REGISTRATION_STATUS_CHANGE:I = 0xe5
 
+.field public static final UNSOL_MULTI_SIM_VOICE_CAPABILITY_CHANGED:I = 0xf3
+
 .field public static final UNSOL_MWI:I = 0xd6
 
 .field public static final UNSOL_ON_SS:I = 0xe0
 
 .field public static final UNSOL_PARTICIPANT_STATUS_INFO:I = 0xdc
+
+.field public static final UNSOL_PRE_ALERTING_CALL_INFO_AVAILABLE:I = 0xf4
 
 .field public static final UNSOL_RADIO_STATE_CHANGED:I = 0xd5
 
@@ -191,6 +213,12 @@
 .field public static final UNSOL_RINGBACK_TONE:I = 0xcb
 
 .field public static final UNSOL_RSP_BASE:I = 0xc8
+
+.field public static final UNSOL_SCBM_UPDATE_IND:I = 0xf0
+
+.field public static final UNSOL_SERVICE_DOMAIN_CHANGED:I = 0xee
+
+.field public static final UNSOL_SIP_DTMF_RECEIVED:I = 0xed
 
 .field public static final UNSOL_SRV_STATUS_UPDATE:I = 0xd2
 

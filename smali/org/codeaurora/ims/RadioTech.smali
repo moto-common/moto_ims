@@ -8,6 +8,8 @@
 
 .field public static final RADIO_TECH_ANY:I = -0x1
 
+.field public static final RADIO_TECH_C_IWLAN:I = 0x15
+
 .field public static final RADIO_TECH_EDGE:I = 0x2
 
 .field public static final RADIO_TECH_EHRPD:I = 0xd

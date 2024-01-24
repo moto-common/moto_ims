@@ -30,6 +30,38 @@
 
 
 # direct methods
+.method static bridge synthetic -$$Nest$mOnUssdSentResponse(Lorg/codeaurora/ims/ImsUssdSessionImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
+    .locals 0
+
+    invoke-direct {p0, p1}, Lorg/codeaurora/ims/ImsUssdSessionImpl;->OnUssdSentResponse(Lorg/codeaurora/telephony/utils/AsyncResult;)V
+
+    return-void
+.end method
+
+.method static bridge synthetic -$$Nest$mdoClose(Lorg/codeaurora/ims/ImsUssdSessionImpl;)V
+    .locals 0
+
+    invoke-direct {p0}, Lorg/codeaurora/ims/ImsUssdSessionImpl;->doClose()V
+
+    return-void
+.end method
+
+.method static bridge synthetic -$$Nest$monCancelUssd(Lorg/codeaurora/ims/ImsUssdSessionImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
+    .locals 0
+
+    invoke-direct {p0, p1}, Lorg/codeaurora/ims/ImsUssdSessionImpl;->onCancelUssd(Lorg/codeaurora/telephony/utils/AsyncResult;)V
+
+    return-void
+.end method
+
+.method static bridge synthetic -$$Nest$monUssdMessageReceived(Lorg/codeaurora/ims/ImsUssdSessionImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
+    .locals 0
+
+    invoke-direct {p0, p1}, Lorg/codeaurora/ims/ImsUssdSessionImpl;->onUssdMessageReceived(Lorg/codeaurora/telephony/utils/AsyncResult;)V
+
+    return-void
+.end method
+
 .method public constructor <init>(Landroid/telephony/ims/ImsCallProfile;Landroid/content/Context;Lorg/codeaurora/ims/ImsSenderRxr;ILorg/codeaurora/ims/ImsServiceClassTracker;Lorg/codeaurora/ims/UssdInfo;)V
     .locals 4
     .param p1, "profile"    # Landroid/telephony/ims/ImsCallProfile;
@@ -39,31 +71,31 @@
     .param p5, "tracker"    # Lorg/codeaurora/ims/ImsServiceClassTracker;
     .param p6, "info"    # Lorg/codeaurora/ims/UssdInfo;
 
-    .line 51
+    .line 53
     invoke-direct {p0, p2, p3, p4, p5}, Lorg/codeaurora/ims/QImsSessionBase;-><init>(Landroid/content/Context;Lorg/codeaurora/ims/ImsSenderRxr;ILorg/codeaurora/ims/ImsServiceClassTracker;)V
 
-    .line 44
+    .line 46
     new-instance v0, Lorg/codeaurora/ims/ImsUssdSessionImpl$ImsSessionHandler;
 
     invoke-direct {v0, p0}, Lorg/codeaurora/ims/ImsUssdSessionImpl$ImsSessionHandler;-><init>(Lorg/codeaurora/ims/ImsUssdSessionImpl;)V
 
     iput-object v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mHandler:Landroid/os/Handler;
 
-    .line 45
+    .line 47
     const/4 v0, 0x0
 
     iput-object v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mUssdInfo:Lorg/codeaurora/ims/UssdInfo;
 
-    .line 46
+    .line 48
     iput-object v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mCallProfile:Landroid/telephony/ims/ImsCallProfile;
 
-    .line 52
+    .line 54
     iput-object p6, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mUssdInfo:Lorg/codeaurora/ims/UssdInfo;
 
-    .line 53
+    .line 55
     iput-object p1, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mCallProfile:Landroid/telephony/ims/ImsCallProfile;
 
-    .line 54
+    .line 56
     iget-object v1, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mCi:Lorg/codeaurora/ims/ImsSenderRxr;
 
     iget-object v2, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mHandler:Landroid/os/Handler;
@@ -72,7 +104,7 @@
 
     invoke-virtual {v1, v2, v3, v0}, Lorg/codeaurora/ims/ImsSenderRxr;->registerForUssdInfo(Landroid/os/Handler;ILjava/lang/Object;)V
 
-    .line 55
+    .line 57
     return-void
 .end method
 
@@ -80,18 +112,18 @@
     .locals 5
     .param p1, "ar"    # Lorg/codeaurora/telephony/utils/AsyncResult;
 
-    .line 164
+    .line 166
     if-nez p1, :cond_0
 
-    .line 165
+    .line 167
     const-string v0, "USSD: response result is null"
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 166
+    .line 168
     return-void
 
-    .line 168
+    .line 170
     :cond_0
     iget v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mState:I
 
@@ -101,20 +133,20 @@
 
     if-ne v0, v2, :cond_2
 
-    .line 169
+    .line 171
     const-string v0, "USSD: ongoing USSD session"
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 170
+    .line 172
     iget-object v0, p1, Lorg/codeaurora/telephony/utils/AsyncResult;->exception:Ljava/lang/Throwable;
 
     if-eqz v0, :cond_1
 
-    .line 171
+    .line 173
     iput v1, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mState:I
 
-    .line 172
+    .line 174
     iget-object v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mCallbackHandler:Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;
 
     new-instance v1, Landroid/telephony/ims/ImsReasonInfo;
@@ -129,17 +161,17 @@
 
     invoke-virtual {v0, v1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->callSessionTerminated(Landroid/telephony/ims/ImsReasonInfo;)V
 
-    .line 176
+    .line 178
     :cond_1
     return-void
 
-    .line 178
+    .line 180
     :cond_2
     iget-object v0, p1, Lorg/codeaurora/telephony/utils/AsyncResult;->exception:Ljava/lang/Throwable;
 
     if-eqz v0, :cond_3
 
-    .line 179
+    .line 181
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -148,9 +180,13 @@
 
     invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     iget-object v2, p1, Lorg/codeaurora/telephony/utils/AsyncResult;->exception:Ljava/lang/Throwable;
 
     invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -158,85 +194,42 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 180
+    .line 182
     iput v1, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mState:I
 
-    .line 181
+    .line 183
     invoke-static {p1}, Lorg/codeaurora/ims/ImsCallUtils;->getImsReasonInfo(Lorg/codeaurora/telephony/utils/AsyncResult;)Landroid/telephony/ims/ImsReasonInfo;
 
     move-result-object v0
 
-    .line 182
+    .line 184
     .local v0, "sipErrorInfo":Landroid/telephony/ims/ImsReasonInfo;
     iget-object v1, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mCallbackHandler:Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;
 
-    invoke-virtual {v1, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->callSessionInitiatedFailed(Landroid/telephony/ims/ImsReasonInfo;)V
+    invoke-virtual {v1, v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->callSessionInitiatingFailed(Landroid/telephony/ims/ImsReasonInfo;)V
 
-    .line 183
+    .line 185
     .end local v0    # "sipErrorInfo":Landroid/telephony/ims/ImsReasonInfo;
     goto :goto_0
 
-    .line 184
+    .line 186
     :cond_3
     const-string v0, "USSD: response received"
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->d(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 185
+    .line 187
     iput v2, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mState:I
 
-    .line 186
+    .line 188
     iget-object v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mCallbackHandler:Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;
 
     iget-object v1, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mCallProfile:Landroid/telephony/ims/ImsCallProfile;
 
     invoke-virtual {v0, v1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->callSessionInitiated(Landroid/telephony/ims/ImsCallProfile;)V
 
-    .line 188
+    .line 190
     :goto_0
-    return-void
-.end method
-
-.method static synthetic access$000(Lorg/codeaurora/ims/ImsUssdSessionImpl;)V
-    .locals 0
-    .param p0, "x0"    # Lorg/codeaurora/ims/ImsUssdSessionImpl;
-
-    .line 37
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsUssdSessionImpl;->doClose()V
-
-    return-void
-.end method
-
-.method static synthetic access$100(Lorg/codeaurora/ims/ImsUssdSessionImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
-    .locals 0
-    .param p0, "x0"    # Lorg/codeaurora/ims/ImsUssdSessionImpl;
-    .param p1, "x1"    # Lorg/codeaurora/telephony/utils/AsyncResult;
-
-    .line 37
-    invoke-direct {p0, p1}, Lorg/codeaurora/ims/ImsUssdSessionImpl;->OnUssdSentResponse(Lorg/codeaurora/telephony/utils/AsyncResult;)V
-
-    return-void
-.end method
-
-.method static synthetic access$200(Lorg/codeaurora/ims/ImsUssdSessionImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
-    .locals 0
-    .param p0, "x0"    # Lorg/codeaurora/ims/ImsUssdSessionImpl;
-    .param p1, "x1"    # Lorg/codeaurora/telephony/utils/AsyncResult;
-
-    .line 37
-    invoke-direct {p0, p1}, Lorg/codeaurora/ims/ImsUssdSessionImpl;->onCancelUssd(Lorg/codeaurora/telephony/utils/AsyncResult;)V
-
-    return-void
-.end method
-
-.method static synthetic access$300(Lorg/codeaurora/ims/ImsUssdSessionImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
-    .locals 0
-    .param p0, "x0"    # Lorg/codeaurora/ims/ImsUssdSessionImpl;
-    .param p1, "x1"    # Lorg/codeaurora/telephony/utils/AsyncResult;
-
-    .line 37
-    invoke-direct {p0, p1}, Lorg/codeaurora/ims/ImsUssdSessionImpl;->onUssdMessageReceived(Lorg/codeaurora/telephony/utils/AsyncResult;)V
-
     return-void
 .end method
 
@@ -244,7 +237,7 @@
     .locals 1
     .param p0, "msg"    # Ljava/lang/String;
 
-    .line 131
+    .line 133
     if-eqz p0, :cond_0
 
     move-object v0, p0
@@ -261,80 +254,80 @@
 .method private doClose()V
     .locals 3
 
-    .line 238
+    .line 240
     const-string v0, "doClose!"
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 239
+    .line 241
     iget-object v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mCallbackHandler:Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;
 
     const/4 v1, 0x0
 
     if-eqz v0, :cond_0
 
-    .line 240
+    .line 242
     iget-object v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mCallbackHandler:Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;
 
     invoke-virtual {v0}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->dispose()V
 
-    .line 241
+    .line 243
     iput-object v1, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mCallbackHandler:Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;
 
-    .line 243
+    .line 245
     :cond_0
     iget-object v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mHandler:Landroid/os/Handler;
 
     if-eqz v0, :cond_1
 
-    .line 244
+    .line 246
     iget-object v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mCi:Lorg/codeaurora/ims/ImsSenderRxr;
 
     iget-object v2, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mHandler:Landroid/os/Handler;
 
     invoke-virtual {v0, v2}, Lorg/codeaurora/ims/ImsSenderRxr;->unregisterForUssdInfo(Landroid/os/Handler;)V
 
-    .line 245
+    .line 247
     iput-object v1, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mHandler:Landroid/os/Handler;
 
-    .line 247
+    .line 249
     :cond_1
     invoke-virtual {p0}, Lorg/codeaurora/ims/ImsUssdSessionImpl;->notifySessionClosed()V
 
-    .line 248
+    .line 250
     iget-object v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mListeners:Ljava/util/List;
 
     monitor-enter v0
 
-    .line 249
+    .line 251
     :try_start_0
     iget-object v2, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mListeners:Ljava/util/List;
 
     invoke-interface {v2}, Ljava/util/List;->clear()V
 
-    .line 250
+    .line 252
     monitor-exit v0
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    .line 251
+    .line 253
     iput-object v1, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mCi:Lorg/codeaurora/ims/ImsSenderRxr;
 
-    .line 252
+    .line 254
     iput-object v1, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mCallProfile:Landroid/telephony/ims/ImsCallProfile;
 
-    .line 253
+    .line 255
     const/4 v0, -0x1
 
     iput v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mPhoneId:I
 
-    .line 254
+    .line 256
     iput v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mState:I
 
-    .line 255
+    .line 257
     return-void
 
-    .line 250
+    .line 252
     :catchall_0
     move-exception v1
 
@@ -350,24 +343,24 @@
     .locals 5
     .param p1, "ar"    # Lorg/codeaurora/telephony/utils/AsyncResult;
 
-    .line 191
+    .line 193
     if-nez p1, :cond_0
 
-    .line 192
+    .line 194
     const-string v0, "USSD: response result is null"
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 193
+    .line 195
     return-void
 
-    .line 195
+    .line 197
     :cond_0
     iget-object v0, p1, Lorg/codeaurora/telephony/utils/AsyncResult;->exception:Ljava/lang/Throwable;
 
     if-eqz v0, :cond_1
 
-    .line 196
+    .line 198
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -376,9 +369,13 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     iget-object v1, p1, Lorg/codeaurora/telephony/utils/AsyncResult;->exception:Ljava/lang/Throwable;
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -386,21 +383,21 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 197
+    .line 199
     return-void
 
-    .line 199
+    .line 201
     :cond_1
     const-string v0, "Cancel USSD: response received"
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->d(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 200
+    .line 202
     const/16 v0, 0x8
 
     iput v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mState:I
 
-    .line 201
+    .line 203
     iget-object v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mCallbackHandler:Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;
 
     new-instance v1, Landroid/telephony/ims/ImsReasonInfo;
@@ -415,7 +412,7 @@
 
     invoke-virtual {v0, v1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->callSessionTerminated(Landroid/telephony/ims/ImsReasonInfo;)V
 
-    .line 204
+    .line 206
     return-void
 .end method
 
@@ -423,18 +420,18 @@
     .locals 5
     .param p1, "ar"    # Lorg/codeaurora/telephony/utils/AsyncResult;
 
-    .line 207
+    .line 209
     if-nez p1, :cond_0
 
-    .line 208
+    .line 210
     const-string v0, "USSD: message result is null"
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 209
+    .line 211
     return-void
 
-    .line 211
+    .line 213
     :cond_0
     iget-object v0, p1, Lorg/codeaurora/telephony/utils/AsyncResult;->exception:Ljava/lang/Throwable;
 
@@ -444,7 +441,7 @@
 
     if-eqz v0, :cond_2
 
-    .line 212
+    .line 214
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -453,9 +450,13 @@
 
     invoke-virtual {v0, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     iget-object v3, p1, Lorg/codeaurora/telephony/utils/AsyncResult;->exception:Ljava/lang/Throwable;
 
     invoke-virtual {v0, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -463,7 +464,7 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->e(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 214
+    .line 216
     iget v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mState:I
 
     if-eq v0, v1, :cond_1
@@ -472,13 +473,13 @@
 
     if-ne v0, v2, :cond_5
 
-    .line 216
+    .line 218
     :cond_1
     const/16 v0, 0x8
 
     iput v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mState:I
 
-    .line 217
+    .line 219
     iget-object v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mCallbackHandler:Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;
 
     new-instance v1, Landroid/telephony/ims/ImsReasonInfo;
@@ -495,7 +496,7 @@
 
     goto :goto_0
 
-    .line 221
+    .line 223
     :cond_2
     iget v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mState:I
 
@@ -505,46 +506,46 @@
 
     if-ne v0, v2, :cond_5
 
-    .line 223
+    .line 225
     :cond_3
     const-string v0, "USSD: message received"
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->d(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 224
+    .line 226
     iget-object v0, p1, Lorg/codeaurora/telephony/utils/AsyncResult;->result:Ljava/lang/Object;
 
     check-cast v0, Lorg/codeaurora/ims/UssdInfo;
 
-    .line 225
+    .line 227
     .local v0, "info":Lorg/codeaurora/ims/UssdInfo;
     invoke-virtual {v0}, Lorg/codeaurora/ims/UssdInfo;->getType()I
 
     move-result v1
 
-    .line 226
+    .line 228
     .local v1, "ussdMode":I
     invoke-virtual {v0}, Lorg/codeaurora/ims/UssdInfo;->getMessage()Ljava/lang/String;
 
     move-result-object v3
 
-    .line 227
+    .line 229
     .local v3, "ussdMsg":Ljava/lang/String;
     iget-object v4, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mCallbackHandler:Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;
 
     invoke-virtual {v4, v1, v3}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->callSessionUssdMessageReceived(ILjava/lang/String;)V
 
-    .line 229
+    .line 231
     if-ne v1, v2, :cond_4
 
-    .line 230
+    .line 232
     invoke-virtual {v3}, Ljava/lang/String;->isEmpty()Z
 
     move-result v2
 
     if-eqz v2, :cond_5
 
-    .line 231
+    .line 233
     :cond_4
     new-instance v2, Ljava/lang/StringBuilder;
 
@@ -554,7 +555,11 @@
 
     invoke-virtual {v2, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v2
+
     invoke-virtual {v2, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v2
 
     invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -562,10 +567,10 @@
 
     invoke-static {p0, v2}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 232
+    .line 234
     invoke-direct {p0}, Lorg/codeaurora/ims/ImsUssdSessionImpl;->doClose()V
 
-    .line 235
+    .line 237
     .end local v0    # "info":Lorg/codeaurora/ims/UssdInfo;
     .end local v1    # "ussdMode":I
     .end local v3    # "ussdMsg":Ljava/lang/String;
@@ -581,7 +586,7 @@
     .param p1, "callType"    # I
     .param p2, "profile"    # Landroid/telephony/ims/ImsStreamMediaProfile;
 
-    .line 87
+    .line 89
     invoke-virtual {p0}, Lorg/codeaurora/ims/ImsUssdSessionImpl;->isSessionValid()Z
 
     move-result v0
@@ -590,18 +595,18 @@
 
     return-void
 
-    .line 89
+    .line 91
     :cond_0
     iget-object v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mUssdInfo:Lorg/codeaurora/ims/UssdInfo;
 
     if-eqz v0, :cond_1
 
-    .line 90
+    .line 92
     const/4 v0, 0x4
 
     iput v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mState:I
 
-    .line 91
+    .line 93
     iget-object v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mCallbackHandler:Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;
 
     iget-object v1, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mUssdInfo:Lorg/codeaurora/ims/UssdInfo;
@@ -612,15 +617,15 @@
 
     iget-object v2, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mUssdInfo:Lorg/codeaurora/ims/UssdInfo;
 
-    .line 92
+    .line 94
     invoke-virtual {v2}, Lorg/codeaurora/ims/UssdInfo;->getMessage()Ljava/lang/String;
 
     move-result-object v2
 
-    .line 91
+    .line 93
     invoke-virtual {v0, v1, v2}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->callSessionUssdMessageReceived(ILjava/lang/String;)V
 
-    .line 94
+    .line 96
     :cond_1
     return-void
 .end method
@@ -628,17 +633,17 @@
 .method public close()V
     .locals 2
 
-    .line 112
+    .line 114
     const-string v0, "Close!"
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 113
+    .line 115
     iget-object v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mHandler:Landroid/os/Handler;
 
     if-eqz v0, :cond_0
 
-    .line 114
+    .line 116
     const/4 v1, 0x4
 
     invoke-virtual {v0, v1}, Landroid/os/Handler;->obtainMessage(I)Landroid/os/Message;
@@ -647,16 +652,25 @@
 
     invoke-virtual {v0}, Landroid/os/Message;->sendToTarget()V
 
-    .line 116
+    .line 118
     :cond_0
     return-void
+.end method
+
+.method public getHandler()Landroid/os/Handler;
+    .locals 1
+
+    .line 261
+    iget-object v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mHandler:Landroid/os/Handler;
+
+    return-object v0
 .end method
 
 .method public sendUssd(Ljava/lang/String;)V
     .locals 4
     .param p1, "ussdMessage"    # Ljava/lang/String;
 
-    .line 124
+    .line 126
     invoke-virtual {p0}, Lorg/codeaurora/ims/ImsUssdSessionImpl;->isSessionValid()Z
 
     move-result v0
@@ -665,7 +679,7 @@
 
     return-void
 
-    .line 126
+    .line 128
     :cond_0
     iget-object v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mCi:Lorg/codeaurora/ims/ImsSenderRxr;
 
@@ -677,15 +691,15 @@
 
     const/4 v3, 0x1
 
-    .line 127
+    .line 129
     invoke-virtual {v2, v3, p0}, Landroid/os/Handler;->obtainMessage(ILjava/lang/Object;)Landroid/os/Message;
 
     move-result-object v2
 
-    .line 126
+    .line 128
     invoke-virtual {v0, v1, v2}, Lorg/codeaurora/ims/ImsSenderRxr;->sendUssd(Ljava/lang/String;Landroid/os/Message;)V
 
-    .line 128
+    .line 130
     return-void
 .end method
 
@@ -694,7 +708,7 @@
     .param p1, "callee"    # Ljava/lang/String;
     .param p2, "profile"    # Landroid/telephony/ims/ImsCallProfile;
 
-    .line 66
+    .line 68
     invoke-virtual {p0}, Lorg/codeaurora/ims/ImsUssdSessionImpl;->isSessionValid()Z
 
     move-result v0
@@ -703,7 +717,7 @@
 
     return-void
 
-    .line 68
+    .line 70
     :cond_0
     iget-object v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mTracker:Lorg/codeaurora/ims/ImsServiceClassTracker;
 
@@ -713,12 +727,12 @@
 
     if-nez v0, :cond_1
 
-    .line 69
+    .line 71
     const-string v0, "start: USSD is not supported"
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->i(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 70
+    .line 72
     iget-object v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mCallbackHandler:Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;
 
     new-instance v1, Landroid/telephony/ims/ImsReasonInfo;
@@ -731,18 +745,18 @@
 
     invoke-direct {v1, v2, v3, v4}, Landroid/telephony/ims/ImsReasonInfo;-><init>(IILjava/lang/String;)V
 
-    invoke-virtual {v0, v1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->callSessionInitiatedFailed(Landroid/telephony/ims/ImsReasonInfo;)V
-
-    .line 73
-    return-void
+    invoke-virtual {v0, v1}, Lorg/codeaurora/ims/ImsCallSessionCallbackHandler;->callSessionInitiatingFailed(Landroid/telephony/ims/ImsReasonInfo;)V
 
     .line 75
+    return-void
+
+    .line 77
     :cond_1
     const/4 v0, 0x1
 
     iput v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mState:I
 
-    .line 76
+    .line 78
     iget-object v1, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mCi:Lorg/codeaurora/ims/ImsSenderRxr;
 
     iget-object v2, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mHandler:Landroid/os/Handler;
@@ -753,7 +767,7 @@
 
     invoke-virtual {v1, p1, v0}, Lorg/codeaurora/ims/ImsSenderRxr;->sendUssd(Ljava/lang/String;Landroid/os/Message;)V
 
-    .line 77
+    .line 79
     return-void
 .end method
 
@@ -761,7 +775,7 @@
     .locals 3
     .param p1, "reason"    # I
 
-    .line 102
+    .line 104
     invoke-virtual {p0}, Lorg/codeaurora/ims/ImsUssdSessionImpl;->isSessionValid()Z
 
     move-result v0
@@ -770,7 +784,7 @@
 
     return-void
 
-    .line 104
+    .line 106
     :cond_0
     iget-object v0, p0, Lorg/codeaurora/ims/ImsUssdSessionImpl;->mCi:Lorg/codeaurora/ims/ImsSenderRxr;
 
@@ -784,6 +798,6 @@
 
     invoke-virtual {v0, v1}, Lorg/codeaurora/ims/ImsSenderRxr;->cancelPendingUssd(Landroid/os/Message;)V
 
-    .line 105
+    .line 107
     return-void
 .end method

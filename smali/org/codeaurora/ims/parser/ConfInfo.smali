@@ -50,102 +50,85 @@
 
 .field public mNewElement:Lorg/codeaurora/ims/parser/Element;
 
-.field mParticipants:Ljava/util/LinkedList;
-    .annotation system Ldalvik/annotation/Signature;
-        value = {
-            "Ljava/util/LinkedList<",
-            "Ljava/lang/String;",
-            ">;"
-        }
-    .end annotation
-.end field
-
 
 # direct methods
 .method public constructor <init>()V
     .locals 2
 
-    .line 56
+    .line 55
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 34
+    .line 33
     const/4 v0, 0x0
 
     iput v0, p0, Lorg/codeaurora/ims/parser/ConfInfo;->VERSION_INVALID:I
 
-    .line 35
+    .line 34
     const/4 v1, 0x1
 
     iput v1, p0, Lorg/codeaurora/ims/parser/ConfInfo;->VERSION_EQUAL:I
 
-    .line 36
+    .line 35
     const/4 v1, 0x2
 
     iput v1, p0, Lorg/codeaurora/ims/parser/ConfInfo;->VERSION_GREATER:I
 
-    .line 37
+    .line 36
     const/4 v1, 0x3
 
     iput v1, p0, Lorg/codeaurora/ims/parser/ConfInfo;->VERSION_lESSER:I
 
-    .line 38
+    .line 37
     const/4 v1, 0x4
 
     iput v1, p0, Lorg/codeaurora/ims/parser/ConfInfo;->STATE_FULL:I
 
-    .line 39
+    .line 38
     const/4 v1, 0x5
 
     iput v1, p0, Lorg/codeaurora/ims/parser/ConfInfo;->STATE_PARTIAL:I
 
-    .line 40
+    .line 39
     const/4 v1, 0x6
 
     iput v1, p0, Lorg/codeaurora/ims/parser/ConfInfo;->STATE_DELETE:I
 
-    .line 41
+    .line 40
     const-string v1, "ConfInfo"
 
     iput-object v1, p0, Lorg/codeaurora/ims/parser/ConfInfo;->LOGTAG:Ljava/lang/String;
 
-    .line 42
+    .line 41
     new-instance v1, Ljava/util/ArrayList;
 
     invoke-direct {v1}, Ljava/util/ArrayList;-><init>()V
 
     iput-object v1, p0, Lorg/codeaurora/ims/parser/ConfInfo;->allowedPartial:Ljava/util/ArrayList;
 
-    .line 43
+    .line 42
     iput-boolean v0, p0, Lorg/codeaurora/ims/parser/ConfInfo;->debug:Z
 
-    .line 609
-    new-instance v0, Ljava/util/LinkedList;
-
-    invoke-direct {v0}, Ljava/util/LinkedList;-><init>()V
-
-    iput-object v0, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mParticipants:Ljava/util/LinkedList;
-
-    .line 57
+    .line 56
     new-instance v0, Lorg/codeaurora/ims/parser/Element;
 
     invoke-direct {v0}, Lorg/codeaurora/ims/parser/Element;-><init>()V
 
     iput-object v0, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mCachedElement:Lorg/codeaurora/ims/parser/Element;
 
-    .line 58
+    .line 57
     invoke-direct {p0}, Lorg/codeaurora/ims/parser/ConfInfo;->setMapAttributeWithDefaultValue()V
 
-    .line 59
+    .line 58
     new-instance v0, Lorg/codeaurora/ims/parser/Element;
 
     invoke-direct {v0}, Lorg/codeaurora/ims/parser/Element;-><init>()V
 
     iput-object v0, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mNewElement:Lorg/codeaurora/ims/parser/Element;
 
-    .line 60
+    .line 59
     invoke-direct {p0}, Lorg/codeaurora/ims/parser/ConfInfo;->preparePartialList()V
 
-    .line 61
+    .line 60
     return-void
 .end method
 
@@ -154,7 +137,7 @@
     .param p1, "key"    # Ljava/lang/String;
     .param p2, "value"    # Ljava/lang/String;
 
-    .line 565
+    .line 568
     sget-object v0, Lorg/codeaurora/ims/parser/ConfInfo;->sHandler:Lorg/codeaurora/ims/parser/SAXXMLHandler;
 
     invoke-virtual {v0}, Lorg/codeaurora/ims/parser/SAXXMLHandler;->getConferenceDescElement()Lorg/codeaurora/ims/parser/Element;
@@ -163,7 +146,7 @@
 
     invoke-virtual {v0, p1, p2}, Lorg/codeaurora/ims/parser/Element;->setAttributValue(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 566
+    .line 569
     return-void
 .end method
 
@@ -172,7 +155,7 @@
     .param p1, "key"    # Ljava/lang/String;
     .param p2, "value"    # Ljava/lang/String;
 
-    .line 561
+    .line 564
     sget-object v0, Lorg/codeaurora/ims/parser/ConfInfo;->sHandler:Lorg/codeaurora/ims/parser/SAXXMLHandler;
 
     invoke-virtual {v0}, Lorg/codeaurora/ims/parser/SAXXMLHandler;->getConferenceInfoLatestMessage()Lorg/codeaurora/ims/parser/Element;
@@ -181,7 +164,7 @@
 
     invoke-virtual {v0, p1, p2}, Lorg/codeaurora/ims/parser/Element;->setAttributValue(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 562
+    .line 565
     return-void
 .end method
 
@@ -189,10 +172,10 @@
     .locals 4
     .param p1, "element"    # Lorg/codeaurora/ims/parser/Element;
 
-    .line 503
+    .line 506
     const-string v0, "full"
 
-    .line 505
+    .line 508
     .local v0, "resultantState":Ljava/lang/String;
     const-string v1, "state"
 
@@ -200,14 +183,14 @@
 
     move-result-object v1
 
-    .line 506
+    .line 509
     .local v1, "elementState":Ljava/lang/String;
     if-eqz v1, :cond_0
 
-    .line 507
+    .line 510
     move-object v0, v1
 
-    .line 509
+    .line 512
     :cond_0
     new-instance v2, Ljava/lang/StringBuilder;
 
@@ -217,13 +200,21 @@
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v2
+
     invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v2
 
     const-string v3, " element state "
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v2
+
     invoke-virtual {v2, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v2
 
     invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -231,7 +222,7 @@
 
     invoke-virtual {p0, v2}, Lorg/codeaurora/ims/parser/ConfInfo;->debugLog(Ljava/lang/String;)V
 
-    .line 510
+    .line 513
     return-object v0
 .end method
 
@@ -239,14 +230,14 @@
     .locals 4
     .param p1, "lhs"    # Lorg/codeaurora/ims/parser/Element;
 
-    .line 569
+    .line 572
     const/4 v0, 0x0
 
-    .line 570
+    .line 573
     .local v0, "index":I
     const/4 v1, 0x0
 
-    .line 571
+    .line 574
     .local v1, "lindex":I
     invoke-virtual {p1}, Lorg/codeaurora/ims/parser/Element;->getTagName()Ljava/lang/String;
 
@@ -266,26 +257,26 @@
 
     iget-object v2, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mCachedElement:Lorg/codeaurora/ims/parser/Element;
 
-    .line 572
+    .line 575
     invoke-virtual {v2}, Lorg/codeaurora/ims/parser/Element;->getParentTag()Ljava/lang/String;
 
     move-result-object v2
 
     iget-object v3, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mCachedElement:Lorg/codeaurora/ims/parser/Element;
 
-    .line 573
+    .line 576
     invoke-virtual {v3}, Lorg/codeaurora/ims/parser/Element;->getParentTag()Ljava/lang/String;
 
     move-result-object v3
 
-    .line 572
+    .line 575
     invoke-virtual {v2, v3}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z
 
     move-result v2
 
     if-eqz v2, :cond_0
 
-    .line 581
+    .line 584
     invoke-virtual {p1}, Lorg/codeaurora/ims/parser/Element;->getMapAttribute()Ljava/util/Map;
 
     move-result-object v2
@@ -294,38 +285,38 @@
 
     iget-object v2, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mCachedElement:Lorg/codeaurora/ims/parser/Element;
 
-    .line 582
+    .line 585
     invoke-virtual {v2}, Lorg/codeaurora/ims/parser/Element;->getMapAttribute()Ljava/util/Map;
 
     move-result-object v2
 
     if-eqz v2, :cond_0
 
-    .line 583
+    .line 586
     invoke-virtual {p1}, Lorg/codeaurora/ims/parser/Element;->getMapAttribute()Ljava/util/Map;
 
     move-result-object v2
 
     iget-object v3, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mCachedElement:Lorg/codeaurora/ims/parser/Element;
 
-    .line 584
+    .line 587
     invoke-virtual {v3}, Lorg/codeaurora/ims/parser/Element;->getMapAttribute()Ljava/util/Map;
 
     move-result-object v3
 
-    .line 583
+    .line 586
     invoke-interface {v2, v3}, Ljava/util/Map;->equals(Ljava/lang/Object;)Z
 
     move-result v2
 
     if-eqz v2, :cond_0
 
-    .line 585
+    .line 588
     const/4 v2, 0x1
 
     return v2
 
-    .line 588
+    .line 591
     :cond_0
     const/4 v2, 0x0
 
@@ -335,23 +326,23 @@
 .method private dumpstate()V
     .locals 8
 
-    .line 93
+    .line 92
     iget-object v0, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mCachedElement:Lorg/codeaurora/ims/parser/Element;
 
     invoke-virtual {v0}, Lorg/codeaurora/ims/parser/Element;->getSubElementList()Ljava/util/List;
 
     move-result-object v0
 
-    .line 94
+    .line 93
     .local v0, "list":Ljava/util/List;, "Ljava/util/List<Lorg/codeaurora/ims/parser/Element;>;"
     if-eqz v0, :cond_3
 
-    .line 95
+    .line 94
     invoke-interface {v0}, Ljava/util/List;->size()I
 
     move-result v1
 
-    .line 96
+    .line 95
     .local v1, "length":I
     iget-object v2, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mCachedElement:Lorg/codeaurora/ims/parser/Element;
 
@@ -361,7 +352,7 @@
 
     invoke-virtual {p0, v2}, Lorg/codeaurora/ims/parser/ConfInfo;->debugLog(Ljava/lang/String;)V
 
-    .line 97
+    .line 96
     new-instance v2, Ljava/lang/StringBuilder;
 
     invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
@@ -370,7 +361,11 @@
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v2
+
     invoke-virtual {v2, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v2
 
     invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -378,14 +373,14 @@
 
     invoke-virtual {p0, v2}, Lorg/codeaurora/ims/parser/ConfInfo;->debugLog(Ljava/lang/String;)V
 
-    .line 98
+    .line 97
     const/4 v2, 0x0
 
     .local v2, "index":I
     :goto_0
     if-ge v2, v1, :cond_2
 
-    .line 99
+    .line 98
     new-instance v3, Ljava/lang/StringBuilder;
 
     invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
@@ -394,13 +389,19 @@
 
     invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v3
+
     invoke-virtual {v3, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v3
 
     const-string v4, "::"
 
     invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    .line 100
+    move-result-object v3
+
+    .line 99
     invoke-interface {v0, v2}, Ljava/util/List;->get(I)Ljava/lang/Object;
 
     move-result-object v4
@@ -413,14 +414,16 @@
 
     invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v3
+
     invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
     move-result-object v3
 
-    .line 99
+    .line 98
     invoke-virtual {p0, v3}, Lorg/codeaurora/ims/parser/ConfInfo;->debugLog(Ljava/lang/String;)V
 
-    .line 101
+    .line 100
     invoke-interface {v0, v2}, Ljava/util/List;->get(I)Ljava/lang/Object;
 
     move-result-object v3
@@ -433,7 +436,7 @@
 
     if-eqz v3, :cond_1
 
-    .line 102
+    .line 101
     invoke-interface {v0, v2}, Ljava/util/List;->get(I)Ljava/lang/Object;
 
     move-result-object v3
@@ -448,7 +451,7 @@
 
     move-result v3
 
-    .line 103
+    .line 102
     .local v3, "length2":I
     new-instance v4, Ljava/lang/StringBuilder;
 
@@ -458,7 +461,11 @@
 
     invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v4
+
     invoke-virtual {v4, v3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v4
 
     invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -466,21 +473,23 @@
 
     invoke-virtual {p0, v4}, Lorg/codeaurora/ims/parser/ConfInfo;->debugLog(Ljava/lang/String;)V
 
-    .line 104
+    .line 103
     const/4 v4, 0x0
 
     .local v4, "index2":I
     :goto_1
     if-ge v4, v3, :cond_0
 
-    .line 105
+    .line 104
     new-instance v6, Ljava/lang/StringBuilder;
 
     invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
 
     invoke-virtual {v6, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    .line 106
+    move-result-object v6
+
+    .line 105
     invoke-interface {v0, v2}, Ljava/util/List;->get(I)Ljava/lang/Object;
 
     move-result-object v7
@@ -497,67 +506,69 @@
 
     check-cast v7, Lorg/codeaurora/ims/parser/Element;
 
-    .line 107
+    .line 106
     invoke-virtual {v7}, Lorg/codeaurora/ims/parser/Element;->getTagName()Ljava/lang/String;
 
     move-result-object v7
 
     invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v6
+
     invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
     move-result-object v6
 
-    .line 105
+    .line 104
     invoke-virtual {p0, v6}, Lorg/codeaurora/ims/parser/ConfInfo;->debugLog(Ljava/lang/String;)V
 
-    .line 104
+    .line 103
     add-int/lit8 v4, v4, 0x1
 
     goto :goto_1
 
-    .line 109
+    .line 108
     .end local v3    # "length2":I
     .end local v4    # "index2":I
     :cond_0
     goto :goto_2
 
-    .line 110
+    .line 109
     :cond_1
     const-string v3, "List two is null"
 
     invoke-virtual {p0, v3}, Lorg/codeaurora/ims/parser/ConfInfo;->debugLog(Ljava/lang/String;)V
 
-    .line 98
+    .line 97
     :goto_2
     add-int/lit8 v2, v2, 0x1
 
     goto/16 :goto_0
 
-    .line 113
+    .line 112
     .end local v1    # "length":I
     .end local v2    # "index":I
     :cond_2
     goto :goto_3
 
-    .line 114
+    .line 113
     :cond_3
     const-string v1, "List one is null"
 
     invoke-virtual {p0, v1}, Lorg/codeaurora/ims/parser/ConfInfo;->debugLog(Ljava/lang/String;)V
 
-    .line 116
+    .line 115
     :goto_3
     invoke-virtual {p0}, Lorg/codeaurora/ims/parser/ConfInfo;->getUserUriList()[Ljava/lang/String;
 
-    .line 117
+    .line 116
     return-void
 .end method
 
 .method private getConfStateValue()I
     .locals 1
 
-    .line 605
+    .line 608
     const/4 v0, 0x1
 
     return v0
@@ -579,34 +590,34 @@
         }
     .end annotation
 
-    .line 226
+    .line 229
     .local p1, "mList":Ljava/util/List;, "Ljava/util/List<Lorg/codeaurora/ims/parser/Element;>;"
     invoke-interface {p1}, Ljava/util/List;->size()I
 
     move-result v0
 
-    .line 227
+    .line 230
     .local v0, "length":I
     const/4 v1, -0x1
 
-    .line 228
+    .line 231
     .local v1, "ret":I
     invoke-virtual {p2, p3}, Lorg/codeaurora/ims/parser/Element;->getAttributeValue(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v2
 
-    .line 229
+    .line 232
     .local v2, "value":Ljava/lang/String;
     if-eqz v2, :cond_1
 
-    .line 230
+    .line 233
     const/4 v3, 0x0
 
     .local v3, "i":I
     :goto_0
     if-ge v3, v0, :cond_1
 
-    .line 231
+    .line 234
     invoke-interface {p1, v3}, Ljava/util/List;->get(I)Ljava/lang/Object;
 
     move-result-object v4
@@ -623,19 +634,19 @@
 
     if-eqz v4, :cond_0
 
-    .line 232
+    .line 235
     move v1, v3
 
-    .line 233
+    .line 236
     goto :goto_1
 
-    .line 230
+    .line 233
     :cond_0
     add-int/lit8 v3, v3, 0x1
 
     goto :goto_0
 
-    .line 237
+    .line 240
     .end local v3    # "i":I
     :cond_1
     :goto_1
@@ -656,20 +667,20 @@
         }
     .end annotation
 
-    .line 484
+    .line 487
     .local p1, "aList":Ljava/util/List;, "Ljava/util/List<Lorg/codeaurora/ims/parser/Element;>;"
     const/4 v0, -0x1
 
-    .line 485
+    .line 488
     .local v0, "iIndex":I
     if-eqz p1, :cond_1
 
-    .line 486
+    .line 489
     invoke-interface {p1}, Ljava/util/List;->size()I
 
     move-result v1
 
-    .line 487
+    .line 490
     .local v1, "length":I
     const/4 v2, 0x0
 
@@ -677,7 +688,7 @@
     :goto_0
     if-ge v2, v1, :cond_1
 
-    .line 488
+    .line 491
     invoke-interface {p1, v2}, Ljava/util/List;->get(I)Ljava/lang/Object;
 
     move-result-object v3
@@ -694,19 +705,19 @@
 
     if-eqz v3, :cond_0
 
-    .line 489
+    .line 492
     move v0, v2
 
-    .line 490
+    .line 493
     goto :goto_1
 
-    .line 487
+    .line 490
     :cond_0
     add-int/lit8 v2, v2, 0x1
 
     goto :goto_0
 
-    .line 494
+    .line 497
     .end local v1    # "length":I
     .end local v2    # "i":I
     :cond_1
@@ -718,16 +729,16 @@
     .locals 3
     .param p1, "element"    # Lorg/codeaurora/ims/parser/Element;
 
-    .line 261
+    .line 264
     const/4 v0, 0x0
 
-    .line 262
+    .line 265
     .local v0, "ret":Ljava/lang/String;
     invoke-virtual {p1}, Lorg/codeaurora/ims/parser/Element;->getTagName()Ljava/lang/String;
 
     move-result-object v1
 
-    .line 263
+    .line 266
     .local v1, "tag":Ljava/lang/String;
     const-string v2, "user"
 
@@ -737,7 +748,7 @@
 
     if-nez v2, :cond_3
 
-    .line 264
+    .line 267
     const-string v2, "endpoint"
 
     invoke-virtual {v1, v2}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z
@@ -746,7 +757,7 @@
 
     if-nez v2, :cond_3
 
-    .line 265
+    .line 268
     const-string v2, "entry"
 
     invoke-virtual {v1, v2}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z
@@ -757,7 +768,7 @@
 
     goto :goto_0
 
-    .line 267
+    .line 270
     :cond_0
     const-string v2, "media"
 
@@ -767,12 +778,12 @@
 
     if-eqz v2, :cond_1
 
-    .line 268
+    .line 271
     const-string v0, "id"
 
     goto :goto_1
 
-    .line 269
+    .line 272
     :cond_1
     const-string v2, "sidebars-by-ref"
 
@@ -782,12 +793,12 @@
 
     if-eqz v2, :cond_2
 
-    .line 270
+    .line 273
     const-string v0, "uri"
 
     goto :goto_1
 
-    .line 272
+    .line 275
     :cond_2
     const-string v2, " :Is not supported"
 
@@ -795,12 +806,12 @@
 
     goto :goto_1
 
-    .line 266
+    .line 269
     :cond_3
     :goto_0
     const-string v0, "entity"
 
-    .line 274
+    .line 277
     :goto_1
     return-object v0
 .end method
@@ -809,12 +820,12 @@
     .locals 7
     .param p1, "e"    # Lorg/codeaurora/ims/parser/Element;
 
-    .line 196
+    .line 199
     const/4 v0, 0x4
 
     new-array v0, v0, [Ljava/lang/String;
 
-    .line 199
+    .line 202
     .local v0, "participantInfo":[Ljava/lang/String;
     const-string v1, "entity"
 
@@ -826,7 +837,7 @@
 
     aput-object v2, v0, v3
 
-    .line 202
+    .line 205
     const-string v2, "display-text"
 
     invoke-virtual {p1, v2}, Lorg/codeaurora/ims/parser/Element;->getAttributeValue(Ljava/lang/String;)Ljava/lang/String;
@@ -837,12 +848,12 @@
 
     aput-object v2, v0, v3
 
-    .line 204
+    .line 207
     invoke-virtual {p1}, Lorg/codeaurora/ims/parser/Element;->getSubElementList()Ljava/util/List;
 
     move-result-object v2
 
-    .line 205
+    .line 208
     .local v2, "userSubElements":Ljava/util/List;, "Ljava/util/List<Lorg/codeaurora/ims/parser/Element;>;"
     const/4 v3, 0x0
 
@@ -854,7 +865,7 @@
 
     if-ge v3, v4, :cond_1
 
-    .line 206
+    .line 209
     new-instance v4, Ljava/lang/StringBuilder;
 
     invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
@@ -863,11 +874,17 @@
 
     invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v4
+
     invoke-virtual {v4, v3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v4
 
     const-string v5, "]:: "
 
     invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v4
 
     invoke-interface {v2, v3}, Ljava/util/List;->get(I)Ljava/lang/Object;
 
@@ -881,13 +898,15 @@
 
     invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v4
+
     invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
     move-result-object v4
 
     invoke-virtual {p0, v4}, Lorg/codeaurora/ims/parser/ConfInfo;->log(Ljava/lang/String;)V
 
-    .line 207
+    .line 210
     invoke-interface {v2, v3}, Ljava/util/List;->get(I)Ljava/lang/Object;
 
     move-result-object v4
@@ -906,7 +925,7 @@
 
     if-eqz v4, :cond_0
 
-    .line 209
+    .line 212
     const/4 v4, 0x2
 
     invoke-interface {v2, v3}, Ljava/util/List;->get(I)Ljava/lang/Object;
@@ -921,7 +940,7 @@
 
     aput-object v5, v0, v4
 
-    .line 212
+    .line 215
     const/4 v4, 0x3
 
     invoke-interface {v2, v3}, Ljava/util/List;->get(I)Ljava/lang/Object;
@@ -938,13 +957,13 @@
 
     aput-object v5, v0, v4
 
-    .line 205
+    .line 208
     :cond_0
     add-int/lit8 v3, v3, 0x1
 
     goto :goto_0
 
-    .line 217
+    .line 220
     .end local v3    # "i":I
     :cond_1
     return-object v0
@@ -964,35 +983,35 @@
         }
     .end annotation
 
-    .line 400
+    .line 403
     .local p1, "mNewSubElementList":Ljava/util/List;, "Ljava/util/List<Lorg/codeaurora/ims/parser/Element;>;"
     .local p2, "mOldSubElementList":Ljava/util/List;, "Ljava/util/List<Lorg/codeaurora/ims/parser/Element;>;"
     const/4 v0, 0x0
 
-    .line 401
+    .line 404
     .local v0, "newSubElement":Lorg/codeaurora/ims/parser/Element;
     const/4 v1, -0x1
 
-    .line 403
+    .line 406
     .local v1, "iIndex":I
     invoke-interface {p1}, Ljava/util/List;->size()I
 
     move-result v2
 
-    .line 404
+    .line 407
     .local v2, "newListLength":I
     const-string v3, "updateNotification : HandlePartialNotification"
 
     invoke-virtual {p0, v3}, Lorg/codeaurora/ims/parser/ConfInfo;->log(Ljava/lang/String;)V
 
-    .line 405
+    .line 408
     const/4 v3, 0x0
 
     .local v3, "elementIndex":I
     :goto_0
     if-ge v3, v2, :cond_6
 
-    .line 406
+    .line 409
     invoke-interface {p1, v3}, Ljava/util/List;->get(I)Ljava/lang/Object;
 
     move-result-object v4
@@ -1001,7 +1020,7 @@
 
     check-cast v0, Lorg/codeaurora/ims/parser/Element;
 
-    .line 407
+    .line 410
     new-instance v4, Ljava/lang/StringBuilder;
 
     invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
@@ -1010,33 +1029,45 @@
 
     invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v4
+
     invoke-virtual {v4, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v4
 
     const-string v5, "at index : "
 
     invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v4
+
     invoke-virtual {v4, v3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v4
 
     const-string v5, "tag name:"
 
     invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    .line 409
+    move-result-object v4
+
+    .line 412
     invoke-virtual {v0}, Lorg/codeaurora/ims/parser/Element;->getTagName()Ljava/lang/String;
 
     move-result-object v5
 
     invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v4
+
     invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
     move-result-object v4
 
-    .line 407
+    .line 410
     invoke-virtual {p0, v4}, Lorg/codeaurora/ims/parser/ConfInfo;->debugLog(Ljava/lang/String;)V
 
-    .line 410
+    .line 413
     new-instance v4, Ljava/lang/StringBuilder;
 
     invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
@@ -1045,7 +1076,11 @@
 
     invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v4
+
     invoke-virtual {v4, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v4
 
     invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -1053,7 +1088,7 @@
 
     invoke-virtual {p0, v4}, Lorg/codeaurora/ims/parser/ConfInfo;->log(Ljava/lang/String;)V
 
-    .line 411
+    .line 414
     invoke-virtual {v0}, Lorg/codeaurora/ims/parser/Element;->getTagName()Ljava/lang/String;
 
     move-result-object v4
@@ -1064,28 +1099,28 @@
 
     if-eqz v4, :cond_3
 
-    .line 412
+    .line 415
     invoke-direct {p0, v0}, Lorg/codeaurora/ims/parser/ConfInfo;->getKey(Lorg/codeaurora/ims/parser/Element;)Ljava/lang/String;
 
     move-result-object v4
 
-    .line 413
+    .line 416
     .local v4, "key":Ljava/lang/String;
     const/4 v5, 0x0
 
     if-eqz v4, :cond_0
 
-    .line 414
+    .line 417
     const-string v6, "Key is not null"
 
     invoke-virtual {p0, v6}, Lorg/codeaurora/ims/parser/ConfInfo;->log(Ljava/lang/String;)V
 
-    .line 415
+    .line 418
     invoke-direct {p0, p2, v0, v4}, Lorg/codeaurora/ims/parser/ConfInfo;->getElementIndexOnKeyMatch(Ljava/util/List;Lorg/codeaurora/ims/parser/Element;Ljava/lang/String;)I
 
     move-result v1
 
-    .line 417
+    .line 420
     new-instance v6, Ljava/lang/StringBuilder;
 
     invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
@@ -1094,7 +1129,11 @@
 
     invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v6
+
     invoke-virtual {v6, v3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v6
 
     invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -1102,7 +1141,7 @@
 
     invoke-virtual {p0, v6}, Lorg/codeaurora/ims/parser/ConfInfo;->debugLog(Ljava/lang/String;)V
 
-    .line 420
+    .line 423
     new-instance v6, Ljava/lang/StringBuilder;
 
     invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
@@ -1111,7 +1150,11 @@
 
     invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v6
+
     invoke-virtual {v6, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v6
 
     invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -1119,21 +1162,21 @@
 
     invoke-virtual {p0, v6}, Lorg/codeaurora/ims/parser/ConfInfo;->debugLog(Ljava/lang/String;)V
 
-    .line 421
+    .line 424
     invoke-virtual {p0, p2, v5, v0, v1}, Lorg/codeaurora/ims/parser/ConfInfo;->updateNotification(Ljava/util/List;Lorg/codeaurora/ims/parser/Element;Lorg/codeaurora/ims/parser/Element;I)V
 
     goto :goto_1
 
-    .line 424
+    .line 427
     :cond_0
     const-string v6, "key is null"
 
     invoke-virtual {p0, v6}, Lorg/codeaurora/ims/parser/ConfInfo;->log(Ljava/lang/String;)V
 
-    .line 425
+    .line 428
     nop
 
-    .line 426
+    .line 429
     invoke-virtual {v0}, Lorg/codeaurora/ims/parser/Element;->getTagName()Ljava/lang/String;
 
     move-result-object v6
@@ -1142,25 +1185,25 @@
 
     move-result-object v6
 
-    .line 425
+    .line 428
     invoke-direct {p0, p2, v6}, Lorg/codeaurora/ims/parser/ConfInfo;->getElementIndexOnTagMatch(Ljava/util/List;Ljava/lang/String;)I
 
     move-result v1
 
-    .line 427
+    .line 430
     if-gez v1, :cond_1
 
-    .line 428
+    .line 431
     const-string v6, "element is not found after doing Index on key match"
 
     invoke-virtual {p0, v6}, Lorg/codeaurora/ims/parser/ConfInfo;->log(Ljava/lang/String;)V
 
-    .line 430
+    .line 433
     invoke-virtual {p0, p2, v5, v0, v1}, Lorg/codeaurora/ims/parser/ConfInfo;->updateNotification(Ljava/util/List;Lorg/codeaurora/ims/parser/Element;Lorg/codeaurora/ims/parser/Element;I)V
 
     goto :goto_1
 
-    .line 432
+    .line 435
     :cond_1
     invoke-interface {p2, v1}, Ljava/util/List;->get(I)Ljava/lang/Object;
 
@@ -1168,28 +1211,28 @@
 
     check-cast v5, Lorg/codeaurora/ims/parser/Element;
 
-    .line 433
+    .line 436
     .local v5, "tempelement":Lorg/codeaurora/ims/parser/Element;
     invoke-virtual {v5}, Lorg/codeaurora/ims/parser/Element;->getSubElementList()Ljava/util/List;
 
     move-result-object v6
 
-    .line 434
+    .line 437
     .local v6, "mOldList":Ljava/util/List;, "Ljava/util/List<Lorg/codeaurora/ims/parser/Element;>;"
     invoke-virtual {v0}, Lorg/codeaurora/ims/parser/Element;->getSubElementList()Ljava/util/List;
 
     move-result-object v7
 
-    .line 435
+    .line 438
     .local v7, "mNewList":Ljava/util/List;, "Ljava/util/List<Lorg/codeaurora/ims/parser/Element;>;"
     if-eqz v7, :cond_2
 
     if-eqz v6, :cond_2
 
-    .line 436
+    .line 439
     invoke-direct {p0, v7, v6}, Lorg/codeaurora/ims/parser/ConfInfo;->handleNotificationOnSubElements(Ljava/util/List;Ljava/util/List;)V
 
-    .line 439
+    .line 442
     .end local v4    # "key":Ljava/lang/String;
     .end local v5    # "tempelement":Lorg/codeaurora/ims/parser/Element;
     .end local v6    # "mOldList":Ljava/util/List;, "Ljava/util/List<Lorg/codeaurora/ims/parser/Element;>;"
@@ -1198,16 +1241,16 @@
     :goto_1
     goto :goto_2
 
-    .line 440
+    .line 443
     :cond_3
     const-string v4, "Tag not valid for Partial Notification"
 
     invoke-virtual {p0, v4}, Lorg/codeaurora/ims/parser/ConfInfo;->log(Ljava/lang/String;)V
 
-    .line 441
+    .line 444
     nop
 
-    .line 442
+    .line 445
     invoke-virtual {v0}, Lorg/codeaurora/ims/parser/Element;->getTagName()Ljava/lang/String;
 
     move-result-object v4
@@ -1216,12 +1259,12 @@
 
     move-result-object v4
 
-    .line 441
+    .line 444
     invoke-direct {p0, p2, v4}, Lorg/codeaurora/ims/parser/ConfInfo;->getElementIndexOnTagMatch(Ljava/util/List;Ljava/lang/String;)I
 
     move-result v1
 
-    .line 443
+    .line 446
     new-instance v4, Ljava/lang/StringBuilder;
 
     invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
@@ -1229,6 +1272,8 @@
     const-string v5, "newSubElement Tag Name: "
 
     invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v4
 
     invoke-virtual {v0}, Lorg/codeaurora/ims/parser/Element;->getTagName()Ljava/lang/String;
 
@@ -1240,53 +1285,55 @@
 
     invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v4
+
     invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
     move-result-object v4
 
     invoke-virtual {p0, v4}, Lorg/codeaurora/ims/parser/ConfInfo;->debugLog(Ljava/lang/String;)V
 
-    .line 444
+    .line 447
     if-ltz v1, :cond_4
 
-    .line 445
+    .line 448
     invoke-interface {p2, v1}, Ljava/util/List;->get(I)Ljava/lang/Object;
 
     move-result-object v4
 
     check-cast v4, Lorg/codeaurora/ims/parser/Element;
 
-    .line 446
+    .line 449
     .local v4, "tempelement":Lorg/codeaurora/ims/parser/Element;
     invoke-virtual {p0, p2, v4, v0, v1}, Lorg/codeaurora/ims/parser/ConfInfo;->updateNotification(Ljava/util/List;Lorg/codeaurora/ims/parser/Element;Lorg/codeaurora/ims/parser/Element;I)V
 
     goto :goto_2
 
-    .line 449
+    .line 452
     .end local v4    # "tempelement":Lorg/codeaurora/ims/parser/Element;
     :cond_4
     const-string v4, "May be tags are not at same level checking it by reindexing one level up"
 
     invoke-virtual {p0, v4}, Lorg/codeaurora/ims/parser/ConfInfo;->log(Ljava/lang/String;)V
 
-    .line 450
+    .line 453
     if-eqz p2, :cond_5
 
-    .line 451
+    .line 454
     invoke-direct {p0, p2, v0}, Lorg/codeaurora/ims/parser/ConfInfo;->reIndexOldElementList(Ljava/util/List;Lorg/codeaurora/ims/parser/Element;)Ljava/util/List;
 
-    .line 452
+    .line 455
     invoke-interface {p2, v1}, Ljava/util/List;->get(I)Ljava/lang/Object;
 
     move-result-object v4
 
     check-cast v4, Lorg/codeaurora/ims/parser/Element;
 
-    .line 453
+    .line 456
     .restart local v4    # "tempelement":Lorg/codeaurora/ims/parser/Element;
     invoke-virtual {p0, p2, v4, v0, v1}, Lorg/codeaurora/ims/parser/ConfInfo;->updateNotification(Ljava/util/List;Lorg/codeaurora/ims/parser/Element;Lorg/codeaurora/ims/parser/Element;I)V
 
-    .line 405
+    .line 408
     .end local v4    # "tempelement":Lorg/codeaurora/ims/parser/Element;
     :cond_5
     :goto_2
@@ -1294,7 +1341,7 @@
 
     goto/16 :goto_0
 
-    .line 459
+    .line 462
     .end local v3    # "elementIndex":I
     :cond_6
     return-void
@@ -1304,7 +1351,7 @@
     .locals 1
     .param p1, "tagname"    # Ljava/lang/String;
 
-    .line 290
+    .line 293
     iget-object v0, p0, Lorg/codeaurora/ims/parser/ConfInfo;->allowedPartial:Ljava/util/ArrayList;
 
     invoke-virtual {v0, p1}, Ljava/util/ArrayList;->contains(Ljava/lang/Object;)Z
@@ -1317,49 +1364,49 @@
 .method private preparePartialList()V
     .locals 2
 
-    .line 281
+    .line 284
     iget-object v0, p0, Lorg/codeaurora/ims/parser/ConfInfo;->allowedPartial:Ljava/util/ArrayList;
 
     const-string v1, "conference-info"
 
     invoke-virtual {v0, v1}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
-    .line 282
+    .line 285
     iget-object v0, p0, Lorg/codeaurora/ims/parser/ConfInfo;->allowedPartial:Ljava/util/ArrayList;
 
     const-string v1, "users"
 
     invoke-virtual {v0, v1}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
-    .line 283
+    .line 286
     iget-object v0, p0, Lorg/codeaurora/ims/parser/ConfInfo;->allowedPartial:Ljava/util/ArrayList;
 
     const-string v1, "user"
 
     invoke-virtual {v0, v1}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
-    .line 284
+    .line 287
     iget-object v0, p0, Lorg/codeaurora/ims/parser/ConfInfo;->allowedPartial:Ljava/util/ArrayList;
 
     const-string v1, "endpoint"
 
     invoke-virtual {v0, v1}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
-    .line 285
+    .line 288
     iget-object v0, p0, Lorg/codeaurora/ims/parser/ConfInfo;->allowedPartial:Ljava/util/ArrayList;
 
     const-string v1, "sidebars-by-val"
 
     invoke-virtual {v0, v1}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
-    .line 286
+    .line 289
     iget-object v0, p0, Lorg/codeaurora/ims/parser/ConfInfo;->allowedPartial:Ljava/util/ArrayList;
 
     const-string v1, "sidebars-by-ref"
 
     invoke-virtual {v0, v1}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
-    .line 287
+    .line 290
     return-void
 .end method
 
@@ -1380,11 +1427,11 @@
         }
     .end annotation
 
-    .line 467
+    .line 470
     .local p1, "mOldSubElementList":Ljava/util/List;, "Ljava/util/List<Lorg/codeaurora/ims/parser/Element;>;"
     if-eqz p1, :cond_2
 
-    .line 468
+    .line 471
     const/4 v0, 0x0
 
     .local v0, "index":I
@@ -1395,14 +1442,14 @@
 
     if-ge v0, v1, :cond_1
 
-    .line 469
+    .line 472
     invoke-interface {p1, v0}, Ljava/util/List;->get(I)Ljava/lang/Object;
 
     move-result-object v1
 
     check-cast v1, Lorg/codeaurora/ims/parser/Element;
 
-    .line 470
+    .line 473
     .local v1, "temp":Lorg/codeaurora/ims/parser/Element;
     invoke-virtual {v1}, Lorg/codeaurora/ims/parser/Element;->getTagName()Ljava/lang/String;
 
@@ -1418,7 +1465,7 @@
 
     if-eqz v2, :cond_0
 
-    .line 471
+    .line 474
     new-instance v2, Ljava/lang/StringBuilder;
 
     invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
@@ -1427,32 +1474,40 @@
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v2
+
     invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v2
 
     const-string v3, "]"
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    .line 472
+    move-result-object v2
+
+    .line 475
     invoke-virtual {v1}, Lorg/codeaurora/ims/parser/Element;->getTagName()Ljava/lang/String;
 
     move-result-object v3
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v2
+
     invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
     move-result-object v2
 
-    .line 471
+    .line 474
     invoke-virtual {p0, v2}, Lorg/codeaurora/ims/parser/ConfInfo;->debugLog(Ljava/lang/String;)V
 
-    .line 473
+    .line 476
     invoke-virtual {v1}, Lorg/codeaurora/ims/parser/Element;->getSubElementList()Ljava/util/List;
 
     move-result-object p1
 
-    .line 468
+    .line 471
     .end local v1    # "temp":Lorg/codeaurora/ims/parser/Element;
     :cond_0
     add-int/lit8 v0, v0, 0x1
@@ -1463,13 +1518,13 @@
     :cond_1
     goto :goto_1
 
-    .line 477
+    .line 480
     :cond_2
     const-string v0, "old element list is null"
 
     invoke-virtual {p0, v0}, Lorg/codeaurora/ims/parser/ConfInfo;->debugLog(Ljava/lang/String;)V
 
-    .line 480
+    .line 483
     :goto_1
     return-object p1
 .end method
@@ -1477,12 +1532,12 @@
 .method private setMapAttributeWithDefaultValue()V
     .locals 3
 
-    .line 64
+    .line 63
     iget-object v0, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mCachedElement:Lorg/codeaurora/ims/parser/Element;
 
     invoke-virtual {v0}, Lorg/codeaurora/ims/parser/Element;->setMapAttribute()V
 
-    .line 65
+    .line 64
     iget-object v0, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mCachedElement:Lorg/codeaurora/ims/parser/Element;
 
     invoke-virtual {v0}, Lorg/codeaurora/ims/parser/Element;->getMapAttribute()Ljava/util/Map;
@@ -1495,7 +1550,7 @@
 
     invoke-interface {v0, v1, v2}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 66
+    .line 65
     return-void
 .end method
 
@@ -1503,10 +1558,10 @@
     .locals 0
     .param p0, "handler"    # Lorg/codeaurora/ims/parser/SAXXMLHandler;
 
-    .line 69
+    .line 68
     sput-object p0, Lorg/codeaurora/ims/parser/ConfInfo;->sHandler:Lorg/codeaurora/ims/parser/SAXXMLHandler;
 
-    .line 70
+    .line 69
     return-void
 .end method
 
@@ -1515,10 +1570,10 @@
     .param p1, "cachedElement"    # Lorg/codeaurora/ims/parser/Element;
     .param p2, "newElement"    # Lorg/codeaurora/ims/parser/Element;
 
-    .line 246
+    .line 249
     new-instance v0, Ljava/util/HashSet;
 
-    .line 247
+    .line 250
     invoke-virtual {p2}, Lorg/codeaurora/ims/parser/Element;->getMapAttribute()Ljava/util/Map;
 
     move-result-object v1
@@ -1529,13 +1584,13 @@
 
     invoke-direct {v0, v1}, Ljava/util/HashSet;-><init>(Ljava/util/Collection;)V
 
-    .line 248
+    .line 251
     .local v0, "newElementTags":Ljava/util/Set;, "Ljava/util/Set<Ljava/lang/String;>;"
     invoke-interface {v0}, Ljava/util/Set;->toArray()[Ljava/lang/Object;
 
     move-result-object v1
 
-    .line 249
+    .line 252
     .local v1, "mappedKeys":[Ljava/lang/Object;
     const/4 v2, 0x0
 
@@ -1545,32 +1600,32 @@
 
     if-ge v2, v3, :cond_0
 
-    .line 250
+    .line 253
     aget-object v3, v1, v2
 
     invoke-virtual {v3}, Ljava/lang/Object;->toString()Ljava/lang/String;
 
     move-result-object v3
 
-    .line 251
+    .line 254
     .local v3, "key":Ljava/lang/String;
     nop
 
-    .line 252
+    .line 255
     invoke-virtual {p2, v3}, Lorg/codeaurora/ims/parser/Element;->getAttributeValue(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v4
 
-    .line 251
+    .line 254
     invoke-virtual {p1, v3, v4}, Lorg/codeaurora/ims/parser/Element;->setAttributValue(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 249
+    .line 252
     .end local v3    # "key":Ljava/lang/String;
     add-int/lit8 v2, v2, 0x1
 
     goto :goto_0
 
-    .line 254
+    .line 257
     .end local v2    # "i":I
     :cond_0
     return-void
@@ -1582,10 +1637,10 @@
     .locals 0
     .param p1, "element"    # Lorg/codeaurora/ims/parser/Element;
 
-    .line 557
+    .line 560
     iput-object p1, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mCachedElement:Lorg/codeaurora/ims/parser/Element;
 
-    .line 558
+    .line 561
     return-void
 .end method
 
@@ -1594,12 +1649,12 @@
     .param p1, "key"    # Ljava/lang/String;
     .param p2, "value"    # Ljava/lang/String;
 
-    .line 553
+    .line 556
     iget-object v0, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mCachedElement:Lorg/codeaurora/ims/parser/Element;
 
     invoke-virtual {v0, p1, p2}, Lorg/codeaurora/ims/parser/Element;->setAttributValue(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 554
+    .line 557
     return-void
 .end method
 
@@ -1618,13 +1673,13 @@
         }
     .end annotation
 
-    .line 549
+    .line 552
     .local p1, "parent":Ljava/util/Map;, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;"
     const-string v0, "state"
 
     invoke-interface {p1, v0, p2}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 550
+    .line 553
     return-void
 .end method
 
@@ -1643,7 +1698,7 @@
         }
     .end annotation
 
-    .line 532
+    .line 535
     .local p1, "parent":Ljava/util/Map;, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;"
     const-string v0, "version"
 
@@ -1653,7 +1708,7 @@
 
     if-eqz v1, :cond_0
 
-    .line 533
+    .line 536
     invoke-interface {p1, v0}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
 
     move-result-object v1
@@ -1666,27 +1721,27 @@
 
     if-nez v1, :cond_0
 
-    .line 534
+    .line 537
     invoke-interface {p1, v0}, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 537
+    .line 540
     :cond_0
     invoke-interface {p1, v0, p2}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 538
+    .line 541
     return-void
 .end method
 
 .method public clearAndSetDefault()V
     .locals 0
 
-    .line 600
+    .line 603
     invoke-virtual {p0}, Lorg/codeaurora/ims/parser/ConfInfo;->dispose()V
 
-    .line 601
+    .line 604
     invoke-direct {p0}, Lorg/codeaurora/ims/parser/ConfInfo;->setMapAttributeWithDefaultValue()V
 
-    .line 602
+    .line 605
     return-void
 .end method
 
@@ -1694,17 +1749,17 @@
     .locals 1
     .param p1, "str"    # Ljava/lang/String;
 
-    .line 81
+    .line 80
     iget-boolean v0, p0, Lorg/codeaurora/ims/parser/ConfInfo;->debug:Z
 
     if-eqz v0, :cond_0
 
-    .line 82
+    .line 81
     iget-object v0, p0, Lorg/codeaurora/ims/parser/ConfInfo;->LOGTAG:Ljava/lang/String;
 
     invoke-static {v0, p1}, Lcom/qualcomm/ims/utils/Log;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 83
+    .line 82
     :cond_0
     return-void
 .end method
@@ -1712,27 +1767,27 @@
 .method public dispose()V
     .locals 1
 
-    .line 592
+    .line 595
     iget-object v0, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mCachedElement:Lorg/codeaurora/ims/parser/Element;
 
     if-eqz v0, :cond_0
-
-    .line 593
-    invoke-virtual {v0}, Lorg/codeaurora/ims/parser/Element;->ClearAll()V
-
-    .line 594
-    :cond_0
-    invoke-static {}, Lorg/codeaurora/ims/parser/Element;->clearMatchedElementsList()V
-
-    .line 595
-    iget-object v0, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mNewElement:Lorg/codeaurora/ims/parser/Element;
-
-    if-eqz v0, :cond_1
 
     .line 596
     invoke-virtual {v0}, Lorg/codeaurora/ims/parser/Element;->ClearAll()V
 
     .line 597
+    :cond_0
+    invoke-static {}, Lorg/codeaurora/ims/parser/Element;->clearMatchedElementsList()V
+
+    .line 598
+    iget-object v0, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mNewElement:Lorg/codeaurora/ims/parser/Element;
+
+    if-eqz v0, :cond_1
+
+    .line 599
+    invoke-virtual {v0}, Lorg/codeaurora/ims/parser/Element;->ClearAll()V
+
+    .line 600
     :cond_1
     return-void
 .end method
@@ -1740,17 +1795,12 @@
 .method public getConfUriList()Landroid/telephony/ims/ImsConferenceState;
     .locals 12
 
-    .line 153
-    iget-object v0, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mParticipants:Ljava/util/LinkedList;
-
-    invoke-virtual {v0}, Ljava/util/LinkedList;->clear()V
-
-    .line 154
+    .line 152
     iget-object v0, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mCachedElement:Lorg/codeaurora/ims/parser/Element;
 
     if-eqz v0, :cond_2
 
-    .line 155
+    .line 153
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1759,9 +1809,13 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     iget-object v1, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mCachedElement:Lorg/codeaurora/ims/parser/Element;
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -1769,7 +1823,7 @@
 
     invoke-virtual {p0, v0}, Lorg/codeaurora/ims/parser/ConfInfo;->log(Ljava/lang/String;)V
 
-    .line 156
+    .line 154
     iget-object v0, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mCachedElement:Lorg/codeaurora/ims/parser/Element;
 
     const-string v1, "version"
@@ -1778,7 +1832,7 @@
 
     move-result-object v0
 
-    .line 157
+    .line 155
     .local v0, "version":Ljava/lang/String;
     new-instance v1, Ljava/lang/StringBuilder;
 
@@ -1788,7 +1842,11 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -1796,7 +1854,7 @@
 
     invoke-virtual {p0, v1}, Lorg/codeaurora/ims/parser/ConfInfo;->debugLog(Ljava/lang/String;)V
 
-    .line 158
+    .line 156
     if-eqz v0, :cond_1
 
     const-string v1, "NotApplicable"
@@ -1807,10 +1865,10 @@
 
     if-nez v1, :cond_1
 
-    .line 160
+    .line 158
     invoke-static {}, Lorg/codeaurora/ims/parser/Element;->clearMatchedElementsList()V
 
-    .line 161
+    .line 159
     iget-object v1, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mCachedElement:Lorg/codeaurora/ims/parser/Element;
 
     const-string v2, "user"
@@ -1821,13 +1879,13 @@
 
     move-result-object v1
 
-    .line 163
+    .line 161
     .local v1, "usersList":Ljava/util/ArrayList;, "Ljava/util/ArrayList<Lorg/codeaurora/ims/parser/Element;>;"
     invoke-virtual {v1}, Ljava/util/ArrayList;->size()I
 
     move-result v3
 
-    .line 164
+    .line 162
     .local v3, "length":I
     new-instance v4, Ljava/lang/StringBuilder;
 
@@ -1837,7 +1895,11 @@
 
     invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v4
+
     invoke-virtual {v4, v3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v4
 
     invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -1845,204 +1907,207 @@
 
     invoke-virtual {p0, v4}, Lorg/codeaurora/ims/parser/ConfInfo;->log(Ljava/lang/String;)V
 
-    .line 165
-    invoke-static {}, Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+    .line 163
+    new-instance v4, Landroid/telephony/ims/ImsConferenceState;
 
-    move-result-object v4
-
-    .line 166
-    .local v4, "p":Landroid/os/Parcel;
-    invoke-virtual {v4, v3}, Landroid/os/Parcel;->writeInt(I)V
+    invoke-direct {v4}, Landroid/telephony/ims/ImsConferenceState;-><init>()V
 
     .line 167
+    .local v4, "confState":Landroid/telephony/ims/ImsConferenceState;
     const/4 v5, 0x0
 
     .local v5, "index":I
     :goto_0
-    const/4 v6, 0x0
-
     if-ge v5, v3, :cond_0
 
     .line 168
     invoke-virtual {v1, v5}, Ljava/util/ArrayList;->get(I)Ljava/lang/Object;
 
-    move-result-object v7
+    move-result-object v6
 
-    check-cast v7, Lorg/codeaurora/ims/parser/Element;
+    check-cast v6, Lorg/codeaurora/ims/parser/Element;
 
-    invoke-direct {p0, v7}, Lorg/codeaurora/ims/parser/ConfInfo;->getParticipantInfoFromElement(Lorg/codeaurora/ims/parser/Element;)[Ljava/lang/String;
+    invoke-direct {p0, v6}, Lorg/codeaurora/ims/parser/ConfInfo;->getParticipantInfoFromElement(Lorg/codeaurora/ims/parser/Element;)[Ljava/lang/String;
 
-    move-result-object v7
+    move-result-object v6
 
     .line 170
-    .local v7, "participantInfo":[Ljava/lang/String;
-    new-instance v8, Ljava/lang/StringBuilder;
+    .local v6, "participantInfo":[Ljava/lang/String;
+    new-instance v7, Ljava/lang/StringBuilder;
 
-    invoke-direct {v8}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v7}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v9, "getConfUriList["
+    const-string v8, "getConfUriList["
 
-    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v8, v5}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    move-result-object v7
 
-    const-string v9, "] -> userEntity="
+    invoke-virtual {v7, v5}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v7
 
-    aget-object v9, v7, v6
+    const-string v8, "] -> userEntity="
+
+    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v7
+
+    const/4 v8, 0x0
+
+    aget-object v9, v6, v8
 
     .line 171
     invoke-static {v9}, Lcom/qualcomm/ims/utils/Log;->pii(Ljava/lang/Object;)Ljava/lang/String;
 
     move-result-object v9
 
-    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v7, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v7
 
     const-string v9, ", Display Text="
 
-    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v7, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v7
 
     const/4 v9, 0x1
 
-    aget-object v9, v7, v9
+    aget-object v9, v6, v9
 
     .line 172
     invoke-static {v9}, Lcom/qualcomm/ims/utils/Log;->pii(Ljava/lang/Object;)Ljava/lang/String;
 
     move-result-object v9
 
-    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v7, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v7
 
     const-string v9, ", endPoint="
 
-    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v7, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v7
 
     const/4 v9, 0x2
 
-    aget-object v10, v7, v9
+    aget-object v10, v6, v9
 
     .line 173
     invoke-static {v10}, Lcom/qualcomm/ims/utils/Log;->pii(Ljava/lang/Object;)Ljava/lang/String;
 
     move-result-object v10
 
-    invoke-virtual {v8, v10}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v7, v10}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v7
 
     const-string v10, ", status="
 
-    invoke-virtual {v8, v10}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v7, v10}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v7
 
     const/4 v10, 0x3
 
-    aget-object v11, v7, v10
+    aget-object v11, v6, v10
 
-    invoke-virtual {v8, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v7, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v7
+
+    invoke-virtual {v7}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v7
+
+    .line 170
+    invoke-virtual {p0, v7}, Lorg/codeaurora/ims/parser/ConfInfo;->log(Ljava/lang/String;)V
+
+    .line 178
+    new-instance v7, Landroid/os/Bundle;
+
+    invoke-direct {v7}, Landroid/os/Bundle;-><init>()V
+
+    .line 179
+    .local v7, "b":Landroid/os/Bundle;
+    aget-object v11, v6, v8
+
+    invoke-virtual {v7, v2, v11}, Landroid/os/Bundle;->putString(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 180
+    aget-object v9, v6, v9
+
+    const-string v11, "endpoint"
+
+    invoke-virtual {v7, v11, v9}, Landroid/os/Bundle;->putString(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 181
+    aget-object v9, v6, v10
+
+    const-string v10, "status"
+
+    invoke-virtual {v7, v10, v9}, Landroid/os/Bundle;->putString(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 186
+    iget-object v9, v4, Landroid/telephony/ims/ImsConferenceState;->mParticipants:Ljava/util/HashMap;
+
+    new-instance v10, Ljava/lang/StringBuilder;
+
+    invoke-direct {v10}, Ljava/lang/StringBuilder;-><init>()V
+
+    aget-object v8, v6, v8
+
+    invoke-virtual {v10, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v8
+
+    const-string v10, "_"
+
+    invoke-virtual {v8, v10}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v8
+
+    invoke-virtual {v8, v5}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v8
 
     invoke-virtual {v8}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
     move-result-object v8
 
-    .line 170
-    invoke-virtual {p0, v8}, Lorg/codeaurora/ims/parser/ConfInfo;->log(Ljava/lang/String;)V
-
-    .line 176
-    aget-object v8, v7, v6
-
-    invoke-virtual {v4, v8}, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
-
-    .line 177
-    iget-object v8, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mParticipants:Ljava/util/LinkedList;
-
-    aget-object v11, v7, v6
-
-    invoke-virtual {v8, v11}, Ljava/util/LinkedList;->offer(Ljava/lang/Object;)Z
-
-    .line 179
-    new-instance v8, Landroid/os/Bundle;
-
-    invoke-direct {v8}, Landroid/os/Bundle;-><init>()V
-
-    .line 180
-    .local v8, "b":Landroid/os/Bundle;
-    aget-object v11, v7, v6
-
-    invoke-virtual {v8, v2, v11}, Landroid/os/Bundle;->putString(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 181
-    aget-object v9, v7, v9
-
-    const-string v11, "endpoint"
-
-    invoke-virtual {v8, v11, v9}, Landroid/os/Bundle;->putString(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 182
-    aget-object v9, v7, v10
-
-    const-string v10, "status"
-
-    invoke-virtual {v8, v10, v9}, Landroid/os/Bundle;->putString(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 184
-    invoke-virtual {v4, v8, v6}, Landroid/os/Parcel;->writeParcelable(Landroid/os/Parcelable;I)V
+    invoke-virtual {v9, v8, v7}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 167
-    .end local v7    # "participantInfo":[Ljava/lang/String;
-    .end local v8    # "b":Landroid/os/Bundle;
+    .end local v6    # "participantInfo":[Ljava/lang/String;
+    .end local v7    # "b":Landroid/os/Bundle;
     add-int/lit8 v5, v5, 0x1
 
     goto/16 :goto_0
 
-    .line 186
+    .line 189
     .end local v5    # "index":I
     :cond_0
-    invoke-virtual {v4, v6}, Landroid/os/Parcel;->setDataPosition(I)V
+    return-object v4
 
-    .line 187
-    sget-object v2, Landroid/telephony/ims/ImsConferenceState;->CREATOR:Landroid/os/Parcelable$Creator;
-
-    invoke-interface {v2, v4}, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
-
-    move-result-object v2
-
-    check-cast v2, Landroid/telephony/ims/ImsConferenceState;
-
-    return-object v2
-
-    .line 189
+    .line 192
     .end local v0    # "version":Ljava/lang/String;
     .end local v1    # "usersList":Ljava/util/ArrayList;, "Ljava/util/ArrayList<Lorg/codeaurora/ims/parser/Element;>;"
     .end local v3    # "length":I
-    .end local v4    # "p":Landroid/os/Parcel;
+    .end local v4    # "confState":Landroid/telephony/ims/ImsConferenceState;
     :cond_1
     goto :goto_1
 
-    .line 190
+    .line 193
     :cond_2
     const-string v0, "conf_version not valid"
 
     invoke-virtual {p0, v0}, Lorg/codeaurora/ims/parser/ConfInfo;->log(Ljava/lang/String;)V
 
-    .line 192
+    .line 195
     :goto_1
     const/4 v0, 0x0
-
-    return-object v0
-.end method
-
-.method public getParticipants()Ljava/util/LinkedList;
-    .locals 1
-    .annotation system Ldalvik/annotation/Signature;
-        value = {
-            "()",
-            "Ljava/util/LinkedList<",
-            "Ljava/lang/String;",
-            ">;"
-        }
-    .end annotation
-
-    .line 611
-    iget-object v0, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mParticipants:Ljava/util/LinkedList;
 
     return-object v0
 .end method
@@ -2060,7 +2125,7 @@
         }
     .end annotation
 
-    .line 541
+    .line 544
     .local p1, "parent":Ljava/util/Map;, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;"
     const-string v0, "state"
 
@@ -2070,7 +2135,7 @@
 
     if-eqz v1, :cond_0
 
-    .line 542
+    .line 545
     invoke-interface {p1, v0}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
 
     move-result-object v0
@@ -2079,7 +2144,7 @@
 
     return-object v0
 
-    .line 544
+    .line 547
     :cond_0
     const/4 v0, 0x0
 
@@ -2089,16 +2154,16 @@
 .method public getUserUriList()[Ljava/lang/String;
     .locals 7
 
-    .line 123
+    .line 122
     const/4 v0, 0x0
 
-    .line 124
+    .line 123
     .local v0, "userUri":[Ljava/lang/String;
     iget-object v1, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mCachedElement:Lorg/codeaurora/ims/parser/Element;
 
     if-eqz v1, :cond_1
 
-    .line 125
+    .line 124
     new-instance v1, Ljava/lang/StringBuilder;
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
@@ -2107,9 +2172,13 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     iget-object v2, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mCachedElement:Lorg/codeaurora/ims/parser/Element;
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -2117,7 +2186,7 @@
 
     invoke-virtual {p0, v1}, Lorg/codeaurora/ims/parser/ConfInfo;->log(Ljava/lang/String;)V
 
-    .line 126
+    .line 125
     iget-object v1, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mCachedElement:Lorg/codeaurora/ims/parser/Element;
 
     const-string v2, "version"
@@ -2126,7 +2195,7 @@
 
     move-result-object v1
 
-    .line 127
+    .line 126
     .local v1, "version":Ljava/lang/String;
     new-instance v2, Ljava/lang/StringBuilder;
 
@@ -2136,7 +2205,11 @@
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v2
+
     invoke-virtual {v2, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v2
 
     invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -2144,7 +2217,7 @@
 
     invoke-virtual {p0, v2}, Lorg/codeaurora/ims/parser/ConfInfo;->debugLog(Ljava/lang/String;)V
 
-    .line 128
+    .line 127
     if-eqz v1, :cond_0
 
     const-string v2, "NotApplicable"
@@ -2155,10 +2228,10 @@
 
     if-nez v2, :cond_0
 
-    .line 131
+    .line 130
     invoke-static {}, Lorg/codeaurora/ims/parser/Element;->clearMatchedElementsList()V
 
-    .line 132
+    .line 131
     iget-object v2, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mCachedElement:Lorg/codeaurora/ims/parser/Element;
 
     const-string v3, "user"
@@ -2169,13 +2242,13 @@
 
     move-result-object v2
 
-    .line 134
+    .line 133
     .local v2, "usersList":Ljava/util/ArrayList;, "Ljava/util/ArrayList<Lorg/codeaurora/ims/parser/Element;>;"
     invoke-virtual {v2}, Ljava/util/ArrayList;->size()I
 
     move-result v3
 
-    .line 135
+    .line 134
     .local v3, "length":I
     new-instance v4, Ljava/lang/StringBuilder;
 
@@ -2185,7 +2258,11 @@
 
     invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v4
+
     invoke-virtual {v4, v3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v4
 
     invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -2193,17 +2270,17 @@
 
     invoke-virtual {p0, v4}, Lorg/codeaurora/ims/parser/ConfInfo;->log(Ljava/lang/String;)V
 
-    .line 136
+    .line 135
     new-array v0, v3, [Ljava/lang/String;
 
-    .line 137
+    .line 136
     const/4 v4, 0x0
 
     .local v4, "index":I
     :goto_0
     if-ge v4, v3, :cond_0
 
-    .line 138
+    .line 137
     invoke-virtual {v2, v4}, Ljava/util/ArrayList;->get(I)Ljava/lang/Object;
 
     move-result-object v5
@@ -2218,7 +2295,7 @@
 
     aput-object v5, v0, v4
 
-    .line 140
+    .line 139
     new-instance v5, Ljava/lang/StringBuilder;
 
     invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
@@ -2226,6 +2303,8 @@
     const-string v6, "Inside getUser URI list"
 
     invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v5
 
     aget-object v6, v0, v4
 
@@ -2235,18 +2314,20 @@
 
     invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v5
+
     invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
     move-result-object v5
 
     invoke-virtual {p0, v5}, Lorg/codeaurora/ims/parser/ConfInfo;->log(Ljava/lang/String;)V
 
-    .line 137
+    .line 136
     add-int/lit8 v4, v4, 0x1
 
     goto :goto_0
 
-    .line 143
+    .line 142
     .end local v1    # "version":Ljava/lang/String;
     .end local v2    # "usersList":Ljava/util/ArrayList;, "Ljava/util/ArrayList<Lorg/codeaurora/ims/parser/Element;>;"
     .end local v3    # "length":I
@@ -2254,13 +2335,13 @@
     :cond_0
     goto :goto_1
 
-    .line 144
+    .line 143
     :cond_1
     const-string v1, "conf_version not valid"
 
     invoke-virtual {p0, v1}, Lorg/codeaurora/ims/parser/ConfInfo;->log(Ljava/lang/String;)V
 
-    .line 146
+    .line 145
     :goto_1
     return-object v0
 .end method
@@ -2269,12 +2350,12 @@
     .locals 1
     .param p1, "str"    # Ljava/lang/String;
 
-    .line 86
+    .line 85
     iget-object v0, p0, Lorg/codeaurora/ims/parser/ConfInfo;->LOGTAG:Ljava/lang/String;
 
     invoke-static {v0, p1}, Lcom/qualcomm/ims/utils/Log;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 87
+    .line 86
     return-void
 .end method
 
@@ -2282,18 +2363,18 @@
     .locals 6
     .param p1, "confxml"    # [B
 
-    .line 73
+    .line 72
     new-instance v0, Ljava/io/ByteArrayInputStream;
 
     invoke-direct {v0, p1}, Ljava/io/ByteArrayInputStream;-><init>([B)V
 
-    .line 74
+    .line 73
     .local v0, "is":Ljava/io/InputStream;
     invoke-static {}, Lorg/codeaurora/ims/parser/SAXXMLParser;->getSAXXMLParser()Lorg/codeaurora/ims/parser/SAXXMLParser;
 
     move-result-object v1
 
-    .line 75
+    .line 74
     .local v1, "confparser":Lorg/codeaurora/ims/parser/SAXXMLParser;
     invoke-static {v0}, Lorg/codeaurora/ims/parser/SAXXMLParser;->parse(Ljava/io/InputStream;)Lorg/codeaurora/ims/parser/Element;
 
@@ -2301,12 +2382,12 @@
 
     iput-object v2, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mNewElement:Lorg/codeaurora/ims/parser/Element;
 
-    .line 76
+    .line 75
     const-string v2, "*************New Notification*****************"
 
     invoke-virtual {p0, v2}, Lorg/codeaurora/ims/parser/ConfInfo;->debugLog(Ljava/lang/String;)V
 
-    .line 77
+    .line 76
     iget-object v2, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mCachedElement:Lorg/codeaurora/ims/parser/Element;
 
     iget-object v3, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mNewElement:Lorg/codeaurora/ims/parser/Element;
@@ -2317,7 +2398,7 @@
 
     invoke-virtual {p0, v4, v2, v3, v5}, Lorg/codeaurora/ims/parser/ConfInfo;->updateNotification(Ljava/util/List;Lorg/codeaurora/ims/parser/Element;Lorg/codeaurora/ims/parser/Element;I)V
 
-    .line 78
+    .line 77
     return-void
 .end method
 
@@ -2338,7 +2419,7 @@
         }
     .end annotation
 
-    .line 307
+    .line 310
     .local p1, "oldList":Ljava/util/List;, "Ljava/util/List<Lorg/codeaurora/ims/parser/Element;>;"
     const-string v0, "Old Element Tag name: "
 
@@ -2350,25 +2431,41 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     const-string v2, ", OldElement: "
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     invoke-virtual {v1, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     const-string v2, ", NewElement: "
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     invoke-virtual {v1, p3}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     const-string v2, ", index = "
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     invoke-virtual {v1, p4}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -2376,7 +2473,7 @@
 
     invoke-virtual {p0, v1}, Lorg/codeaurora/ims/parser/ConfInfo;->log(Ljava/lang/String;)V
 
-    .line 309
+    .line 312
     new-instance v1, Ljava/lang/StringBuilder;
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
@@ -2385,9 +2482,13 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     iget-object v2, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mCachedElement:Lorg/codeaurora/ims/parser/Element;
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -2395,34 +2496,34 @@
 
     invoke-virtual {p0, v1}, Lorg/codeaurora/ims/parser/ConfInfo;->debugLog(Ljava/lang/String;)V
 
-    .line 311
+    .line 314
     :try_start_0
     invoke-direct {p0, p3}, Lorg/codeaurora/ims/parser/ConfInfo;->checkElementState(Lorg/codeaurora/ims/parser/Element;)Ljava/lang/String;
 
     move-result-object v1
 
-    .line 312
+    .line 315
     .local v1, "latestState":Ljava/lang/String;
     invoke-virtual {p3}, Lorg/codeaurora/ims/parser/Element;->getTagName()Ljava/lang/String;
 
     move-result-object v2
 
-    .line 313
+    .line 316
     .local v2, "newTagName":Ljava/lang/String;
     const/4 v3, 0x0
 
-    .line 314
+    .line 317
     .local v3, "oldTagName":Ljava/lang/String;
     if-eqz p2, :cond_0
 
-    .line 315
+    .line 318
     invoke-virtual {p2}, Lorg/codeaurora/ims/parser/Element;->getTagName()Ljava/lang/String;
 
     move-result-object v4
 
     move-object v3, v4
 
-    .line 316
+    .line 319
     :cond_0
     new-instance v4, Ljava/lang/StringBuilder;
 
@@ -2430,7 +2531,11 @@
 
     invoke-virtual {v4, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v4
+
     invoke-virtual {v4, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v4
 
     invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -2438,7 +2543,7 @@
 
     invoke-virtual {p0, v4}, Lorg/codeaurora/ims/parser/ConfInfo;->debugLog(Ljava/lang/String;)V
 
-    .line 317
+    .line 320
     new-instance v4, Ljava/lang/StringBuilder;
 
     invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
@@ -2447,7 +2552,11 @@
 
     invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v4
+
     invoke-virtual {v4, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v4
 
     invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -2455,7 +2564,7 @@
 
     invoke-virtual {p0, v4}, Lorg/codeaurora/ims/parser/ConfInfo;->debugLog(Ljava/lang/String;)V
 
-    .line 321
+    .line 324
     const-string v4, "full"
 
     invoke-virtual {v1, v4}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z
@@ -2464,37 +2573,37 @@
 
     if-eqz v4, :cond_3
 
-    .line 322
+    .line 325
     if-nez p1, :cond_1
 
-    .line 323
+    .line 326
     const-string v0, "Root Element is replced with Full state"
 
     invoke-virtual {p0, v0}, Lorg/codeaurora/ims/parser/ConfInfo;->log(Ljava/lang/String;)V
 
-    .line 324
+    .line 327
     iput-object p3, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mCachedElement:Lorg/codeaurora/ims/parser/Element;
 
     goto/16 :goto_2
 
-    .line 326
+    .line 329
     :cond_1
     if-eqz p1, :cond_b
 
-    .line 328
+    .line 331
     if-gez p4, :cond_2
 
-    .line 329
+    .line 332
     const-string v0, "adding new Element with Full state"
 
     invoke-virtual {p0, v0}, Lorg/codeaurora/ims/parser/ConfInfo;->debugLog(Ljava/lang/String;)V
 
-    .line 330
+    .line 333
     invoke-interface {p1, p3}, Ljava/util/List;->add(Ljava/lang/Object;)Z
 
     goto/16 :goto_2
 
-    .line 332
+    .line 335
     :cond_2
     new-instance v0, Ljava/lang/StringBuilder;
 
@@ -2504,32 +2613,40 @@
 
     invoke-virtual {v0, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    .line 333
+    move-result-object v0
+
+    .line 336
     invoke-virtual {p3}, Lorg/codeaurora/ims/parser/Element;->getParentTag()Ljava/lang/String;
 
     move-result-object v4
 
     invoke-virtual {v0, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     const-string v4, " Index :"
 
     invoke-virtual {v0, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     invoke-virtual {v0, p4}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
     move-result-object v0
 
-    .line 332
+    .line 335
     invoke-virtual {p0, v0}, Lorg/codeaurora/ims/parser/ConfInfo;->debugLog(Ljava/lang/String;)V
 
-    .line 334
+    .line 337
     invoke-interface {p1, p4, p3}, Ljava/util/List;->set(ILjava/lang/Object;)Ljava/lang/Object;
 
     goto/16 :goto_2
 
-    .line 339
+    .line 342
     :cond_3
     const-string v4, "partial"
 
@@ -2539,7 +2656,7 @@
 
     if-eqz v4, :cond_9
 
-    .line 340
+    .line 343
     const-string v4, "updateNotification: partial state"
 
     invoke-virtual {p0, v4}, Lorg/codeaurora/ims/parser/ConfInfo;->log(Ljava/lang/String;)V
@@ -2547,7 +2664,7 @@
     .catch Ljava/lang/NullPointerException; {:try_start_0 .. :try_end_0} :catch_2
     .catch Ljava/lang/IndexOutOfBoundsException; {:try_start_0 .. :try_end_0} :catch_1
 
-    .line 343
+    .line 346
     :try_start_1
     invoke-direct {p0, v2}, Lorg/codeaurora/ims/parser/ConfInfo;->isPartialAllowed(Ljava/lang/String;)Z
 
@@ -2555,7 +2672,7 @@
 
     if-eqz v4, :cond_8
 
-    .line 344
+    .line 347
     new-instance v4, Ljava/lang/StringBuilder;
 
     invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
@@ -2564,7 +2681,11 @@
 
     invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v4
+
     invoke-virtual {v4, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v4
 
     invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -2572,36 +2693,36 @@
 
     invoke-virtual {p0, v4}, Lorg/codeaurora/ims/parser/ConfInfo;->debugLog(Ljava/lang/String;)V
 
-    .line 346
+    .line 349
     if-nez p2, :cond_5
 
     if-ltz p4, :cond_4
 
     goto :goto_0
 
-    .line 367
+    .line 370
     :cond_4
     const-string v0, "Partial Notification state, but no old element."
 
     invoke-virtual {p0, v0}, Lorg/codeaurora/ims/parser/ConfInfo;->debugLog(Ljava/lang/String;)V
 
-    .line 368
+    .line 371
     invoke-interface {p1, p3}, Ljava/util/List;->add(Ljava/lang/Object;)Z
 
     goto :goto_1
 
-    .line 347
+    .line 350
     :cond_5
     :goto_0
     invoke-virtual {p3}, Lorg/codeaurora/ims/parser/Element;->getSubElementList()Ljava/util/List;
 
     move-result-object v4
 
-    .line 348
+    .line 351
     .local v4, "mNewSubElementList":Ljava/util/List;, "Ljava/util/List<Lorg/codeaurora/ims/parser/Element;>;"
     if-eqz p1, :cond_6
 
-    .line 354
+    .line 357
     invoke-interface {p1, p4}, Ljava/util/List;->get(I)Ljava/lang/Object;
 
     move-result-object v5
@@ -2610,16 +2731,16 @@
 
     move-object p2, v5
 
-    .line 356
+    .line 359
     :cond_6
     nop
 
-    .line 357
+    .line 360
     invoke-virtual {p2}, Lorg/codeaurora/ims/parser/Element;->getSubElementList()Ljava/util/List;
 
     move-result-object v5
 
-    .line 358
+    .line 361
     .local v5, "oldSubElementList":Ljava/util/List;, "Ljava/util/List<Lorg/codeaurora/ims/parser/Element;>;"
     new-instance v6, Ljava/lang/StringBuilder;
 
@@ -2627,31 +2748,35 @@
 
     invoke-virtual {v6, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v6, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v0
 
-    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {v0, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
     move-result-object v0
 
     invoke-virtual {p0, v0}, Lorg/codeaurora/ims/parser/ConfInfo;->debugLog(Ljava/lang/String;)V
 
-    .line 359
+    .line 362
     invoke-direct {p0, p2, p3}, Lorg/codeaurora/ims/parser/ConfInfo;->updateAttributeList(Lorg/codeaurora/ims/parser/Element;Lorg/codeaurora/ims/parser/Element;)V
 
-    .line 360
+    .line 363
     if-nez v5, :cond_7
 
-    .line 361
+    .line 364
     nop
 
-    .line 362
+    .line 365
     invoke-direct {p0, v5, p3}, Lorg/codeaurora/ims/parser/ConfInfo;->reIndexOldElementList(Ljava/util/List;Lorg/codeaurora/ims/parser/Element;)Ljava/util/List;
 
     move-result-object v0
 
     move-object v5, v0
 
-    .line 364
+    .line 367
     :cond_7
     invoke-direct {p0, v4, v5}, Lorg/codeaurora/ims/parser/ConfInfo;->handleNotificationOnSubElements(Ljava/util/List;Ljava/util/List;)V
     :try_end_1
@@ -2659,31 +2784,31 @@
     .catch Ljava/lang/NullPointerException; {:try_start_1 .. :try_end_1} :catch_2
     .catch Ljava/lang/IndexOutOfBoundsException; {:try_start_1 .. :try_end_1} :catch_1
 
-    .line 374
+    .line 377
     .end local v4    # "mNewSubElementList":Ljava/util/List;, "Ljava/util/List<Lorg/codeaurora/ims/parser/Element;>;"
     .end local v5    # "oldSubElementList":Ljava/util/List;, "Ljava/util/List<Lorg/codeaurora/ims/parser/Element;>;"
     :cond_8
     :goto_1
     goto :goto_2
 
-    .line 371
+    .line 374
     :catch_0
     move-exception v0
 
-    .line 372
+    .line 375
     .local v0, "ex":Ljava/lang/Exception;
     :try_start_2
     const-string v4, "Exception in handlePatialNotification "
 
     invoke-virtual {p0, v4}, Lorg/codeaurora/ims/parser/ConfInfo;->log(Ljava/lang/String;)V
 
-    .line 373
+    .line 376
     invoke-virtual {v0}, Ljava/lang/Exception;->printStackTrace()V
 
     .end local v0    # "ex":Ljava/lang/Exception;
     goto :goto_1
 
-    .line 375
+    .line 378
     :cond_9
     const-string v0, "deleted"
 
@@ -2693,12 +2818,12 @@
 
     if-eqz v0, :cond_b
 
-    .line 376
+    .line 379
     const-string v0, "updateNotification Deleting Element"
 
     invoke-virtual {p0, v0}, Lorg/codeaurora/ims/parser/ConfInfo;->log(Ljava/lang/String;)V
 
-    .line 377
+    .line 380
     const-string v0, "conference-info"
 
     invoke-virtual {v2, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
@@ -2707,12 +2832,12 @@
 
     if-nez v0, :cond_a
 
-    .line 378
+    .line 381
     invoke-interface {p1, p4}, Ljava/util/List;->remove(I)Ljava/lang/Object;
 
     goto :goto_2
 
-    .line 380
+    .line 383
     :cond_a
     iget-object v0, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mCachedElement:Lorg/codeaurora/ims/parser/Element;
 
@@ -2723,51 +2848,51 @@
 
     goto :goto_2
 
-    .line 386
+    .line 389
     .end local v1    # "latestState":Ljava/lang/String;
     .end local v2    # "newTagName":Ljava/lang/String;
     .end local v3    # "oldTagName":Ljava/lang/String;
     :catch_1
     move-exception v0
 
-    .line 387
+    .line 390
     .local v0, "ex":Ljava/lang/IndexOutOfBoundsException;
     const-string v1, "Indexout of bound exception in UpdateNotification"
 
     invoke-virtual {p0, v1}, Lorg/codeaurora/ims/parser/ConfInfo;->log(Ljava/lang/String;)V
 
-    .line 388
+    .line 391
     invoke-virtual {v0}, Ljava/lang/IndexOutOfBoundsException;->printStackTrace()V
 
     goto :goto_3
 
-    .line 383
+    .line 386
     .end local v0    # "ex":Ljava/lang/IndexOutOfBoundsException;
     :catch_2
     move-exception v0
 
-    .line 384
+    .line 387
     .local v0, "ex":Ljava/lang/NullPointerException;
     const-string v1, "Null Pointer Exception in UpdateNotification"
 
     invoke-virtual {p0, v1}, Lorg/codeaurora/ims/parser/ConfInfo;->log(Ljava/lang/String;)V
 
-    .line 385
+    .line 388
     invoke-virtual {v0}, Ljava/lang/NullPointerException;->printStackTrace()V
 
-    .line 389
+    .line 392
     .end local v0    # "ex":Ljava/lang/NullPointerException;
     :cond_b
     :goto_2
     nop
 
-    .line 390
+    .line 393
     :goto_3
     const-string v0, "updateNotification : comming out"
 
     invoke-virtual {p0, v0}, Lorg/codeaurora/ims/parser/ConfInfo;->log(Ljava/lang/String;)V
 
-    .line 391
+    .line 394
     return-void
 .end method
 
@@ -2775,22 +2900,22 @@
     .locals 3
     .param p1, "newmessage"    # Lorg/codeaurora/ims/parser/Element;
 
-    .line 514
+    .line 517
     iget-object v0, p0, Lorg/codeaurora/ims/parser/ConfInfo;->mCachedElement:Lorg/codeaurora/ims/parser/Element;
 
-    .line 515
+    .line 518
     const-string v1, "version"
 
     invoke-virtual {v0, v1}, Lorg/codeaurora/ims/parser/Element;->getAttributeValue(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v0
 
-    .line 514
+    .line 517
     invoke-static {v0}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
 
     move-result v0
 
-    .line 516
+    .line 519
     .local v0, "oldversion":I
     invoke-virtual {p1}, Lorg/codeaurora/ims/parser/Element;->getMapAttribute()Ljava/util/Map;
 
@@ -2802,53 +2927,53 @@
 
     if-eqz v2, :cond_2
 
-    .line 517
+    .line 520
     nop
 
-    .line 518
+    .line 521
     invoke-virtual {p1, v1}, Lorg/codeaurora/ims/parser/Element;->getAttributeValue(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v1
 
-    .line 517
+    .line 520
     invoke-static {v1}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
 
     move-result v1
 
-    .line 519
+    .line 522
     .local v1, "newversion":I
     if-ne v0, v1, :cond_0
 
-    .line 520
+    .line 523
     invoke-static {p0}, Ljava/util/Objects;->requireNonNull(Ljava/lang/Object;)Ljava/lang/Object;
 
     const/4 v2, 0x1
 
     return v2
 
-    .line 521
+    .line 524
     :cond_0
     if-le v0, v1, :cond_1
 
-    .line 522
+    .line 525
     invoke-static {p0}, Ljava/util/Objects;->requireNonNull(Ljava/lang/Object;)Ljava/lang/Object;
 
     const/4 v2, 0x2
 
     return v2
 
-    .line 523
+    .line 526
     :cond_1
     if-ge v0, v1, :cond_2
 
-    .line 524
+    .line 527
     invoke-static {p0}, Ljava/util/Objects;->requireNonNull(Ljava/lang/Object;)Ljava/lang/Object;
 
     const/4 v2, 0x3
 
     return v2
 
-    .line 527
+    .line 530
     .end local v1    # "newversion":I
     :cond_2
     invoke-static {p0}, Ljava/util/Objects;->requireNonNull(Ljava/lang/Object;)Ljava/lang/Object;

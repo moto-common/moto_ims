@@ -62,9 +62,13 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     iget v1, p1, Landroid/os/Message;->what:I
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -83,13 +87,7 @@
     .local v0, "ar":Lorg/codeaurora/telephony/utils/AsyncResult;
     iget v2, p1, Landroid/os/Message;->what:I
 
-    const/4 v3, 0x1
-
-    if-eq v2, v3, :cond_1
-
-    const/4 v3, 0x2
-
-    if-eq v2, v3, :cond_0
+    packed-switch v2, :pswitch_data_0
 
     .line 76
     new-instance v2, Ljava/lang/StringBuilder;
@@ -100,9 +98,13 @@
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v2
+
     iget v3, p1, Landroid/os/Message;->what:I
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v2
 
     invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -113,7 +115,7 @@
     goto :goto_0
 
     .line 72
-    :cond_0
+    :pswitch_0
     const-string v2, "EVENT_CAPABILITIES_CHANGED"
 
     invoke-static {v1, v2}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
@@ -121,13 +123,13 @@
     .line 73
     iget-object v1, p0, Lorg/codeaurora/ims/ImsMultiEndpointImpl$ImsMultiEndpointImplHandler;->this$0:Lorg/codeaurora/ims/ImsMultiEndpointImpl;
 
-    invoke-static {v1, v0}, Lorg/codeaurora/ims/ImsMultiEndpointImpl;->access$100(Lorg/codeaurora/ims/ImsMultiEndpointImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
+    invoke-static {v1, v0}, Lorg/codeaurora/ims/ImsMultiEndpointImpl;->-$$Nest$mupdateCapabilities(Lorg/codeaurora/ims/ImsMultiEndpointImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
 
     .line 74
     goto :goto_0
 
     .line 68
-    :cond_1
+    :pswitch_1
     const-string v2, "EVENT_REFRESH_VICE_INFO"
 
     invoke-static {v1, v2}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
@@ -135,7 +137,7 @@
     .line 69
     iget-object v1, p0, Lorg/codeaurora/ims/ImsMultiEndpointImpl$ImsMultiEndpointImplHandler;->this$0:Lorg/codeaurora/ims/ImsMultiEndpointImpl;
 
-    invoke-static {v1, v0}, Lorg/codeaurora/ims/ImsMultiEndpointImpl;->access$000(Lorg/codeaurora/ims/ImsMultiEndpointImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
+    invoke-static {v1, v0}, Lorg/codeaurora/ims/ImsMultiEndpointImpl;->-$$Nest$mhandleRefreshViceInfo(Lorg/codeaurora/ims/ImsMultiEndpointImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
 
     .line 70
     nop
@@ -143,4 +145,12 @@
     .line 79
     :goto_0
     return-void
+
+    nop
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method

@@ -16,6 +16,14 @@
 
 
 # direct methods
+.method static bridge synthetic -$$Nest$monClientDeath(Lorg/codeaurora/ims/ImsScreenShareControllerImpl;)V
+    .locals 0
+
+    invoke-direct {p0}, Lorg/codeaurora/ims/ImsScreenShareControllerImpl;->onClientDeath()V
+
+    return-void
+.end method
+
 .method public constructor <init>(Lorg/codeaurora/ims/ImsServiceSub;Landroid/content/Context;)V
     .locals 1
     .param p1, "serviceSub"    # Lorg/codeaurora/ims/ImsServiceSub;
@@ -43,16 +51,6 @@
     iput-object p2, p0, Lorg/codeaurora/ims/ImsScreenShareControllerImpl;->mContext:Landroid/content/Context;
 
     .line 38
-    return-void
-.end method
-
-.method static synthetic access$000(Lorg/codeaurora/ims/ImsScreenShareControllerImpl;)V
-    .locals 0
-    .param p0, "x0"    # Lorg/codeaurora/ims/ImsScreenShareControllerImpl;
-
-    .line 21
-    invoke-direct {p0}, Lorg/codeaurora/ims/ImsScreenShareControllerImpl;->onClientDeath()V
-
     return-void
 .end method
 

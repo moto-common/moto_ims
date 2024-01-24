@@ -62,16 +62,14 @@
 
     if-eqz v0, :cond_2
 
-    aget-object v2, v0, v1
+    aget-object v0, v0, v1
 
-    if-nez v2, :cond_0
+    if-nez v0, :cond_0
 
     goto :goto_0
 
     .line 39
     :cond_0
-    aget-object v0, v0, v1
-
     iget v0, v0, Lorg/codeaurora/ims/ServiceStatus$StatusForAccessTech;->networkMode:I
 
     const/16 v2, 0x14

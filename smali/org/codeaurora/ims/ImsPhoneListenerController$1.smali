@@ -39,7 +39,7 @@
     .line 62
     iget-object v0, p0, Lorg/codeaurora/ims/ImsPhoneListenerController$1;->this$0:Lorg/codeaurora/ims/ImsPhoneListenerController;
 
-    invoke-static {v0}, Lorg/codeaurora/ims/ImsPhoneListenerController;->access$000(Lorg/codeaurora/ims/ImsPhoneListenerController;)V
+    invoke-static {v0}, Lorg/codeaurora/ims/ImsPhoneListenerController;->-$$Nest$mupdatePhoneStateListeners(Lorg/codeaurora/ims/ImsPhoneListenerController;)V
 
     .line 63
     return-void

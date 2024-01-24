@@ -6,6 +6,8 @@
 # static fields
 .field public static final CANCELLED:I = 0x7
 
+.field public static final CF_SERVICE_NOT_REGISTERED:I = 0x31
+
 .field public static final DIAL_MODIFIED_TO_DIAL:I = 0x29
 
 .field public static final DIAL_MODIFIED_TO_DIAL_VIDEO:I = 0x2a
@@ -45,6 +47,8 @@
 .field public static final REJECTED_BY_REMOTE:I = 0x1c
 
 .field public static final REQUEST_NOT_SUPPORTED:I = 0x6
+
+.field public static final SEND_SIP_DTMF_FAILED:I = 0x30
 
 .field public static final SS_MODIFIED_TO_DIAL:I = 0x23
 

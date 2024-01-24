@@ -53,19 +53,27 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     iget-object v2, p0, Lorg/codeaurora/ims/ImsCallModification$1;->this$0:Lorg/codeaurora/ims/ImsCallModification;
 
-    invoke-static {v2}, Lorg/codeaurora/ims/ImsCallModification;->access$000(Lorg/codeaurora/ims/ImsCallModification;)Z
+    invoke-static {v2}, Lorg/codeaurora/ims/ImsCallModification;->-$$Nest$fgetmIsCarMode(Lorg/codeaurora/ims/ImsCallModification;)Z
 
     move-result v2
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     const-string v2, " intent received: "
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -89,7 +97,7 @@
 
     const/4 v2, 0x1
 
-    invoke-static {v1, v2}, Lorg/codeaurora/ims/ImsCallModification;->access$002(Lorg/codeaurora/ims/ImsCallModification;Z)Z
+    invoke-static {v1, v2}, Lorg/codeaurora/ims/ImsCallModification;->-$$Nest$fputmIsCarMode(Lorg/codeaurora/ims/ImsCallModification;Z)V
 
     goto :goto_0
 
@@ -108,7 +116,7 @@
 
     const/4 v2, 0x0
 
-    invoke-static {v1, v2}, Lorg/codeaurora/ims/ImsCallModification;->access$002(Lorg/codeaurora/ims/ImsCallModification;Z)Z
+    invoke-static {v1, v2}, Lorg/codeaurora/ims/ImsCallModification;->-$$Nest$fputmIsCarMode(Lorg/codeaurora/ims/ImsCallModification;Z)V
 
     goto :goto_0
 
@@ -122,11 +130,15 @@
 
     invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     invoke-virtual {p2}, Landroid/content/Intent;->getAction()Ljava/lang/String;
 
     move-result-object v3
 
     invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 

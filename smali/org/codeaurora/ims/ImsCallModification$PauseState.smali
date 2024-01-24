@@ -34,7 +34,7 @@
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 6
+    .locals 7
 
     .line 75
     new-instance v0, Lorg/codeaurora/ims/ImsCallModification$PauseState;
@@ -47,42 +47,38 @@
 
     sput-object v0, Lorg/codeaurora/ims/ImsCallModification$PauseState;->NONE:Lorg/codeaurora/ims/ImsCallModification$PauseState;
 
-    new-instance v0, Lorg/codeaurora/ims/ImsCallModification$PauseState;
+    new-instance v1, Lorg/codeaurora/ims/ImsCallModification$PauseState;
 
-    const-string v1, "PAUSE"
+    const-string v3, "PAUSE"
 
-    const/4 v3, 0x1
+    const/4 v4, 0x1
 
-    invoke-direct {v0, v1, v3}, Lorg/codeaurora/ims/ImsCallModification$PauseState;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v1, v3, v4}, Lorg/codeaurora/ims/ImsCallModification$PauseState;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lorg/codeaurora/ims/ImsCallModification$PauseState;->PAUSE:Lorg/codeaurora/ims/ImsCallModification$PauseState;
+    sput-object v1, Lorg/codeaurora/ims/ImsCallModification$PauseState;->PAUSE:Lorg/codeaurora/ims/ImsCallModification$PauseState;
 
-    new-instance v0, Lorg/codeaurora/ims/ImsCallModification$PauseState;
+    new-instance v3, Lorg/codeaurora/ims/ImsCallModification$PauseState;
 
-    const-string v1, "RESUME"
+    const-string v5, "RESUME"
 
-    const/4 v4, 0x2
+    const/4 v6, 0x2
 
-    invoke-direct {v0, v1, v4}, Lorg/codeaurora/ims/ImsCallModification$PauseState;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v3, v5, v6}, Lorg/codeaurora/ims/ImsCallModification$PauseState;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lorg/codeaurora/ims/ImsCallModification$PauseState;->RESUME:Lorg/codeaurora/ims/ImsCallModification$PauseState;
+    sput-object v3, Lorg/codeaurora/ims/ImsCallModification$PauseState;->RESUME:Lorg/codeaurora/ims/ImsCallModification$PauseState;
 
     .line 74
-    const/4 v1, 0x3
+    const/4 v5, 0x3
 
-    new-array v1, v1, [Lorg/codeaurora/ims/ImsCallModification$PauseState;
+    new-array v5, v5, [Lorg/codeaurora/ims/ImsCallModification$PauseState;
 
-    sget-object v5, Lorg/codeaurora/ims/ImsCallModification$PauseState;->NONE:Lorg/codeaurora/ims/ImsCallModification$PauseState;
+    aput-object v0, v5, v2
 
-    aput-object v5, v1, v2
+    aput-object v1, v5, v4
 
-    sget-object v2, Lorg/codeaurora/ims/ImsCallModification$PauseState;->PAUSE:Lorg/codeaurora/ims/ImsCallModification$PauseState;
+    aput-object v3, v5, v6
 
-    aput-object v2, v1, v3
-
-    aput-object v0, v1, v4
-
-    sput-object v1, Lorg/codeaurora/ims/ImsCallModification$PauseState;->$VALUES:[Lorg/codeaurora/ims/ImsCallModification$PauseState;
+    sput-object v5, Lorg/codeaurora/ims/ImsCallModification$PauseState;->$VALUES:[Lorg/codeaurora/ims/ImsCallModification$PauseState;
 
     return-void
 .end method

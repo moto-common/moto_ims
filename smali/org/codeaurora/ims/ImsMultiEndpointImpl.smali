@@ -36,6 +36,22 @@
 
 
 # direct methods
+.method static bridge synthetic -$$Nest$mhandleRefreshViceInfo(Lorg/codeaurora/ims/ImsMultiEndpointImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
+    .locals 0
+
+    invoke-direct {p0, p1}, Lorg/codeaurora/ims/ImsMultiEndpointImpl;->handleRefreshViceInfo(Lorg/codeaurora/telephony/utils/AsyncResult;)V
+
+    return-void
+.end method
+
+.method static bridge synthetic -$$Nest$mupdateCapabilities(Lorg/codeaurora/ims/ImsMultiEndpointImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
+    .locals 0
+
+    invoke-direct {p0, p1}, Lorg/codeaurora/ims/ImsMultiEndpointImpl;->updateCapabilities(Lorg/codeaurora/telephony/utils/AsyncResult;)V
+
+    return-void
+.end method
+
 .method public constructor <init>(Lorg/codeaurora/ims/ImsSenderRxr;Landroid/content/Context;Lorg/codeaurora/ims/ImsServiceSub;)V
     .locals 5
     .param p1, "ci"    # Lorg/codeaurora/ims/ImsSenderRxr;
@@ -105,28 +121,6 @@
     invoke-virtual {v0, v2, v1, v4}, Lorg/codeaurora/ims/ImsServiceSub;->registerForCapabilitiesChanged(Landroid/os/Handler;ILjava/lang/Object;)V
 
     .line 50
-    return-void
-.end method
-
-.method static synthetic access$000(Lorg/codeaurora/ims/ImsMultiEndpointImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
-    .locals 0
-    .param p0, "x0"    # Lorg/codeaurora/ims/ImsMultiEndpointImpl;
-    .param p1, "x1"    # Lorg/codeaurora/telephony/utils/AsyncResult;
-
-    .line 25
-    invoke-direct {p0, p1}, Lorg/codeaurora/ims/ImsMultiEndpointImpl;->handleRefreshViceInfo(Lorg/codeaurora/telephony/utils/AsyncResult;)V
-
-    return-void
-.end method
-
-.method static synthetic access$100(Lorg/codeaurora/ims/ImsMultiEndpointImpl;Lorg/codeaurora/telephony/utils/AsyncResult;)V
-    .locals 0
-    .param p0, "x0"    # Lorg/codeaurora/ims/ImsMultiEndpointImpl;
-    .param p1, "x1"    # Lorg/codeaurora/telephony/utils/AsyncResult;
-
-    .line 25
-    invoke-direct {p0, p1}, Lorg/codeaurora/ims/ImsMultiEndpointImpl;->updateCapabilities(Lorg/codeaurora/telephony/utils/AsyncResult;)V
-
     return-void
 .end method
 
@@ -343,17 +337,25 @@
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v2
+
     iget-boolean v3, p0, Lorg/codeaurora/ims/ImsMultiEndpointImpl;->mIsVideoSupported:Z
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+
+    move-result-object v2
 
     const-string v3, ", Voice = "
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v2
+
     iget-boolean v3, p0, Lorg/codeaurora/ims/ImsMultiEndpointImpl;->mIsVoiceSupported:Z
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+
+    move-result-object v2
 
     invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 

@@ -25,12 +25,12 @@
     .locals 1
     .param p1, "this$0"    # Lorg/codeaurora/ims/ImsCallSessionImpl;
 
-    .line 3000
+    .line 3319
     iput-object p1, p0, Lorg/codeaurora/ims/ImsCallSessionImpl$1;->this$0:Lorg/codeaurora/ims/ImsCallSessionImpl;
 
     invoke-direct {p0}, Landroid/os/Handler;-><init>()V
 
-    .line 3001
+    .line 3320
     const/4 v0, 0x0
 
     iput v0, p0, Lorg/codeaurora/ims/ImsCallSessionImpl$1;->numberOfAlerts:I
@@ -41,67 +41,71 @@
 
 # virtual methods
 .method public handleMessage(Landroid/os/Message;)V
-    .locals 5
+    .locals 3
     .param p1, "msg"    # Landroid/os/Message;
 
-    .line 3003
+    .line 3322
     iget v0, p1, Landroid/os/Message;->what:I
 
-    const/4 v1, 0x1
-
-    const/4 v2, 0x2
-
-    if-eq v0, v1, :cond_1
-
-    if-eq v0, v2, :cond_0
+    packed-switch v0, :pswitch_data_0
 
     goto :goto_0
 
-    .line 3015
-    :cond_0
+    .line 3334
+    :pswitch_0
     const/4 v0, 0x0
 
     iput v0, p0, Lorg/codeaurora/ims/ImsCallSessionImpl$1;->numberOfAlerts:I
 
-    .line 3016
+    .line 3335
     goto :goto_0
 
-    .line 3005
-    :cond_1
+    .line 3324
+    :pswitch_1
     iget v0, p0, Lorg/codeaurora/ims/ImsCallSessionImpl$1;->numberOfAlerts:I
 
-    const/4 v3, 0x3
+    const/4 v1, 0x3
 
-    if-ne v0, v3, :cond_2
+    if-ne v0, v1, :cond_0
 
-    .line 3006
+    .line 3325
     return-void
 
-    .line 3008
-    :cond_2
-    invoke-virtual {p0, v2}, Lorg/codeaurora/ims/ImsCallSessionImpl$1;->removeMessages(I)V
+    .line 3327
+    :cond_0
+    const/4 v0, 0x2
 
-    .line 3009
-    const-wide/32 v3, 0x1b7740
+    invoke-virtual {p0, v0}, Lorg/codeaurora/ims/ImsCallSessionImpl$1;->removeMessages(I)V
 
-    invoke-virtual {p0, v2, v3, v4}, Lorg/codeaurora/ims/ImsCallSessionImpl$1;->sendEmptyMessageDelayed(IJ)Z
+    .line 3328
+    const-wide/32 v1, 0x1b7740
 
-    .line 3010
+    invoke-virtual {p0, v0, v1, v2}, Lorg/codeaurora/ims/ImsCallSessionImpl$1;->sendEmptyMessageDelayed(IJ)Z
+
+    .line 3329
     iget-object v0, p0, Lorg/codeaurora/ims/ImsCallSessionImpl$1;->this$0:Lorg/codeaurora/ims/ImsCallSessionImpl;
 
-    invoke-static {v0}, Lorg/codeaurora/ims/ImsCallSessionImpl;->access$900(Lorg/codeaurora/ims/ImsCallSessionImpl;)V
+    invoke-static {v0}, Lorg/codeaurora/ims/ImsCallSessionImpl;->-$$Nest$mstartBeepForAlert(Lorg/codeaurora/ims/ImsCallSessionImpl;)V
 
-    .line 3011
+    .line 3330
     iget v0, p0, Lorg/codeaurora/ims/ImsCallSessionImpl$1;->numberOfAlerts:I
 
-    add-int/2addr v0, v1
+    add-int/lit8 v0, v0, 0x1
 
     iput v0, p0, Lorg/codeaurora/ims/ImsCallSessionImpl$1;->numberOfAlerts:I
 
-    .line 3012
+    .line 3331
     nop
 
-    .line 3021
+    .line 3340
     :goto_0
     return-void
+
+    nop
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method

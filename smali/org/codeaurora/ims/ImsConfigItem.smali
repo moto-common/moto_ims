@@ -18,6 +18,8 @@
 
 .field public static final AVAILABILITY_CACHE_EXPIRATION:I = 0x13
 
+.field public static final B2C_ENRICHED_CALLING_MODE:I = 0x4d
+
 .field public static final CALL_COMPOSER_MODE:I = 0x4b
 
 .field public static final CANCELLATION_TIMER:I = 0x5
@@ -29,6 +31,8 @@
 .field public static final CAPABILITY_DISCOVERY_ENABLED:I = 0x1e
 
 .field public static final CAPAB_POLL_LIST_SUB_EXP:I = 0x17
+
+.field public static final DATA_CHANNEL_MODE:I = 0x4e
 
 .field public static final DOMAIN_NAME:I = 0xd
 
@@ -154,7 +158,9 @@
 
 .field public static final VOICE_OVER_WIFI_ENABLED:I = 0x1b
 
-.field public static final VOICE_OVER_WIFI_MDN:I = 0x4c
+.field public static final VOICE_OVER_WIFI_ENTITLEMENT_ID:I = 0x4c
+
+.field public static final VOICE_OVER_WIFI_MDN:I = 0x51
 
 .field public static final VOICE_OVER_WIFI_MODE:I = 0x1d
 
@@ -167,6 +173,10 @@
 .field public static final VOLTE_PREF_ENABLED:I = 0x1
 
 .field public static final VOLTE_PREF_UNKNOWN:I = 0x2
+
+.field public static final VOLTE_PROVISIONING_RESTRICT_HOME:I = 0x4f
+
+.field public static final VOLTE_PROVISIONING_RESTRICT_ROAMING:I = 0x50
 
 .field public static final VOLTE_USER_OPT_IN_STATUS:I = 0x21
 
@@ -193,29 +203,29 @@
 .method public constructor <init>()V
     .locals 2
 
-    .line 658
+    .line 707
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 659
+    .line 708
     const/4 v0, 0x0
 
     iput v0, p0, Lorg/codeaurora/ims/ImsConfigItem;->mItem:I
 
-    .line 660
+    .line 709
     iput-boolean v0, p0, Lorg/codeaurora/ims/ImsConfigItem;->mBoolValue:Z
 
-    .line 661
+    .line 710
     iput v0, p0, Lorg/codeaurora/ims/ImsConfigItem;->mIntValue:I
 
-    .line 662
+    .line 711
     const-string v1, ""
 
     iput-object v1, p0, Lorg/codeaurora/ims/ImsConfigItem;->mStringValue:Ljava/lang/String;
 
-    .line 663
+    .line 712
     iput v0, p0, Lorg/codeaurora/ims/ImsConfigItem;->mErrorCause:I
 
-    .line 664
+    .line 713
     return-void
 .end method
 
@@ -224,7 +234,7 @@
 .method public getBoolValue()Z
     .locals 1
 
-    .line 679
+    .line 728
     iget-boolean v0, p0, Lorg/codeaurora/ims/ImsConfigItem;->mBoolValue:Z
 
     return v0
@@ -233,7 +243,7 @@
 .method public getErrorCause()I
     .locals 1
 
-    .line 703
+    .line 752
     iget v0, p0, Lorg/codeaurora/ims/ImsConfigItem;->mErrorCause:I
 
     return v0
@@ -242,7 +252,7 @@
 .method public getIntValue()I
     .locals 1
 
-    .line 687
+    .line 736
     iget v0, p0, Lorg/codeaurora/ims/ImsConfigItem;->mIntValue:I
 
     return v0
@@ -251,7 +261,7 @@
 .method public getItem()I
     .locals 1
 
-    .line 671
+    .line 720
     iget v0, p0, Lorg/codeaurora/ims/ImsConfigItem;->mItem:I
 
     return v0
@@ -260,7 +270,7 @@
 .method public getStringValue()Ljava/lang/String;
     .locals 1
 
-    .line 695
+    .line 744
     iget-object v0, p0, Lorg/codeaurora/ims/ImsConfigItem;->mStringValue:Ljava/lang/String;
 
     return-object v0
@@ -270,10 +280,10 @@
     .locals 0
     .param p1, "value"    # Z
 
-    .line 675
+    .line 724
     iput-boolean p1, p0, Lorg/codeaurora/ims/ImsConfigItem;->mBoolValue:Z
 
-    .line 676
+    .line 725
     return-void
 .end method
 
@@ -281,10 +291,10 @@
     .locals 0
     .param p1, "value"    # I
 
-    .line 699
+    .line 748
     iput p1, p0, Lorg/codeaurora/ims/ImsConfigItem;->mErrorCause:I
 
-    .line 700
+    .line 749
     return-void
 .end method
 
@@ -292,10 +302,10 @@
     .locals 0
     .param p1, "value"    # I
 
-    .line 683
+    .line 732
     iput p1, p0, Lorg/codeaurora/ims/ImsConfigItem;->mIntValue:I
 
-    .line 684
+    .line 733
     return-void
 .end method
 
@@ -303,10 +313,10 @@
     .locals 0
     .param p1, "value"    # I
 
-    .line 667
+    .line 716
     iput p1, p0, Lorg/codeaurora/ims/ImsConfigItem;->mItem:I
 
-    .line 668
+    .line 717
     return-void
 .end method
 
@@ -314,17 +324,17 @@
     .locals 0
     .param p1, "value"    # Ljava/lang/String;
 
-    .line 691
+    .line 740
     iput-object p1, p0, Lorg/codeaurora/ims/ImsConfigItem;->mStringValue:Ljava/lang/String;
 
-    .line 692
+    .line 741
     return-void
 .end method
 
 .method public toString()Ljava/lang/String;
     .locals 2
 
-    .line 707
+    .line 756
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -333,41 +343,61 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     iget v1, p0, Lorg/codeaurora/ims/ImsConfigItem;->mItem:I
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     const-string v1, " boolValue: "
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     iget-boolean v1, p0, Lorg/codeaurora/ims/ImsConfigItem;->mBoolValue:Z
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     const-string v1, " intValue: "
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     iget v1, p0, Lorg/codeaurora/ims/ImsConfigItem;->mIntValue:I
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     const-string v1, " stringValue: "
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     iget-object v1, p0, Lorg/codeaurora/ims/ImsConfigItem;->mStringValue:Ljava/lang/String;
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     const-string v1, " errorCause"
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     iget v1, p0, Lorg/codeaurora/ims/ImsConfigItem;->mErrorCause:I
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 

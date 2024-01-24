@@ -1,13 +1,13 @@
 Signature-Version: 1.0
 Created-By: 1.0 (Android SignApk)
-SHA-256-Digest-Manifest: LVFZqk0t6dx1bgXaLGtfys9ldhnusSb0Yggf42bbi+E=
+SHA-256-Digest-Manifest: qJ/6ICnxJot08uuFGGBrRjU5nTkkHNWLU7l+I75+Bm8=
 X-Android-APK-Signed: 2, 3
 
 Name: AndroidManifest.xml
-SHA-256-Digest: Gg5XqIrFUUtV5BFYf/RffqT8f/U+cRyKVIoOuNfMOhY=
+SHA-256-Digest: f/c2H9otsWyysOTpERaTtB4qUjnVZJRc/9I4Xbpt1RU=
 
 Name: classes.dex
-SHA-256-Digest: lcBqKpSC3A0AleNdx+wuWRprs2vbN2x0uVvQhqIBs1E=
+SHA-256-Digest: C38xOcSfZY6FuTkwpqivVvr2jDDO0J4yEOAN4VKiN7E=
 
 Name: res/drawable-hdpi-v4/img_no_image.png
 SHA-256-Digest: XblUFZvNd8BFsD5hSnPgLaYu9msgdFyc5gHJSfMxbQY=
@@ -40,5 +40,5 @@ Name: res/drawable/img_no_image.png
 SHA-256-Digest: FKH+O+9+T53w7DixPpO2aQAhnDxBjuTUZeuZd6Z78v4=
 
 Name: resources.arsc
-SHA-256-Digest: 7hua5D8IXR+7tG1mWYq4RX77AAK3yPQqj/9kTVD3Kvw=
+SHA-256-Digest: 5ZDc2q37MGdbRnq6N82ggGmzv0r4zKqxFNVfa4ZBMTQ=
 

@@ -28,7 +28,7 @@
     .locals 0
     .param p1, "this$0"    # Lcom/qualcomm/ims/vt/MediaController;
 
-    .line 121
+    .line 116
     iput-object p1, p0, Lcom/qualcomm/ims/vt/MediaController$2;->this$0:Lcom/qualcomm/ims/vt/MediaController;
 
     iput p2, p0, Lcom/qualcomm/ims/vt/MediaController$2;->val$rotation:I
@@ -43,10 +43,10 @@
 .method public run()V
     .locals 2
 
-    .line 124
+    .line 119
     iget-object v0, p0, Lcom/qualcomm/ims/vt/MediaController$2;->this$0:Lcom/qualcomm/ims/vt/MediaController;
 
-    invoke-static {v0}, Lcom/qualcomm/ims/vt/MediaController;->access$000(Lcom/qualcomm/ims/vt/MediaController;)Lcom/qualcomm/ims/vt/ImsMedia;
+    invoke-static {v0}, Lcom/qualcomm/ims/vt/MediaController;->-$$Nest$fgetmMedia(Lcom/qualcomm/ims/vt/MediaController;)Lcom/qualcomm/ims/vt/ImsMedia;
 
     move-result-object v0
 
@@ -58,6 +58,6 @@
 
     invoke-virtual {v0, v1}, Lcom/qualcomm/ims/vt/ImsMedia;->sendCvoInfo(I)V
 
-    .line 125
+    .line 120
     return-void
 .end method

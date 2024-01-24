@@ -7,51 +7,54 @@
 .method public constructor <init>()V
     .locals 0
 
-    .line 24
+    .line 26
     invoke-direct {p0}, Landroid/telephony/ims/stub/ImsRegistrationImplBase;-><init>()V
 
     return-void
 .end method
 
 .method private getImsRegTechFromRadioTech(I)I
-    .locals 2
+    .locals 1
     .param p1, "imsRadioTech"    # I
 
-    .line 72
+    .line 75
     const/4 v0, -0x1
 
-    .line 73
-    .local v0, "regTech":I
-    const/16 v1, 0xd
+    sparse-switch p1, :sswitch_data_0
 
-    if-eq p1, v1, :cond_1
-
-    const/16 v1, 0x12
-
-    if-eq p1, v1, :cond_0
+    .line 86
+    return v0
 
     .line 82
-    const/4 v0, -0x1
+    :sswitch_0
+    const/4 v0, 0x2
 
-    goto :goto_0
+    return v0
 
-    .line 78
-    :cond_0
+    .line 80
+    :sswitch_1
     const/4 v0, 0x1
 
-    .line 79
-    goto :goto_0
+    return v0
 
-    .line 75
-    :cond_1
+    .line 77
+    :sswitch_2
     const/4 v0, 0x0
 
-    .line 76
-    nop
+    return v0
 
     .line 84
-    :goto_0
+    :sswitch_3
     return v0
+
+    :sswitch_data_0
+    .sparse-switch
+        0x0 -> :sswitch_3
+        0xe -> :sswitch_2
+        0x12 -> :sswitch_1
+        0x13 -> :sswitch_1
+        0x15 -> :sswitch_0
+    .end sparse-switch
 .end method
 
 
@@ -60,7 +63,7 @@
     .locals 2
     .param p1, "imsRadioTech"    # I
 
-    .line 30
+    .line 32
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -69,7 +72,11 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -77,14 +84,14 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->d(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 31
+    .line 33
     invoke-direct {p0, p1}, Lorg/codeaurora/ims/ImsRegistrationImpl;->getImsRegTechFromRadioTech(I)I
 
     move-result v0
 
     invoke-virtual {p0, v0}, Lorg/codeaurora/ims/ImsRegistrationImpl;->onRegistered(I)V
 
-    .line 32
+    .line 34
     return-void
 .end method
 
@@ -92,7 +99,7 @@
     .locals 2
     .param p1, "imsRadioTech"    # I
 
-    .line 38
+    .line 40
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -101,7 +108,11 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -109,44 +120,58 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->d(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 39
+    .line 41
     invoke-direct {p0, p1}, Lorg/codeaurora/ims/ImsRegistrationImpl;->getImsRegTechFromRadioTech(I)I
 
     move-result v0
 
     invoke-virtual {p0, v0}, Lorg/codeaurora/ims/ImsRegistrationImpl;->onRegistering(I)V
 
-    .line 40
+    .line 42
     return-void
 .end method
 
 .method public registrationAssociatedUriChanged([Landroid/net/Uri;)V
-    .locals 2
+    .locals 3
     .param p1, "uris"    # [Landroid/net/Uri;
 
-    .line 63
-    new-instance v0, Ljava/lang/StringBuilder;
+    .line 65
+    if-eqz p1, :cond_0
 
-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+    array-length v0, p1
 
-    const-string v1, "registrationAssociatedUriChanged :: uris.length="
+    goto :goto_0
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    :cond_0
+    const/4 v0, 0x0
 
-    array-length v1, p1
+    .line 66
+    .local v0, "urisLength":I
+    :goto_0
+    new-instance v1, Ljava/lang/StringBuilder;
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    const-string v2, "registrationAssociatedUriChanged :: uris.length="
 
-    move-result-object v0
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->d(Ljava/lang/Object;Ljava/lang/String;)V
+    move-result-object v1
 
-    .line 64
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {p0, v1}, Lcom/qualcomm/ims/utils/Log;->d(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 67
     invoke-virtual {p0, p1}, Lorg/codeaurora/ims/ImsRegistrationImpl;->onSubscriberAssociatedUriChanged([Landroid/net/Uri;)V
 
-    .line 65
+    .line 68
     return-void
 .end method
 
@@ -155,7 +180,7 @@
     .param p1, "imsRadioTech"    # I
     .param p2, "info"    # Landroid/telephony/ims/ImsReasonInfo;
 
-    .line 54
+    .line 56
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -164,13 +189,21 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     const-string v1, " info="
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -178,14 +211,14 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->d(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 55
+    .line 57
     invoke-direct {p0, p1}, Lorg/codeaurora/ims/ImsRegistrationImpl;->getImsRegTechFromRadioTech(I)I
 
     move-result v0
 
     invoke-virtual {p0, v0, p2}, Lorg/codeaurora/ims/ImsRegistrationImpl;->onTechnologyChangeFailed(ILandroid/telephony/ims/ImsReasonInfo;)V
 
-    .line 56
+    .line 58
     return-void
 .end method
 
@@ -193,7 +226,7 @@
     .locals 2
     .param p1, "info"    # Landroid/telephony/ims/ImsReasonInfo;
 
-    .line 46
+    .line 48
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -202,7 +235,11 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -210,9 +247,9 @@
 
     invoke-static {p0, v0}, Lcom/qualcomm/ims/utils/Log;->d(Ljava/lang/Object;Ljava/lang/String;)V
 
-    .line 47
+    .line 49
     invoke-virtual {p0, p1}, Lorg/codeaurora/ims/ImsRegistrationImpl;->onDeregistered(Landroid/telephony/ims/ImsReasonInfo;)V
 
-    .line 48
+    .line 50
     return-void
 .end method

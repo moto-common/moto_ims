@@ -24,6 +24,14 @@
 
 
 # direct methods
+.method static bridge synthetic -$$Nest$mcreateEcbmCallBackThread(Lorg/codeaurora/ims/ImsEcbmImpl;Z)V
+    .locals 0
+
+    invoke-direct {p0, p1}, Lorg/codeaurora/ims/ImsEcbmImpl;->createEcbmCallBackThread(Z)V
+
+    return-void
+.end method
+
 .method public constructor <init>(Lorg/codeaurora/ims/ImsServiceSub;Lorg/codeaurora/ims/ImsSenderRxr;)V
     .locals 4
     .param p1, "serviceSub"    # Lorg/codeaurora/ims/ImsServiceSub;
@@ -68,17 +76,6 @@
     return-void
 .end method
 
-.method static synthetic access$000(Lorg/codeaurora/ims/ImsEcbmImpl;Z)V
-    .locals 0
-    .param p0, "x0"    # Lorg/codeaurora/ims/ImsEcbmImpl;
-    .param p1, "x1"    # Z
-
-    .line 18
-    invoke-direct {p0, p1}, Lorg/codeaurora/ims/ImsEcbmImpl;->createEcbmCallBackThread(Z)V
-
-    return-void
-.end method
-
 .method private createEcbmCallBackThread(Z)V
     .locals 4
     .param p1, "isEntered"    # Z
@@ -98,9 +95,13 @@
 
     invoke-virtual {v2, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
 
+    move-result-object v2
+
     const-string v3, "ImsEcbmImpl:EcbmCallBackThread"
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v2
 
     invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 

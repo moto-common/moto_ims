@@ -28,6 +28,14 @@
 
 
 # direct methods
+.method static bridge synthetic -$$Nest$fgetmContext(Lcom/qualcomm/ims/vt/CameraManager;)Landroid/content/Context;
+    .locals 0
+
+    iget-object p0, p0, Lcom/qualcomm/ims/vt/CameraManager;->mContext:Landroid/content/Context;
+
+    return-object p0
+.end method
+
 .method private constructor <init>(Landroid/content/Context;)V
     .locals 2
     .param p1, "context"    # Landroid/content/Context;
@@ -52,24 +60,22 @@
 
     new-instance v0, Lcom/qualcomm/ims/vt/CameraManager$Camera2Factory;
 
-    invoke-direct {v0, p0, v1}, Lcom/qualcomm/ims/vt/CameraManager$Camera2Factory;-><init>(Lcom/qualcomm/ims/vt/CameraManager;Lcom/qualcomm/ims/vt/CameraManager$1;)V
+    invoke-direct {v0, p0, v1}, Lcom/qualcomm/ims/vt/CameraManager$Camera2Factory;-><init>(Lcom/qualcomm/ims/vt/CameraManager;Lcom/qualcomm/ims/vt/CameraManager$Camera2Factory-IA;)V
 
     goto :goto_0
 
     :cond_0
     new-instance v0, Lcom/qualcomm/ims/vt/CameraManager$Camera1Factory;
 
-    invoke-direct {v0, p0, v1}, Lcom/qualcomm/ims/vt/CameraManager$Camera1Factory;-><init>(Lcom/qualcomm/ims/vt/CameraManager;Lcom/qualcomm/ims/vt/CameraManager$1;)V
+    invoke-direct {v0, p0, v1}, Lcom/qualcomm/ims/vt/CameraManager$Camera1Factory;-><init>(Lcom/qualcomm/ims/vt/CameraManager;Lcom/qualcomm/ims/vt/CameraManager$Camera1Factory-IA;)V
 
     :goto_0
     invoke-static {v0}, Lcom/qualcomm/ims/vt/CameraManager;->setFactory(Lcom/qualcomm/ims/vt/CameraManager$IFactory;)V
 
     .line 36
-    iget-object v0, p0, Lcom/qualcomm/ims/vt/CameraManager;->mContext:Landroid/content/Context;
+    const-string v0, "device_policy"
 
-    const-string v1, "device_policy"
-
-    invoke-virtual {v0, v1}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+    invoke-virtual {p1, v0}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
 
     move-result-object v0
 
@@ -79,16 +85,6 @@
 
     .line 37
     return-void
-.end method
-
-.method static synthetic access$200(Lcom/qualcomm/ims/vt/CameraManager;)Landroid/content/Context;
-    .locals 1
-    .param p0, "x0"    # Lcom/qualcomm/ims/vt/CameraManager;
-
-    .line 22
-    iget-object v0, p0, Lcom/qualcomm/ims/vt/CameraManager;->mContext:Landroid/content/Context;
-
-    return-object v0
 .end method
 
 .method public static declared-synchronized init(Landroid/content/Context;)V
@@ -149,13 +145,21 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     invoke-virtual {v0, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     const-string v1, " listener= "
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -267,7 +271,11 @@
 
     invoke-virtual {v3, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v3
+
     invoke-virtual {v3, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v3
 
     invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 

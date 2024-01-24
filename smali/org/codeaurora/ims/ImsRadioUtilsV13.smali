@@ -35,9 +35,7 @@
     .param p0, "imsReason"    # I
 
     .line 34
-    const/16 v0, 0x16d
-
-    if-eq p0, v0, :cond_0
+    packed-switch p0, :pswitch_data_0
 
     .line 38
     invoke-static {p0}, Lorg/codeaurora/ims/ImsRadioUtilsV14;->getCallFailCauseForImsReason(I)I
@@ -47,10 +45,17 @@
     return v0
 
     .line 36
-    :cond_0
+    :pswitch_0
     const/16 v0, 0x25a
 
     return v0
+
+    nop
+
+    :pswitch_data_0
+    .packed-switch 0x16d
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method public static getImsReasonForCallFailCause(I)I

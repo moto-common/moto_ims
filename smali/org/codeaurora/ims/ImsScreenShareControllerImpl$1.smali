@@ -42,7 +42,7 @@
     .line 29
     iget-object v0, p0, Lorg/codeaurora/ims/ImsScreenShareControllerImpl$1;->this$0:Lorg/codeaurora/ims/ImsScreenShareControllerImpl;
 
-    invoke-static {v0}, Lorg/codeaurora/ims/ImsScreenShareControllerImpl;->access$000(Lorg/codeaurora/ims/ImsScreenShareControllerImpl;)V
+    invoke-static {v0}, Lorg/codeaurora/ims/ImsScreenShareControllerImpl;->-$$Nest$monClientDeath(Lorg/codeaurora/ims/ImsScreenShareControllerImpl;)V
 
     .line 30
     return-void
