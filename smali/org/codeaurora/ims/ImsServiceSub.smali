@@ -8962,7 +8962,7 @@
 
     iget v3, p0, Lorg/codeaurora/ims/ImsServiceSub;->mPhoneId:I
 
-    const/4 v3, 0x0
+    const/4 v6, 0x0
 
     goto :goto_1
 
