@@ -50,7 +50,7 @@
 
     .line 31
     :cond_0
-    const-string v0, "ro.board.api_level"
+    const-string v0, "ro.vndk.version"
 
     invoke-static {v0, v1}, Landroid/os/SystemProperties;->getInt(Ljava/lang/String;I)I
 
