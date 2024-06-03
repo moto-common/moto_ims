@@ -159,17 +159,15 @@
 
     .line 371
     .local v4, "voiceDomain":I
-    new-instance v5, Lcom/motorola/android/telephony/MotoExtTelephonyManager;
+    new-instance v5, Landroid/telephony/TelephonyManager;
 
     iget-object v6, p0, Lcom/mediatek/ims/config/internal/ImsConfigEventReceiver$1;->val$context:Landroid/content/Context;
 
-    invoke-direct {v5, v6, v0}, Lcom/motorola/android/telephony/MotoExtTelephonyManager;-><init>(Landroid/content/Context;I)V
+    invoke-direct {v5, v6, v0}, Landroid/telephony/TelephonyManager;-><init>(Landroid/content/Context;I)V
 
     .line 372
-    .local v5, "mMotoExtTM":Lcom/motorola/android/telephony/MotoExtTelephonyManager;
-    invoke-virtual {v5}, Lcom/motorola/android/telephony/MotoExtTelephonyManager;->getVoiceDomainSetting()I
-
-    move-result v6
+    .local v5, "mMotoExtTM":Landroid/telephony/TelephonyManager;
+    const/4 v6, 0x0
 
     if-eq v4, v6, :cond_5
 
@@ -199,9 +197,6 @@
     move-result-object v7
 
     invoke-static {v6, v7}, Landroid/telephony/Rlog;->i(Ljava/lang/String;Ljava/lang/String;)I
-
-    .line 374
-    invoke-virtual {v5, v4}, Lcom/motorola/android/telephony/MotoExtTelephonyManager;->setVoiceDomainSetting(I)Z
 
     .line 376
     :cond_5
